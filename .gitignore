@@ -1,0 +1,14 @@
+*.xcuserstate
+*.xcuserdatad/
+DerivedData/
+.build/
+.DS_Store
+xcuserdata/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+Timeline.xctimeline
+PlaygroundPage.xcplaygroundpage
+Playgrounds/
