@@ -1,0 +1,20 @@
+import ProjectDescription
+import DependencyPlugin
+
+let project = Project.makeModule(
+    name: ModulePath.Domain.name + ModulePath.Domain.Client.rawValue,
+    targets: [
+        .domain(
+            sources: .Client,
+            target: .init(
+                dependencies: [
+                    .domain(sources: .Entity),
+                    .external(name: "FirebaseAuth"),
+                    .external(name: "FirebaseFirestore"),
+                    .external(name: "GoogleSignIn"),
+                    .external(name: "ComposableArchitecture"),
+                ]
+            )
+        ),
+    ]
+)

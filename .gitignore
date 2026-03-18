@@ -12,3 +12,4 @@ xcuserdata/
 Timeline.xctimeline
 PlaygroundPage.xcplaygroundpage
 Playgrounds/
+**/Secrets.xcconfig
