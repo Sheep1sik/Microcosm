@@ -10,6 +10,7 @@ let targets: [Target] = [
                 .feature(sources: .Nickname),
                 .feature(sources: .Main),
                 .feature(sources: .Universe),
+                .feature(sources: .Constellation),
                 .feature(sources: .Profile),
             ]
         )

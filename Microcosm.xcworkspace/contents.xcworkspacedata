@@ -33,6 +33,9 @@
             location = "group:Auth/FeatureAuth.xcodeproj">
          </FileRef>
          <FileRef
+            location = "group:Constellation/FeatureConstellation.xcodeproj">
+         </FileRef>
+         <FileRef
             location = "group:Main/FeatureMain.xcodeproj">
          </FileRef>
          <FileRef

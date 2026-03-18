@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		33F0D602C64255A09000BB30 /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 3378E6198B2426BFB8FF4552 /* libDomainClient.a */; };
 		3FD48CC2D06A2B882F7DFD94 /* libDomainEntity.a in Dependencies */ = {isa = PBXBuildFile; fileRef = D2C30521251874BEDB70E827 /* libDomainEntity.a */; };
+		5BB40B5821C13A3625C88CA8 /* libFeatureConstellation.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 178F99CE722797CCC9039D3E /* libFeatureConstellation.a */; };
 		78C6D2C455F0FE182E266764 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95BA4D02B4815DA50B0CD76 /* ComposableArchitecture.framework */; };
 		880E7DF6E59E8618F3414595 /* libFeatureProfile.a in Dependencies */ = {isa = PBXBuildFile; fileRef = BF8599910B638D70BB0326A9 /* libFeatureProfile.a */; };
 		99DD3E3EB6FB5FD56B2F70D6 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C542B177DC7517604DB17 /* MainTabFeature.swift */; };
@@ -24,6 +25,7 @@
 			files = (
 				33F0D602C64255A09000BB30 /* libDomainClient.a in Dependencies */,
 				3FD48CC2D06A2B882F7DFD94 /* libDomainEntity.a in Dependencies */,
+				5BB40B5821C13A3625C88CA8 /* libFeatureConstellation.a in Dependencies */,
 				880E7DF6E59E8618F3414595 /* libFeatureProfile.a in Dependencies */,
 				ED3CD9E73433FD53A7BD4410 /* libFeatureUniverse.a in Dependencies */,
 			);
@@ -43,6 +45,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		178F99CE722797CCC9039D3E /* libFeatureConstellation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureConstellation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3378E6198B2426BFB8FF4552 /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureUniverse.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1C542B177DC7517604DB17 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
@@ -71,6 +74,7 @@
 				E95BA4D02B4815DA50B0CD76 /* ComposableArchitecture.framework */,
 				3378E6198B2426BFB8FF4552 /* libDomainClient.a */,
 				D2C30521251874BEDB70E827 /* libDomainEntity.a */,
+				178F99CE722797CCC9039D3E /* libFeatureConstellation.a */,
 				7923381FD4154FDA933C0721 /* libFeatureMain.a */,
 				BF8599910B638D70BB0326A9 /* libFeatureProfile.a */,
 				339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */,

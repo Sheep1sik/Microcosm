@@ -79,6 +79,7 @@
 		8B1E731B3E973ECAF578F675 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = B3E5E6EE052618BBF988A2A6 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle */; };
 		8F78DD6AB822D677723BF53D /* FirebaseAuthInternal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED93FF4FBA10E64F4D4A9D06 /* FirebaseAuthInternal.framework */; };
 		91FF103A07983B7805D938AB /* GoogleUtilities_UserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E636F12029AD4B16C7FB0A49 /* GoogleUtilities_UserDefaults.framework */; };
+		9670DDB84408995B2BB128B8 /* libFeatureConstellation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 447F762412D0584415FBA57F /* libFeatureConstellation.a */; };
 		9951A1BB74E38E4188C150A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBB2073FE2C3FA8CF2F2F81 /* Foundation.framework */; };
 		996926DD5FE803B538B9A368 /* gRPC_grpcppWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD67157AEDF9F9CA2E92DAFE /* gRPC_grpcppWrapper.bundle */; };
 		9C59277EACE71587AB40943F /* MicrocosmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214161CC8E41F96EA70035C8 /* MicrocosmApp.swift */; };
@@ -206,6 +207,7 @@
 		3EDAE7E53D90746054FC8C48 /* libFeatureProfile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureProfile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		414731C9BB8D513C145AD70F /* FirebaseFirestoreInternal.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; path = FirebaseFirestoreInternal.xcframework; sourceTree = "<group>"; };
 		4459AC440B063044813E979E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		447F762412D0584415FBA57F /* libFeatureConstellation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureConstellation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		47DC14F71FD60EE16D251920 /* AppAuth_AppAuthCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppAuth_AppAuthCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		48998AA38F90160E6A754556 /* GoogleUtilities_AppDelegateSwizzler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_AppDelegateSwizzler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49A8F44173AE773538037143 /* GoogleUtilities_Environment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Environment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,6 +314,7 @@
 				3F51CDC26861F5EEF5DB8AB0 /* FBLPromises.framework in Frameworks */,
 				AA25F77F30E64B2CD7F28753 /* libFeature.a in Frameworks */,
 				CEE72E5209DB009849EFC54B /* libFeatureAuth.a in Frameworks */,
+				9670DDB84408995B2BB128B8 /* libFeatureConstellation.a in Frameworks */,
 				7BD3FF570C4643E2CA84CCBC /* libFeatureMain.a in Frameworks */,
 				EA83B8AF0BD3CBF8F6D2354F /* libFeatureNickname.a in Frameworks */,
 				FC6DE8A2CB4FE864DD5BC1F7 /* libFeatureProfile.a in Frameworks */,
@@ -599,6 +602,7 @@
 				DF21012ACC23A1E1EA8E7D57 /* libDomainEntity.a */,
 				1EB5A8380F86920C4EE26B78 /* libFeature.a */,
 				E8D27C10B40489AACFEF3C27 /* libFeatureAuth.a */,
+				447F762412D0584415FBA57F /* libFeatureConstellation.a */,
 				147CCBEC359EABDED4B76614 /* libFeatureMain.a */,
 				7C61E210D4AFC5D84A113605 /* libFeatureNickname.a */,
 				3EDAE7E53D90746054FC8C48 /* libFeatureProfile.a */,

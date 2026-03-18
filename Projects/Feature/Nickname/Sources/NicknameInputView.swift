@@ -16,6 +16,7 @@ public struct NicknameInputView: View {
         ZStack {
             Color(red: 0.012, green: 0.024, blue: 0.031)
                 .ignoresSafeArea()
+                .onTapGesture { isFocused = false }
 
             VStack(spacing: 32) {
                 VStack(spacing: 8) {

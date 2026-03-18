@@ -1,7 +1,6 @@
 import SwiftUI
 import ComposableArchitecture
 import DomainEntity
-import DomainClient
 import SharedDesignSystem
 
 struct SearchOverlayView: View {
@@ -96,7 +95,7 @@ struct SearchOverlayView: View {
 
     private func starRow(_ record: Record) -> some View {
         HStack(spacing: 14) {
-            StarPreview(color: record.resolvedProfile.primaryColor.swiftUIColor)
+            StarPreview(color: record.resolvedProfile.primaryColor.swiftUIColor, seed: Double(record.id.hashValue))
             VStack(alignment: .leading, spacing: 3) {
                 if !record.starName.isEmpty {
                     Text(record.starName).font(.subheadline).fontWeight(.medium).foregroundStyle(.white)

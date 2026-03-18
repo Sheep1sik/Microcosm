@@ -17,6 +17,12 @@ private struct SplitMix64: RandomNumberGenerator {
 
 final class UniverseScene: SKScene {
 
+    // SwiftUI가 scene을 pause하지 못하게 방지
+    override var isPaused: Bool {
+        get { super.isPaused }
+        set { /* ignore */ }
+    }
+
     // MARK: - World
 
     let worldSize = CGSize(width: 4000, height: 4000)
@@ -44,6 +50,21 @@ final class UniverseScene: SKScene {
     var backButton: SKLabelNode?
 
     weak var sceneDelegate: UniverseSceneDelegate?
+
+    // MARK: - Sun & Planets
+
+    var sunNode: SKNode?
+
+    struct PlanetOrbitData {
+        let node: SKNode
+        let orbit: CGFloat
+        let ellipseRatio: CGFloat
+        let period: TimeInterval
+        let startAngle: CGFloat
+    }
+    var planetOrbits: [PlanetOrbitData] = []
+    var planetElapsedTime: TimeInterval = 0
+    var lastUpdateTime: TimeInterval = 0
 
     // MARK: - Shared Shaders (재사용으로 컴파일 1회만)
 
@@ -135,6 +156,7 @@ final class UniverseScene: SKScene {
         backgroundColor = UIColor(red: 0.012, green: 0.024, blue: 0.031, alpha: 1)
 
         setupCamera()
+        setupSun()
         setupDustField()
         setupNebulae()
         setupBrightStars()
@@ -150,6 +172,117 @@ final class UniverseScene: SKScene {
         cameraNode.setScale(2.0)
         addChild(cameraNode)
         camera = cameraNode
+    }
+
+    // MARK: - Solar System (Decorative)
+
+    private func setupSun() {
+        let center = CGPoint(x: worldSize.width / 2, y: worldSize.height / 2 + 200)
+
+        let container = SKNode()
+        container.position = center
+        container.zPosition = 8
+        container.name = "sunNode"
+
+        // Glow behind sun
+        let glow = SKSpriteNode(texture: nebulaTexture,
+                                size: CGSize(width: 160, height: 160))
+        glow.color = UIColor(red: 1.0, green: 0.7, blue: 0.3, alpha: 1)
+        glow.colorBlendFactor = 1.0
+        glow.alpha = 0.2
+        glow.blendMode = .add
+        container.addChild(glow)
+        glow.run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.group([
+                SKAction.fadeAlpha(to: 0.35, duration: 2.5),
+                SKAction.scale(to: 1.15, duration: 2.5),
+            ]),
+            SKAction.group([
+                SKAction.fadeAlpha(to: 0.15, duration: 2.5),
+                SKAction.scale(to: 0.9, duration: 2.5),
+            ]),
+        ])))
+
+        // Sun image
+        if let sunImage = UIImage(named: "Sun") {
+            let sprite = SKSpriteNode(texture: SKTexture(image: sunImage),
+                                      size: CGSize(width: 64, height: 64))
+            sprite.zPosition = 2
+            sprite.run(SKAction.repeatForever(
+                SKAction.rotate(byAngle: .pi * 2, duration: 120)))
+            container.addChild(sprite)
+        }
+
+        // Label
+        let label = SKLabelNode(text: "태양계")
+        label.fontName = "AppleSDGothicNeo-Light"
+        label.fontSize = 44
+        label.setScale(0.25)
+        label.fontColor = UIColor(red: 1.0, green: 0.8, blue: 0.4, alpha: 0.4)
+        label.position = CGPoint(x: 0, y: -50)
+        label.zPosition = 1
+        container.addChild(label)
+
+        addChild(container)
+        sunNode = container
+
+        // 궤도 시스템 — yScale 압축 없이 타원 궤도 직접 계산 (행성 찌그러짐 방지)
+        let orbitSystem = SKNode()
+        orbitSystem.position = center
+        orbitSystem.zPosition = 7
+        orbitSystem.zRotation = 0.25  // ~14° tilt (3D 느낌)
+        addChild(orbitSystem)
+
+        let ellipseRatio: CGFloat = 0.45  // y축 비율 (타원형)
+        let tiltAngle: CGFloat = 0.25     // orbitSystem의 회전과 동일
+
+        // Planet definitions (자전 없음, 공전만)
+        let planets: [(name: String, image: String, size: CGFloat, orbit: CGFloat, period: TimeInterval)] = [
+            ("mercury", "Mercury",   8,   80,  14),
+            ("venus",   "Venus",    13,  120,  22),
+            ("earth",   "Earth",    14,  165,  30),
+            ("mars",    "Mars",     10,  210,  42),
+            ("jupiter", "Jupiter",  28,  300,  65),
+            ("saturn",  "Saturn",   24,  390,  85),
+            ("uranus",  "Uranus",   18,  475, 110),
+            ("neptune", "Neptune",  16,  550, 140),
+        ]
+
+        for planet in planets {
+            // 타원 궤도 경로 (직접 그리기)
+            let orbitPath = SKShapeNode(ellipseOf: CGSize(width: planet.orbit * 2,
+                                                          height: planet.orbit * ellipseRatio * 2))
+            orbitPath.strokeColor = UIColor(white: 1, alpha: 0.03)
+            orbitPath.fillColor = .clear
+            orbitPath.lineWidth = 0.5
+            orbitSystem.addChild(orbitPath)
+
+            let startAngle = CGFloat.random(in: 0...(2 * .pi))
+
+            let planetNode = SKNode()
+            planetNode.position = CGPoint(x: planet.orbit * cos(startAngle),
+                                          y: planet.orbit * ellipseRatio * sin(startAngle))
+
+            if let img = UIImage(named: planet.image) {
+                let sprite = SKSpriteNode(texture: SKTexture(image: img),
+                                          size: CGSize(width: planet.size, height: planet.size))
+                sprite.name = "planetSprite_\(planet.name)"
+                // 부모 회전 상쇄하여 행성이 항상 똑바로 보이게
+                sprite.zRotation = -tiltAngle
+                planetNode.addChild(sprite)
+            }
+
+            orbitSystem.addChild(planetNode)
+
+            // update()에서 위치 갱신 (customAction 반복 경계 끊김 방지)
+            planetOrbits.append(PlanetOrbitData(
+                node: planetNode,
+                orbit: planet.orbit,
+                ellipseRatio: ellipseRatio,
+                period: planet.period,
+                startAngle: startAngle
+            ))
+        }
     }
 
     // MARK: - Dynamic Galaxies
@@ -169,7 +302,11 @@ final class UniverseScene: SKScene {
         let currentMonthKey = String(format: "%04d-%02d",
                                      calendar.component(.year, from: now),
                                      calendar.component(.month, from: now))
-        if grouped[currentMonthKey] == nil {
+
+        // 온보딩 welcome/nicknameInput 단계에서는 빈 현재월 은하 생성 보류
+        let step = sceneDelegate?.getOnboardingStep()
+        let delayGalaxyCreation = step == .welcome || step == .nicknameInput
+        if !delayGalaxyCreation, grouped[currentMonthKey] == nil {
             grouped[currentMonthKey] = []
         }
 
@@ -260,21 +397,43 @@ final class UniverseScene: SKScene {
     // MARK: - Galaxy Helpers
 
     private func galaxyPosition(year: Int, month: Int) -> CGPoint {
-        let seed = UInt64(year * 100 + month)
-        var rng = SplitMix64(seed: seed)
         let margin: CGFloat = 350
-        let x = margin + CGFloat(rng.next() % UInt64(worldSize.width - margin * 2))
-        let y = margin + CGFloat(rng.next() % UInt64(worldSize.height - margin * 2))
-        return CGPoint(x: x, y: y)
+        let sunCenter = CGPoint(x: worldSize.width / 2, y: worldSize.height / 2 + 200)
+        let sunExclusion: CGFloat = 650
+        let galaxyMinDist: CGFloat = 300
+
+        let existingPositions = activeGalaxies.values.map { $0.position }
+
+        for _ in 0..<50 {
+            let x = CGFloat.random(in: margin...(worldSize.width - margin))
+            let y = CGFloat.random(in: margin...(worldSize.height - margin))
+
+            if hypot(x - sunCenter.x, y - sunCenter.y) < sunExclusion { continue }
+
+            let tooClose = existingPositions.contains { p in
+                hypot(x - p.x, y - p.y) < galaxyMinDist
+            }
+            if tooClose { continue }
+
+            return CGPoint(x: x, y: y)
+        }
+        // 폴백: 태양계만 피하기
+        for _ in 0..<20 {
+            let x = CGFloat.random(in: margin...(worldSize.width - margin))
+            let y = CGFloat.random(in: margin...(worldSize.height - margin))
+            if hypot(x - sunCenter.x, y - sunCenter.y) >= sunExclusion {
+                return CGPoint(x: x, y: y)
+            }
+        }
+        return CGPoint(x: CGFloat.random(in: margin...(worldSize.width - margin)),
+                       y: CGFloat.random(in: margin...(worldSize.height - margin)))
     }
 
     private func galaxyProperties(year: Int, month: Int) -> (arms: Int, tilt: CGFloat, wind: CGFloat, ellipticity: CGFloat) {
-        let seed = UInt64(year * 100 + month + 7777)
-        var rng = SplitMix64(seed: seed)
-        let arms = 2 + Int(rng.next() % 4)
-        let tilt = CGFloat(rng.next() % 315) / 100.0 - 1.57
-        let wind = 2.0 + CGFloat(rng.next() % 300) / 100.0
-        let ellipticity = 0.25 + CGFloat(rng.next() % 41) / 100.0
+        let arms = Int.random(in: 2...5)
+        let tilt = CGFloat.random(in: -1.57...1.57)
+        let wind = CGFloat.random(in: 2.0...5.0)
+        let ellipticity = CGFloat.random(in: 0.25...0.65)
         return (arms, tilt, wind, ellipticity)
     }
 
@@ -720,6 +879,16 @@ final class UniverseScene: SKScene {
     // MARK: - Update
 
     override func update(_ currentTime: TimeInterval) {
+        // 행성 궤도 갱신 (delta 누적 — pause/resume 시 점프 방지)
+        let dt = lastUpdateTime == 0 ? 0 : min(currentTime - lastUpdateTime, 0.1)
+        lastUpdateTime = currentTime
+        planetElapsedTime += dt
+        for data in planetOrbits {
+            let angle = data.startAngle + CGFloat(planetElapsedTime / data.period) * .pi * 2
+            data.node.position = CGPoint(x: data.orbit * cos(angle),
+                                         y: data.orbit * data.ellipseRatio * sin(angle))
+        }
+
         if needsInitialFocus && !activeGalaxies.isEmpty && sceneState == .universe {
             needsInitialFocus = false
             let cal = Calendar.current

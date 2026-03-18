@@ -3,6 +3,7 @@ import ComposableArchitecture
 import DomainEntity
 import DomainClient
 import FeatureUniverse
+import FeatureConstellation
 import FeatureProfile
 
 public struct MainTabView: View {
@@ -19,9 +20,18 @@ public struct MainTabView: View {
             )
             .tabItem {
                 Image(systemName: "sparkles")
-                Text("우주")
+                Text("소우주")
             }
             .tag(MainTabFeature.State.Tab.universe)
+
+            ConstellationView(
+                store: store.scope(state: \.constellation, action: \.constellation)
+            )
+            .tabItem {
+                Image(systemName: "star.circle")
+                Text("별자리")
+            }
+            .tag(MainTabFeature.State.Tab.constellation)
 
             ProfileView(
                 store: store.scope(state: \.profile, action: \.profile)

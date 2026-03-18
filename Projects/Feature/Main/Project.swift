@@ -9,6 +9,7 @@ let project = Project.makeModule(
             target: .init(
                 dependencies: [
                     .feature(sources: .Universe),
+                    .feature(sources: .Constellation),
                     .feature(sources: .Profile),
                     .domain(sources: .Client),
                     .domain(sources: .Entity),

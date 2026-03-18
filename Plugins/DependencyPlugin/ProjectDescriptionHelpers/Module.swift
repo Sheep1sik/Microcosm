@@ -23,6 +23,7 @@ public extension ModulePath {
         case Nickname
         case Main
         case Universe
+        case Constellation
         case Profile
     }
 }

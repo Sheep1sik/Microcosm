@@ -4,7 +4,6 @@ import DomainEntity
 import DomainClient
 import FeatureSplash
 import FeatureAuth
-import FeatureNickname
 import FeatureMain
 
 @Reducer
@@ -14,7 +13,6 @@ struct RootFeature {
         var mode: Mode = .splash
         var splash = SplashFeature.State()
         var login = LoginFeature.State()
-        var nickname = NicknameFeature.State(isOnboarding: true)
         var mainTab = MainTabFeature.State()
 
         // 인증 정보
@@ -25,7 +23,6 @@ struct RootFeature {
         enum Mode: Equatable {
             case splash
             case login
-            case nickname
             case main
         }
     }
@@ -37,7 +34,6 @@ struct RootFeature {
         case userProfileUpdated(UserProfile)
         case splash(SplashFeature.Action)
         case login(LoginFeature.Action)
-        case nickname(NicknameFeature.Action)
         case mainTab(MainTabFeature.Action)
     }
 
@@ -49,7 +45,6 @@ struct RootFeature {
 
         Scope(state: \.splash, action: \.splash) { SplashFeature() }
         Scope(state: \.login, action: \.login) { LoginFeature() }
-        Scope(state: \.nickname, action: \.nickname) { NicknameFeature() }
         Scope(state: \.mainTab, action: \.mainTab) { MainTabFeature() }
 
         Reduce { state, action in
@@ -97,11 +92,9 @@ struct RootFeature {
                 state.mainTab.profile.displayName = profile.nickname ?? state.displayName
                 state.mainTab.userId = state.userId
 
-                if state.mode == .splash || state.mode == .login || state.mode == .nickname {
+                if state.mode == .splash || state.mode == .login {
                     if state.userId == nil {
                         state.mode = .login
-                    } else if !profile.hasSetNickname {
-                        state.mode = .nickname
                     } else {
                         state.mode = .main
                     }
@@ -112,13 +105,6 @@ struct RootFeature {
                 return .none
 
             case .login:
-                return .none
-
-            case .nickname(.delegate(.nicknameSet)):
-                state.mode = .main
-                return .none
-
-            case .nickname:
                 return .none
 
             case .mainTab(.profile(.delegate(.didSignOut))):

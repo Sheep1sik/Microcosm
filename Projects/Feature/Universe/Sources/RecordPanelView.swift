@@ -1,7 +1,6 @@
 import SwiftUI
 import ComposableArchitecture
 import DomainEntity
-import DomainClient
 
 struct RecordPanelView: View {
     @Bindable var store: StoreOf<UniverseFeature>
@@ -18,7 +17,7 @@ struct RecordPanelView: View {
         let remaining = store.remainingRecordCount
         VStack(spacing: 12) {
             if store.onboardingStep != .createStarPrompt {
-                Text("남은 기록 \(remaining)/\(UniverseFeature.State.monthlyRecordLimit)")
+                Text("오늘 남은 기록 \(remaining)/\(UniverseFeature.State.dailyRecordLimit)")
                     .font(.system(size: 11, weight: .medium))
                     .foregroundStyle(
                         remaining <= 1 ? .red :
@@ -39,7 +38,7 @@ struct RecordPanelView: View {
             .background(Color.white.opacity(0.06))
             .clipShape(RoundedRectangle(cornerRadius: 10))
 
-            HStack(alignment: .bottom, spacing: 8) {
+            HStack(spacing: 8) {
                 TextField("기록 내용", text: $store.recordContent, axis: .vertical)
                     .foregroundStyle(.white)
                     .focused($isTextFocused)
@@ -51,13 +50,7 @@ struct RecordPanelView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 Button {
-                    isTextFocused = false
-                    let content = store.recordContent
-                    let name = store.starName
-                    let isOnboarding = store.onboardingStep == .createStarPrompt
                     store.send(.saveRecord)
-                    scene.showPreviewStar(color: .fallback)
-                    // GPT 색상 분석 완료 후 scene에서 처리
                 } label: {
                     Group {
                         if store.isAnalyzingColor {

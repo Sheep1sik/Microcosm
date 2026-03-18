@@ -336,6 +336,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FEB8502575C240A8A7C138B1"
+               BuildableName = "libFeatureConstellation.a"
+               BlueprintName = "FeatureConstellation"
+               ReferencedContainer = "container:Projects/Feature/Constellation/FeatureConstellation.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "C62951D5F12265650ECDE4F9"
                BuildableName = "libFeatureMain.a"
                BlueprintName = "FeatureMain"

@@ -20,6 +20,7 @@
 		9291C187251BFD51E5BD7227 /* UniverseScene+GalaxyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C42C7EAAB66A8A78723002 /* UniverseScene+GalaxyDetail.swift */; };
 		B9C4256065D143EFB602382E /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B81BBEFAC7065C696785994 /* ComposableArchitecture.framework */; };
 		BCD3420B1F339275DDF600A2 /* UniverseScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163E4C3E3BFBB46CDB8AE38D /* UniverseScene+Background.swift */; };
+		BD3A12630229EC94BA3C3887 /* OnboardingOverlayView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C414478CBDE554400A31A0 /* OnboardingOverlayView+Preview.swift */; };
 		DB140719BD0ED68EA10DBC13 /* UniverseScene+Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DEC8E846389DC155F6923 /* UniverseScene+Touch.swift */; };
 		E847B1FE9EF07324769BF929 /* RecordPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC201661D0A1E2DC0644C1 /* RecordPanelView.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		6F3475ADFB9D246BF390E1EF /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		729E7A7A3FCCD34F24F3240C /* OnboardingOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingOverlayView.swift; sourceTree = "<group>"; };
 		77C42C7EAAB66A8A78723002 /* UniverseScene+GalaxyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+GalaxyDetail.swift"; sourceTree = "<group>"; };
+		93C414478CBDE554400A31A0 /* OnboardingOverlayView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingOverlayView+Preview.swift"; sourceTree = "<group>"; };
 		9B81BBEFAC7065C696785994 /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E71D8D99E2A70FB15E046F9 /* UniverseScene+Minimap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+Minimap.swift"; sourceTree = "<group>"; };
 		AFBE69C705A0EA89798C38DB /* UniverseScene+Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+Previews.swift"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				A68E467F14E0D8490EF2ADA0 /* Scenes */,
 				729E7A7A3FCCD34F24F3240C /* OnboardingOverlayView.swift */,
+				93C414478CBDE554400A31A0 /* OnboardingOverlayView+Preview.swift */,
 				2AFC201661D0A1E2DC0644C1 /* RecordPanelView.swift */,
 				370A89BBC915639B64550295 /* SearchOverlayView.swift */,
 				FDB8708933D1A30FDAE2512D /* UniverseFeature.swift */,
@@ -201,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD3A12630229EC94BA3C3887 /* OnboardingOverlayView+Preview.swift in Sources */,
 				32F01A46F6BEE52D6844E41E /* OnboardingOverlayView.swift in Sources */,
 				E847B1FE9EF07324769BF929 /* RecordPanelView.swift in Sources */,
 				BCD3420B1F339275DDF600A2 /* UniverseScene+Background.swift in Sources */,

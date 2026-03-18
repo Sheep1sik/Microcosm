@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0CF43BC0EC42FD64970AF8F0 /* libFeatureProfile.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 0451D0CA1E7894BF114291C3 /* libFeatureProfile.a */; };
 		194EAD0A8E9F80DBB793A3C3 /* libFeatureNickname.a in Dependencies */ = {isa = PBXBuildFile; fileRef = B55B356C49B336910726E0A0 /* libFeatureNickname.a */; };
+		423C630E74626F96DF3ED0B5 /* libFeatureConstellation.a in Dependencies */ = {isa = PBXBuildFile; fileRef = A07865C9C3220C4E0FB563F7 /* libFeatureConstellation.a */; };
 		57810F1D903E2CFD78A4CB0F /* libFeatureAuth.a in Dependencies */ = {isa = PBXBuildFile; fileRef = B25838C02E82E78EF1C8356A /* libFeatureAuth.a */; };
 		72D2ED75226C41C41CEDEA89 /* libFeatureUniverse.a in Dependencies */ = {isa = PBXBuildFile; fileRef = DAF3CFF29F5C917649CD4190 /* libFeatureUniverse.a */; };
 		8004D8457A39BA704BCEEFF1 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC234541A523A090E51715 /* Feature.swift */; };
@@ -23,6 +24,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				57810F1D903E2CFD78A4CB0F /* libFeatureAuth.a in Dependencies */,
+				423C630E74626F96DF3ED0B5 /* libFeatureConstellation.a in Dependencies */,
 				E6629EE25FC69732FD954412 /* libFeatureMain.a in Dependencies */,
 				194EAD0A8E9F80DBB793A3C3 /* libFeatureNickname.a in Dependencies */,
 				0CF43BC0EC42FD64970AF8F0 /* libFeatureProfile.a in Dependencies */,
@@ -48,6 +50,7 @@
 		0451D0CA1E7894BF114291C3 /* libFeatureProfile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureProfile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AA81F22C018DC41FD377ABA /* libFeatureSplash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureSplash.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		37CC234541A523A090E51715 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
+		A07865C9C3220C4E0FB563F7 /* libFeatureConstellation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureConstellation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25838C02E82E78EF1C8356A /* libFeatureAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B55B356C49B336910726E0A0 /* libFeatureNickname.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureNickname.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B693A64B9FA839E6FD15EC24 /* libFeature.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeature.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +98,7 @@
 			children = (
 				B693A64B9FA839E6FD15EC24 /* libFeature.a */,
 				B25838C02E82E78EF1C8356A /* libFeatureAuth.a */,
+				A07865C9C3220C4E0FB563F7 /* libFeatureConstellation.a */,
 				E63C890B8600AAEA15DA5043 /* libFeatureMain.a */,
 				B55B356C49B336910726E0A0 /* libFeatureNickname.a */,
 				0451D0CA1E7894BF114291C3 /* libFeatureProfile.a */,

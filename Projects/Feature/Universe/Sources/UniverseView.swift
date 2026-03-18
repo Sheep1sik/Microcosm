@@ -3,7 +3,23 @@ import SpriteKit
 import ComposableArchitecture
 import DomainEntity
 import DomainClient
-import SharedDesignSystem
+
+// MARK: - SpriteKit UIViewRepresentable (키보드/레이아웃 변경 시 렌더링 중단 방지)
+
+private struct SpriteKitView: UIViewRepresentable {
+    let scene: UniverseScene
+
+    func makeUIView(context: Context) -> SKView {
+        let skView = SKView()
+        skView.ignoresSiblingOrder = true
+        skView.allowsTransparency = true
+        skView.backgroundColor = .clear
+        skView.presentScene(scene)
+        return skView
+    }
+
+    func updateUIView(_ uiView: SKView, context: Context) {}
+}
 
 public struct UniverseView: View {
     @Bindable var store: StoreOf<UniverseFeature>
@@ -30,8 +46,8 @@ public struct UniverseView: View {
 
     public var body: some View {
         ZStack {
-            SpriteView(scene: scene, options: [.ignoresSiblingOrder])
-                .ignoresSafeArea()
+            SpriteKitView(scene: scene)
+                .ignoresSafeArea(.all)
                 .onAppear { setupScene() }
 
             if store.isSearching {
@@ -93,6 +109,11 @@ public struct UniverseView: View {
         .onChange(of: store.allRecords) {
             scene.refreshGalaxies()
         }
+        .onChange(of: store.onboardingStep) {
+            if store.onboardingStep == .galaxyBirthIntro {
+                scene.refreshGalaxies()
+            }
+        }
         .onChange(of: store.analyzedProfile) {
             guard let profile = store.analyzedProfile else { return }
             // GPT 감정 분석 완료 → scene에 기록 생성 요청
@@ -118,12 +139,16 @@ public struct UniverseView: View {
                 pendingSaveContent = store.recordContent.trimmingCharacters(in: .whitespacesAndNewlines)
                 pendingSaveName = store.starName
                 pendingSaveIsOnboarding = store.onboardingStep == .createStarPrompt
+                // 키보드 해제를 별도 프레임으로 분리하여 버튼 애니메이션 충돌 방지
+                DispatchQueue.main.async {
+                    isTextFocused = false
+                }
             }
         }
-        .alert("이번 달 기록 한도에 도달했어요", isPresented: $store.showLimitAlert) {
+        .alert("오늘의 기록을 이미 작성했어요", isPresented: $store.showLimitAlert) {
             Button("확인", role: .cancel) {}
         } message: {
-            Text("매월 10개까지 무료로 기록할 수 있어요")
+            Text("하루에 1개까지 무료로 기록할 수 있어요")
         }
     }
 
@@ -143,7 +168,7 @@ public struct UniverseView: View {
                     Spacer()
                     VStack(spacing: 6) {
                         if store.onboardingStep != .createStarPrompt {
-                            Text("\(remaining)/\(UniverseFeature.State.monthlyRecordLimit)")
+                            Text("\(remaining)/\(UniverseFeature.State.dailyRecordLimit)")
                                 .font(.system(size: 11, weight: .medium))
                                 .foregroundStyle(.white.opacity(0.6))
                         }
@@ -163,6 +188,11 @@ public struct UniverseView: View {
                                 )
                         }
                         .opacity(canCreate ? 1.0 : 0.4)
+                        .overlay {
+                            if store.onboardingStep == .createStarPrompt {
+                                PlusPulsingRing()
+                            }
+                        }
                     }
                     .padding(.trailing, 24)
                     .padding(.bottom, 28)
@@ -221,14 +251,6 @@ public struct UniverseView: View {
         .background(Capsule().fill(Color.white.opacity(store.isSearching ? 0.14 : 0.08)))
     }
 
-    // MARK: - Helpers
-
-    private func dismissKeyboard() {
-        isTextFocused = false
-        isSearchFocused = false
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-
     // MARK: - Scene Setup
 
     private func setupScene() {
@@ -251,6 +273,7 @@ protocol UniverseSceneDelegate: AnyObject {
     func previewImagesUpdated(galaxies: [String: UIImage])
     func getAllRecords() -> [DomainEntity.Record]
     func getIsOnboarding() -> Bool
+    func getOnboardingStep() -> OnboardingStep?
     func addRecord(_ record: DomainEntity.Record)
     func didTapEmptyArea()
 }
@@ -295,6 +318,10 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
         store.isOnboarding
     }
 
+    func getOnboardingStep() -> OnboardingStep? {
+        store.onboardingStep
+    }
+
     func addRecord(_ record: DomainEntity.Record) {
         @Dependency(\.authClient) var authClient
         @Dependency(\.recordClient) var recordClient
@@ -306,5 +333,29 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
 
     func didTapEmptyArea() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+// MARK: - Plus Button Pulsing Effect
+
+private struct PlusPulsingRing: View {
+    @State private var isPulsing = false
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.6), lineWidth: 2)
+                .frame(width: 52, height: 52)
+                .scaleEffect(isPulsing ? 1.6 : 1.0)
+                .opacity(isPulsing ? 0 : 0.8)
+            Circle()
+                .stroke(Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.4), lineWidth: 1.5)
+                .frame(width: 52, height: 52)
+                .scaleEffect(isPulsing ? 1.3 : 0.9)
+                .opacity(isPulsing ? 0.2 : 0.6)
+        }
+        .animation(.easeOut(duration: 1.5).repeatForever(autoreverses: false), value: isPulsing)
+        .onAppear { isPulsing = true }
+        .allowsHitTesting(false)
     }
 }

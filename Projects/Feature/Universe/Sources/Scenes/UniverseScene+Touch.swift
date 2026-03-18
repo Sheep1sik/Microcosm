@@ -89,7 +89,6 @@ extension UniverseScene {
     // MARK: - Tap → Zoom
 
     func handleTap(at scenePos: CGPoint) {
-        // 어디를 탭하든 키보드 내리기
         sceneDelegate?.didTapEmptyArea()
 
         switch sceneState {

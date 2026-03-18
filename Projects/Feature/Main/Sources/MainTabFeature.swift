@@ -2,6 +2,7 @@ import ComposableArchitecture
 import DomainEntity
 import DomainClient
 import FeatureUniverse
+import FeatureConstellation
 import FeatureProfile
 
 @Reducer
@@ -10,22 +11,26 @@ public struct MainTabFeature {
     public struct State: Equatable {
         public var selectedTab: Tab = .universe
         public var universe = UniverseFeature.State()
+        public var constellation = ConstellationFeature.State()
         public var profile = ProfileFeature.State()
         public var userId: String?
 
         public enum Tab: Equatable {
             case universe
+            case constellation
             case profile
         }
 
         public init(
             selectedTab: Tab = .universe,
             universe: UniverseFeature.State = UniverseFeature.State(),
+            constellation: ConstellationFeature.State = ConstellationFeature.State(),
             profile: ProfileFeature.State = ProfileFeature.State(),
             userId: String? = nil
         ) {
             self.selectedTab = selectedTab
             self.universe = universe
+            self.constellation = constellation
             self.profile = profile
             self.userId = userId
         }
@@ -37,6 +42,7 @@ public struct MainTabFeature {
         case tabSelected(State.Tab)
         case recordsUpdated([Record])
         case universe(UniverseFeature.Action)
+        case constellation(ConstellationFeature.Action)
         case profile(ProfileFeature.Action)
     }
 
@@ -48,6 +54,7 @@ public struct MainTabFeature {
         BindingReducer()
 
         Scope(state: \.universe, action: \.universe) { UniverseFeature() }
+        Scope(state: \.constellation, action: \.constellation) { ConstellationFeature() }
         Scope(state: \.profile, action: \.profile) { ProfileFeature() }
 
         Reduce { state, action in
@@ -69,6 +76,9 @@ public struct MainTabFeature {
                 return .none
 
             case .universe:
+                return .none
+
+            case .constellation:
                 return .none
 
             case .profile:

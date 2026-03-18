@@ -6,6 +6,8 @@ import DomainClient
 public typealias Record = DomainEntity.Record
 
 public enum OnboardingStep: Int, Equatable {
+    case welcome
+    case nicknameInput
     case galaxyBirthIntro
     case monthlyGalaxyGuide
     case tapGalaxyPrompt
@@ -23,6 +25,13 @@ public struct UniverseFeature {
         public var onboardingStep: OnboardingStep? = nil
         public var onboardingGalaxyScreenCenter: CGPoint?
 
+        // Onboarding Nickname
+        public var onboardingNickname = ""
+        public var onboardingNicknameChecking = false
+        public var onboardingNicknameError: String?
+        public var onboardingNicknameAvailable: Bool?
+        public var onboardingNicknameSaving = false
+
         public var isOnboarding: Bool { onboardingStep != nil && onboardingStep != .completed }
 
         // Auth Info
@@ -37,7 +46,7 @@ public struct UniverseFeature {
         public var currentDetailRecords: [Record] = []
 
         // Free Tier
-        public static let monthlyRecordLimit = 10
+        public static let dailyRecordLimit = 1
         public var showLimitAlert = false
 
         // Record Input
@@ -73,24 +82,21 @@ public struct UniverseFeature {
             return cal.component(.year, from: now) == y && cal.component(.month, from: now) == m
         }
 
-        public func currentMonthRecordCount() -> Int {
+        public func todayRecordCount() -> Int {
             let cal = Calendar.current
-            let now = Date()
-            let year = cal.component(.year, from: now)
-            let month = cal.component(.month, from: now)
+            let today = cal.startOfDay(for: Date())
             return allRecords.filter {
                 !$0.isOnboardingRecord &&
-                cal.component(.year, from: $0.createdAt) == year &&
-                cal.component(.month, from: $0.createdAt) == month
+                cal.isDate($0.createdAt, inSameDayAs: today)
             }.count
         }
 
         public var remainingRecordCount: Int {
-            max(0, Self.monthlyRecordLimit - currentMonthRecordCount())
+            max(0, Self.dailyRecordLimit - todayRecordCount())
         }
 
         public var canCreateRecord: Bool {
-            currentMonthRecordCount() < Self.monthlyRecordLimit
+            todayRecordCount() < Self.dailyRecordLimit
         }
 
         public func galaxyResults() -> [(yearMonth: String, label: String, recordCount: Int, color: Color)] {
@@ -201,7 +207,14 @@ public struct UniverseFeature {
 
         // Onboarding
         case checkOnboarding
+        case onboardingAdvanceFromWelcome
         case onboardingAdvanceFromGuide
+        case onboardingNicknameChanged(String)
+        case onboardingCheckNickname
+        case onboardingNicknameCheckResult(Bool)
+        case onboardingNicknameCheckFailed(String)
+        case onboardingNicknameConfirm
+        case onboardingNicknameSaveCompleted
         case onboardingComplete
         case skipOnboarding
 
@@ -358,6 +371,69 @@ public struct UniverseFeature {
                     state.hasCompletedOnboarding = true
                     return .none
                 }
+                state.onboardingStep = .welcome
+                return .none
+
+            case .onboardingAdvanceFromWelcome:
+                guard state.onboardingStep == .welcome else { return .none }
+                state.onboardingStep = .nicknameInput
+                return .none
+
+            case .onboardingNicknameChanged(let text):
+                state.onboardingNickname = text
+                state.onboardingNicknameError = nil
+                state.onboardingNicknameAvailable = nil
+                return .none
+
+            case .onboardingCheckNickname:
+                let trimmed = state.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
+                guard trimmed.count >= 2, trimmed.count <= 10 else {
+                    state.onboardingNicknameError = "2~10자로 입력해주세요"
+                    return .none
+                }
+                state.onboardingNicknameChecking = true
+                state.onboardingNicknameError = nil
+                state.onboardingNicknameAvailable = nil
+                let nickname = trimmed
+                return .run { send in
+                    do {
+                        let available = try await userClient.checkNickname(nickname)
+                        await send(.onboardingNicknameCheckResult(available))
+                    } catch {
+                        await send(.onboardingNicknameCheckFailed("확인 중 오류가 발생했어요"))
+                    }
+                }
+
+            case .onboardingNicknameCheckResult(let available):
+                state.onboardingNicknameChecking = false
+                if available {
+                    state.onboardingNicknameAvailable = true
+                    state.onboardingNicknameError = nil
+                } else {
+                    state.onboardingNicknameAvailable = false
+                    state.onboardingNicknameError = "이미 사용 중인 닉네임이에요"
+                }
+                return .none
+
+            case .onboardingNicknameCheckFailed(let message):
+                state.onboardingNicknameChecking = false
+                state.onboardingNicknameError = message
+                return .none
+
+            case .onboardingNicknameConfirm:
+                let trimmed = state.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
+                guard state.onboardingNicknameAvailable == true else { return .none }
+                state.onboardingNicknameSaving = true
+                let nickname = trimmed
+                return .run { send in
+                    guard let userId = authClient.currentUser()?.uid else { return }
+                    try await userClient.setNickname(userId, nickname)
+                    await send(.onboardingNicknameSaveCompleted)
+                }
+
+            case .onboardingNicknameSaveCompleted:
+                state.onboardingNicknameSaving = false
+                state.userDisplayName = state.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
                 state.onboardingStep = .galaxyBirthIntro
                 return .none
 
