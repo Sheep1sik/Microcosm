@@ -3,6 +3,23 @@ import CoreImage
 import Combine
 import DomainEntity
 
+// MARK: - Seeded Random Number Generator
+
+private struct SeededRNG: RandomNumberGenerator {
+    private var state: UInt64
+
+    init(seed: UInt64) {
+        state = seed == 0 ? 1 : seed
+    }
+
+    mutating func next() -> UInt64 {
+        state ^= state << 13
+        state ^= state >> 7
+        state ^= state << 17
+        return state
+    }
+}
+
 private struct SplitMix64: RandomNumberGenerator {
     private var state: UInt64
     init(seed: UInt64) { state = seed }
@@ -143,6 +160,10 @@ final class UniverseScene: SKScene {
     private var hasPerformedInitialLoad = false
     private var needsInitialFocus = true
 
+    // MARK: - Completed Constellations (배경)
+
+    var completedConstellationNodes: [String: SKNode] = [:]
+
     // MARK: - Preview Star
 
     var previewStarNode: SKSpriteNode?
@@ -184,25 +205,6 @@ final class UniverseScene: SKScene {
         container.zPosition = 8
         container.name = "sunNode"
 
-        // Glow behind sun
-        let glow = SKSpriteNode(texture: nebulaTexture,
-                                size: CGSize(width: 160, height: 160))
-        glow.color = UIColor(red: 1.0, green: 0.7, blue: 0.3, alpha: 1)
-        glow.colorBlendFactor = 1.0
-        glow.alpha = 0.2
-        glow.blendMode = .add
-        container.addChild(glow)
-        glow.run(SKAction.repeatForever(SKAction.sequence([
-            SKAction.group([
-                SKAction.fadeAlpha(to: 0.35, duration: 2.5),
-                SKAction.scale(to: 1.15, duration: 2.5),
-            ]),
-            SKAction.group([
-                SKAction.fadeAlpha(to: 0.15, duration: 2.5),
-                SKAction.scale(to: 0.9, duration: 2.5),
-            ]),
-        ])))
-
         // Sun image
         if let sunImage = UIImage(named: "Sun") {
             let sprite = SKSpriteNode(texture: SKTexture(image: sunImage),
@@ -212,16 +214,6 @@ final class UniverseScene: SKScene {
                 SKAction.rotate(byAngle: .pi * 2, duration: 120)))
             container.addChild(sprite)
         }
-
-        // Label
-        let label = SKLabelNode(text: "태양계")
-        label.fontName = "AppleSDGothicNeo-Light"
-        label.fontSize = 44
-        label.setScale(0.25)
-        label.fontColor = UIColor(red: 1.0, green: 0.8, blue: 0.4, alpha: 0.4)
-        label.position = CGPoint(x: 0, y: -50)
-        label.zPosition = 1
-        container.addChild(label)
 
         addChild(container)
         sunNode = container
@@ -315,7 +307,8 @@ final class UniverseScene: SKScene {
 
         var newGalaxyKeys: [String] = []
 
-        for (yearMonth, records) in grouped {
+        for yearMonth in grouped.keys.sorted() {
+            let records = grouped[yearMonth] ?? []
             if var existing = activeGalaxies[yearMonth] {
                 let oldCount = existing.recordCount
                 let newColor = records.blendedUIColor()
@@ -402,11 +395,12 @@ final class UniverseScene: SKScene {
         let sunExclusion: CGFloat = 650
         let galaxyMinDist: CGFloat = 300
 
+        var rng = SeededRNG(seed: UInt64(year * 100 + month))
         let existingPositions = activeGalaxies.values.map { $0.position }
 
         for _ in 0..<50 {
-            let x = CGFloat.random(in: margin...(worldSize.width - margin))
-            let y = CGFloat.random(in: margin...(worldSize.height - margin))
+            let x = CGFloat.random(in: margin...(worldSize.width - margin), using: &rng)
+            let y = CGFloat.random(in: margin...(worldSize.height - margin), using: &rng)
 
             if hypot(x - sunCenter.x, y - sunCenter.y) < sunExclusion { continue }
 
@@ -419,21 +413,22 @@ final class UniverseScene: SKScene {
         }
         // 폴백: 태양계만 피하기
         for _ in 0..<20 {
-            let x = CGFloat.random(in: margin...(worldSize.width - margin))
-            let y = CGFloat.random(in: margin...(worldSize.height - margin))
+            let x = CGFloat.random(in: margin...(worldSize.width - margin), using: &rng)
+            let y = CGFloat.random(in: margin...(worldSize.height - margin), using: &rng)
             if hypot(x - sunCenter.x, y - sunCenter.y) >= sunExclusion {
                 return CGPoint(x: x, y: y)
             }
         }
-        return CGPoint(x: CGFloat.random(in: margin...(worldSize.width - margin)),
-                       y: CGFloat.random(in: margin...(worldSize.height - margin)))
+        return CGPoint(x: CGFloat.random(in: margin...(worldSize.width - margin), using: &rng),
+                       y: CGFloat.random(in: margin...(worldSize.height - margin), using: &rng))
     }
 
     private func galaxyProperties(year: Int, month: Int) -> (arms: Int, tilt: CGFloat, wind: CGFloat, ellipticity: CGFloat) {
-        let arms = Int.random(in: 2...5)
-        let tilt = CGFloat.random(in: -1.57...1.57)
-        let wind = CGFloat.random(in: 2.0...5.0)
-        let ellipticity = CGFloat.random(in: 0.25...0.65)
+        var rng = SeededRNG(seed: UInt64(year * 1000 + month * 7 + 31))
+        let arms = Int.random(in: 2...5, using: &rng)
+        let tilt = CGFloat.random(in: -1.57...1.57, using: &rng)
+        let wind = CGFloat.random(in: 2.0...5.0, using: &rng)
+        let ellipticity = CGFloat.random(in: 0.25...0.65, using: &rng)
         return (arms, tilt, wind, ellipticity)
     }
 

@@ -1,4 +1,23 @@
 import SpriteKit
+import DomainEntity
+
+// MARK: - Scene Delegate
+
+protocol ConstellationSceneDelegate: AnyObject {
+    func didTapStar(constellationId: String, starIndex: Int)
+    func didEnterConstellationDetail(id: String)
+    func didExitConstellationDetail()
+    func didTapEmptyArea()
+}
+
+// MARK: - Rendered Constellation (노드 참조)
+
+struct RenderedConstellation {
+    let containerNode: SKNode
+    var starNodes: [SKSpriteNode]       // index 순
+    var lineNodes: [SKShapeNode]
+    var labelNode: SKLabelNode?
+}
 
 final class ConstellationScene: SKScene {
 
@@ -16,6 +35,30 @@ final class ConstellationScene: SKScene {
     var velocity: CGVector = .zero
     var pinchStartDist: CGFloat = 0
     var pinchStartScale: CGFloat = 1
+
+    // MARK: - Scene State
+
+    enum SceneState { case overview, zoomingIn, constellationDetail, zoomingOut }
+    var sceneState: SceneState = .overview
+
+    var touchStartPos: CGPoint?
+    var touchStartTime: TimeInterval = 0
+
+    var savedCameraPos: CGPoint = .zero
+    var savedCameraScale: CGFloat = 1.5
+    var currentConstellationId: String?
+    var detailMaxScale: CGFloat = 1.0  // 디테일 모드 줌아웃 한계
+
+    weak var sceneDelegate: ConstellationSceneDelegate?
+
+    // MARK: - Constellation Rendering
+
+    var renderedConstellations: [String: RenderedConstellation] = [:]
+    var detailNodes: [SKNode] = []
+    var backButton: SKLabelNode?
+
+    // 마지막 목표 스냅샷 (줌아웃 시 완성 상태 참조용)
+    var lastGoalsSnapshot: [Goal] = []
 
     // MARK: - Shared Textures & Shaders
 
@@ -59,6 +102,7 @@ final class ConstellationScene: SKScene {
         setupCamera()
         setupDustField()
         setupNebulae()
+        setupConstellations()
     }
 
     // MARK: - Camera
@@ -70,70 +114,14 @@ final class ConstellationScene: SKScene {
         camera = cameraNode
     }
 
-    // MARK: - Touch Handling
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let view = self.view, let all = event?.allTouches else { return }
-        let active = all.filter { $0.phase == .began || $0.phase == .moved || $0.phase == .stationary }
-
-        if active.count >= 2 {
-            let arr = Array(active)
-            let p1 = arr[0].location(in: view); let p2 = arr[1].location(in: view)
-            pinchStartDist = hypot(p2.x - p1.x, p2.y - p1.y)
-            pinchStartScale = cameraNode.xScale
-            lastTouchPos = nil; velocity = .zero
-        } else if let touch = touches.first {
-            lastTouchPos = touch.location(in: view)
-            velocity = .zero
-        }
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let view = self.view, let all = event?.allTouches else { return }
-        let active = all.filter { $0.phase == .began || $0.phase == .moved || $0.phase == .stationary }
-
-        if active.count >= 2 {
-            let arr = Array(active)
-            let p1 = arr[0].location(in: view); let p2 = arr[1].location(in: view)
-            let dist = hypot(p2.x - p1.x, p2.y - p1.y)
-            if pinchStartDist > 10 {
-                let newScale = pinchStartScale * (pinchStartDist / dist)
-                cameraNode.setScale(max(0.5, min(3.0, newScale)))
-            }
-        } else if active.count == 1, let touch = active.first {
-            let cur = touch.location(in: view)
-            if let last = lastTouchPos {
-                let dx = cur.x - last.x
-                let dy = cur.y - last.y
-                let s = cameraNode.xScale
-                cameraNode.position.x -= dx * s
-                cameraNode.position.y += dy * s
-                velocity = CGVector(dx: -dx * s, dy: dy * s)
-            }
-            lastTouchPos = cur
-        }
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let all = event?.allTouches else { return }
-        let active = all.filter { $0.phase != .ended && $0.phase != .cancelled }
-
-        if active.isEmpty {
-            lastTouchPos = nil; pinchStartDist = 0
-        } else if active.count == 1 {
-            lastTouchPos = active.first?.location(in: view); pinchStartDist = 0
-        }
-    }
-
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        lastTouchPos = nil; pinchStartDist = 0; velocity = .zero
-    }
-
     // MARK: - Update
 
     override func update(_ currentTime: TimeInterval) {
-        // 관성 패닝
-        if lastTouchPos == nil && pinchStartDist == 0 {
+        // 관성 패닝 (overview, constellationDetail에서만)
+        guard sceneState == .overview || sceneState == .constellationDetail else { return }
+
+        // 디테일 모드에서는 관성 이동 비활성화
+        if sceneState == .overview, lastTouchPos == nil, pinchStartDist == 0 {
             if abs(velocity.dx) > 0.1 || abs(velocity.dy) > 0.1 {
                 cameraNode.position.x += velocity.dx
                 cameraNode.position.y += velocity.dy
@@ -142,10 +130,22 @@ final class ConstellationScene: SKScene {
         }
 
         // 카메라 경계 제한
-        let s = cameraNode.xScale
-        let halfW = size.width * s / 2
-        let halfH = size.height * s / 2
-        cameraNode.position.x = max(halfW, min(worldSize.width - halfW, cameraNode.position.x))
-        cameraNode.position.y = max(halfH, min(worldSize.height - halfH, cameraNode.position.y))
+        if sceneState == .constellationDetail,
+           let id = currentConstellationId,
+           let rendered = renderedConstellations[id] {
+            // 디테일: 별자리 중심 기준으로 패닝 범위 제한
+            let center = rendered.containerNode.position
+            let s = cameraNode.xScale
+            let panLimit: CGFloat = 200 * (detailMaxScale / s) // 줌인할수록 더 이동 가능
+            cameraNode.position.x = max(center.x - panLimit, min(center.x + panLimit, cameraNode.position.x))
+            cameraNode.position.y = max(center.y - panLimit - size.height * s * 0.15,
+                                        min(center.y + panLimit, cameraNode.position.y))
+        } else {
+            let s = cameraNode.xScale
+            let halfW = size.width * s / 2
+            let halfH = size.height * s / 2
+            cameraNode.position.x = max(halfW, min(worldSize.width - halfW, cameraNode.position.x))
+            cameraNode.position.y = max(halfH, min(worldSize.height - halfH, cameraNode.position.y))
+        }
     }
 }

@@ -45,110 +45,91 @@ public struct UniverseView: View {
     }
 
     public var body: some View {
+        mainContent
+            .toolbar(store.isInGalaxyDetail || store.isOnboarding ? .hidden : .visible, for: .tabBar)
+            .animation(.easeOut(duration: 0.3), value: store.showRecordPanel)
+            .modifier(SceneChangeHandlers(store: store, scene: scene, pendingSaveContent: $pendingSaveContent, pendingSaveName: $pendingSaveName, pendingSaveIsOnboarding: $pendingSaveIsOnboarding, isTextFocused: $isTextFocused))
+            .alert("오늘의 기록을 이미 작성했어요", isPresented: $store.showLimitAlert) {
+                Button("확인", role: .cancel) {}
+            } message: {
+                Text("하루에 1개까지 무료로 기록할 수 있어요")
+            }
+    }
+
+    // MARK: - Main Content
+
+    private var mainContent: some View {
         ZStack {
             SpriteKitView(scene: scene)
                 .ignoresSafeArea(.all)
                 .onAppear { setupScene() }
 
+            searchButton
+
             if store.isSearching {
                 SearchOverlayView(store: store, isSearchFocused: $isSearchFocused)
-            }
-
-            if !store.showRecordPanel && !store.isOnboarding {
-                GeometryReader { geo in
-                    VStack {
-                        searchBar
-                            .padding(.horizontal, 16)
-                            .padding(.top, store.isInGalaxyDetail
-                                ? geo.safeAreaInsets.top + 64
-                                : geo.safeAreaInsets.top + 4)
-                        Spacer()
-                    }
-                    .ignoresSafeArea()
-                }
+                    .transition(.opacity)
             }
 
             plusButton
 
             OnboardingOverlayView(store: store)
 
-            if store.showRecordPanel {
-                VStack {
-                    Color.clear
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            if isTextFocused {
-                                isTextFocused = false
-                            } else {
-                                withAnimation(.easeIn(duration: 0.25)) {
-                                    store.send(.dismissPanel)
-                                    scene.dismissPreviewStar()
-                                }
+            recordPanelOverlay
+        }
+        .animation(.easeOut(duration: 0.2), value: store.isSearching)
+    }
+
+    // MARK: - Search Button
+
+    @ViewBuilder
+    private var searchButton: some View {
+        if !store.showRecordPanel && !store.isOnboarding && !store.isSearching {
+            VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        withAnimation(.easeOut(duration: 0.2)) {
+                            _ = store.send(.binding(.set(\.isSearching, true)))
+                        }
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 18, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.8))
+                            .frame(width: 40, height: 40)
+                            .background(.ultraThinMaterial.opacity(0.6))
+                            .clipShape(Circle())
+                    }
+                    .padding(.trailing, 16)
+                    .padding(.top, 8)
+                }
+                Spacer()
+            }
+        }
+    }
+
+    // MARK: - Record Panel Overlay
+
+    @ViewBuilder
+    private var recordPanelOverlay: some View {
+        if store.showRecordPanel {
+            VStack {
+                Color.clear
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        if isTextFocused {
+                            isTextFocused = false
+                        } else {
+                            withAnimation(.easeIn(duration: 0.25)) {
+                                store.send(.dismissPanel)
+                                scene.dismissPreviewStar()
                             }
                         }
-                    RecordPanelView(store: store, scene: scene, isTextFocused: $isTextFocused)
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-                .ignoresSafeArea(.container, edges: .bottom)
+                    }
+                RecordPanelView(store: store, scene: scene, isTextFocused: $isTextFocused)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
             }
-        }
-        .toolbar(store.isInGalaxyDetail || store.isOnboarding ? .hidden : .visible, for: .tabBar)
-        .animation(.easeOut(duration: 0.3), value: store.showRecordPanel)
-        .onChange(of: store.pendingNavigation) {
-            guard let nav = store.pendingNavigation else { return }
-            store.send(.binding(.set(\.pendingNavigation, nil)))
-            switch nav {
-            case .galaxy(let yearMonth):
-                scene.navigateToGalaxy(yearMonth: yearMonth)
-            case .star(let record):
-                scene.navigateToStar(record: record)
-            case .galaxyThenStar(let yearMonth, let record):
-                scene.navigateToGalaxyThenStar(yearMonth: yearMonth, record: record)
-            }
-        }
-        .onChange(of: store.allRecords) {
-            scene.refreshGalaxies()
-        }
-        .onChange(of: store.onboardingStep) {
-            if store.onboardingStep == .galaxyBirthIntro {
-                scene.refreshGalaxies()
-            }
-        }
-        .onChange(of: store.analyzedProfile) {
-            guard let profile = store.analyzedProfile else { return }
-            // GPT 감정 분석 완료 → scene에 기록 생성 요청
-            scene.confirmPreviewStar()
-            let content = pendingSaveContent
-            let name = pendingSaveName
-            let isOnboarding = pendingSaveIsOnboarding
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                scene.createRecordAndRefresh(
-                    content: content,
-                    profile: profile,
-                    starName: name,
-                    isOnboardingRecord: isOnboarding
-                )
-            }
-            pendingSaveContent = ""
-            pendingSaveName = ""
-            pendingSaveIsOnboarding = false
-        }
-        .onChange(of: store.isAnalyzingColor) {
-            if store.isAnalyzingColor {
-                // 분석 시작 시 현재 입력값 캡처
-                pendingSaveContent = store.recordContent.trimmingCharacters(in: .whitespacesAndNewlines)
-                pendingSaveName = store.starName
-                pendingSaveIsOnboarding = store.onboardingStep == .createStarPrompt
-                // 키보드 해제를 별도 프레임으로 분리하여 버튼 애니메이션 충돌 방지
-                DispatchQueue.main.async {
-                    isTextFocused = false
-                }
-            }
-        }
-        .alert("오늘의 기록을 이미 작성했어요", isPresented: $store.showLimitAlert) {
-            Button("확인", role: .cancel) {}
-        } message: {
-            Text("하루에 1개까지 무료로 기록할 수 있어요")
+            .ignoresSafeArea(.container, edges: .bottom)
         }
     }
 
@@ -201,56 +182,6 @@ public struct UniverseView: View {
         }
     }
 
-    // MARK: - Search Bar
-
-    private var searchBar: some View {
-        HStack(spacing: 10) {
-            Image(systemName: "magnifyingglass")
-                .font(.subheadline)
-                .foregroundColor(.white.opacity(0.7))
-
-            ZStack(alignment: .leading) {
-                if store.searchText.isEmpty {
-                    Text(store.isInGalaxyDetail ? "별 검색" : "은하·별 검색")
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.5))
-                }
-                TextField("", text: Binding(
-                    get: { store.searchText },
-                    set: { store.send(.searchTextChanged($0)) }
-                ))
-                    .font(.subheadline)
-                    .foregroundColor(.white)
-                    .tint(.white)
-                    .autocorrectionDisabled()
-                    .focused($isSearchFocused)
-                    .onSubmit { isSearchFocused = false }
-                    .onChange(of: isSearchFocused) {
-                        if isSearchFocused {
-                            withAnimation(.easeOut(duration: 0.2)) {
-                                store.send(.binding(.set(\.isSearching, true)))
-                            }
-                        }
-                    }
-            }
-
-            if store.isSearching {
-                Button {
-                    store.send(.closeSearch)
-                    isSearchFocused = false
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                } label: {
-                    Text("취소")
-                        .font(.subheadline)
-                        .foregroundColor(.white)
-                }
-            }
-        }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 10)
-        .background(Capsule().fill(Color.white.opacity(store.isSearching ? 0.14 : 0.08)))
-    }
-
     // MARK: - Scene Setup
 
     private func setupScene() {
@@ -259,6 +190,84 @@ public struct UniverseView: View {
         scene.sceneDelegate = bridge
         store.send(.checkOnboarding)
         scene.refreshGalaxies()
+    }
+}
+
+// MARK: - Scene onChange Handlers (body 복잡도 분산)
+
+private struct SceneChangeHandlers: ViewModifier {
+    @Bindable var store: StoreOf<UniverseFeature>
+    let scene: UniverseScene
+    @Binding var pendingSaveContent: String
+    @Binding var pendingSaveName: String
+    @Binding var pendingSaveIsOnboarding: Bool
+    var isTextFocused: FocusState<Bool>.Binding
+
+    func body(content: Content) -> some View {
+        content
+            .onChange(of: store.pendingNavigation) {
+                handleNavigation()
+            }
+            .onChange(of: store.allRecords) {
+                scene.refreshGalaxies()
+            }
+            .onChange(of: store.onboardingStep) {
+                if store.onboardingStep == .galaxyBirthIntro {
+                    scene.refreshGalaxies()
+                }
+            }
+            .onChange(of: store.analyzedProfile) {
+                handleProfileAnalyzed()
+            }
+            .onChange(of: store.isAnalyzingColor) {
+                handleAnalyzingColor()
+            }
+            .onChange(of: store.completedConstellationIds) {
+                scene.updateCompletedConstellations(ids: store.completedConstellationIds)
+            }
+    }
+
+    private func handleNavigation() {
+        guard let nav = store.pendingNavigation else { return }
+        store.send(.binding(.set(\.pendingNavigation, nil)))
+        switch nav {
+        case .galaxy(let yearMonth):
+            scene.navigateToGalaxy(yearMonth: yearMonth)
+        case .star(let record):
+            scene.navigateToStar(record: record)
+        case .galaxyThenStar(let yearMonth, let record):
+            scene.navigateToGalaxyThenStar(yearMonth: yearMonth, record: record)
+        }
+    }
+
+    private func handleProfileAnalyzed() {
+        guard let profile = store.analyzedProfile else { return }
+        scene.confirmPreviewStar()
+        let content = pendingSaveContent
+        let name = pendingSaveName
+        let isOnboarding = pendingSaveIsOnboarding
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            scene.createRecordAndRefresh(
+                content: content,
+                profile: profile,
+                starName: name,
+                isOnboardingRecord: isOnboarding
+            )
+        }
+        pendingSaveContent = ""
+        pendingSaveName = ""
+        pendingSaveIsOnboarding = false
+    }
+
+    private func handleAnalyzingColor() {
+        if store.isAnalyzingColor {
+            pendingSaveContent = store.recordContent.trimmingCharacters(in: .whitespacesAndNewlines)
+            pendingSaveName = store.starName
+            pendingSaveIsOnboarding = store.onboardingStep == .createStarPrompt
+            DispatchQueue.main.async {
+                isTextFocused.wrappedValue = false
+            }
+        }
     }
 }
 

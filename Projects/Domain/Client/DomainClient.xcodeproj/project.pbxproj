@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		13182738F8F516981D36B2F2 /* libDomainEntity.a in Dependencies */ = {isa = PBXBuildFile; fileRef = E8373FC5D27F3A2D0DDC7A79 /* libDomainEntity.a */; };
+		1DFC1E425835C7824A5769AB /* GoalClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F16363E15E4D5234940AAA /* GoalClient.swift */; };
 		2012F6A8DD0F9FF37F813A57 /* GoogleSignIn.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = 2E8D7B139D0D0F0F5FE3D3B2 /* GoogleSignIn.framework */; };
 		29270558215922F50DCB395F /* FirebaseFirestoreTarget.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = 325588A78D67F8A40ABF1084 /* FirebaseFirestoreTarget.framework */; };
 		732F4A982FFFBF0CACE0E301 /* RecordClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC051CDB03428F229BB2B42 /* RecordClient.swift */; };
@@ -52,6 +53,7 @@
 		3DC051CDB03428F229BB2B42 /* RecordClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordClient.swift; sourceTree = "<group>"; };
 		5541C81F3532E2127D510D6C /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
 		A364915225E5B79D92805B76 /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3F16363E15E4D5234940AAA /* GoalClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalClient.swift; sourceTree = "<group>"; };
 		B7CBF4E64084DAF41B301EC6 /* OpenAIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIClient.swift; sourceTree = "<group>"; };
 		C0980B59C1B40FF186646649 /* UserClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClient.swift; sourceTree = "<group>"; };
 		E8373FC5D27F3A2D0DDC7A79 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				5541C81F3532E2127D510D6C /* AuthClient.swift */,
+				A3F16363E15E4D5234940AAA /* GoalClient.swift */,
 				B7CBF4E64084DAF41B301EC6 /* OpenAIClient.swift */,
 				3DC051CDB03428F229BB2B42 /* RecordClient.swift */,
 				C0980B59C1B40FF186646649 /* UserClient.swift */,
@@ -177,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D37B3559CA743F822649CD /* AuthClient.swift in Sources */,
+				1DFC1E425835C7824A5769AB /* GoalClient.swift in Sources */,
 				A98E497C78EAA285C4476952 /* OpenAIClient.swift in Sources */,
 				732F4A982FFFBF0CACE0E301 /* RecordClient.swift in Sources */,
 				8248E6266E483E72DEBB296D /* UserClient.swift in Sources */,

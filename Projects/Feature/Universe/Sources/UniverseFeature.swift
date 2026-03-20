@@ -61,6 +61,9 @@ public struct UniverseFeature {
         public var isSearching = false
         public var debouncedQuery = ""
 
+        // Completed Constellations (배경 표시용)
+        public var completedConstellationIds: [String] = []
+
         // Preview Images
         public var galaxyPreviewImages: [String: UIImage] = [:]
 
@@ -150,6 +153,7 @@ public struct UniverseFeature {
             starName: String = "",
             isAnalyzingColor: Bool = false,
             analyzedProfile: StarVisualProfile? = nil,
+            completedConstellationIds: [String] = [],
             searchText: String = "",
             isSearching: Bool = false,
             debouncedQuery: String = "",
@@ -170,6 +174,7 @@ public struct UniverseFeature {
             self.starName = starName
             self.isAnalyzingColor = isAnalyzingColor
             self.analyzedProfile = analyzedProfile
+            self.completedConstellationIds = completedConstellationIds
             self.searchText = searchText
             self.isSearching = isSearching
             self.debouncedQuery = debouncedQuery

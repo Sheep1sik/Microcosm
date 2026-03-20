@@ -17,6 +17,7 @@
 		5B54DDD872C132949D299FC7 /* UniverseScene+Minimap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E71D8D99E2A70FB15E046F9 /* UniverseScene+Minimap.swift */; };
 		5DED6F4935AEF58B58890EAE /* libDomainEntity.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 6F006D790A18670C5FAAEA61 /* libDomainEntity.a */; };
 		7E04DFECBC3FB226A3B8FA9F /* UniverseScene+Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBE69C705A0EA89798C38DB /* UniverseScene+Previews.swift */; };
+		924576AFA27765AD13052766 /* UniverseScene+CompletedConstellations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127FD52571E0173D08F9FFA7 /* UniverseScene+CompletedConstellations.swift */; };
 		9291C187251BFD51E5BD7227 /* UniverseScene+GalaxyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C42C7EAAB66A8A78723002 /* UniverseScene+GalaxyDetail.swift */; };
 		B9C4256065D143EFB602382E /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B81BBEFAC7065C696785994 /* ComposableArchitecture.framework */; };
 		BCD3420B1F339275DDF600A2 /* UniverseScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163E4C3E3BFBB46CDB8AE38D /* UniverseScene+Background.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		127FD52571E0173D08F9FFA7 /* UniverseScene+CompletedConstellations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+CompletedConstellations.swift"; sourceTree = "<group>"; };
 		163E4C3E3BFBB46CDB8AE38D /* UniverseScene+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+Background.swift"; sourceTree = "<group>"; };
 		216AB2FBC4E08D76B219B4E0 /* UniverseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseScene.swift; sourceTree = "<group>"; };
 		2AFC201661D0A1E2DC0644C1 /* RecordPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPanelView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			children = (
 				216AB2FBC4E08D76B219B4E0 /* UniverseScene.swift */,
 				163E4C3E3BFBB46CDB8AE38D /* UniverseScene+Background.swift */,
+				127FD52571E0173D08F9FFA7 /* UniverseScene+CompletedConstellations.swift */,
 				77C42C7EAAB66A8A78723002 /* UniverseScene+GalaxyDetail.swift */,
 				9E71D8D99E2A70FB15E046F9 /* UniverseScene+Minimap.swift */,
 				AFBE69C705A0EA89798C38DB /* UniverseScene+Previews.swift */,
@@ -208,6 +211,7 @@
 				32F01A46F6BEE52D6844E41E /* OnboardingOverlayView.swift in Sources */,
 				E847B1FE9EF07324769BF929 /* RecordPanelView.swift in Sources */,
 				BCD3420B1F339275DDF600A2 /* UniverseScene+Background.swift in Sources */,
+				924576AFA27765AD13052766 /* UniverseScene+CompletedConstellations.swift in Sources */,
 				9291C187251BFD51E5BD7227 /* UniverseScene+GalaxyDetail.swift in Sources */,
 				5B54DDD872C132949D299FC7 /* UniverseScene+Minimap.swift in Sources */,
 				7E04DFECBC3FB226A3B8FA9F /* UniverseScene+Previews.swift in Sources */,
