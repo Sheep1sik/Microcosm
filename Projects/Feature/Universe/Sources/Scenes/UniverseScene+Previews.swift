@@ -4,34 +4,26 @@ import DomainEntity
 extension UniverseScene {
 
     /// 셰이더로 렌더링된 은하/별 프리뷰 이미지를 생성하여 sceneDelegate에 전달
-    /// 캐싱: 이전 렌더링 키와 비교하여 변경분만 재렌더링
+    /// 2계층 캐싱: 메모리 → 디스크 → 셰이더 렌더링 순으로 조회
     func renderPreviews() {
-        guard let skView = self.view else { return }
+        guard let skView = self.view, let cache = previewCache else { return }
 
         let sceneBg = UIColor(red: 0.012, green: 0.024, blue: 0.031, alpha: 1)
 
-        // ── 은하 프리뷰 (변경분만 재렌더링) ──
+        // ── 은하 프리뷰 ──
         let gz: CGFloat = 80
         let gCrop = CGRect(x: -gz / 2, y: -gz / 2, width: gz, height: gz)
 
-        // 현재 은하 키 세트 계산
         var currentGalaxyKeys: Set<String> = []
-        var newGalaxyKeys: [String] = []
-        for key in activeGalaxies.keys {
+        for (key, galaxy) in activeGalaxies {
             currentGalaxyKeys.insert(key)
-            if cachedGalaxyPreviewImages[key] == nil {
-                newGalaxyKeys.append(key)
-            }
-        }
 
-        // 삭제된 은하 캐시 제거
-        for key in cachedGalaxyPreviewImages.keys where !currentGalaxyKeys.contains(key) {
-            cachedGalaxyPreviewImages.removeValue(forKey: key)
-        }
+            // 메모리 캐시 히트
+            if cache.galaxyImages[key] != nil { continue }
+            // 디스크 캐시 히트 (메모리에 자동 로드)
+            if cache.galaxyImage(for: key) != nil { continue }
 
-        // 새 은하만 렌더링
-        for key in newGalaxyKeys {
-            guard let galaxy = activeGalaxies[key] else { continue }
+            // 캐시 미스 → 셰이더 렌더링
             let container = SKNode()
 
             let bg = SKSpriteNode(color: sceneBg,
@@ -58,11 +50,17 @@ extension UniverseScene {
             container.addChild(sprite)
 
             if let texture = skView.texture(from: container, crop: gCrop) {
-                cachedGalaxyPreviewImages[key] = UIImage(cgImage: texture.cgImage())
+                let image = UIImage(cgImage: texture.cgImage())
+                cache.setGalaxyImage(image, for: key)
             }
         }
 
-        // ── 별 프리뷰 (변경분만 재렌더링) ──
+        // 삭제된 은하 캐시 제거
+        for key in cache.galaxyImages.keys where !currentGalaxyKeys.contains(key) {
+            cache.removeGalaxy(for: key)
+        }
+
+        // ── 별 프리뷰 ──
         let sz: CGFloat = 72
         let sCrop = CGRect(x: -sz / 2, y: -sz / 2, width: sz, height: sz)
 
@@ -71,9 +69,13 @@ extension UniverseScene {
 
         for record in records {
             currentRecordIds.insert(record.id)
-            // 이미 캐시된 별은 건너뜀
-            if cachedStarPreviewImages[record.id] != nil { continue }
 
+            // 메모리 캐시 히트
+            if cache.starImages[record.id] != nil { continue }
+            // 디스크 캐시 히트 (메모리에 자동 로드)
+            if cache.starImage(for: record.id) != nil { continue }
+
+            // 캐시 미스 → 셰이더 렌더링
             let profile = record.resolvedProfile
             let container = SKNode()
 
@@ -94,18 +96,20 @@ extension UniverseScene {
             container.addChild(sprite)
 
             if let texture = skView.texture(from: container, crop: sCrop) {
-                cachedStarPreviewImages[record.id] = UIImage(cgImage: texture.cgImage())
+                let image = UIImage(cgImage: texture.cgImage())
+                cache.setStarImage(image, for: record.id)
             }
         }
 
         // 삭제된 레코드 캐시 제거
-        for id in cachedStarPreviewImages.keys where !currentRecordIds.contains(id) {
-            cachedStarPreviewImages.removeValue(forKey: id)
+        for id in cache.starImages.keys where !currentRecordIds.contains(id) {
+            cache.removeStar(for: id)
         }
 
+        // delegate에 전달하여 revision 증가
         sceneDelegate?.previewImagesUpdated(
-            galaxies: cachedGalaxyPreviewImages,
-            stars: cachedStarPreviewImages
+            galaxies: cache.galaxyImages,
+            stars: cache.starImages
         )
     }
 }

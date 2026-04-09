@@ -58,8 +58,7 @@ final class UniverseScene: SKScene {
 
     // MARK: - Preview Image Cache
 
-    var cachedGalaxyPreviewImages: [String: UIImage] = [:]
-    var cachedStarPreviewImages: [String: UIImage] = [:]
+    var previewCache: PreviewImageCache?
 
     // MARK: - Dust Stars (for frustum culling)
 

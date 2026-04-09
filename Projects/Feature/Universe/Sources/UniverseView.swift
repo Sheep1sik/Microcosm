@@ -188,6 +188,7 @@ public struct UniverseView: View {
         let bridge = SceneDelegateBridge(store: store)
         sceneBridge = bridge
         scene.sceneDelegate = bridge
+        scene.previewCache = bridge.previewImageCache
         store.send(.checkOnboarding)
         scene.refreshGalaxies()
     }
