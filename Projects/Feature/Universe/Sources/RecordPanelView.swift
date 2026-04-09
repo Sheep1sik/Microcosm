@@ -1,6 +1,7 @@
 import SwiftUI
 import ComposableArchitecture
 import DomainEntity
+import SharedDesignSystem
 
 struct RecordPanelView: View {
     @Bindable var store: StoreOf<UniverseFeature>
@@ -67,7 +68,7 @@ struct RecordPanelView: View {
                         Capsule().fill(
                             store.recordContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
                                 ? Color.white.opacity(0.15)
-                                : Color(red: 0.55, green: 0.83, blue: 0.97)
+                                : AppColors.accent
                         )
                     )
                 }
@@ -80,9 +81,9 @@ struct RecordPanelView: View {
             LinearGradient(
                 colors: [
                     .clear,
-                    Color(red: 0.01, green: 0.02, blue: 0.04).opacity(0.6),
-                    Color(red: 0.01, green: 0.02, blue: 0.04).opacity(0.92),
-                    Color(red: 0.01, green: 0.02, blue: 0.04),
+                    AppColors.surfaceDark.opacity(0.6),
+                    AppColors.surfaceDark.opacity(0.92),
+                    AppColors.surfaceDark,
                 ],
                 startPoint: .top, endPoint: .bottom
             )

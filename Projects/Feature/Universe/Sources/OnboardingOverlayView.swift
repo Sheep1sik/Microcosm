@@ -1,6 +1,7 @@
 import SwiftUI
 import ComposableArchitecture
 import DomainEntity
+import SharedDesignSystem
 
 struct OnboardingOverlayView: View {
     let store: StoreOf<UniverseFeature>
@@ -146,7 +147,7 @@ struct OnboardingOverlayView: View {
                                 .background(
                                     Capsule().fill(
                                         onboardingCanCheck
-                                            ? Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.6)
+                                            ? AppColors.accent.opacity(0.6)
                                             : Color.white.opacity(0.08)
                                     )
                                 )
@@ -173,7 +174,7 @@ struct OnboardingOverlayView: View {
                             } else if store.onboardingNicknameAvailable == true {
                                 Text("사용 가능한 닉네임이에요!")
                                     .font(.system(size: 12))
-                                    .foregroundStyle(Color(red: 0.55, green: 0.83, blue: 0.97))
+                                    .foregroundStyle(AppColors.accent)
                                     .transition(.opacity)
                             }
                             Spacer()
@@ -194,7 +195,7 @@ struct OnboardingOverlayView: View {
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 8)
                                     .background(
-                                        Capsule().fill(Color(red: 0.55, green: 0.83, blue: 0.97))
+                                        Capsule().fill(AppColors.accent)
                                     )
                                 }
                                 .disabled(store.onboardingNicknameSaving)
@@ -210,9 +211,9 @@ struct OnboardingOverlayView: View {
                         LinearGradient(
                             colors: [
                                 .clear,
-                                Color(red: 0.01, green: 0.02, blue: 0.04).opacity(0.6),
-                                Color(red: 0.01, green: 0.02, blue: 0.04).opacity(0.92),
-                                Color(red: 0.01, green: 0.02, blue: 0.04),
+                                AppColors.surfaceDark.opacity(0.6),
+                                AppColors.surfaceDark.opacity(0.92),
+                                AppColors.surfaceDark,
                             ],
                             startPoint: .top, endPoint: .bottom
                         )
@@ -233,7 +234,7 @@ struct OnboardingOverlayView: View {
         if store.onboardingNicknameError != nil {
             return .red.opacity(0.5)
         } else if store.onboardingNicknameAvailable == true {
-            return Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.5)
+            return AppColors.accent.opacity(0.5)
         }
         return Color.white.opacity(0.08)
     }

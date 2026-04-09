@@ -15,6 +15,7 @@
 		99DD3E3EB6FB5FD56B2F70D6 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C542B177DC7517604DB17 /* MainTabFeature.swift */; };
 		A52A4306C3541B3D59B8DCF9 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD1FC4CA907676807B7A7C0 /* MainTabView.swift */; };
 		ED3CD9E73433FD53A7BD4410 /* libFeatureUniverse.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */; };
+		FE8B956D20A191348643D074 /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 4DB283A18B8E0AEE3A524248 /* libSharedDesignSystem.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,7 @@
 				5BB40B5821C13A3625C88CA8 /* libFeatureConstellation.a in Dependencies */,
 				880E7DF6E59E8618F3414595 /* libFeatureProfile.a in Dependencies */,
 				ED3CD9E73433FD53A7BD4410 /* libFeatureUniverse.a in Dependencies */,
+				FE8B956D20A191348643D074 /* libSharedDesignSystem.a in Dependencies */,
 			);
 			name = Dependencies;
 			runOnlyForDeploymentPostprocessing = 1;
@@ -48,6 +50,7 @@
 		178F99CE722797CCC9039D3E /* libFeatureConstellation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureConstellation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3378E6198B2426BFB8FF4552 /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureUniverse.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DB283A18B8E0AEE3A524248 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1C542B177DC7517604DB17 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
 		7923381FD4154FDA933C0721 /* libFeatureMain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureMain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF8599910B638D70BB0326A9 /* libFeatureProfile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureProfile.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +81,7 @@
 				7923381FD4154FDA933C0721 /* libFeatureMain.a */,
 				BF8599910B638D70BB0326A9 /* libFeatureProfile.a */,
 				339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */,
+				4DB283A18B8E0AEE3A524248 /* libSharedDesignSystem.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -396,7 +400,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -632,7 +636,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

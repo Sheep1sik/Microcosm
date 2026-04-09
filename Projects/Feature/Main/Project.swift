@@ -13,6 +13,7 @@ let project = Project.makeModule(
                     .feature(sources: .Profile),
                     .domain(sources: .Client),
                     .domain(sources: .Entity),
+                    .shared(sources: .DesignSystem),
                     .external(name: "ComposableArchitecture"),
                 ]
             )

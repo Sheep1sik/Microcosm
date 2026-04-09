@@ -6,7 +6,7 @@ let project = Project.makeModule(
     settings: .settings(
         base: [
             "CODE_SIGN_STYLE": "Automatic",
-            "ENABLE_USER_SCRIPT_SANDBOXING": "NO",
+            "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
             "OTHER_LDFLAGS": ["$(inherited)", "-ObjC"],
             "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
             "GENERATE_DEBUG_SYMBOLS": "YES",

@@ -11,6 +11,7 @@
 		6A601D2E32DBCB9F1DD6A17A /* LoginFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53E7CF049EC45448AC8B12 /* LoginFeature.swift */; };
 		894A4B8C31B30B0A6766141D /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 027575FD14BBEC079549EAB7 /* libDomainClient.a */; };
 		B793C1D7FB1C4669310F2F49 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856DFC9261E80AFADC1AD585 /* LoginView.swift */; };
+		F84CED9374261265192FD647 /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 982DC3A81FA71B3F562D3360 /* libSharedDesignSystem.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +31,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				894A4B8C31B30B0A6766141D /* libDomainClient.a in Dependencies */,
+				F84CED9374261265192FD647 /* libSharedDesignSystem.a in Dependencies */,
 			);
 			name = Dependencies;
 			runOnlyForDeploymentPostprocessing = 1;
@@ -39,6 +41,7 @@
 /* Begin PBXFileReference section */
 		027575FD14BBEC079549EAB7 /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		856DFC9261E80AFADC1AD585 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		982DC3A81FA71B3F562D3360 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A060A204D8EED02B80831242 /* libFeatureAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB53E7CF049EC45448AC8B12 /* LoginFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeature.swift; sourceTree = "<group>"; };
 		CB316CAC7280421811D7AF9C /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +82,7 @@
 				CB316CAC7280421811D7AF9C /* ComposableArchitecture.framework */,
 				027575FD14BBEC079549EAB7 /* libDomainClient.a */,
 				A060A204D8EED02B80831242 /* libFeatureAuth.a */,
+				982DC3A81FA71B3F562D3360 /* libSharedDesignSystem.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -376,7 +380,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -610,7 +614,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;

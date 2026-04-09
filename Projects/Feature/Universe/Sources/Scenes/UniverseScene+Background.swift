@@ -1,18 +1,12 @@
 import SpriteKit
+import SharedDesignSystem
 
 extension UniverseScene {
 
     // MARK: - Dust Field (GPU 셰이더 별: 확대해도 영롱)
 
     func setupDustField() {
-        let colors: [UIColor] = [
-            .white,
-            UIColor(red: 0.7, green: 0.85, blue: 1.0, alpha: 1),
-            UIColor(red: 0.9, green: 0.92, blue: 1.0, alpha: 1),
-            UIColor(red: 1.0, green: 0.95, blue: 0.8, alpha: 1),
-            UIColor(red: 1.0, green: 0.85, blue: 0.6, alpha: 1),
-            UIColor(red: 0.85, green: 0.88, blue: 1.0, alpha: 1),
-        ]
+        let colors = DustStarColors.palette
         for i in 0..<600 {
             let sz = CGFloat.random(in: 3...8)
             let sprite = SKSpriteNode(color: .white, size: CGSize(width: sz, height: sz))

@@ -2,6 +2,7 @@ import SpriteKit
 import CoreImage
 import Combine
 import DomainEntity
+import SharedDesignSystem
 
 // MARK: - Seeded Random Number Generator
 
@@ -180,7 +181,7 @@ final class UniverseScene: SKScene {
 
     override func didMove(to view: SKView) {
         view.isMultipleTouchEnabled = true
-        backgroundColor = UIColor(red: 0.012, green: 0.024, blue: 0.031, alpha: 1)
+        backgroundColor = AppColors.sceneBackground
 
         setupCamera()
         setupSun()

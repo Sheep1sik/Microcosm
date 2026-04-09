@@ -11,6 +11,7 @@
 		7F5428EFB7841E1F6531A0CC /* NicknameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8693038C47D3D5FB2EEB535 /* NicknameInputView.swift */; };
 		A412C47A6FEE5EA12A52D05C /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 9CD38C65A9C506ECD6F6AA3F /* libDomainClient.a */; };
 		B2DEFD46F97B44E1AE85A4D3 /* NicknameFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018FE8342C0912FBCB45561 /* NicknameFeature.swift */; };
+		B533961FD313568DB2EFBA54 /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 6B9CB8AE2AE08F6819513527 /* libSharedDesignSystem.a */; };
 		C66B566DDB2803840411FE9E /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A93165726DED450E90E9BF /* ComposableArchitecture.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 			files = (
 				A412C47A6FEE5EA12A52D05C /* libDomainClient.a in Dependencies */,
 				3434D96F733CC7A9AC4DCE5B /* libDomainEntity.a in Dependencies */,
+				B533961FD313568DB2EFBA54 /* libSharedDesignSystem.a in Dependencies */,
 			);
 			name = Dependencies;
 			runOnlyForDeploymentPostprocessing = 1;
@@ -42,6 +44,7 @@
 		03A93165726DED450E90E9BF /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D73158E863D57F87669A5A /* libFeatureNickname.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureNickname.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D0ACE7154DA3BAF7A55D5C1 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B9CB8AE2AE08F6819513527 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD38C65A9C506ECD6F6AA3F /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A018FE8342C0912FBCB45561 /* NicknameFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameFeature.swift; sourceTree = "<group>"; };
 		F8693038C47D3D5FB2EEB535 /* NicknameInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameInputView.swift; sourceTree = "<group>"; };
@@ -82,6 +85,7 @@
 				9CD38C65A9C506ECD6F6AA3F /* libDomainClient.a */,
 				5D0ACE7154DA3BAF7A55D5C1 /* libDomainEntity.a */,
 				35D73158E863D57F87669A5A /* libFeatureNickname.a */,
+				6B9CB8AE2AE08F6819513527 /* libSharedDesignSystem.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -384,7 +388,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -620,7 +624,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

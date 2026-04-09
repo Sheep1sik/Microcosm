@@ -10,6 +10,7 @@ let project = Project.makeModule(
                 dependencies: [
                     .domain(sources: .Client),
                     .domain(sources: .Entity),
+                    .shared(sources: .DesignSystem),
                     .external(name: "ComposableArchitecture"),
                 ]
             )

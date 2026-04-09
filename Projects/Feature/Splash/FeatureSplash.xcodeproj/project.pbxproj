@@ -10,9 +10,20 @@
 		4B5CA49F2DD62D15FD44D516 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089635CDDD2957D70CD4EC05 /* SplashView.swift */; };
 		5F19E41F59E9CC710AEA419D /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D239DBCB729E4434ED42221 /* ComposableArchitecture.framework */; };
 		933B8A917590FA61CE310EFD /* SplashFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C1623930A7B98988C7C257 /* SplashFeature.swift */; };
+		FBB1EA212B34B4EC11F9CC3B /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = D7E45D9DB558857184A82E96 /* libSharedDesignSystem.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		1087B742D9CF78B0A8AEADA5 /* Dependencies */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstSubfolderSpec = 16;
+			files = (
+				FBB1EA212B34B4EC11F9CC3B /* libSharedDesignSystem.a in Dependencies */,
+			);
+			name = Dependencies;
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		1B8332DC5FD08B6B2919CB03 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -30,6 +41,7 @@
 		8D239DBCB729E4434ED42221 /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4FC3E64896177EFD43BBE7A /* libFeatureSplash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureSplash.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2C1623930A7B98988C7C257 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
+		D7E45D9DB558857184A82E96 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +61,7 @@
 			children = (
 				8D239DBCB729E4434ED42221 /* ComposableArchitecture.framework */,
 				A4FC3E64896177EFD43BBE7A /* libFeatureSplash.a */,
+				D7E45D9DB558857184A82E96 /* libSharedDesignSystem.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,6 +102,7 @@
 				090537F66E34745638D983CE /* Resources */,
 				38A40AB181C4D81A73098F73 /* Frameworks */,
 				1B8332DC5FD08B6B2919CB03 /* Embed Frameworks */,
+				1087B742D9CF78B0A8AEADA5 /* Dependencies */,
 			);
 			buildRules = (
 			);
@@ -193,7 +207,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -348,7 +362,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;

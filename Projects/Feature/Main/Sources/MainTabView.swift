@@ -5,6 +5,7 @@ import DomainClient
 import FeatureUniverse
 import FeatureConstellation
 import FeatureProfile
+import SharedDesignSystem
 
 public struct MainTabView: View {
     @Bindable var store: StoreOf<MainTabFeature>
@@ -46,7 +47,7 @@ public struct MainTabView: View {
         .onAppear {
             let appearance = UITabBarAppearance()
             appearance.configureWithTransparentBackground()
-            appearance.backgroundColor = UIColor(red: 0.01, green: 0.02, blue: 0.04, alpha: 0.9)
+            appearance.backgroundColor = AppColors.tabBarBackground
             appearance.stackedLayoutAppearance.normal.iconColor = UIColor.white.withAlphaComponent(0.4)
             appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white.withAlphaComponent(0.4)]
             appearance.stackedLayoutAppearance.selected.iconColor = .white

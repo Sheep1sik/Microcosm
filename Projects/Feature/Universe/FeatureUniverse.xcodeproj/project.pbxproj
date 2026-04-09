@@ -24,6 +24,7 @@
 		BD3A12630229EC94BA3C3887 /* OnboardingOverlayView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C414478CBDE554400A31A0 /* OnboardingOverlayView+Preview.swift */; };
 		DB140719BD0ED68EA10DBC13 /* UniverseScene+Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DEC8E846389DC155F6923 /* UniverseScene+Touch.swift */; };
 		E847B1FE9EF07324769BF929 /* RecordPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC201661D0A1E2DC0644C1 /* RecordPanelView.swift */; };
+		EFB2EAC564D1E352FF263310 /* PreviewImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541AA578ED788C68BEBFA043 /* PreviewImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +59,7 @@
 		2AFC201661D0A1E2DC0644C1 /* RecordPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPanelView.swift; sourceTree = "<group>"; };
 		370A89BBC915639B64550295 /* SearchOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOverlayView.swift; sourceTree = "<group>"; };
 		4E42BDFF5F056CC93DB4CA54 /* UniverseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseView.swift; sourceTree = "<group>"; };
+		541AA578ED788C68BEBFA043 /* PreviewImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewImageCache.swift; sourceTree = "<group>"; };
 		559DEC8E846389DC155F6923 /* UniverseScene+Touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+Touch.swift"; sourceTree = "<group>"; };
 		6AE3B3AD19ADF5BE5025BBBB /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F006D790A18670C5FAAEA61 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 				A68E467F14E0D8490EF2ADA0 /* Scenes */,
 				729E7A7A3FCCD34F24F3240C /* OnboardingOverlayView.swift */,
 				93C414478CBDE554400A31A0 /* OnboardingOverlayView+Preview.swift */,
+				541AA578ED788C68BEBFA043 /* PreviewImageCache.swift */,
 				2AFC201661D0A1E2DC0644C1 /* RecordPanelView.swift */,
 				370A89BBC915639B64550295 /* SearchOverlayView.swift */,
 				FDB8708933D1A30FDAE2512D /* UniverseFeature.swift */,
@@ -209,6 +212,7 @@
 			files = (
 				BD3A12630229EC94BA3C3887 /* OnboardingOverlayView+Preview.swift in Sources */,
 				32F01A46F6BEE52D6844E41E /* OnboardingOverlayView.swift in Sources */,
+				EFB2EAC564D1E352FF263310 /* PreviewImageCache.swift in Sources */,
 				E847B1FE9EF07324769BF929 /* RecordPanelView.swift in Sources */,
 				BCD3420B1F339275DDF600A2 /* UniverseScene+Background.swift in Sources */,
 				924576AFA27765AD13052766 /* UniverseScene+CompletedConstellations.swift in Sources */,
@@ -436,7 +440,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -497,7 +501,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;

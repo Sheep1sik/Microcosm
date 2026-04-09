@@ -24,7 +24,7 @@ struct SearchOverlayView: View {
             searchResults
         }
         .background(
-            Color(red: 0.01, green: 0.02, blue: 0.04).opacity(0.95)
+            AppColors.surfaceDark.opacity(0.95)
                 .ignoresSafeArea()
                 .onTapGesture {
                     if isSearchFocused {

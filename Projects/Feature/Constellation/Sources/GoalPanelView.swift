@@ -1,6 +1,7 @@
 import SwiftUI
 import ComposableArchitecture
 import DomainEntity
+import SharedDesignSystem
 
 struct GoalPanelView: View {
     let store: StoreOf<ConstellationFeature>
@@ -77,12 +78,12 @@ struct GoalPanelView: View {
                         Text("목표 추가")
                     }
                     .font(.subheadline.weight(.medium))
-                    .foregroundStyle(Color(red: 0.55, green: 0.83, blue: 0.97))
+                    .foregroundStyle(AppColors.accent)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.1))
+                            .fill(AppColors.accent.opacity(0.1))
                     )
                 }
 
@@ -91,7 +92,7 @@ struct GoalPanelView: View {
             .padding(.horizontal, 20)
             .background(
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(Color(red: 0.04, green: 0.06, blue: 0.09).opacity(0.95))
+                    .fill(AppColors.surfaceElevated.opacity(0.95))
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.white.opacity(0.06), lineWidth: 0.5)
@@ -125,7 +126,7 @@ private struct GoalRowView: View {
                         Text(goal.isCompleted ? "완료됨" : "미완료")
                             .font(.caption)
                             .foregroundStyle(goal.isCompleted
-                                ? Color(red: 0.3, green: 0.85, blue: 0.5).opacity(0.7)
+                                ? AppColors.success.opacity(0.7)
                                 : .white.opacity(0.4))
                     }
                 }
@@ -141,7 +142,7 @@ private struct GoalRowView: View {
                             .font(.title3)
                             .foregroundStyle(
                                 goal.isCompleted
-                                    ? Color(red: 0.3, green: 0.85, blue: 0.5)
+                                    ? AppColors.success
                                     : .white.opacity(0.3)
                             )
                     }
@@ -153,8 +154,8 @@ private struct GoalRowView: View {
                             .trim(from: 0, to: goal.completionRatio)
                             .stroke(
                                 goal.isCompleted
-                                    ? Color(red: 0.3, green: 0.85, blue: 0.5)
-                                    : Color(red: 0.55, green: 0.83, blue: 0.97),
+                                    ? AppColors.success
+                                    : AppColors.accent,
                                 style: StrokeStyle(lineWidth: 3, lineCap: .round)
                             )
                             .rotationEffect(.degrees(-90))
@@ -194,7 +195,7 @@ private struct GoalRowView: View {
                                     .font(.subheadline)
                                     .foregroundStyle(
                                         subGoal.isCompleted
-                                            ? Color(red: 0.3, green: 0.85, blue: 0.5)
+                                            ? AppColors.success
                                             : .white.opacity(0.3)
                                     )
 

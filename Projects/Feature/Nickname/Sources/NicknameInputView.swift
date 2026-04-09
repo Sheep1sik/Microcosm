@@ -2,6 +2,7 @@ import SwiftUI
 import ComposableArchitecture
 import DomainClient
 import DomainEntity
+import SharedDesignSystem
 
 public struct NicknameInputView: View {
     @Bindable var store: StoreOf<NicknameFeature>
@@ -14,7 +15,7 @@ public struct NicknameInputView: View {
 
     public var body: some View {
         ZStack {
-            Color(red: 0.012, green: 0.024, blue: 0.031)
+            AppColors.background
                 .ignoresSafeArea()
                 .onTapGesture { isFocused = false }
 
@@ -64,7 +65,7 @@ public struct NicknameInputView: View {
                             .background(
                                 Capsule().fill(
                                     canCheck
-                                        ? Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.6)
+                                        ? AppColors.accent.opacity(0.6)
                                         : Color.white.opacity(0.08)
                                 )
                             )
@@ -91,7 +92,7 @@ public struct NicknameInputView: View {
                     } else if store.isAvailable == true {
                         Text("사용 가능한 닉네임이에요!")
                             .font(.system(size: 13))
-                            .foregroundStyle(Color(red: 0.55, green: 0.83, blue: 0.97))
+                            .foregroundStyle(AppColors.accent)
                             .transition(.opacity)
                     }
                 }
@@ -116,7 +117,7 @@ public struct NicknameInputView: View {
                         .frame(height: 50)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
-                                .fill(Color(red: 0.55, green: 0.83, blue: 0.97))
+                                .fill(AppColors.accent)
                         )
                     }
                     .disabled(store.isSaving)
@@ -139,7 +140,7 @@ public struct NicknameInputView: View {
         if store.errorMessage != nil {
             return .red.opacity(0.5)
         } else if store.isAvailable == true {
-            return Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.5)
+            return AppColors.accent.opacity(0.5)
         }
         return Color.white.opacity(0.08)
     }

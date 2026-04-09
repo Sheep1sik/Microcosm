@@ -1,5 +1,6 @@
 import SpriteKit
 import DomainEntity
+import SharedDesignSystem
 
 extension UniverseScene {
 
@@ -8,7 +9,7 @@ extension UniverseScene {
     func renderPreviews() {
         guard let skView = self.view, let cache = previewCache else { return }
 
-        let sceneBg = UIColor(red: 0.012, green: 0.024, blue: 0.031, alpha: 1)
+        let sceneBg = AppColors.sceneBackground
 
         // ── 은하 프리뷰 ──
         let gz: CGFloat = 80

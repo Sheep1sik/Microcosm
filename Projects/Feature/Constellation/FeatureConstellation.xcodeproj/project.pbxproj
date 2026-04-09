@@ -17,6 +17,7 @@
 		634E932A5D7F0A17F67303AF /* GoalPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E641B660704EF6031CB0D78F /* GoalPanelView.swift */; };
 		66FD28D775A3063176B6EA3E /* ConstellationScene+Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E967D8C62613C837C20A21 /* ConstellationScene+Brightness.swift */; };
 		70BAA720A89017EBEE32227E /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = E258867B52BF736A447AA5A6 /* libDomainClient.a */; };
+		7581F063AAC0E6409CC7E144 /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 37FA726EBE1E948257650A13 /* libSharedDesignSystem.a */; };
 		76BDFB7FFA0C7C069ABE25E2 /* GoalEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24A322D6C77CD764CF91C38 /* GoalEditView.swift */; };
 		7E2C858D1E3DCE75E44E8F60 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098F1770BDE33FAFCA65B6E /* ComposableArchitecture.framework */; };
 		AC9BA81BB68691CFC1C17E1C /* ConstellationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC98B976A239F2EAFD1CA7 /* ConstellationView.swift */; };
@@ -40,6 +41,7 @@
 			files = (
 				70BAA720A89017EBEE32227E /* libDomainClient.a in Dependencies */,
 				54F775254A1FA13CE09AC6AA /* libDomainEntity.a in Dependencies */,
+				7581F063AAC0E6409CC7E144 /* libSharedDesignSystem.a in Dependencies */,
 			);
 			name = Dependencies;
 			runOnlyForDeploymentPostprocessing = 1;
@@ -49,6 +51,7 @@
 /* Begin PBXFileReference section */
 		10827ACB10409945EE65459D /* ConstellationScene+Touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationScene+Touch.swift"; sourceTree = "<group>"; };
 		350C2A37B320DD083A6AD3A4 /* ConstellationScene+Zoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationScene+Zoom.swift"; sourceTree = "<group>"; };
+		37FA726EBE1E948257650A13 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		776BC6E80DACE5A9B3097A51 /* ConstellationScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationScene.swift; sourceTree = "<group>"; };
 		77CD21361F3A07E675832057 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BC98B976A239F2EAFD1CA7 /* ConstellationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationView.swift; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 				E258867B52BF736A447AA5A6 /* libDomainClient.a */,
 				77CD21361F3A07E675832057 /* libDomainEntity.a */,
 				8ABE6DDFA7E97B20D3829B51 /* libFeatureConstellation.a */,
+				37FA726EBE1E948257650A13 /* libSharedDesignSystem.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -420,7 +424,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -487,7 +491,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

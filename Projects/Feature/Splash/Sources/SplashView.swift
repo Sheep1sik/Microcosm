@@ -1,5 +1,6 @@
 import SwiftUI
 import ComposableArchitecture
+import SharedDesignSystem
 
 public struct SplashView: View {
     let store: StoreOf<SplashFeature>
@@ -10,7 +11,7 @@ public struct SplashView: View {
 
     public var body: some View {
         ZStack {
-            Color(red: 0.012, green: 0.024, blue: 0.031)
+            AppColors.background
                 .ignoresSafeArea()
 
             VStack(spacing: 16) {

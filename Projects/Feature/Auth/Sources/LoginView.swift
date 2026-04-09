@@ -2,6 +2,7 @@ import SwiftUI
 import ComposableArchitecture
 import AuthenticationServices
 import DomainClient
+import SharedDesignSystem
 
 public struct LoginView: View {
     @Bindable var store: StoreOf<LoginFeature>
@@ -12,7 +13,7 @@ public struct LoginView: View {
 
     public var body: some View {
         ZStack {
-            Color(red: 0.012, green: 0.024, blue: 0.031)
+            AppColors.background
                 .ignoresSafeArea()
 
             Circle()
@@ -38,7 +39,7 @@ public struct LoginView: View {
                         .font(.system(size: 48))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.white, Color(red: 0.55, green: 0.83, blue: 0.97)],
+                                colors: [.white, AppColors.accent],
                                 startPoint: .top,
                                 endPoint: .bottom
                             )

@@ -1,5 +1,6 @@
 import SpriteKit
 import DomainEntity
+import SharedDesignSystem
 
 extension UniverseScene {
 
@@ -375,7 +376,7 @@ extension UniverseScene {
         let cardW: CGFloat = size.width * 0.75
         let cardH: CGFloat = 180
         let card = SKShapeNode(rectOf: CGSize(width: cardW, height: cardH), cornerRadius: 12)
-        card.fillColor = UIColor(red: 0.04, green: 0.06, blue: 0.09, alpha: 0.95)
+        card.fillColor = AppColors.surfaceElevatedUI
         card.strokeColor = UIColor(white: 1, alpha: 0.08)
         card.lineWidth = 0.5
         card.zPosition = 91

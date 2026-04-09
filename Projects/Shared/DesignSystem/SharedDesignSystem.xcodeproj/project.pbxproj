@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2215653D3A89862F89D59793 /* AppTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4499B36F6A956E467A260002 /* AppTypography.swift */; };
+		4B734DBCB46E9EC8DDCD0EEA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5044140883A329189A0917 /* AppColors.swift */; };
 		5B0A60FFEE9348D47C5CE8D6 /* CanvasPreviewViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */; };
 		D1A45AB3AF6AC146103E04CA /* libDomainEntity.a in Dependencies */ = {isa = PBXBuildFile; fileRef = B867F6B79B5AFB08870F45C8 /* libDomainEntity.a */; };
 /* End PBXBuildFile section */
@@ -35,7 +37,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4499B36F6A956E467A260002 /* AppTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTypography.swift; sourceTree = "<group>"; };
 		6AC1697A7DAC909AC709777C /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F5044140883A329189A0917 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasPreviewViews.swift; sourceTree = "<group>"; };
 		B867F6B79B5AFB08870F45C8 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -79,6 +83,8 @@
 		E4D6BC21CF1185821CD1D415 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				7F5044140883A329189A0917 /* AppColors.swift */,
+				4499B36F6A956E467A260002 /* AppTypography.swift */,
 				87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */,
 			);
 			path = Sources;
@@ -151,6 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B734DBCB46E9EC8DDCD0EEA /* AppColors.swift in Sources */,
+				2215653D3A89862F89D59793 /* AppTypography.swift in Sources */,
 				5B0A60FFEE9348D47C5CE8D6 /* CanvasPreviewViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,7 +231,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -310,7 +318,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

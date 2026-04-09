@@ -1,6 +1,7 @@
 import SwiftUI
 import ComposableArchitecture
 import DomainEntity
+import SharedDesignSystem
 
 struct GoalEditView: View {
     let store: StoreOf<ConstellationFeature>
@@ -65,7 +66,7 @@ struct GoalEditView: View {
                 store.send(.saveGoal)
             }
             .font(.subheadline.weight(.medium))
-            .foregroundStyle(canSave ? Color(red: 0.55, green: 0.83, blue: 0.97) : .white.opacity(0.3))
+            .foregroundStyle(canSave ? AppColors.accent : .white.opacity(0.3))
             .disabled(!canSave)
         }
     }
@@ -107,7 +108,7 @@ struct GoalEditView: View {
                 } label: {
                     Image(systemName: "plus")
                         .font(.caption)
-                        .foregroundStyle(Color(red: 0.55, green: 0.83, blue: 0.97))
+                        .foregroundStyle(AppColors.accent)
                 }
             }
 
@@ -166,7 +167,7 @@ struct GoalEditView: View {
 
     private var panelBackground: some View {
         RoundedRectangle(cornerRadius: 20)
-            .fill(Color(red: 0.04, green: 0.06, blue: 0.09).opacity(0.95))
+            .fill(AppColors.surfaceElevated.opacity(0.95))
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(Color.white.opacity(0.06), lineWidth: 0.5)

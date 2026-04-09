@@ -8,6 +8,7 @@ let project = Project.makeModule(
             sources: .Splash,
             target: .init(
                 dependencies: [
+                    .shared(sources: .DesignSystem),
                     .external(name: "ComposableArchitecture"),
                 ]
             )

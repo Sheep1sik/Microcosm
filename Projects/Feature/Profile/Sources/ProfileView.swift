@@ -3,6 +3,7 @@ import ComposableArchitecture
 import DomainClient
 import DomainEntity
 import FeatureNickname
+import SharedDesignSystem
 
 public struct ProfileView: View {
     @Bindable var store: StoreOf<ProfileFeature>
@@ -13,7 +14,7 @@ public struct ProfileView: View {
 
     public var body: some View {
         ZStack {
-            Color(red: 0.01, green: 0.02, blue: 0.04)
+            AppColors.surfaceDark
                 .ignoresSafeArea()
 
             StarfieldBackground()
@@ -160,17 +161,5 @@ private struct StarfieldBackground: View {
             }
         }
         .drawingGroup()
-    }
-}
-
-private struct SplitMix64: RandomNumberGenerator {
-    private var state: UInt64
-    init(seed: UInt64) { state = seed }
-    mutating func next() -> UInt64 {
-        state &+= 0x9e3779b97f4a7c15
-        var z = state
-        z = (z ^ (z >> 30)) &* 0xbf58476d1ce4e5b9
-        z = (z ^ (z >> 27)) &* 0x94d049bb133111eb
-        return z ^ (z >> 31)
     }
 }

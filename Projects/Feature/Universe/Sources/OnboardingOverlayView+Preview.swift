@@ -2,6 +2,7 @@
 import SwiftUI
 import ComposableArchitecture
 import DomainEntity
+import SharedDesignSystem
 
 // MARK: - Onboarding Step Previews
 
@@ -16,7 +17,7 @@ import DomainEntity
             UniverseFeature()
         }
     )
-    .background(Color(red: 0.012, green: 0.024, blue: 0.031))
+    .background(AppColors.background)
 }
 
 #Preview("0.5. Nickname Input") {
@@ -30,7 +31,7 @@ import DomainEntity
             UniverseFeature()
         }
     )
-    .background(Color(red: 0.012, green: 0.024, blue: 0.031))
+    .background(AppColors.background)
 }
 
 #Preview("1. Galaxy Birth Intro") {
@@ -44,7 +45,7 @@ import DomainEntity
             UniverseFeature()
         }
     )
-    .background(Color(red: 0.012, green: 0.024, blue: 0.031))
+    .background(AppColors.background)
 }
 
 #Preview("2. Monthly Galaxy Guide") {
@@ -58,7 +59,7 @@ import DomainEntity
             UniverseFeature()
         }
     )
-    .background(Color(red: 0.012, green: 0.024, blue: 0.031))
+    .background(AppColors.background)
 }
 
 #Preview("3. Tap Galaxy Prompt") {
@@ -73,7 +74,7 @@ import DomainEntity
             UniverseFeature()
         }
     )
-    .background(Color(red: 0.012, green: 0.024, blue: 0.031))
+    .background(AppColors.background)
 }
 
 #Preview("4. Create Star Prompt") {
@@ -88,7 +89,7 @@ import DomainEntity
             UniverseFeature()
         }
     )
-    .background(Color(red: 0.012, green: 0.024, blue: 0.031))
+    .background(AppColors.background)
 }
 
 #Preview("5. Closing Message") {
@@ -102,7 +103,7 @@ import DomainEntity
             UniverseFeature()
         }
     )
-    .background(Color(red: 0.012, green: 0.024, blue: 0.031))
+    .background(AppColors.background)
 }
 
 #endif

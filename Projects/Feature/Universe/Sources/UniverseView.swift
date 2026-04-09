@@ -3,6 +3,7 @@ import SpriteKit
 import ComposableArchitecture
 import DomainEntity
 import DomainClient
+import SharedDesignSystem
 
 // MARK: - SpriteKit UIViewRepresentable (키보드/레이아웃 변경 시 렌더링 중단 방지)
 
@@ -164,8 +165,8 @@ public struct UniverseView: View {
                                 .frame(width: 52, height: 52)
                                 .background(
                                     Circle()
-                                        .fill(Color(red: 0.55, green: 0.83, blue: 0.97))
-                                        .shadow(color: Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.5), radius: 8)
+                                        .fill(AppColors.accent)
+                                        .shadow(color: AppColors.accent.opacity(0.5), radius: 8)
                                 )
                         }
                         .opacity(canCreate ? 1.0 : 0.4)
@@ -351,12 +352,12 @@ private struct PlusPulsingRing: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.6), lineWidth: 2)
+                .stroke(AppColors.accent.opacity(0.6), lineWidth: 2)
                 .frame(width: 52, height: 52)
                 .scaleEffect(isPulsing ? 1.6 : 1.0)
                 .opacity(isPulsing ? 0 : 0.8)
             Circle()
-                .stroke(Color(red: 0.55, green: 0.83, blue: 0.97).opacity(0.4), lineWidth: 1.5)
+                .stroke(AppColors.accent.opacity(0.4), lineWidth: 1.5)
                 .frame(width: 52, height: 52)
                 .scaleEffect(isPulsing ? 1.3 : 0.9)
                 .opacity(isPulsing ? 0.2 : 0.6)

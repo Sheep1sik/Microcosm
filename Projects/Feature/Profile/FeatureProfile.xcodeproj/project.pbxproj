@@ -13,6 +13,7 @@
 		67BDE63100A803D72329E441 /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 5F59C6456040FB5A2B9B8FCA /* libDomainClient.a */; };
 		86783114A884E0AAFCC0174B /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2E9A762989E18FFF8F26D5 /* ComposableArchitecture.framework */; };
 		962E9334C0BB9CBCFC82C031 /* ProfileFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877C44D1C235866E4F81E217 /* ProfileFeature.swift */; };
+		D1213B67F790828D3148C48B /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = ECF0351F386E4E438BD02B3B /* libSharedDesignSystem.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,7 @@
 				67BDE63100A803D72329E441 /* libDomainClient.a in Dependencies */,
 				02C37EDF614ADCF3F6E385F2 /* libDomainEntity.a in Dependencies */,
 				1BCC80B3735D20DCBD313D7C /* libFeatureNickname.a in Dependencies */,
+				D1213B67F790828D3148C48B /* libSharedDesignSystem.a in Dependencies */,
 			);
 			name = Dependencies;
 			runOnlyForDeploymentPostprocessing = 1;
@@ -46,6 +48,7 @@
 		5F59C6456040FB5A2B9B8FCA /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B5BCF4D976A24C245D37D0B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		877C44D1C235866E4F81E217 /* ProfileFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFeature.swift; sourceTree = "<group>"; };
+		ECF0351F386E4E438BD02B3B /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59B2D46530E8C458A66AC76 /* libFeatureProfile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureProfile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF52A95E33506FDEE8BF9D77 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -70,6 +73,7 @@
 				FF52A95E33506FDEE8BF9D77 /* libDomainEntity.a */,
 				56D962965853758794231208 /* libFeatureNickname.a */,
 				F59B2D46530E8C458A66AC76 /* libFeatureProfile.a */,
+				ECF0351F386E4E438BD02B3B /* libSharedDesignSystem.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -384,7 +388,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -618,7 +622,7 @@
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
