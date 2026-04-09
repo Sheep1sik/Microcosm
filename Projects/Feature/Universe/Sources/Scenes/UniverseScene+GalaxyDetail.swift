@@ -392,19 +392,33 @@ extension UniverseScene {
         cameraNode.addChild(emotionBar)
         recordDetailNodes.append(emotionBar)
 
+        // 별 이름
+        if !record.starName.isEmpty {
+            let nameLabel = SKLabelNode(text: "「\(record.starName)」")
+            nameLabel.fontName = "AppleSDGothicNeo-Bold"
+            nameLabel.fontSize = 15
+            nameLabel.fontColor = recordUIColor
+            nameLabel.position = CGPoint(x: 0, y: cardH / 2 - 36)
+            nameLabel.zPosition = 92
+            cameraNode.addChild(nameLabel)
+            recordDetailNodes.append(nameLabel)
+        }
+
+        // 날짜/시간
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
-        let namePrefix = record.starName.isEmpty ? "" : "「\(record.starName)」 "
-        let infoText = "\(namePrefix)\(dateFormatter.string(from: record.createdAt))"
-        let info = SKLabelNode(text: infoText)
-        info.fontName = "AppleSDGothicNeo-Medium"
-        info.fontSize = 13
-        info.fontColor = recordUIColor
-        info.position = CGPoint(x: 0, y: cardH / 2 - 38)
-        info.zPosition = 92
-        cameraNode.addChild(info)
-        recordDetailNodes.append(info)
+        let dateLabel = SKLabelNode(text: dateFormatter.string(from: record.createdAt))
+        dateLabel.fontName = "AppleSDGothicNeo-Regular"
+        dateLabel.fontSize = 11
+        dateLabel.fontColor = UIColor(white: 1, alpha: 0.4)
+        let dateY: CGFloat = record.starName.isEmpty ? (cardH / 2 - 36) : (cardH / 2 - 54)
+        dateLabel.position = CGPoint(x: 0, y: dateY)
+        dateLabel.zPosition = 92
+        cameraNode.addChild(dateLabel)
+        recordDetailNodes.append(dateLabel)
 
+        // 기록 내용
+        let contentY: CGFloat = record.starName.isEmpty ? (cardH / 2 - 54) : (cardH / 2 - 72)
         let content = SKLabelNode(text: record.content)
         content.fontName = "AppleSDGothicNeo-Regular"
         content.fontSize = 15
@@ -412,7 +426,7 @@ extension UniverseScene {
         content.preferredMaxLayoutWidth = cardW - 40
         content.numberOfLines = 0
         content.verticalAlignmentMode = .top
-        content.position = CGPoint(x: 0, y: cardH / 2 - 55)
+        content.position = CGPoint(x: 0, y: contentY)
         content.zPosition = 92
         cameraNode.addChild(content)
         recordDetailNodes.append(content)

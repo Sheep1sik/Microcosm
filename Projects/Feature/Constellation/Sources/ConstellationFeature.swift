@@ -117,6 +117,7 @@ public struct ConstellationFeature {
 
         // Goal/SubGoal Toggle
         case toggleGoalCompletion(goalId: String)
+        case toggleAllSubGoals(goalId: String)
         case toggleSubGoal(goalId: String, subGoalId: String)
 
         // Edit Cancel
@@ -308,6 +309,29 @@ public struct ConstellationFeature {
                 state.showGoalPanel = false
                 state.selectedStarIndex = nil
                 // 낙관적 로컬 업데이트
+                state.allGoals[goalIndex] = goal
+                let goalToUpdate = goal
+                return .run { send in
+                    guard let userId = authClient.currentUser()?.uid else { return }
+                    try await goalClient.updateGoal(userId, goalToUpdate)
+                }
+
+            case .toggleAllSubGoals(let goalId):
+                guard var goal = state.allGoals.first(where: { $0.id == goalId }),
+                      let goalIndex = state.allGoals.firstIndex(where: { $0.id == goalId }),
+                      !goal.subGoals.isEmpty else {
+                    return .none
+                }
+                let allCompleted = goal.subGoals.allSatisfy(\.isCompleted)
+                for i in goal.subGoals.indices {
+                    goal.subGoals[i].isCompleted = !allCompleted
+                    goal.subGoals[i].completedAt = allCompleted ? nil : .now
+                }
+                goal.completedAt = allCompleted ? nil : .now
+                if !allCompleted {
+                    state.showGoalPanel = false
+                    state.selectedStarIndex = nil
+                }
                 state.allGoals[goalIndex] = goal
                 let goalToUpdate = goal
                 return .run { send in

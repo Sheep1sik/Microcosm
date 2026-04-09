@@ -9,6 +9,8 @@ public struct ProfileFeature {
     public struct State: Equatable {
         public var userProfile: UserProfile = UserProfile()
         public var displayName: String?
+        public var allRecords: [Record] = []
+        public var showSignOutAlert = false
         public var showDeleteAlert = false
         public var showNicknameChange = false
         public var nicknameState = NicknameFeature.State(isOnboarding: false)
@@ -16,12 +18,16 @@ public struct ProfileFeature {
         public init(
             userProfile: UserProfile = UserProfile(),
             displayName: String? = nil,
+            allRecords: [Record] = [],
+            showSignOutAlert: Bool = false,
             showDeleteAlert: Bool = false,
             showNicknameChange: Bool = false,
             nicknameState: NicknameFeature.State = NicknameFeature.State(isOnboarding: false)
         ) {
             self.userProfile = userProfile
             self.displayName = displayName
+            self.allRecords = allRecords
+            self.showSignOutAlert = showSignOutAlert
             self.showDeleteAlert = showDeleteAlert
             self.showNicknameChange = showNicknameChange
             self.nicknameState = nicknameState
@@ -31,8 +37,11 @@ public struct ProfileFeature {
     public enum Action: BindableAction {
         case binding(BindingAction<State>)
         case signOutTapped
+        case confirmSignOut
+        case dismissSignOutAlert
         case deleteAccountTapped
         case confirmDeleteAccount
+        case dismissDeleteAlert
         case changeNicknameTapped
         case dismissNicknameChange
         case resetOnboardingTapped
@@ -60,20 +69,34 @@ public struct ProfileFeature {
         Reduce { state, action in
             switch action {
             case .signOutTapped:
+                state.showSignOutAlert = true
+                return .none
+
+            case .confirmSignOut:
+                state.showSignOutAlert = false
                 return .run { send in
                     try authClient.signOut()
                     await send(.delegate(.didSignOut))
                 }
+
+            case .dismissSignOutAlert:
+                state.showSignOutAlert = false
+                return .none
 
             case .deleteAccountTapped:
                 state.showDeleteAlert = true
                 return .none
 
             case .confirmDeleteAccount:
+                state.showDeleteAlert = false
                 return .run { send in
                     try await authClient.deleteAccount()
                     await send(.delegate(.didDeleteAccount))
                 }
+
+            case .dismissDeleteAlert:
+                state.showDeleteAlert = false
+                return .none
 
             case .resetOnboardingTapped:
                 return .run { _ in

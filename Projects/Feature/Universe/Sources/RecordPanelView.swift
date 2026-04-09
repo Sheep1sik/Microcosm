@@ -14,9 +14,21 @@ struct RecordPanelView: View {
         self._isTextFocused = isTextFocused
     }
 
+    private static let freeCharLimit = 100
+
+    private var contentLength: Int {
+        store.recordContent.count
+    }
+
+    private var isOverLimit: Bool {
+        contentLength > Self.freeCharLimit
+    }
+
     var body: some View {
         let remaining = store.remainingRecordCount
-        VStack(spacing: 12) {
+        let contentEmpty = store.recordContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+
+        VStack(spacing: 10) {
             if store.onboardingStep != .createStarPrompt {
                 Text("오늘 남은 기록 \(remaining)/\(UniverseFeature.State.dailyRecordLimit)")
                     .font(.system(size: 11, weight: .medium))
@@ -27,28 +39,19 @@ struct RecordPanelView: View {
                     )
             }
 
+            // 별 이름 + 새기기 버튼
             HStack(spacing: 8) {
-                Text("✦").foregroundStyle(.white.opacity(0.6))
-                TextField("별 이름", text: $store.starName)
-                    .foregroundStyle(.white)
-                    .focused($isTextFocused)
-                    .font(.subheadline)
-            }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 9)
-            .background(Color.white.opacity(0.06))
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-
-            HStack(spacing: 8) {
-                TextField("기록 내용", text: $store.recordContent, axis: .vertical)
-                    .foregroundStyle(.white)
-                    .focused($isTextFocused)
-                    .font(.subheadline)
-                    .lineLimit(1...4)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 9)
-                    .background(Color.white.opacity(0.06))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                HStack(spacing: 8) {
+                    Text("✦").foregroundStyle(.white.opacity(0.6))
+                    TextField("별 이름", text: $store.starName)
+                        .foregroundStyle(.white)
+                        .focused($isTextFocused)
+                        .font(.subheadline)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 9)
+                .background(Color.white.opacity(0.06))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
 
                 Button {
                     store.send(.saveRecord)
@@ -66,13 +69,31 @@ struct RecordPanelView: View {
                     .padding(.vertical, 9)
                     .background(
                         Capsule().fill(
-                            store.recordContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                            (contentEmpty || isOverLimit)
                                 ? Color.white.opacity(0.15)
                                 : AppColors.accent
                         )
                     )
                 }
-                .disabled(store.recordContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || store.isAnalyzingColor)
+                .disabled(contentEmpty || isOverLimit || store.isAnalyzingColor)
+            }
+
+            // 기록 내용 (전체 너비)
+            VStack(alignment: .trailing, spacing: 4) {
+                TextField("기록 내용", text: $store.recordContent, axis: .vertical)
+                    .foregroundStyle(.white)
+                    .focused($isTextFocused)
+                    .font(.subheadline)
+                    .lineLimit(3...6)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 11)
+                    .background(Color.white.opacity(0.06))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                Text("\(contentLength)/\(Self.freeCharLimit)")
+                    .font(.system(size: 10))
+                    .foregroundStyle(isOverLimit ? .red.opacity(0.8) : .white.opacity(0.3))
+                    .padding(.trailing, 4)
             }
         }
         .padding(.horizontal, 16)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		056FB8F1F653C1AA185B04C7 /* CosmicAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AFB930D80F71F0EE8ED280 /* CosmicAlertView.swift */; };
 		2215653D3A89862F89D59793 /* AppTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4499B36F6A956E467A260002 /* AppTypography.swift */; };
 		4B734DBCB46E9EC8DDCD0EEA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5044140883A329189A0917 /* AppColors.swift */; };
 		5B0A60FFEE9348D47C5CE8D6 /* CanvasPreviewViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */; };
@@ -41,6 +42,7 @@
 		6AC1697A7DAC909AC709777C /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F5044140883A329189A0917 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasPreviewViews.swift; sourceTree = "<group>"; };
+		90AFB930D80F71F0EE8ED280 /* CosmicAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmicAlertView.swift; sourceTree = "<group>"; };
 		B867F6B79B5AFB08870F45C8 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -86,6 +88,7 @@
 				7F5044140883A329189A0917 /* AppColors.swift */,
 				4499B36F6A956E467A260002 /* AppTypography.swift */,
 				87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */,
+				90AFB930D80F71F0EE8ED280 /* CosmicAlertView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				4B734DBCB46E9EC8DDCD0EEA /* AppColors.swift in Sources */,
 				2215653D3A89862F89D59793 /* AppTypography.swift in Sources */,
 				5B0A60FFEE9348D47C5CE8D6 /* CanvasPreviewViews.swift in Sources */,
+				056FB8F1F653C1AA185B04C7 /* CosmicAlertView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

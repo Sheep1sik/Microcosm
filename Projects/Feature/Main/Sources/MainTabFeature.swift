@@ -84,6 +84,7 @@ public struct MainTabFeature {
 
             case .recordsUpdated(let records):
                 state.universe.allRecords = records
+                state.profile.allRecords = records
                 return .none
 
             case .goalsUpdated(let goals):
@@ -128,6 +129,7 @@ public struct MainTabFeature {
                 return .none
 
             case .constellation(.toggleGoalCompletion),
+                 .constellation(.toggleAllSubGoals),
                  .constellation(.toggleSubGoal),
                  .constellation(.goalSaved),
                  .constellation(.goalDeleted):

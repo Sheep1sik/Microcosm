@@ -112,15 +112,21 @@ struct OnboardingOverlayView: View {
                 Spacer()
 
                 if showNicknameInput {
-                    // 하단 입력창 (RecordPanelView 스타일)
-                    VStack(spacing: 12) {
-                        HStack(spacing: 12) {
+                    VStack(spacing: 10) {
+                        HStack(spacing: 10) {
+                            // 상태 아이콘
+                            if store.onboardingNicknameAvailable == true {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundStyle(AppColors.accent)
+                                    .transition(.scale.combined(with: .opacity))
+                            }
+
                             TextField("", text: Binding(
                                 get: { store.onboardingNickname },
                                 set: { store.send(.onboardingNicknameChanged($0)) }
                             ))
                             .placeholder(when: store.onboardingNickname.isEmpty) {
-                                Text("2~10자")
+                                Text("2~10자 닉네임")
                                     .foregroundStyle(.white.opacity(0.3))
                             }
                             .foregroundStyle(.white)
@@ -130,29 +136,51 @@ struct OnboardingOverlayView: View {
                             .textInputAutocapitalization(.never)
                             .onSubmit { store.send(.onboardingCheckNickname) }
 
-                            Button {
-                                store.send(.onboardingCheckNickname)
-                            } label: {
-                                Group {
-                                    if store.onboardingNicknameChecking {
-                                        ProgressView().tint(.white)
-                                    } else {
-                                        Text("중복확인")
-                                            .font(.system(size: 13, weight: .medium))
+                            // 중복확인 or 시작하기 버튼
+                            if store.onboardingNicknameAvailable == true {
+                                Button {
+                                    store.send(.onboardingNicknameConfirm)
+                                } label: {
+                                    Group {
+                                        if store.onboardingNicknameSaving {
+                                            ProgressView().tint(.black)
+                                        } else {
+                                            Text("시작하기")
+                                                .font(.system(size: 13, weight: .semibold))
+                                        }
                                     }
+                                    .foregroundStyle(.black)
+                                    .padding(.horizontal, 14)
+                                    .padding(.vertical, 7)
+                                    .background(Capsule().fill(AppColors.accent))
                                 }
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 7)
-                                .background(
-                                    Capsule().fill(
-                                        onboardingCanCheck
-                                            ? AppColors.accent.opacity(0.6)
-                                            : Color.white.opacity(0.08)
+                                .disabled(store.onboardingNicknameSaving)
+                                .transition(.scale(scale: 0.8).combined(with: .opacity))
+                            } else {
+                                Button {
+                                    store.send(.onboardingCheckNickname)
+                                } label: {
+                                    Group {
+                                        if store.onboardingNicknameChecking {
+                                            ProgressView().tint(.white)
+                                        } else {
+                                            Text("중복확인")
+                                                .font(.system(size: 13, weight: .medium))
+                                        }
+                                    }
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 7)
+                                    .background(
+                                        Capsule().fill(
+                                            onboardingCanCheck
+                                                ? AppColors.accent.opacity(0.6)
+                                                : Color.white.opacity(0.08)
+                                        )
                                     )
-                                )
+                                }
+                                .disabled(!onboardingCanCheck || store.onboardingNicknameChecking)
                             }
-                            .disabled(!onboardingCanCheck || store.onboardingNicknameChecking)
                         }
                         .padding(.horizontal, 14)
                         .padding(.vertical, 12)
@@ -164,46 +192,17 @@ struct OnboardingOverlayView: View {
                                         .stroke(onboardingBorderColor, lineWidth: 1)
                                 )
                         )
-
-                        HStack {
-                            if let error = store.onboardingNicknameError {
-                                Text(error)
-                                    .font(.system(size: 12))
-                                    .foregroundStyle(.red.opacity(0.8))
-                                    .transition(.opacity)
-                            } else if store.onboardingNicknameAvailable == true {
-                                Text("사용 가능한 닉네임이에요!")
-                                    .font(.system(size: 12))
-                                    .foregroundStyle(AppColors.accent)
-                                    .transition(.opacity)
-                            }
-                            Spacer()
-
-                            if store.onboardingNicknameAvailable == true {
-                                Button {
-                                    store.send(.onboardingNicknameConfirm)
-                                } label: {
-                                    Group {
-                                        if store.onboardingNicknameSaving {
-                                            ProgressView().tint(.black)
-                                        } else {
-                                            Text("확인")
-                                                .font(.system(size: 14, weight: .semibold))
-                                        }
-                                    }
-                                    .foregroundStyle(.black)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 8)
-                                    .background(
-                                        Capsule().fill(AppColors.accent)
-                                    )
-                                }
-                                .disabled(store.onboardingNicknameSaving)
-                                .transition(.opacity.combined(with: .scale(scale: 0.9)))
-                            }
-                        }
-                        .animation(.easeInOut(duration: 0.2), value: store.onboardingNicknameError)
                         .animation(.easeInOut(duration: 0.2), value: store.onboardingNicknameAvailable)
+
+                        // 에러 메시지만 표시 (성공 시 아이콘으로 대체)
+                        if let error = store.onboardingNicknameError {
+                            Text(error)
+                                .font(.system(size: 12))
+                                .foregroundStyle(.red.opacity(0.8))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .transition(.opacity)
+                                .animation(.easeInOut(duration: 0.2), value: store.onboardingNicknameError)
+                        }
                     }
                     .padding(.horizontal, 16)
                     .padding(.bottom, 34)

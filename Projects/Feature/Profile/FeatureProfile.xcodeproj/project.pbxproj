@@ -12,6 +12,7 @@
 		3685F627E28413EDC33534C0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BCF4D976A24C245D37D0B /* ProfileView.swift */; };
 		67BDE63100A803D72329E441 /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 5F59C6456040FB5A2B9B8FCA /* libDomainClient.a */; };
 		86783114A884E0AAFCC0174B /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2E9A762989E18FFF8F26D5 /* ComposableArchitecture.framework */; };
+		934FDE53804FE7D7836E9890 /* EmotionStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB32B6A79A9E365890C33198 /* EmotionStatisticsView.swift */; };
 		962E9334C0BB9CBCFC82C031 /* ProfileFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877C44D1C235866E4F81E217 /* ProfileFeature.swift */; };
 		D1213B67F790828D3148C48B /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = ECF0351F386E4E438BD02B3B /* libSharedDesignSystem.a */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		5F59C6456040FB5A2B9B8FCA /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B5BCF4D976A24C245D37D0B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		877C44D1C235866E4F81E217 /* ProfileFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFeature.swift; sourceTree = "<group>"; };
+		AB32B6A79A9E365890C33198 /* EmotionStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionStatisticsView.swift; sourceTree = "<group>"; };
 		ECF0351F386E4E438BD02B3B /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59B2D46530E8C458A66AC76 /* libFeatureProfile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureProfile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF52A95E33506FDEE8BF9D77 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,7 @@
 		74447B709BA83FFDC1D8FBD5 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				AB32B6A79A9E365890C33198 /* EmotionStatisticsView.swift */,
 				877C44D1C235866E4F81E217 /* ProfileFeature.swift */,
 				7B5BCF4D976A24C245D37D0B /* ProfileView.swift */,
 			);
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				934FDE53804FE7D7836E9890 /* EmotionStatisticsView.swift in Sources */,
 				962E9334C0BB9CBCFC82C031 /* ProfileFeature.swift in Sources */,
 				3685F627E28413EDC33534C0 /* ProfileView.swift in Sources */,
 			);

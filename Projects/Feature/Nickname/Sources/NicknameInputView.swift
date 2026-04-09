@@ -20,6 +20,26 @@ public struct NicknameInputView: View {
                 .onTapGesture { isFocused = false }
 
             VStack(spacing: 32) {
+                // 뒤로가기 버튼 (닉네임 변경 모드)
+                if !store.isOnboarding {
+                    HStack {
+                        Button {
+                            dismiss()
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: "chevron.left")
+                                    .font(.system(size: 16, weight: .medium))
+                                Text("돌아가기")
+                                    .font(.system(size: 16))
+                            }
+                            .foregroundStyle(.white.opacity(0.6))
+                        }
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 16)
+                }
+
                 VStack(spacing: 8) {
                     Text(store.isOnboarding ? "닉네임을 정해주세요" : "닉네임 변경")
                         .font(.system(size: 24, weight: .bold))
@@ -29,7 +49,7 @@ public struct NicknameInputView: View {
                         .font(.system(size: 15))
                         .foregroundStyle(.white.opacity(0.5))
                 }
-                .padding(.top, 60)
+                .padding(.top, store.isOnboarding ? 60 : 20)
 
                 VStack(spacing: 16) {
                     HStack(spacing: 12) {
@@ -127,6 +147,7 @@ public struct NicknameInputView: View {
                 }
             }
         }
+        .navigationBarHidden(true)
         .preferredColorScheme(.dark)
         .onAppear { isFocused = true }
     }

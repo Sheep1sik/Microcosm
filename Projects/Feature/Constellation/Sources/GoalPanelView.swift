@@ -147,20 +147,24 @@ private struct GoalRowView: View {
                             )
                     }
                 } else {
-                    ZStack {
-                        Circle()
-                            .stroke(Color.white.opacity(0.1), lineWidth: 3)
-                        Circle()
-                            .trim(from: 0, to: goal.completionRatio)
-                            .stroke(
-                                goal.isCompleted
-                                    ? AppColors.success
-                                    : AppColors.accent,
-                                style: StrokeStyle(lineWidth: 3, lineCap: .round)
-                            )
-                            .rotationEffect(.degrees(-90))
+                    Button {
+                        store.send(.toggleAllSubGoals(goalId: goal.id))
+                    } label: {
+                        ZStack {
+                            Circle()
+                                .stroke(Color.white.opacity(0.1), lineWidth: 3)
+                            Circle()
+                                .trim(from: 0, to: goal.completionRatio)
+                                .stroke(
+                                    goal.isCompleted
+                                        ? AppColors.success
+                                        : AppColors.accent,
+                                    style: StrokeStyle(lineWidth: 3, lineCap: .round)
+                                )
+                                .rotationEffect(.degrees(-90))
+                        }
+                        .frame(width: 28, height: 28)
                     }
-                    .frame(width: 28, height: 28)
                 }
 
                 // 편집/삭제 메뉴
