@@ -1,6 +1,7 @@
 import ComposableArchitecture
 import DomainEntity
 import DomainClient
+import Foundation
 
 @Reducer
 public struct ConstellationFeature {
@@ -28,6 +29,19 @@ public struct ConstellationFeature {
         public var completedConstellationSubtitle: String?
         public var previouslyCompletedIds: Set<String> = []
         public var hasInitialGoalsLoaded = false
+
+        // Guide
+        public var showGuide = false
+        public var guideStep: GuideStep?
+        public var userDisplayName: String?
+
+        public enum GuideStep: Int, Equatable, CaseIterable {
+            case welcome = 0         // 환영 (탭하여 계속)
+            case tapConstellation    // "별자리를 탭해보세요" (유저가 직접 탭)
+            case tapStar             // "별을 탭해보세요" (유저가 직접 탭)
+            case registerGoal        // "목표를 등록해보세요" (유저가 직접 저장)
+            case closing             // 축하 메시지 (탭하여 완료)
+        }
 
         // Search
         public var isSearching = false
@@ -126,6 +140,11 @@ public struct ConstellationFeature {
         // Constellation Completion
         case dismissCompletionMessage
 
+        // Guide
+        case checkGuide
+        case advanceGuide
+        case dismissGuide
+
         // Search
         case toggleSearch
         case searchTextChanged(String)
@@ -143,7 +162,7 @@ public struct ConstellationFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                return .none
+                return .send(.checkGuide)
 
             // MARK: - Data
 
@@ -156,6 +175,10 @@ public struct ConstellationFeature {
             case .sceneDidEnterConstellationDetail(let id):
                 state.isInConstellationDetail = true
                 state.selectedConstellationId = id
+                // 가이드: 별자리 탭 단계 완료
+                if state.guideStep == .tapConstellation {
+                    state.guideStep = .tapStar
+                }
                 return .none
 
             case .sceneDidExitConstellationDetail:
@@ -171,6 +194,10 @@ public struct ConstellationFeature {
                 state.selectedStarIndex = starIndex
                 state.showGoalPanel = true
                 state.isEditingGoal = false
+                // 가이드: 별 탭 단계 완료 → 목표 등록 단계
+                if state.guideStep == .tapStar {
+                    state.guideStep = .registerGoal
+                }
                 return .none
 
             case .sceneDidTapEmptyArea:
@@ -284,6 +311,10 @@ public struct ConstellationFeature {
                 }
 
             case .goalSaved:
+                // 가이드: 목표 등록 완료 → 축하 단계
+                if state.guideStep == .registerGoal {
+                    state.guideStep = .closing
+                }
                 return .none
 
             case .goalDeleted:
@@ -382,6 +413,42 @@ public struct ConstellationFeature {
             case .dismissCompletionMessage:
                 state.completedConstellationMessage = nil
                 state.completedConstellationSubtitle = nil
+                return .none
+
+            // MARK: - Guide
+
+            case .checkGuide:
+                let hasSeenGuide = UserDefaults.standard.bool(forKey: "hasSeenConstellationGuide")
+                if !hasSeenGuide {
+                    state.showGuide = true
+                    state.guideStep = .welcome
+                }
+                return .none
+
+            case .advanceGuide:
+                guard let current = state.guideStep else {
+                    state.showGuide = false
+                    return .none
+                }
+                switch current {
+                case .welcome:
+                    // 환영 → 별자리 탭 안내 (유저가 직접 조작)
+                    state.guideStep = .tapConstellation
+                case .closing:
+                    // 가이드 완료
+                    state.showGuide = false
+                    state.guideStep = nil
+                    UserDefaults.standard.set(true, forKey: "hasSeenConstellationGuide")
+                default:
+                    // tapConstellation, tapStar, registerGoal은 유저 인터랙션으로 진행
+                    break
+                }
+                return .none
+
+            case .dismissGuide:
+                state.showGuide = false
+                state.guideStep = nil
+                UserDefaults.standard.set(true, forKey: "hasSeenConstellationGuide")
                 return .none
 
             // MARK: - Search

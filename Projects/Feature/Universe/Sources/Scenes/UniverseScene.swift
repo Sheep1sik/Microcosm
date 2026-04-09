@@ -402,12 +402,11 @@ final class UniverseScene: SKScene {
         let sunExclusion: CGFloat = 650
         let galaxyMinDist: CGFloat = 300
 
-        var rng = SeededRNG(seed: UInt64(year * 100 + month))
         let existingPositions = activeGalaxies.values.map { $0.position }
 
         for _ in 0..<50 {
-            let x = CGFloat.random(in: margin...(worldSize.width - margin), using: &rng)
-            let y = CGFloat.random(in: margin...(worldSize.height - margin), using: &rng)
+            let x = CGFloat.random(in: margin...(worldSize.width - margin))
+            let y = CGFloat.random(in: margin...(worldSize.height - margin))
 
             if hypot(x - sunCenter.x, y - sunCenter.y) < sunExclusion { continue }
 
@@ -420,22 +419,21 @@ final class UniverseScene: SKScene {
         }
         // 폴백: 태양계만 피하기
         for _ in 0..<20 {
-            let x = CGFloat.random(in: margin...(worldSize.width - margin), using: &rng)
-            let y = CGFloat.random(in: margin...(worldSize.height - margin), using: &rng)
+            let x = CGFloat.random(in: margin...(worldSize.width - margin))
+            let y = CGFloat.random(in: margin...(worldSize.height - margin))
             if hypot(x - sunCenter.x, y - sunCenter.y) >= sunExclusion {
                 return CGPoint(x: x, y: y)
             }
         }
-        return CGPoint(x: CGFloat.random(in: margin...(worldSize.width - margin), using: &rng),
-                       y: CGFloat.random(in: margin...(worldSize.height - margin), using: &rng))
+        return CGPoint(x: CGFloat.random(in: margin...(worldSize.width - margin)),
+                       y: CGFloat.random(in: margin...(worldSize.height - margin)))
     }
 
     private func galaxyProperties(year: Int, month: Int) -> (arms: Int, tilt: CGFloat, wind: CGFloat, ellipticity: CGFloat) {
-        var rng = SeededRNG(seed: UInt64(year * 1000 + month * 7 + 31))
-        let arms = Int.random(in: 2...5, using: &rng)
-        let tilt = CGFloat.random(in: -1.57...1.57, using: &rng)
-        let wind = CGFloat.random(in: 2.0...5.0, using: &rng)
-        let ellipticity = CGFloat.random(in: 0.25...0.65, using: &rng)
+        let arms = Int.random(in: 2...5)
+        let tilt = CGFloat.random(in: -1.57...1.57)
+        let wind = CGFloat.random(in: 2.0...5.0)
+        let ellipticity = CGFloat.random(in: 0.25...0.65)
         return (arms, tilt, wind, ellipticity)
     }
 
@@ -684,8 +682,6 @@ final class UniverseScene: SKScene {
 
     func generateStarPositions(count: Int, yearMonth: String) -> [CGPoint] {
         guard count > 0 else { return [] }
-        let (year, month) = FormatHelper.parseYearMonth(yearMonth)
-        var rng = SplitMix64(seed: UInt64(year * 100 + month) &+ 7777)
 
         let spreadX: CGFloat = min(100 + CGFloat(count) * 0.4, 140)
         let spreadY: CGFloat = min(90 + CGFloat(count) * 0.35, 130)
@@ -697,8 +693,8 @@ final class UniverseScene: SKScene {
             var bestMinDist: CGFloat = -1
 
             for _ in 0..<50 {
-                let rx = CGFloat(rng.next() % 20001) / 10000.0 - 1.0
-                let ry = CGFloat(rng.next() % 20001) / 10000.0 - 1.0
+                let rx = CGFloat.random(in: -1...1)
+                let ry = CGFloat.random(in: -1...1)
                 let candidate = CGPoint(x: rx * spreadX, y: ry * spreadY)
 
                 if positions.isEmpty {

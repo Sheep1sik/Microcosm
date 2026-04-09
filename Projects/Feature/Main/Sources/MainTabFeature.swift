@@ -85,6 +85,8 @@ public struct MainTabFeature {
             case .recordsUpdated(let records):
                 state.universe.allRecords = records
                 state.profile.allRecords = records
+                // 닉네임 동기화
+                state.constellation.userDisplayName = state.universe.userDisplayName
                 return .none
 
             case .goalsUpdated(let goals):

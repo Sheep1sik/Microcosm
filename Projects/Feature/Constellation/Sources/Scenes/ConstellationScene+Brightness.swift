@@ -94,9 +94,9 @@ extension ConstellationScene {
     }
 
     /// 별 노드에 밝기 적용 (애니메이션)
-    /// - 목표 없음: 차가운 청회색, 매우 어둡게 (alpha 0.1)
-    /// - 목표 등록됨(미완료): 따뜻한 보라빛, 살짝 밝게 (alpha 0.25~) + 느린 펄스
-    /// - 목표 완료됨: 따뜻한 백색, 밝게 (alpha ~0.9) + 빠른 반짝임
+    /// - 목표 없음: 차가운 청회색, 매우 어둡게 (alpha 0.12)
+    /// - 목표 등록됨(미완료): 따뜻한 보라빛, 확실히 밝게 (alpha 0.45~) + 느린 펄스
+    /// - 목표 완료됨: 따뜻한 백색, 밝게 (alpha ~0.95) + 빠른 반짝임
     private func applyBrightness(_ brightness: Double, hasGoals: Bool, to starNode: SKSpriteNode) {
         let b = CGFloat(brightness)
 
@@ -105,22 +105,22 @@ extension ConstellationScene {
         let targetColor: vector_float4
 
         if !hasGoals {
-            // 목표 없음: 차가운 청회색, 어둡게
-            targetAlpha = 0.1
+            // 목표 없음: 차가운 청회색, 매우 어둡게
+            targetAlpha = 0.12
             targetScale = 1.0
-            targetColor = vector_float4(0.4, 0.5, 0.7, 1.0)
+            targetColor = vector_float4(0.35, 0.4, 0.6, 1.0)
         } else if brightness < 1.0 {
             // 목표 등록됨, 미완료: 따뜻한 보라빛 기본 + 진행률 반영
-            targetAlpha = 0.25 + b * 0.55  // 0.25 ~ 0.8
-            targetScale = 1.05 + b * 0.4   // 1.05 ~ 1.45
+            targetAlpha = 0.45 + b * 0.4  // 0.45 ~ 0.85
+            targetScale = 1.2 + b * 0.4   // 1.2 ~ 1.6
             let r = Float(0.55 + b * 0.45)  // 0.55 → 1.0
             let g = Float(0.45 + b * 0.5)   // 0.45 → 0.95
             let blue = Float(0.7 + b * 0.15) // 0.7 → 0.85
             targetColor = vector_float4(r, g, blue, 1.0)
         } else {
             // 완료: 따뜻한 백색, 밝게
-            targetAlpha = 0.9
-            targetScale = 1.5
+            targetAlpha = 0.95
+            targetScale = 1.7
             targetColor = vector_float4(1.0, 0.95, 0.85, 1.0)
         }
 
@@ -137,7 +137,7 @@ extension ConstellationScene {
 
         if hasGoals && brightness < 1.0 {
             // 목표 등록됨: 느린 펄스 (숨쉬는 듯)
-            let pulseMin = max(0.15, targetAlpha - 0.1)
+            let pulseMin = max(0.35, targetAlpha - 0.1)
             let pulseMax = min(1.0, targetAlpha + 0.1)
             starNode.run(SKAction.repeatForever(SKAction.sequence([
                 SKAction.fadeAlpha(to: pulseMin, duration: 2.0),

@@ -21,6 +21,7 @@
 		76BDFB7FFA0C7C069ABE25E2 /* GoalEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24A322D6C77CD764CF91C38 /* GoalEditView.swift */; };
 		7E2C858D1E3DCE75E44E8F60 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098F1770BDE33FAFCA65B6E /* ComposableArchitecture.framework */; };
 		AC9BA81BB68691CFC1C17E1C /* ConstellationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC98B976A239F2EAFD1CA7 /* ConstellationView.swift */; };
+		CC80AB536AD82A2A26247441 /* ConstellationGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88A79A52D225473384DC9B5 /* ConstellationGuideView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +59,7 @@
 		7DB66E1AF6AA838CFF651F69 /* ConstellationScene+Constellations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationScene+Constellations.swift"; sourceTree = "<group>"; };
 		8ABE6DDFA7E97B20D3829B51 /* libFeatureConstellation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureConstellation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2E967D8C62613C837C20A21 /* ConstellationScene+Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationScene+Brightness.swift"; sourceTree = "<group>"; };
+		C88A79A52D225473384DC9B5 /* ConstellationGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationGuideView.swift; sourceTree = "<group>"; };
 		E258867B52BF736A447AA5A6 /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4808C664080F310251BB4B7 /* ConstellationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationFeature.swift; sourceTree = "<group>"; };
 		E641B660704EF6031CB0D78F /* GoalPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalPanelView.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				5E5EE0C23324D56255ACF4CB /* Scenes */,
 				E4808C664080F310251BB4B7 /* ConstellationFeature.swift */,
+				C88A79A52D225473384DC9B5 /* ConstellationGuideView.swift */,
 				79BC98B976A239F2EAFD1CA7 /* ConstellationView.swift */,
 				F24A322D6C77CD764CF91C38 /* GoalEditView.swift */,
 				E641B660704EF6031CB0D78F /* GoalPanelView.swift */,
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DC2FD036C0B8806B4792D5C /* ConstellationFeature.swift in Sources */,
+				CC80AB536AD82A2A26247441 /* ConstellationGuideView.swift in Sources */,
 				AC9BA81BB68691CFC1C17E1C /* ConstellationView.swift in Sources */,
 				76BDFB7FFA0C7C069ABE25E2 /* GoalEditView.swift in Sources */,
 				634E932A5D7F0A17F67303AF /* GoalPanelView.swift in Sources */,

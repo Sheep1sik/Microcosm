@@ -66,8 +66,16 @@ public struct ConstellationView: View {
                 constellationCompletionOverlay(message: message)
                     .transition(.opacity.combined(with: .scale(scale: 0.8)))
             }
+
+            // 별자리 가이드
+            if store.showGuide, let step = store.guideStep {
+                constellationGuideOverlay(step: step)
+                    .transition(.opacity)
+            }
         }
         .toolbar(store.isInConstellationDetail ? .hidden : .visible, for: .tabBar)
+        .animation(.easeInOut(duration: 0.3), value: store.showGuide)
+        .animation(.easeInOut(duration: 0.4), value: store.guideStep)
         .animation(.easeOut(duration: 0.3), value: store.showGoalPanel)
         .animation(.easeOut(duration: 0.3), value: store.isEditingGoal)
         .animation(.easeOut(duration: 0.2), value: store.isSearching)
@@ -89,7 +97,7 @@ public struct ConstellationView: View {
 
     @ViewBuilder
     private var searchButton: some View {
-        if !store.isInConstellationDetail && !store.isSearching {
+        if !store.isInConstellationDetail && !store.isSearching && !store.showGuide {
             VStack {
                 HStack {
                     Spacer()
@@ -210,6 +218,18 @@ public struct ConstellationView: View {
         .onTapGesture {
             store.send(.dismissCompletionMessage)
         }
+    }
+
+    // MARK: - Guide Overlay
+
+    private func constellationGuideOverlay(step: ConstellationFeature.State.GuideStep) -> some View {
+        ConstellationGuideStepView(
+            step: step,
+            userName: store.userDisplayName ?? "◈⟡✦⋆"
+        ) {
+            store.send(.advanceGuide, animation: .easeInOut)
+        }
+        .animation(.easeInOut(duration: 0.4), value: step)
     }
 
     // MARK: - Scene Setup

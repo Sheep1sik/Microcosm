@@ -51,8 +51,8 @@ extension ConstellationScene {
             let x = CGFloat(star.x - 0.5) * span
             let y = CGFloat(star.y - 0.5) * span
 
-            // magnitude 기반 크기 (밝을수록 큼): mag 0 → 12pt, mag 5 → 4pt
-            let baseSz = max(4, 12 - CGFloat(star.magnitude) * 1.6)
+            // magnitude 기반 크기 (밝을수록 큼): mag 0 → 28pt, mag 5 → 14pt
+            let baseSz = max(14, 28 - CGFloat(star.magnitude) * 2.8)
             let sprite = SKSpriteNode(color: .white, size: CGSize(width: baseSz, height: baseSz))
             sprite.position = CGPoint(x: x, y: y)
             sprite.zPosition = 3
@@ -61,8 +61,8 @@ extension ConstellationScene {
             sprite.name = "star_\(def.id)_\(star.index)"
 
             // 초기 상태: dim (빛을 잃은 상태)
-            sprite.alpha = 0.1
-            let dimColor = vector_float4(0.4, 0.5, 0.7, 1.0) // 차가운 청회색
+            sprite.alpha = 0.12
+            let dimColor = vector_float4(0.35, 0.4, 0.6, 1.0) // 차가운 청회색
             sprite.setValue(SKAttributeValue(vectorFloat4: dimColor), forAttribute: "a_color")
 
             container.addChild(sprite)
@@ -80,7 +80,7 @@ extension ConstellationScene {
             path.addLine(to: toPos)
 
             let lineNode = SKShapeNode(path: path)
-            lineNode.strokeColor = UIColor(white: 1, alpha: 0.15)
+            lineNode.strokeColor = UIColor(white: 1, alpha: 0.2)
             lineNode.lineWidth = 0.5
             lineNode.zPosition = 2
             lineNode.lineCap = .round
