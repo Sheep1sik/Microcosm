@@ -83,7 +83,7 @@ struct RootFeature {
                 } else {
                     state.userProfile = UserProfile()
                     state.mode = .login
-                    return .none
+                    return .cancel(id: CancelID.userObserver)
                 }
 
             case .userProfileUpdated(let profile):
@@ -111,11 +111,11 @@ struct RootFeature {
 
             case .mainTab(.profile(.delegate(.didSignOut))):
                 state.mode = .login
-                return .none
+                return .cancel(id: CancelID.userObserver)
 
             case .mainTab(.profile(.delegate(.didDeleteAccount))):
                 state.mode = .login
-                return .none
+                return .cancel(id: CancelID.userObserver)
 
             case .mainTab:
                 return .none

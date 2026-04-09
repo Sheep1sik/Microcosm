@@ -110,7 +110,7 @@ extension UniverseScene {
         let container = SKNode()
         for (i, record) in records.enumerated() {
             let dot = SKShapeNode(circleOfRadius: 4)
-            dot.fillColor = record.color.uiColor
+            dot.fillColor = record.resolvedProfile.primaryColor.uiColor
             dot.strokeColor = .clear
             dot.position = positions[i]
             container.addChild(dot)
