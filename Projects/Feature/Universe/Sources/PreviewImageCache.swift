@@ -27,4 +27,11 @@ final class PreviewImageCache {
     func starImage(for recordId: String) -> UIImage? {
         starImages[recordId]
     }
+
+    /// 테스트 시 캐시 상태 초기화용
+    func reset() {
+        galaxyImages.removeAll()
+        starImages.removeAll()
+        revision = 0
+    }
 }

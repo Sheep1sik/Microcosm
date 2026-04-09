@@ -87,6 +87,7 @@ extension AuthClient: DependencyKey {
                       let nonce = nonceHolder.currentNonce else {
                     throw AuthError.missingToken
                 }
+                nonceHolder.currentNonce = nil
                 let credential = OAuthProvider.appleCredential(
                     withIDToken: idTokenString,
                     rawNonce: nonce,

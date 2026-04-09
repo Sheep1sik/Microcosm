@@ -247,9 +247,12 @@ public struct UniverseFeature {
         Reduce { state, action in
             switch action {
             case .addRecordRequested(let record):
-                return .run { [authClient, recordClient] _ in
+                return .run { [authClient, recordClient] send in
                     guard let userId = authClient.currentUser()?.uid else { return }
                     try await recordClient.addRecord(userId, record)
+                } catch: { _, _ in
+                    // Firestore 오프라인 캐시로 즉각 실패가 드물며,
+                    // recordClient.observe가 실시간 상태를 반영하므로 별도 에러 액션 불필요
                 }
 
             case .recordsUpdated(let records):
