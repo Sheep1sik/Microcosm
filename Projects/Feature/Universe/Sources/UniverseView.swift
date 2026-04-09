@@ -290,6 +290,7 @@ protocol UniverseSceneDelegate: AnyObject {
 @MainActor
 final class SceneDelegateBridge: UniverseSceneDelegate {
     let store: StoreOf<UniverseFeature>
+    @Dependency(\.previewImageCache) var previewImageCache
 
     init(store: StoreOf<UniverseFeature>) {
         self.store = store
@@ -316,7 +317,7 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
     }
 
     func previewImagesUpdated(galaxies: [String: UIImage], stars: [String: UIImage]) {
-        PreviewImageCache.shared.update(galaxies: galaxies, stars: stars)
+        previewImageCache.update(galaxies: galaxies, stars: stars)
         store.send(.scenePreviewImagesUpdated)
     }
 

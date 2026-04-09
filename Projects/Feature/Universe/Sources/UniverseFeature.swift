@@ -64,7 +64,7 @@ public struct UniverseFeature {
         // Completed Constellations (배경 표시용)
         public var completedConstellationIds: [String] = []
 
-        // Preview Images (실제 이미지는 PreviewImageCache.shared에 보관)
+        // Preview Images (실제 이미지는 @Dependency(\.previewImageCache)로 관리)
         public var previewRevision: UInt = 0
 
         // Navigation (View에서 scene 메서드 호출용)

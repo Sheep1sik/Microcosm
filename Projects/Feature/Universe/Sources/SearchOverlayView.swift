@@ -6,6 +6,7 @@ import SharedDesignSystem
 struct SearchOverlayView: View {
     @Bindable var store: StoreOf<UniverseFeature>
     @FocusState.Binding var isSearchFocused: Bool
+    @Dependency(\.previewImageCache) var previewImageCache
 
     init(store: StoreOf<UniverseFeature>, isSearchFocused: FocusState<Bool>.Binding) {
         self.store = store
@@ -161,7 +162,7 @@ struct SearchOverlayView: View {
 
     private func galaxyRow(_ galaxy: (yearMonth: String, label: String, recordCount: Int, color: Color)) -> some View {
         HStack(spacing: 14) {
-            if let img = PreviewImageCache.shared.galaxyImage(for: galaxy.yearMonth) {
+            if let img = previewImageCache.galaxyImage(for: galaxy.yearMonth) {
                 Image(uiImage: img)
                     .resizable()
                     .interpolation(.high)
@@ -189,7 +190,7 @@ struct SearchOverlayView: View {
 
     private func starRow(_ record: Record) -> some View {
         HStack(spacing: 14) {
-            if let img = PreviewImageCache.shared.starImage(for: record.id) {
+            if let img = previewImageCache.starImage(for: record.id) {
                 Image(uiImage: img)
                     .resizable()
                     .interpolation(.high)
