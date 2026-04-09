@@ -36,6 +36,7 @@ extension ConstellationScene {
                 ])))
             }
             addChild(sprite)
+            dustStarNodes.append(sprite)
         }
     }
 

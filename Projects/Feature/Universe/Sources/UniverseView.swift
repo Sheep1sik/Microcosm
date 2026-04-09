@@ -280,7 +280,7 @@ protocol UniverseSceneDelegate: AnyObject {
     func galaxyBirthCompleted()
     func galaxyScreenCenterUpdated(_ center: CGPoint?)
     func previewImagesUpdated(galaxies: [String: UIImage], stars: [String: UIImage])
-    func getAllRecords() -> [DomainEntity.Record]
+    @MainActor func getAllRecords() -> [DomainEntity.Record]
     func getIsOnboarding() -> Bool
     func getOnboardingStep() -> OnboardingStep?
     func addRecord(_ record: DomainEntity.Record)
@@ -316,7 +316,8 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
     }
 
     func previewImagesUpdated(galaxies: [String: UIImage], stars: [String: UIImage]) {
-        store.send(.scenePreviewImagesUpdated(galaxies: galaxies, stars: stars))
+        PreviewImageCache.shared.update(galaxies: galaxies, stars: stars)
+        store.send(.scenePreviewImagesUpdated)
     }
 
     func getAllRecords() -> [DomainEntity.Record] {
@@ -332,12 +333,7 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
     }
 
     func addRecord(_ record: DomainEntity.Record) {
-        @Dependency(\.authClient) var authClient
-        @Dependency(\.recordClient) var recordClient
-        guard let userId = authClient.currentUser()?.uid else { return }
-        Task {
-            try? await recordClient.addRecord(userId, record)
-        }
+        store.send(.addRecordRequested(record))
     }
 
     func didTapEmptyArea() {

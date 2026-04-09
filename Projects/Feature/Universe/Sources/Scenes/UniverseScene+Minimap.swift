@@ -25,7 +25,7 @@ extension UniverseScene {
     func refreshMinimapDots() {
         for dot in minimapDots { dot.removeFromParent() }
         minimapDots.removeAll()
-        guard minimapNode != nil else { return }
+        guard let minimapNode else { return }
 
         let sc = mmSize / worldSize.width
         for galaxy in activeGalaxies.values {
@@ -39,6 +39,7 @@ extension UniverseScene {
     }
 
     func updateMinimap() {
+        guard let minimapNode, let minimapViewport else { return }
         // 미니맵이 보이지 않고 활동도 없으면 스킵
         let isActive = lastTouchPos != nil || pinchStartDist > 0
             || abs(velocity.dx) > 0.05 || abs(velocity.dy) > 0.05
@@ -114,7 +115,7 @@ extension UniverseScene {
             dot.position = positions[i]
             container.addChild(dot)
         }
-        minimapNode.addChild(container)
+        minimapNode?.addChild(container)
         galaxyMinimapContainer = container
     }
 
@@ -122,7 +123,7 @@ extension UniverseScene {
         galaxyMinimapContainer?.removeFromParent()
         galaxyMinimapContainer = nil
 
-        minimapViewport.alpha = 1
+        minimapViewport?.alpha = 1
         refreshMinimapDots()
     }
 }

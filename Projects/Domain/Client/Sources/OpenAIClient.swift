@@ -177,6 +177,13 @@ extension OpenAIClient: DependencyKey {
     }
 }
 
+extension OpenAIClient: TestDependencyKey {
+    public static let testValue = OpenAIClient(
+        analyzeColor: unimplemented("\(Self.self).analyzeColor"),
+        analyzeEmotion: unimplemented("\(Self.self).analyzeEmotion")
+    )
+}
+
 extension DependencyValues {
     public var openAIClient: OpenAIClient {
         get { self[OpenAIClient.self] }

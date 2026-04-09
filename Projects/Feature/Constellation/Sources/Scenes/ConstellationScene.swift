@@ -51,6 +51,10 @@ final class ConstellationScene: SKScene {
 
     weak var sceneDelegate: ConstellationSceneDelegate?
 
+    // MARK: - Dust Stars (for frustum culling)
+
+    var dustStarNodes: [SKNode] = []
+
     // MARK: - Constellation Rendering
 
     var renderedConstellations: [String: RenderedConstellation] = [:]
@@ -84,8 +88,13 @@ final class ConstellationScene: SKScene {
     }()
 
     lazy var starShader: SKShader = {
-        let src = (try? String(contentsOf: Bundle.main.url(forResource: "Star", withExtension: "fsh")!))
-            ?? "void main() { gl_FragColor = vec4(0.0); }"
+        let src: String
+        if let url = Bundle.main.url(forResource: "Star", withExtension: "fsh"),
+           let content = try? String(contentsOf: url) {
+            src = content
+        } else {
+            src = "void main() { gl_FragColor = vec4(0.0); }"
+        }
         let s = SKShader(source: src)
         s.attributes = [
             SKAttribute(name: "a_color", type: .vectorFloat4),
@@ -146,6 +155,24 @@ final class ConstellationScene: SKScene {
             let halfH = size.height * s / 2
             cameraNode.position.x = max(halfW, min(worldSize.width - halfW, cameraNode.position.x))
             cameraNode.position.y = max(halfH, min(worldSize.height - halfH, cameraNode.position.y))
+        }
+
+        updateDustStarVisibility()
+    }
+
+    /// 카메라 뷰포트 밖의 dust star를 숨겨 GPU 부하를 줄인다
+    private func updateDustStarVisibility() {
+        let s = cameraNode.xScale
+        let margin: CGFloat = 100
+        let halfW = size.width * s / 2 + margin
+        let halfH = size.height * s / 2 + margin
+        let camX = cameraNode.position.x
+        let camY = cameraNode.position.y
+
+        for node in dustStarNodes {
+            let dx = abs(node.position.x - camX)
+            let dy = abs(node.position.y - camY)
+            node.isHidden = dx > halfW || dy > halfH
         }
     }
 }

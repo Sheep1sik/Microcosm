@@ -73,6 +73,8 @@ struct SearchOverlayView: View {
     // MARK: - Search Results
 
     private var searchResults: some View {
+        // previewRevision을 참조하여 캐시 업데이트 시 View가 갱신되도록 함
+        let _ = store.previewRevision
         let galaxies = store.state.galaxyResults()
         let stars = store.state.starResults()
         let hasResults = !galaxies.isEmpty || !stars.isEmpty
@@ -159,7 +161,7 @@ struct SearchOverlayView: View {
 
     private func galaxyRow(_ galaxy: (yearMonth: String, label: String, recordCount: Int, color: Color)) -> some View {
         HStack(spacing: 14) {
-            if let img = store.galaxyPreviewImages[galaxy.yearMonth] {
+            if let img = PreviewImageCache.shared.galaxyImage(for: galaxy.yearMonth) {
                 Image(uiImage: img)
                     .resizable()
                     .interpolation(.high)
@@ -187,7 +189,7 @@ struct SearchOverlayView: View {
 
     private func starRow(_ record: Record) -> some View {
         HStack(spacing: 14) {
-            if let img = store.starPreviewImages[record.id] {
+            if let img = PreviewImageCache.shared.starImage(for: record.id) {
                 Image(uiImage: img)
                     .resizable()
                     .interpolation(.high)

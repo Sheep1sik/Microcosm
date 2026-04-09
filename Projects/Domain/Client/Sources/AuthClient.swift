@@ -38,7 +38,12 @@ extension AuthClient: DependencyKey {
     public static let liveValue: AuthClient = {
         // Apple Sign-In nonce 상태
         final class NonceHolder: @unchecked Sendable {
-            var currentNonce: String?
+            private let lock = NSLock()
+            private var _currentNonce: String?
+            var currentNonce: String? {
+                get { lock.withLock { _currentNonce } }
+                set { lock.withLock { _currentNonce = newValue } }
+            }
         }
         let nonceHolder = NonceHolder()
 
@@ -101,6 +106,18 @@ extension AuthClient: DependencyKey {
             }
         )
     }()
+}
+
+extension AuthClient: TestDependencyKey {
+    public static let testValue = AuthClient(
+        observeAuthState: unimplemented("\(Self.self).observeAuthState"),
+        signInWithGoogle: unimplemented("\(Self.self).signInWithGoogle"),
+        prepareAppleSignIn: unimplemented("\(Self.self).prepareAppleSignIn"),
+        handleAppleSignIn: unimplemented("\(Self.self).handleAppleSignIn"),
+        signOut: unimplemented("\(Self.self).signOut"),
+        deleteAccount: unimplemented("\(Self.self).deleteAccount"),
+        currentUser: unimplemented("\(Self.self).currentUser")
+    )
 }
 
 extension DependencyValues {

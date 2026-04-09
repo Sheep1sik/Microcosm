@@ -40,6 +40,8 @@ struct RootFeature {
     @Dependency(\.authClient) var authClient
     @Dependency(\.userClient) var userClient
 
+    private enum CancelID { case authObserver, userObserver }
+
     var body: some ReducerOf<Self> {
         BindingReducer()
 
@@ -54,7 +56,7 @@ struct RootFeature {
                     for await user in authClient.observeAuthState() {
                         await send(.authStateChanged(user))
                     }
-                }
+                }.cancellable(id: CancelID.authObserver, cancelInFlight: true)
 
             case .authStateChanged(let user):
                 state.userId = user?.uid
@@ -76,7 +78,7 @@ struct RootFeature {
                             for await profile in userClient.observe(userId) {
                                 await send(.userProfileUpdated(profile))
                             }
-                        }
+                        }.cancellable(id: CancelID.userObserver, cancelInFlight: true)
                     )
                 } else {
                     state.userProfile = UserProfile()

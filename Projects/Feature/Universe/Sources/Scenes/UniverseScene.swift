@@ -20,18 +20,6 @@ private struct SeededRNG: RandomNumberGenerator {
     }
 }
 
-private struct SplitMix64: RandomNumberGenerator {
-    private var state: UInt64
-    init(seed: UInt64) { state = seed }
-    mutating func next() -> UInt64 {
-        state &+= 0x9e3779b97f4a7c15
-        var z = state
-        z = (z ^ (z >> 30)) &* 0xbf58476d1ce4e5b9
-        z = (z ^ (z >> 27)) &* 0x94d049bb133111eb
-        return z ^ (z >> 31)
-    }
-}
-
 final class UniverseScene: SKScene {
 
     // SwiftUI가 scene을 pause하지 못하게 방지
@@ -68,6 +56,15 @@ final class UniverseScene: SKScene {
 
     weak var sceneDelegate: UniverseSceneDelegate?
 
+    // MARK: - Preview Image Cache
+
+    var cachedGalaxyPreviewImages: [String: UIImage] = [:]
+    var cachedStarPreviewImages: [String: UIImage] = [:]
+
+    // MARK: - Dust Stars (for frustum culling)
+
+    var dustStarNodes: [SKNode] = []
+
     // MARK: - Sun & Planets
 
     var sunNode: SKNode?
@@ -86,8 +83,13 @@ final class UniverseScene: SKScene {
     // MARK: - Shared Shaders (재사용으로 컴파일 1회만)
 
     lazy var galaxyShader: SKShader = {
-        let src = (try? String(contentsOf: Bundle.main.url(forResource: "Galaxy", withExtension: "fsh")!))
-            ?? "void main() { gl_FragColor = vec4(0.0); }"
+        let src: String
+        if let url = Bundle.main.url(forResource: "Galaxy", withExtension: "fsh"),
+           let content = try? String(contentsOf: url) {
+            src = content
+        } else {
+            src = "void main() { gl_FragColor = vec4(0.0); }"
+        }
         let s = SKShader(source: src)
         s.attributes = [
             SKAttribute(name: "a_color", type: .vectorFloat4),
@@ -120,8 +122,13 @@ final class UniverseScene: SKScene {
     }()
 
     lazy var starShader: SKShader = {
-        let src = (try? String(contentsOf: Bundle.main.url(forResource: "Star", withExtension: "fsh")!))
-            ?? "void main() { gl_FragColor = vec4(0.0); }"
+        let src: String
+        if let url = Bundle.main.url(forResource: "Star", withExtension: "fsh"),
+           let content = try? String(contentsOf: url) {
+            src = content
+        } else {
+            src = "void main() { gl_FragColor = vec4(0.0); }"
+        }
         let s = SKShader(source: src)
         s.attributes = [
             SKAttribute(name: "a_color", type: .vectorFloat4),
@@ -131,8 +138,8 @@ final class UniverseScene: SKScene {
 
     // MARK: - Minimap
 
-    var minimapNode: SKNode!
-    var minimapViewport: SKShapeNode!
+    var minimapNode: SKNode?
+    var minimapViewport: SKShapeNode?
     let mmSize: CGFloat = 60
 
     // MARK: - Galaxy Minimap
@@ -934,6 +941,23 @@ final class UniverseScene: SKScene {
 
         updateMinimap()
         updateOnboardingGalaxyScreenPosition()
+        updateDustStarVisibility()
+    }
+
+    /// 카메라 뷰포트 밖의 dust star를 숨겨 GPU 부하를 줄인다
+    private func updateDustStarVisibility() {
+        let s = cameraNode.xScale
+        let margin: CGFloat = 100 // 약간의 여유를 두어 팝인 방지
+        let halfW = size.width * s / 2 + margin
+        let halfH = size.height * s / 2 + margin
+        let camX = cameraNode.position.x
+        let camY = cameraNode.position.y
+
+        for node in dustStarNodes {
+            let dx = abs(node.position.x - camX)
+            let dy = abs(node.position.y - camY)
+            node.isHidden = dx > halfW || dy > halfH
+        }
     }
 
     private func updateOnboardingGalaxyScreenPosition() {

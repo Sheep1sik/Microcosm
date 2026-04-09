@@ -50,6 +50,8 @@ public struct MainTabFeature {
     @Dependency(\.recordClient) var recordClient
     @Dependency(\.goalClient) var goalClient
 
+    private enum CancelID { case recordObserver, goalObserver }
+
     public init() {}
 
     public var body: some ReducerOf<Self> {
@@ -68,12 +70,12 @@ public struct MainTabFeature {
                         for await records in recordClient.observe(userId) {
                             await send(.recordsUpdated(records))
                         }
-                    },
+                    }.cancellable(id: CancelID.recordObserver, cancelInFlight: true),
                     .run { send in
                         for await goals in goalClient.observe(userId) {
                             await send(.goalsUpdated(goals))
                         }
-                    }
+                    }.cancellable(id: CancelID.goalObserver, cancelInFlight: true)
                 )
 
             case .tabSelected(let tab):

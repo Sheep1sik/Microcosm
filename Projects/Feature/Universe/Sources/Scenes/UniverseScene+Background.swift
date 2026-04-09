@@ -36,6 +36,7 @@ extension UniverseScene {
                 ])))
             }
             addChild(sprite)
+            dustStarNodes.append(sprite)
         }
     }
 

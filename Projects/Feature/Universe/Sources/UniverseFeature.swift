@@ -64,9 +64,8 @@ public struct UniverseFeature {
         // Completed Constellations (배경 표시용)
         public var completedConstellationIds: [String] = []
 
-        // Preview Images
-        public var galaxyPreviewImages: [String: UIImage] = [:]
-        public var starPreviewImages: [String: UIImage] = [:]
+        // Preview Images (실제 이미지는 PreviewImageCache.shared에 보관)
+        public var previewRevision: UInt = 0
 
         // Navigation (View에서 scene 메서드 호출용)
         public var pendingNavigation: PendingNavigation?
@@ -158,8 +157,7 @@ public struct UniverseFeature {
             searchText: String = "",
             isSearching: Bool = false,
             debouncedQuery: String = "",
-            galaxyPreviewImages: [String: UIImage] = [:],
-            starPreviewImages: [String: UIImage] = [:],
+            previewRevision: UInt = 0,
             pendingNavigation: PendingNavigation? = nil
         ) {
             self.hasCompletedOnboarding = hasCompletedOnboarding
@@ -180,8 +178,7 @@ public struct UniverseFeature {
             self.searchText = searchText
             self.isSearching = isSearching
             self.debouncedQuery = debouncedQuery
-            self.galaxyPreviewImages = galaxyPreviewImages
-            self.starPreviewImages = starPreviewImages
+            self.previewRevision = previewRevision
             self.pendingNavigation = pendingNavigation
         }
     }
@@ -198,12 +195,15 @@ public struct UniverseFeature {
         case sceneDidUpdateDetailRecords([Record])
         case sceneGalaxyBirthCompleted
         case sceneGalaxyScreenCenterUpdated(CGPoint?)
-        case scenePreviewImagesUpdated(galaxies: [String: UIImage], stars: [String: UIImage])
+        case scenePreviewImagesUpdated
 
         // Search
         case searchTextChanged(String)
         case debouncedQueryUpdated(String)
         case closeSearch
+
+        // Record Persistence
+        case addRecordRequested(Record)
 
         // Record Panel
         case openRecordPanel
@@ -237,6 +237,7 @@ public struct UniverseFeature {
     @Dependency(\.openAIClient) var openAIClient
     @Dependency(\.authClient) var authClient
     @Dependency(\.userClient) var userClient
+    @Dependency(\.recordClient) var recordClient
 
     public init() {}
 
@@ -245,6 +246,12 @@ public struct UniverseFeature {
 
         Reduce { state, action in
             switch action {
+            case .addRecordRequested(let record):
+                return .run { [authClient, recordClient] _ in
+                    guard let userId = authClient.currentUser()?.uid else { return }
+                    try await recordClient.addRecord(userId, record)
+                }
+
             case .recordsUpdated(let records):
                 state.allRecords = records
                 return .none
@@ -279,9 +286,8 @@ public struct UniverseFeature {
                 state.onboardingGalaxyScreenCenter = center
                 return .none
 
-            case .scenePreviewImagesUpdated(let galaxies, let stars):
-                state.galaxyPreviewImages = galaxies
-                state.starPreviewImages = stars
+            case .scenePreviewImagesUpdated:
+                state.previewRevision &+= 1
                 return .none
 
             // MARK: - Search

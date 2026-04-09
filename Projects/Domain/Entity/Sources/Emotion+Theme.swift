@@ -48,6 +48,7 @@ public extension Array where Element == Record {
 public enum FormatHelper {
     public static func parseYearMonth(_ ym: String) -> (year: Int, month: Int) {
         let parts = ym.split(separator: "-")
+        guard parts.count >= 2 else { return (2026, 1) }
         return (Int(parts[0]) ?? 2026, Int(parts[1]) ?? 1)
     }
 

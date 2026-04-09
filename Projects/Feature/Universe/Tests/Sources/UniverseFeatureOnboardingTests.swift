@@ -11,8 +11,7 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
     func test_checkOnboarding_신규유저_welcomeStep으로_설정() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
-                hasCompletedOnboarding: false,
-                hasSetNickname: false
+                hasCompletedOnboarding: false
             )
         ) {
             UniverseFeature()
@@ -20,21 +19,6 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
 
         await store.send(.checkOnboarding) {
             $0.onboardingStep = .welcome
-        }
-    }
-
-    func test_checkOnboarding_닉네임설정완료_galaxyBirthIntro로_설정() async {
-        let store = TestStore(
-            initialState: UniverseFeature.State(
-                hasCompletedOnboarding: false,
-                hasSetNickname: true
-            )
-        ) {
-            UniverseFeature()
-        }
-
-        await store.send(.checkOnboarding) {
-            $0.onboardingStep = .galaxyBirthIntro
         }
     }
 
@@ -95,7 +79,7 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
 
     // MARK: - Nickname → Galaxy Birth
 
-    func test_onboardingNicknameSaved_galaxyBirthIntro로_전환() async {
+    func test_onboardingNicknameSaveCompleted_galaxyBirthIntro로_전환() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
                 onboardingStep: .nicknameInput,
@@ -106,9 +90,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
             UniverseFeature()
         }
 
-        await store.send(.onboardingNicknameSaved) {
+        await store.send(.onboardingNicknameSaveCompleted) {
             $0.onboardingNicknameSaving = false
-            $0.hasSetNickname = true
             $0.userDisplayName = "테스트유저"
             $0.onboardingStep = .galaxyBirthIntro
         }
@@ -130,9 +113,6 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         }
     }
 
-    /// 핵심: welcome 단계에서 galaxyBirthCompleted가 들어와도 상태가 변하지 않아야 한다.
-    /// (기존 버그: didMove(to:)에서 delegate 설정 전에 refreshGalaxies()가 호출되어
-    ///  은하가 즉시 생성되고, birth 애니메이션 완료 콜백이 welcome 단계에서 발생)
     func test_galaxyBirthCompleted_welcome단계에서_상태변경없음() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
@@ -226,8 +206,7 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
     func test_onboardingComplete_completed로_전환_및_플래그설정() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
-                onboardingStep: .closingMessage,
-                hasSetNickname: true
+                onboardingStep: .closingMessage
             )
         ) {
             UniverseFeature()
@@ -298,8 +277,7 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
     func test_전체_온보딩_플로우_순차_진행() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
-                hasCompletedOnboarding: false,
-                hasSetNickname: false
+                hasCompletedOnboarding: false
             )
         ) {
             UniverseFeature()
@@ -317,12 +295,9 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         }
 
         // 3. 닉네임 저장 완료 → galaxyBirthIntro
-        // (여기서 scene.refreshGalaxies()가 onChange로 트리거됨)
-        store.send(.binding(.set(\.onboardingNickname, "테스트유저")))
-        await store.send(.onboardingNicknameSaved) {
+        await store.send(.onboardingNicknameSaveCompleted) {
             $0.onboardingNicknameSaving = false
-            $0.hasSetNickname = true
-            $0.userDisplayName = "테스트유저"
+            $0.userDisplayName = ""
             $0.onboardingStep = .galaxyBirthIntro
         }
 
