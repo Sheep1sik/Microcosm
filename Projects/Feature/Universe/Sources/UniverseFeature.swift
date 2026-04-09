@@ -66,6 +66,7 @@ public struct UniverseFeature {
 
         // Preview Images
         public var galaxyPreviewImages: [String: UIImage] = [:]
+        public var starPreviewImages: [String: UIImage] = [:]
 
         // Navigation (View에서 scene 메서드 호출용)
         public var pendingNavigation: PendingNavigation?
@@ -158,6 +159,7 @@ public struct UniverseFeature {
             isSearching: Bool = false,
             debouncedQuery: String = "",
             galaxyPreviewImages: [String: UIImage] = [:],
+            starPreviewImages: [String: UIImage] = [:],
             pendingNavigation: PendingNavigation? = nil
         ) {
             self.hasCompletedOnboarding = hasCompletedOnboarding
@@ -179,6 +181,7 @@ public struct UniverseFeature {
             self.isSearching = isSearching
             self.debouncedQuery = debouncedQuery
             self.galaxyPreviewImages = galaxyPreviewImages
+            self.starPreviewImages = starPreviewImages
             self.pendingNavigation = pendingNavigation
         }
     }
@@ -195,7 +198,7 @@ public struct UniverseFeature {
         case sceneDidUpdateDetailRecords([Record])
         case sceneGalaxyBirthCompleted
         case sceneGalaxyScreenCenterUpdated(CGPoint?)
-        case scenePreviewImagesUpdated(galaxies: [String: UIImage])
+        case scenePreviewImagesUpdated(galaxies: [String: UIImage], stars: [String: UIImage])
 
         // Search
         case searchTextChanged(String)
@@ -276,8 +279,9 @@ public struct UniverseFeature {
                 state.onboardingGalaxyScreenCenter = center
                 return .none
 
-            case .scenePreviewImagesUpdated(let galaxies):
+            case .scenePreviewImagesUpdated(let galaxies, let stars):
                 state.galaxyPreviewImages = galaxies
+                state.starPreviewImages = stars
                 return .none
 
             // MARK: - Search

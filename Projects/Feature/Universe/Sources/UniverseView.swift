@@ -279,7 +279,7 @@ protocol UniverseSceneDelegate: AnyObject {
     func didUpdateDetailRecords(_ records: [DomainEntity.Record])
     func galaxyBirthCompleted()
     func galaxyScreenCenterUpdated(_ center: CGPoint?)
-    func previewImagesUpdated(galaxies: [String: UIImage])
+    func previewImagesUpdated(galaxies: [String: UIImage], stars: [String: UIImage])
     func getAllRecords() -> [DomainEntity.Record]
     func getIsOnboarding() -> Bool
     func getOnboardingStep() -> OnboardingStep?
@@ -315,8 +315,8 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
         store.send(.sceneGalaxyScreenCenterUpdated(center))
     }
 
-    func previewImagesUpdated(galaxies: [String: UIImage]) {
-        store.send(.scenePreviewImagesUpdated(galaxies: galaxies))
+    func previewImagesUpdated(galaxies: [String: UIImage], stars: [String: UIImage]) {
+        store.send(.scenePreviewImagesUpdated(galaxies: galaxies, stars: stars))
     }
 
     func getAllRecords() -> [DomainEntity.Record] {

@@ -187,10 +187,17 @@ struct SearchOverlayView: View {
 
     private func starRow(_ record: Record) -> some View {
         HStack(spacing: 14) {
-            StarPreview(
-                color: record.resolvedProfile.primaryColor.swiftUIColor,
-                seed: Double(record.id.hashValue)
-            )
+            if let img = store.starPreviewImages[record.id] {
+                Image(uiImage: img)
+                    .resizable()
+                    .interpolation(.high)
+                    .frame(width: 36, height: 36)
+            } else {
+                StarPreview(
+                    color: record.resolvedProfile.primaryColor.swiftUIColor,
+                    seed: Double(record.id.hashValue)
+                )
+            }
             VStack(alignment: .leading, spacing: 3) {
                 if !record.starName.isEmpty {
                     Text(record.starName)
