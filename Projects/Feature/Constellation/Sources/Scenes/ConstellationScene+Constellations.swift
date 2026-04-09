@@ -92,7 +92,7 @@ extension ConstellationScene {
             path.addLine(to: toPos)
 
             let lineNode = SKShapeNode(path: path)
-            lineNode.strokeColor = UIColor(white: 1, alpha: 0.06)
+            lineNode.strokeColor = UIColor(white: 1, alpha: 0.15)
             lineNode.lineWidth = 0.5
             lineNode.zPosition = 2
             lineNode.lineCap = .round

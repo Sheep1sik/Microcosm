@@ -119,7 +119,7 @@ extension UniverseScene {
             path.addLine(to: starPositions[line.to])
 
             let lineNode = SKShapeNode(path: path)
-            lineNode.strokeColor = UIColor(white: 1, alpha: 0.4)
+            lineNode.strokeColor = UIColor(white: 1, alpha: 0.6)
             lineNode.lineWidth = 0.4
             lineNode.zPosition = 0
             lineNode.lineCap = .round

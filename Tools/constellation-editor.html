@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>별자리 에디터 - Microcosm</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0e14; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; display: flex; height: 100vh; overflow: hidden; }
+
+/* Left Panel */
+.sidebar { width: 320px; background: #0d1117; border-right: 1px solid #1a2332; display: flex; flex-direction: column; overflow-y: auto; }
+.sidebar h2 { padding: 16px; font-size: 14px; color: #8b949e; border-bottom: 1px solid #1a2332; }
+.sidebar section { padding: 12px 16px; border-bottom: 1px solid #1a2332; }
+.sidebar label { display: block; font-size: 12px; color: #8b949e; margin-bottom: 4px; }
+.sidebar input, .sidebar select { width: 100%; padding: 6px 8px; background: #161b22; border: 1px solid #30363d; border-radius: 6px; color: #e0e0e0; font-size: 13px; margin-bottom: 8px; }
+.sidebar input:focus, .sidebar select:focus { outline: none; border-color: #58a6ff; }
+.btn { padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; }
+.btn-primary { background: #238636; color: white; }
+.btn-danger { background: #da3633; color: white; }
+.btn-secondary { background: #30363d; color: #e0e0e0; }
+.btn:hover { opacity: 0.85; }
+.btn-group { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+
+/* Star List */
+.star-list { max-height: 200px; overflow-y: auto; }
+.star-item { display: flex; align-items: center; gap: 8px; padding: 4px 6px; font-size: 12px; cursor: pointer; border-radius: 4px; }
+.star-item:hover { background: #161b22; }
+.star-item.selected { background: #1a2332; border: 1px solid #58a6ff; }
+.star-dot { width: 8px; height: 8px; border-radius: 50%; background: #e0e0e0; flex-shrink: 0; }
+
+/* Line List */
+.line-list { max-height: 150px; overflow-y: auto; }
+.line-item { display: flex; align-items: center; justify-content: space-between; padding: 3px 6px; font-size: 12px; border-radius: 4px; }
+.line-item:hover { background: #161b22; }
+.line-delete { cursor: pointer; color: #da3633; font-size: 14px; }
+
+/* Canvas Area */
+.canvas-area { flex: 1; display: flex; flex-direction: column; }
+.toolbar { display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: #0d1117; border-bottom: 1px solid #1a2332; }
+.toolbar .mode-btn { padding: 6px 14px; border: 1px solid #30363d; border-radius: 6px; background: #161b22; color: #8b949e; cursor: pointer; font-size: 12px; }
+.toolbar .mode-btn.active { background: #1f6feb; color: white; border-color: #1f6feb; }
+.toolbar .info { margin-left: auto; font-size: 12px; color: #8b949e; }
+.canvas-wrapper { flex: 1; position: relative; }
+canvas { position: absolute; top: 0; left: 0; }
+
+/* Export Modal */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; }
+.modal-overlay.show { display: flex; }
+.modal { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; width: 700px; max-height: 80vh; display: flex; flex-direction: column; }
+.modal h3 { margin-bottom: 12px; }
+.modal textarea { width: 100%; height: 400px; background: #0d1117; color: #79c0ff; border: 1px solid #30363d; border-radius: 8px; padding: 12px; font-family: 'SF Mono', Menlo, monospace; font-size: 12px; resize: none; }
+.modal .btn-group { margin-top: 12px; justify-content: flex-end; }
+
+/* Constellation selector */
+.const-search { margin-bottom: 8px; }
+.constellation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; max-height: 300px; overflow-y: auto; }
+.const-btn { padding: 4px 6px; background: #161b22; border: 1px solid #30363d; border-radius: 4px; color: #8b949e; cursor: pointer; font-size: 11px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.const-btn:hover { border-color: #58a6ff; color: #e0e0e0; }
+.const-btn.loaded { border-color: #238636; color: #3fb950; }
+.const-btn .star-count { color: #484f58; font-size: 10px; }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>별자리 에디터</h2>
+
+  <!-- Constellation Info -->
+  <section>
+    <label>별자리 ID</label>
+    <input type="text" id="constId" placeholder="예: And" />
+    <label>영문 이름</label>
+    <input type="text" id="constNameEN" placeholder="예: Andromeda" />
+    <label>한국어 이름</label>
+    <input type="text" id="constNameKO" placeholder="예: 안드로메다자리" />
+  </section>
+
+  <!-- Stars -->
+  <section>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
+      <label style="margin:0">별 목록 (<span id="starCount">0</span>개)</label>
+    </div>
+    <div class="star-list" id="starList"></div>
+    <div style="margin-top: 8px;">
+      <label>선택된 별</label>
+      <div style="display:flex; gap:4px;">
+        <input type="text" id="starName" placeholder="이름 (선택)" style="flex:1;" />
+        <input type="number" id="starMag" placeholder="등급" style="width:60px;" step="0.1" value="4.0" />
+      </div>
+      <div class="btn-group" style="margin-top:6px;">
+        <button class="btn btn-secondary" onclick="updateSelectedStar()">별 수정</button>
+        <button class="btn btn-danger" onclick="deleteSelectedStar()">별 삭제</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lines -->
+  <section>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
+      <label style="margin:0">연결선 (<span id="lineCount">0</span>개)</label>
+    </div>
+    <div class="line-list" id="lineList"></div>
+  </section>
+
+  <!-- Actions -->
+  <section>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="exportSwift()">Swift 코드 내보내기</button>
+      <button class="btn btn-secondary" onclick="showImport()">코드 붙여넣기</button>
+      <button class="btn btn-danger" onclick="clearAll()">초기화</button>
+    </div>
+  </section>
+
+  <!-- All Constellations -->
+  <section>
+    <label>별자리 불러오기 (88개)</label>
+    <input type="text" class="const-search" id="constSearch" placeholder="검색 (한글/영문/ID)" oninput="filterConstellations()" />
+    <div class="constellation-grid" id="constGrid"></div>
+  </section>
+</div>
+
+<div class="canvas-area">
+  <div class="toolbar">
+    <button class="mode-btn active" data-mode="star" onclick="setMode('star')">⭐ 별 배치</button>
+    <button class="mode-btn" data-mode="line" onclick="setMode('line')">🔗 연결선</button>
+    <button class="mode-btn" data-mode="move" onclick="setMode('move')">✋ 이동</button>
+    <label style="font-size:12px; color:#8b949e; margin-left:12px;">
+      <input type="checkbox" id="showGrid" checked onchange="render()" /> 그리드
+    </label>
+    <label style="font-size:12px; color:#8b949e;">
+      <input type="checkbox" id="showIndex" checked onchange="render()" /> 번호
+    </label>
+    <span class="info" id="cursorInfo">클릭하여 별 배치</span>
+  </div>
+  <div class="canvas-wrapper" id="canvasWrapper">
+    <canvas id="canvas"></canvas>
+  </div>
+</div>
+
+<!-- Export Modal -->
+<div class="modal-overlay" id="exportModal">
+  <div class="modal">
+    <h3>Swift 코드</h3>
+    <textarea id="exportCode" readonly></textarea>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="copyExport()">복사</button>
+      <button class="btn btn-secondary" onclick="closeExport()">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- Import Modal -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal">
+    <h3>Swift 코드 붙여넣기</h3>
+    <textarea id="importCode" placeholder="ConstellationDefinition(...) 코드를 붙여넣으세요"></textarea>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="doImport()">불러오기</button>
+      <button class="btn btn-secondary" onclick="closeImport()">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- Load external data -->
+<script src="constellations_data.js"></script>
+
+<script>
+// === State ===
+let stars = [];
+let lines = [];
+let selectedStarIdx = -1;
+let lineStartIdx = -1;
+let mode = 'star';
+let draggingIdx = -1;
+let mouseX = 0, mouseY = 0;
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const wrapper = document.getElementById('canvasWrapper');
+
+// === Canvas Setup ===
+function resize() {
+  const rect = wrapper.getBoundingClientRect();
+  const size = Math.min(rect.width, rect.height);
+  canvas.width = size;
+  canvas.height = size;
+  canvas.style.left = (rect.width - size) / 2 + 'px';
+  canvas.style.top = (rect.height - size) / 2 + 'px';
+  render();
+}
+window.addEventListener('resize', resize);
+setTimeout(resize, 50);
+
+// === Coordinate Conversion ===
+function dataToCanvas(x, y) {
+  const pad = 40;
+  const s = canvas.width - pad * 2;
+  return { cx: pad + x * s, cy: pad + (1 - y) * s };
+}
+function canvasToData(cx, cy) {
+  const pad = 40;
+  const s = canvas.width - pad * 2;
+  const x = (cx - pad) / s;
+  const y = 1 - (cy - pad) / s;
+  return { x: Math.round(x * 10000) / 10000, y: Math.round(y * 10000) / 10000 };
+}
+
+// === Rendering ===
+function render() {
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = '#0a0e14';
+  ctx.fillRect(0, 0, w, h);
+
+  const showGrid = document.getElementById('showGrid').checked;
+  const showIndex = document.getElementById('showIndex').checked;
+  const pad = 40;
+  const s = w - pad * 2;
+
+  if (showGrid) {
+    ctx.strokeStyle = '#1a2332';
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i <= 10; i++) {
+      const v = pad + (i / 10) * s;
+      ctx.beginPath(); ctx.moveTo(v, pad); ctx.lineTo(v, pad + s); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(pad, v); ctx.lineTo(pad + s, v); ctx.stroke();
+      ctx.fillStyle = '#30363d';
+      ctx.font = '10px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText((i / 10).toFixed(1), v, pad + s + 14);
+      ctx.textAlign = 'right';
+      ctx.fillText((1 - i / 10).toFixed(1), pad - 6, v + 4);
+    }
+  }
+
+  ctx.strokeStyle = '#30363d';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(pad, pad, s, s);
+
+  // Lines
+  for (const line of lines) {
+    if (line.from >= stars.length || line.to >= stars.length) continue;
+    const a = dataToCanvas(stars[line.from].x, stars[line.from].y);
+    const b = dataToCanvas(stars[line.to].x, stars[line.to].y);
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(a.cx, a.cy); ctx.lineTo(b.cx, b.cy); ctx.stroke();
+  }
+
+  // Drawing line preview
+  if (mode === 'line' && lineStartIdx >= 0 && lineStartIdx < stars.length) {
+    const a = dataToCanvas(stars[lineStartIdx].x, stars[lineStartIdx].y);
+    ctx.strokeStyle = 'rgba(88,166,255,0.5)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(a.cx, a.cy); ctx.lineTo(mouseX, mouseY); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Stars
+  for (let i = 0; i < stars.length; i++) {
+    const star = stars[i];
+    const { cx, cy } = dataToCanvas(star.x, star.y);
+    const baseR = Math.max(3, 9 - star.magnitude * 1.2);
+
+    // Glow
+    const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, baseR * 3);
+    grad.addColorStop(0, i === selectedStarIdx ? 'rgba(88,166,255,0.6)' : 'rgba(255,255,255,0.4)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath(); ctx.arc(cx, cy, baseR * 3, 0, Math.PI * 2); ctx.fill();
+
+    // Core
+    ctx.fillStyle = i === selectedStarIdx ? '#58a6ff' : '#ffffff';
+    ctx.beginPath(); ctx.arc(cx, cy, baseR, 0, Math.PI * 2); ctx.fill();
+
+    // Index
+    if (showIndex) {
+      ctx.fillStyle = i === selectedStarIdx ? '#58a6ff' : '#8b949e';
+      ctx.font = 'bold 11px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText(i.toString(), cx + baseR + 4, cy - baseR);
+    }
+
+    // Name
+    if (star.name) {
+      ctx.fillStyle = '#e0e0e0';
+      ctx.font = '11px -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(star.name, cx, cy + baseR + 14);
+    }
+  }
+
+  // Line start highlight
+  if (mode === 'line' && lineStartIdx >= 0 && lineStartIdx < stars.length) {
+    const { cx, cy } = dataToCanvas(stars[lineStartIdx].x, stars[lineStartIdx].y);
+    ctx.strokeStyle = '#58a6ff';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(cx, cy, 12, 0, Math.PI * 2); ctx.stroke();
+  }
+
+  updateUI();
+}
+
+// === Mouse Handlers ===
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  mouseX = e.clientX - rect.left;
+  mouseY = e.clientY - rect.top;
+  const data = canvasToData(mouseX, mouseY);
+  document.getElementById('cursorInfo').textContent = `x: ${data.x.toFixed(4)}, y: ${data.y.toFixed(4)}`;
+
+  if (mode === 'move' && draggingIdx >= 0) {
+    stars[draggingIdx].x = Math.max(0, Math.min(1, data.x));
+    stars[draggingIdx].y = Math.max(0, Math.min(1, data.y));
+    render();
+  }
+  if (mode === 'line' && lineStartIdx >= 0) render();
+});
+
+canvas.addEventListener('mousedown', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
+  const data = canvasToData(cx, cy);
+  const hitIdx = findStarAt(cx, cy);
+
+  if (mode === 'star') {
+    if (hitIdx >= 0) {
+      selectedStarIdx = hitIdx;
+      loadStarToPanel(hitIdx);
+    } else if (data.x >= 0 && data.x <= 1 && data.y >= 0 && data.y <= 1) {
+      stars.push({ x: data.x, y: data.y, magnitude: parseFloat(document.getElementById('starMag').value) || 4.0, name: null });
+      selectedStarIdx = stars.length - 1;
+      loadStarToPanel(selectedStarIdx);
+    }
+    render();
+  }
+
+  if (mode === 'line') {
+    if (hitIdx >= 0) {
+      if (lineStartIdx < 0) {
+        lineStartIdx = hitIdx;
+      } else {
+        if (lineStartIdx !== hitIdx) {
+          const exists = lines.some(l =>
+            (l.from === lineStartIdx && l.to === hitIdx) || (l.from === hitIdx && l.to === lineStartIdx)
+          );
+          if (!exists) lines.push({ from: lineStartIdx, to: hitIdx });
+        }
+        lineStartIdx = -1;
+      }
+      render();
+    } else { lineStartIdx = -1; render(); }
+  }
+
+  if (mode === 'move') {
+    if (hitIdx >= 0) {
+      draggingIdx = hitIdx;
+      selectedStarIdx = hitIdx;
+      loadStarToPanel(hitIdx);
+      render();
+    }
+  }
+});
+
+canvas.addEventListener('mouseup', () => { draggingIdx = -1; });
+
+canvas.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  const rect = canvas.getBoundingClientRect();
+  const hitIdx = findStarAt(e.clientX - rect.left, e.clientY - rect.top);
+  if (hitIdx >= 0) { selectedStarIdx = hitIdx; loadStarToPanel(hitIdx); render(); }
+});
+
+// === Hit Testing ===
+function findStarAt(cx, cy) {
+  let bestIdx = -1, bestDist = 20;
+  for (let i = 0; i < stars.length; i++) {
+    const p = dataToCanvas(stars[i].x, stars[i].y);
+    const d = Math.hypot(p.cx - cx, p.cy - cy);
+    if (d < bestDist) { bestDist = d; bestIdx = i; }
+  }
+  return bestIdx;
+}
+
+// === UI Updates ===
+function updateUI() {
+  document.getElementById('starCount').textContent = stars.length;
+  document.getElementById('lineCount').textContent = lines.length;
+
+  const list = document.getElementById('starList');
+  list.innerHTML = stars.map((s, i) => `
+    <div class="star-item ${i === selectedStarIdx ? 'selected' : ''}" onclick="selectStar(${i})">
+      <span class="star-dot" style="opacity:${1 - s.magnitude * 0.15}"></span>
+      <span>${i}: (${s.x.toFixed(2)}, ${s.y.toFixed(2)}) mag ${s.magnitude}</span>
+      ${s.name ? `<span style="color:#58a6ff">${s.name}</span>` : ''}
+    </div>
+  `).join('');
+
+  const lineListEl = document.getElementById('lineList');
+  lineListEl.innerHTML = lines.map((l, i) => `
+    <div class="line-item">
+      <span>${l.from} → ${l.to}</span>
+      <span class="line-delete" onclick="deleteLine(${i})">×</span>
+    </div>
+  `).join('');
+}
+
+function selectStar(idx) { selectedStarIdx = idx; loadStarToPanel(idx); render(); }
+
+function loadStarToPanel(idx) {
+  if (idx < 0 || idx >= stars.length) return;
+  document.getElementById('starName').value = stars[idx].name || '';
+  document.getElementById('starMag').value = stars[idx].magnitude;
+}
+
+function updateSelectedStar() {
+  if (selectedStarIdx < 0 || selectedStarIdx >= stars.length) return;
+  stars[selectedStarIdx].name = document.getElementById('starName').value.trim() || null;
+  stars[selectedStarIdx].magnitude = parseFloat(document.getElementById('starMag').value) || 4.0;
+  render();
+}
+
+function deleteSelectedStar() {
+  if (selectedStarIdx < 0 || selectedStarIdx >= stars.length) return;
+  const idx = selectedStarIdx;
+  lines = lines.filter(l => l.from !== idx && l.to !== idx)
+    .map(l => ({ from: l.from > idx ? l.from - 1 : l.from, to: l.to > idx ? l.to - 1 : l.to }));
+  stars.splice(idx, 1);
+  selectedStarIdx = -1;
+  render();
+}
+
+function deleteLine(idx) { lines.splice(idx, 1); render(); }
+
+// === Mode ===
+function setMode(m) {
+  mode = m; lineStartIdx = -1;
+  document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.mode === m));
+  const info = { star: '클릭하여 별 배치 (키: 1)', line: '별 두 개를 클릭하여 연결 (키: 2)', move: '별을 드래그하여 이동 (키: 3)' };
+  document.getElementById('cursorInfo').textContent = info[m];
+}
+
+// === Export ===
+function exportSwift() {
+  const id = document.getElementById('constId').value || 'XXX';
+  const nameEN = document.getElementById('constNameEN').value || 'Unknown';
+  const nameKO = document.getElementById('constNameKO').value || '미정';
+
+  let code = `ConstellationDefinition(id: "${id}", nameEN: "${nameEN}", nameKO: "${nameKO}", stars: [\n`;
+  stars.forEach((s, i) => {
+    const nameStr = s.name ? `"${s.name}"` : 'nil';
+    code += `    ConstellationStar(index: ${i}, x: ${s.x}, y: ${s.y}, magnitude: ${s.magnitude}, name: ${nameStr}),\n`;
+  });
+  code += `], lines: [\n`;
+  lines.forEach(l => { code += `    ConstellationLine(from: ${l.from}, to: ${l.to}),\n`; });
+  code += `]),`;
+
+  document.getElementById('exportCode').value = code;
+  document.getElementById('exportModal').classList.add('show');
+}
+
+function copyExport() {
+  navigator.clipboard.writeText(document.getElementById('exportCode').value);
+  alert('복사되었습니다!');
+}
+function closeExport() { document.getElementById('exportModal').classList.remove('show'); }
+
+// === Import ===
+function showImport() { document.getElementById('importModal').classList.add('show'); }
+function closeImport() { document.getElementById('importModal').classList.remove('show'); }
+
+function doImport() {
+  try {
+    parseSwiftCode(document.getElementById('importCode').value);
+    closeImport();
+    render();
+  } catch (e) { alert('파싱 실패: ' + e.message); }
+}
+
+function parseSwiftCode(code) {
+  const idMatch = code.match(/id:\s*"([^"]+)"/);
+  if (idMatch) document.getElementById('constId').value = idMatch[1];
+  const nameENMatch = code.match(/nameEN:\s*"([^"]+)"/);
+  if (nameENMatch) document.getElementById('constNameEN').value = nameENMatch[1];
+  const nameKOMatch = code.match(/nameKO:\s*"([^"]+)"/);
+  if (nameKOMatch) document.getElementById('constNameKO').value = nameKOMatch[1];
+
+  const starRegex = /ConstellationStar\(index:\s*(\d+),\s*x:\s*([\d.]+),\s*y:\s*([\d.]+),\s*magnitude:\s*([\d.]+),\s*name:\s*("([^"]*)"|nil)\)/g;
+  const newStars = [];
+  let m;
+  while ((m = starRegex.exec(code)) !== null) {
+    newStars.push({ x: parseFloat(m[2]), y: parseFloat(m[3]), magnitude: parseFloat(m[4]), name: m[6] || null });
+  }
+
+  const lineRegex = /ConstellationLine\(from:\s*(\d+),\s*to:\s*(\d+)\)/g;
+  const newLines = [];
+  while ((m = lineRegex.exec(code)) !== null) {
+    newLines.push({ from: parseInt(m[1]), to: parseInt(m[2]) });
+  }
+
+  if (newStars.length > 0) { stars = newStars; lines = newLines; selectedStarIdx = -1; }
+  else throw new Error('별 데이터를 찾을 수 없습니다');
+}
+
+// === Load from preloaded data ===
+function loadConstellation(id) {
+  const data = ALL_CONSTELLATIONS[id];
+  if (!data) return;
+
+  document.getElementById('constId').value = id;
+  document.getElementById('constNameEN').value = data.en;
+  document.getElementById('constNameKO').value = data.ko;
+
+  stars = data.s.map(s => ({ x: s.x, y: s.y, magnitude: s.m, name: s.n }));
+  lines = data.l.map(l => ({ from: l.f, to: l.t }));
+  selectedStarIdx = -1;
+  lineStartIdx = -1;
+
+  document.querySelectorAll('.const-btn').forEach(b => b.classList.remove('loaded'));
+  document.querySelector(`[data-const="${id}"]`)?.classList.add('loaded');
+
+  render();
+}
+
+// === Constellation Grid ===
+function initConstGrid() {
+  const grid = document.getElementById('constGrid');
+  const entries = Object.entries(ALL_CONSTELLATIONS)
+    .sort((a, b) => a[1].ko.localeCompare(b[1].ko, 'ko'));
+
+  grid.innerHTML = entries.map(([id, data]) =>
+    `<button class="const-btn" data-const="${id}" onclick="loadConstellation('${id}')">
+      ${data.ko} <span class="star-count">${data.s.length}★</span>
+    </button>`
+  ).join('');
+}
+
+function filterConstellations() {
+  const q = document.getElementById('constSearch').value.toLowerCase();
+  document.querySelectorAll('.const-btn').forEach(btn => {
+    const id = btn.dataset.const;
+    const data = ALL_CONSTELLATIONS[id];
+    const match = !q || data.ko.includes(q) || data.en.toLowerCase().includes(q) || id.toLowerCase().includes(q);
+    btn.style.display = match ? '' : 'none';
+  });
+}
+
+// === Clear ===
+function clearAll() {
+  if (!confirm('모든 데이터를 초기화하시겠습니까?')) return;
+  stars = []; lines = []; selectedStarIdx = -1; lineStartIdx = -1;
+  document.getElementById('constId').value = '';
+  document.getElementById('constNameEN').value = '';
+  document.getElementById('constNameKO').value = '';
+  document.querySelectorAll('.const-btn').forEach(b => b.classList.remove('loaded'));
+  render();
+}
+
+// === Keyboard Shortcuts ===
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === '1') setMode('star');
+  if (e.key === '2') setMode('line');
+  if (e.key === '3') setMode('move');
+  if (e.key === 'Delete' || e.key === 'Backspace') { if (selectedStarIdx >= 0) deleteSelectedStar(); }
+  if (e.key === 'Escape') { selectedStarIdx = -1; lineStartIdx = -1; render(); }
+});
+
+// === Init ===
+initConstGrid();
+resize();
+</script>
+
+</body>
+</html>

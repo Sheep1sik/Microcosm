@@ -38,7 +38,7 @@ extension ConstellationScene {
             }
 
             // 완성된 별자리: 연결선을 밝게 표시
-            let targetLineAlpha: CGFloat = allStarsBright ? 0.3 : 0.06
+            let targetLineAlpha: CGFloat = allStarsBright ? 0.5 : 0.15
             for lineNode in rendered.lineNodes {
                 lineNode.run(SKAction.customAction(withDuration: 0.5) { node, elapsed in
                     guard let shape = node as? SKShapeNode else { return }
@@ -78,19 +78,19 @@ extension ConstellationScene {
         guard let rendered = renderedConstellations[constellationId] else { return 0.06 }
 
         // lastGoals가 없으면 (아직 목표 데이터가 없으면) 기본값
-        guard !lastGoalsSnapshot.isEmpty else { return 0.06 }
+        guard !lastGoalsSnapshot.isEmpty else { return 0.15 }
 
         let constellationGoals = lastGoalsSnapshot.filter { $0.constellationId == constellationId }
-        guard !constellationGoals.isEmpty else { return 0.06 }
+        guard !constellationGoals.isEmpty else { return 0.15 }
 
         // 모든 별에 목표가 있고 모두 밝기 1.0인지 체크
         for (index, _) in rendered.starNodes.enumerated() {
             let goalsForStar = constellationGoals.filter { $0.starIndex == index }
             if goalsForStar.isEmpty || calculateBrightness(for: goalsForStar) < 1.0 {
-                return 0.06
+                return 0.15
             }
         }
-        return 0.3
+        return 0.5
     }
 
     /// 별 노드에 밝기 적용 (애니메이션)
