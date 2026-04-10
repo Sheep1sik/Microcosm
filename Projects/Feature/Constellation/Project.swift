@@ -15,5 +15,14 @@ let project = Project.makeModule(
                 ]
             )
         ),
+        .feature(
+            tests: .Constellation,
+            target: .init(
+                dependencies: [
+                    .target(name: ModulePath.Feature.name + ModulePath.Feature.Constellation.rawValue),
+                    .external(name: "ComposableArchitecture"),
+                ]
+            )
+        ),
     ]
 )

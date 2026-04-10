@@ -210,6 +210,10 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
             )
         ) {
             UniverseFeature()
+        } withDependencies: {
+            // authClient.currentUser()?.uid == nil 이면 markOnboardingCompleted 부작용은
+            // guard let 에서 조기 종료한다. 여기서는 reducer state 전이만 검증한다.
+            $0.authClient.currentUser = { nil }
         }
         store.exhaustivity = .off
 
@@ -241,6 +245,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
             )
         ) {
             UniverseFeature()
+        } withDependencies: {
+            $0.authClient.currentUser = { nil }
         }
         store.exhaustivity = .off
 
@@ -281,6 +287,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
             )
         ) {
             UniverseFeature()
+        } withDependencies: {
+            $0.authClient.currentUser = { nil }
         }
         store.exhaustivity = .off
 

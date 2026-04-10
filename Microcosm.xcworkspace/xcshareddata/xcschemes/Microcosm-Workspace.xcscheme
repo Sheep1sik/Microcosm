@@ -350,6 +350,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D8DBF33C701FC026064BD6D8"
+               BuildableName = "FeatureConstellationTests.xctest"
+               BlueprintName = "FeatureConstellationTests"
+               ReferencedContainer = "container:Projects/Feature/Constellation/FeatureConstellation.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "C62951D5F12265650ECDE4F9"
                BuildableName = "libFeatureMain.a"
                BlueprintName = "FeatureMain"
@@ -409,6 +423,20 @@
                BlueprintIdentifier = "653635B0ED97709D4E8B62F5"
                BuildableName = "libFeatureUniverse.a"
                BlueprintName = "FeatureUniverse"
+               ReferencedContainer = "container:Projects/Feature/Universe/FeatureUniverse.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AD6CAD1417370B2C44C74692"
+               BuildableName = "FeatureUniverseTests.xctest"
+               BlueprintName = "FeatureUniverseTests"
                ReferencedContainer = "container:Projects/Feature/Universe/FeatureUniverse.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -1666,6 +1694,28 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D8DBF33C701FC026064BD6D8"
+               BuildableName = "FeatureConstellationTests.xctest"
+               BlueprintName = "FeatureConstellationTests"
+               ReferencedContainer = "container:Projects/Feature/Constellation/FeatureConstellation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AD6CAD1417370B2C44C74692"
+               BuildableName = "FeatureUniverseTests.xctest"
+               BlueprintName = "FeatureUniverseTests"
+               ReferencedContainer = "container:Projects/Feature/Universe/FeatureUniverse.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
