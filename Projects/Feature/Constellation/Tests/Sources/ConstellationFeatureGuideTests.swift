@@ -5,15 +5,16 @@ import ComposableArchitecture
 @MainActor
 final class ConstellationFeatureGuideTests: XCTestCase {
 
-    private let key = "hasSeenConstellationGuide"
+    private let legacyKey = "hasSeenConstellationGuide"
 
     override func setUp() {
         super.setUp()
-        UserDefaults.standard.removeObject(forKey: key)
+        // 레거시 UserDefaults 마이그레이션 경로를 깔끔하게 하기 위해 항상 제거.
+        UserDefaults.standard.removeObject(forKey: legacyKey)
     }
 
     override func tearDown() {
-        UserDefaults.standard.removeObject(forKey: key)
+        UserDefaults.standard.removeObject(forKey: legacyKey)
         super.tearDown()
     }
 
@@ -48,16 +49,35 @@ final class ConstellationFeatureGuideTests: XCTestCase {
         }
     }
 
-    func test_checkGuide_이미본경우_가이드표시없음() async {
-        UserDefaults.standard.set(true, forKey: key)
-
+    func test_checkGuide_hasSeenConstellationGuide_true_가이드표시없음() async {
+        var state = ConstellationFeature.State()
+        state.hasSeenConstellationGuide = true
         let store = TestStore(
-            initialState: ConstellationFeature.State()
+            initialState: state
         ) {
             ConstellationFeature()
         }
 
         await store.send(.checkGuide)
+    }
+
+    func test_checkGuide_레거시UserDefaults_있으면_Firestore로_마이그레이션후_표시없음() async {
+        // 이전 버전에서 가이드를 완료했던 사용자(레거시 UserDefaults 기록 존재).
+        UserDefaults.standard.set(true, forKey: legacyKey)
+
+        let store = TestStore(
+            initialState: ConstellationFeature.State()
+        ) {
+            ConstellationFeature()
+        } withDependencies: {
+            // authClient.currentUser == nil 이면 Firestore 마이그레이션 effect 가 guard 로 빠져 성공.
+            $0.authClient.currentUser = { nil }
+        }
+        store.exhaustivity = .off
+
+        await store.send(.checkGuide) {
+            $0.hasSeenConstellationGuide = true
+        }
     }
 
     // MARK: - advanceGuide
@@ -85,13 +105,16 @@ final class ConstellationFeatureGuideTests: XCTestCase {
             initialState: state
         ) {
             ConstellationFeature()
+        } withDependencies: {
+            $0.authClient.currentUser = { nil }
         }
+        store.exhaustivity = .off
 
         await store.send(.advanceGuide) {
             $0.showGuide = false
             $0.guideStep = nil
+            $0.hasSeenConstellationGuide = true
         }
-        XCTAssertTrue(UserDefaults.standard.bool(forKey: key))
     }
 
     func test_advanceGuide_tapConstellation_tapStar_registerGoal단계는_상태불변() async {
@@ -137,12 +160,15 @@ final class ConstellationFeatureGuideTests: XCTestCase {
             initialState: state
         ) {
             ConstellationFeature()
+        } withDependencies: {
+            $0.authClient.currentUser = { nil }
         }
+        store.exhaustivity = .off
 
         await store.send(.dismissGuide) {
             $0.showGuide = false
             $0.guideStep = nil
+            $0.hasSeenConstellationGuide = true
         }
-        XCTAssertTrue(UserDefaults.standard.bool(forKey: key))
     }
 }

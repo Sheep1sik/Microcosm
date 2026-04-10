@@ -33,6 +33,9 @@ public struct ConstellationFeature {
         // Guide
         public var showGuide = false
         public var guideStep: GuideStep?
+        /// Firestore `users/{uid}.hasSeenConstellationGuide` 와 동기화되는 1회 노출 플래그.
+        /// RootFeature → MainTabFeature → 여기로 푸시된다.
+        public var hasSeenConstellationGuide = false
         public var userDisplayName: String?
 
         public enum GuideStep: Int, Equatable, CaseIterable {
@@ -153,6 +156,7 @@ public struct ConstellationFeature {
 
     @Dependency(\.goalClient) var goalClient
     @Dependency(\.authClient) var authClient
+    @Dependency(\.userClient) var userClient
 
     public init() {}
 

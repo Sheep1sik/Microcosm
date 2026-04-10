@@ -8,6 +8,7 @@ public struct UserProfile: Equatable {
     public var email: String
     public var nickname: String?
     public var hasCompletedOnboarding: Bool
+    public var hasSeenConstellationGuide: Bool
 
     public var hasSetNickname: Bool { nickname != nil && !(nickname?.isEmpty ?? true) }
 
@@ -15,12 +16,14 @@ public struct UserProfile: Equatable {
         displayName: String = "",
         email: String = "",
         nickname: String? = nil,
-        hasCompletedOnboarding: Bool = false
+        hasCompletedOnboarding: Bool = false,
+        hasSeenConstellationGuide: Bool = false
     ) {
         self.displayName = displayName
         self.email = email
         self.nickname = nickname
         self.hasCompletedOnboarding = hasCompletedOnboarding
+        self.hasSeenConstellationGuide = hasSeenConstellationGuide
     }
 }
 
@@ -33,6 +36,7 @@ public struct UserClient {
     public var updateEmail: (String, String) async throws -> Void
     public var markOnboardingCompleted: (String) async throws -> Void
     public var resetOnboarding: (String) async throws -> Void
+    public var markConstellationGuideSeen: (String) async throws -> Void
 
     public init(
         observe: @escaping (String) -> AsyncStream<UserProfile>,
@@ -42,7 +46,8 @@ public struct UserClient {
         updateDisplayName: @escaping (String, String) async throws -> Void,
         updateEmail: @escaping (String, String) async throws -> Void,
         markOnboardingCompleted: @escaping (String) async throws -> Void,
-        resetOnboarding: @escaping (String) async throws -> Void
+        resetOnboarding: @escaping (String) async throws -> Void,
+        markConstellationGuideSeen: @escaping (String) async throws -> Void
     ) {
         self.observe = observe
         self.createIfNeeded = createIfNeeded
@@ -52,6 +57,7 @@ public struct UserClient {
         self.updateEmail = updateEmail
         self.markOnboardingCompleted = markOnboardingCompleted
         self.resetOnboarding = resetOnboarding
+        self.markConstellationGuideSeen = markConstellationGuideSeen
     }
 }
 
@@ -67,7 +73,8 @@ extension UserClient: DependencyKey {
                             displayName: data["displayName"] as? String ?? "",
                             email: data["email"] as? String ?? "",
                             nickname: data["nickname"] as? String,
-                            hasCompletedOnboarding: data["hasCompletedOnboarding"] as? Bool ?? false
+                            hasCompletedOnboarding: data["hasCompletedOnboarding"] as? Bool ?? false,
+                            hasSeenConstellationGuide: data["hasSeenConstellationGuide"] as? Bool ?? false
                         )
                         continuation.yield(profile)
                     }
@@ -175,6 +182,11 @@ extension UserClient: DependencyKey {
             for doc in records.documents {
                 try await doc.reference.delete()
             }
+        },
+        markConstellationGuideSeen: { userId in
+            let db = Firestore.firestore()
+            try await db.collection("users").document(userId)
+                .updateData(["hasSeenConstellationGuide": true])
         }
     )
 }
@@ -188,7 +200,8 @@ extension UserClient: TestDependencyKey {
         updateDisplayName: unimplemented("\(Self.self).updateDisplayName"),
         updateEmail: unimplemented("\(Self.self).updateEmail"),
         markOnboardingCompleted: unimplemented("\(Self.self).markOnboardingCompleted"),
-        resetOnboarding: unimplemented("\(Self.self).resetOnboarding")
+        resetOnboarding: unimplemented("\(Self.self).resetOnboarding"),
+        markConstellationGuideSeen: unimplemented("\(Self.self).markConstellationGuideSeen")
     )
 }
 

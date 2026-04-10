@@ -90,6 +90,7 @@ struct RootFeature {
                 state.userProfile = profile
                 state.mainTab.universe.userDisplayName = profile.nickname ?? state.displayName
                 state.mainTab.universe.hasCompletedOnboarding = profile.hasCompletedOnboarding
+                state.mainTab.constellation.hasSeenConstellationGuide = profile.hasSeenConstellationGuide
                 state.mainTab.profile.userProfile = profile
                 state.mainTab.profile.displayName = profile.nickname ?? state.displayName
                 state.mainTab.userId = state.userId
