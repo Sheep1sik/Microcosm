@@ -142,6 +142,11 @@ public struct UniverseFeature {
             hasCompletedOnboarding: Bool = false,
             onboardingStep: OnboardingStep? = nil,
             onboardingGalaxyScreenCenter: CGPoint? = nil,
+            onboardingNickname: String = "",
+            onboardingNicknameChecking: Bool = false,
+            onboardingNicknameError: String? = nil,
+            onboardingNicknameAvailable: Bool? = nil,
+            onboardingNicknameSaving: Bool = false,
             userDisplayName: String? = nil,
             allRecords: [Record] = [],
             isInGalaxyDetail: Bool = false,
@@ -163,6 +168,11 @@ public struct UniverseFeature {
             self.hasCompletedOnboarding = hasCompletedOnboarding
             self.onboardingStep = onboardingStep
             self.onboardingGalaxyScreenCenter = onboardingGalaxyScreenCenter
+            self.onboardingNickname = onboardingNickname
+            self.onboardingNicknameChecking = onboardingNicknameChecking
+            self.onboardingNicknameError = onboardingNicknameError
+            self.onboardingNicknameAvailable = onboardingNicknameAvailable
+            self.onboardingNicknameSaving = onboardingNicknameSaving
             self.userDisplayName = userDisplayName
             self.allRecords = allRecords
             self.isInGalaxyDetail = isInGalaxyDetail
@@ -232,7 +242,7 @@ public struct UniverseFeature {
         case navigateToStar(Record)
     }
 
-    private enum CancelID { case debounce }
+    enum CancelID { case debounce }
 
     @Dependency(\.openAIClient) var openAIClient
     @Dependency(\.authClient) var authClient
@@ -244,255 +254,27 @@ public struct UniverseFeature {
     public var body: some ReducerOf<Self> {
         BindingReducer()
 
+        // 기능별로 분리된 Reduce 블록들. 각 블록은 자신이 처리하는 액션만 매칭하고
+        // 나머지는 default → .none 으로 흘려보낸다. 분할 파일은:
+        // - UniverseFeature+SceneCallbacks.swift
+        // - UniverseFeature+Search.swift
+        // - UniverseFeature+RecordPanel.swift
+        // - UniverseFeature+Onboarding.swift
+        // - UniverseFeature+Navigation.swift
         Reduce { state, action in
-            switch action {
-            case .addRecordRequested(let record):
-                return .run { [authClient, recordClient] send in
-                    guard let userId = authClient.currentUser()?.uid else { return }
-                    try await recordClient.addRecord(userId, record)
-                } catch: { _, _ in
-                    // Firestore 오프라인 캐시로 즉각 실패가 드물며,
-                    // recordClient.observe가 실시간 상태를 반영하므로 별도 에러 액션 불필요
-                }
-
-            case .recordsUpdated(let records):
-                state.allRecords = records
-                return .none
-
-            // MARK: - Scene Callbacks
-            case .sceneDidEnterGalaxyDetail(let key, let records):
-                state.isInGalaxyDetail = true
-                state.currentYearMonth = key
-                state.currentDetailRecords = records
-                if state.onboardingStep == .tapGalaxyPrompt {
-                    state.onboardingStep = .createStarPrompt
-                }
-                return .none
-
-            case .sceneDidExitGalaxyDetail:
-                state.isInGalaxyDetail = false
-                state.currentYearMonth = nil
-                state.currentDetailRecords = []
-                return .none
-
-            case .sceneDidUpdateDetailRecords(let records):
-                state.currentDetailRecords = records
-                return .none
-
-            case .sceneGalaxyBirthCompleted:
-                if state.onboardingStep == .galaxyBirthIntro {
-                    state.onboardingStep = .monthlyGalaxyGuide
-                }
-                return .none
-
-            case .sceneGalaxyScreenCenterUpdated(let center):
-                state.onboardingGalaxyScreenCenter = center
-                return .none
-
-            case .scenePreviewImagesUpdated:
-                state.previewRevision &+= 1
-                return .none
-
-            // MARK: - Search
-            case .searchTextChanged(let text):
-                state.searchText = text
-                return .run { send in
-                    try await Task.sleep(for: .milliseconds(250))
-                    await send(.debouncedQueryUpdated(text))
-                }
-                .cancellable(id: CancelID.debounce, cancelInFlight: true)
-
-            case .debouncedQueryUpdated(let query):
-                state.debouncedQuery = query
-                return .none
-
-            case .closeSearch:
-                state.searchText = ""
-                state.debouncedQuery = ""
-                state.isSearching = false
-                return .cancel(id: CancelID.debounce)
-
-            // MARK: - Record Panel
-            case .openRecordPanel:
-                if state.onboardingStep != .createStarPrompt {
-                    guard state.canCreateRecord else {
-                        state.showLimitAlert = true
-                        return .none
-                    }
-                }
-                state.recordContent = ""
-                state.starName = ""
-                state.analyzedProfile = nil
-                state.isAnalyzingColor = false
-                state.showRecordPanel = true
-                return .none
-
-            case .dismissPanel:
-                state.recordContent = ""
-                state.starName = ""
-                state.analyzedProfile = nil
-                state.isAnalyzingColor = false
-                state.showRecordPanel = false
-                return .none
-
-            case .saveRecord:
-                let trimmed = state.recordContent.trimmingCharacters(in: .whitespacesAndNewlines)
-                guard !trimmed.isEmpty else { return .none }
-                state.isAnalyzingColor = true
-                let content = trimmed
-                return .run { send in
-                    // Fallback chain: analyzeEmotion → analyzeColor → fallback
-                    do {
-                        let profile = try await openAIClient.analyzeEmotion(content)
-                        await send(.profileAnalyzed(profile))
-                    } catch {
-                        do {
-                            let color = try await openAIClient.analyzeColor(content)
-                            await send(.colorAnalyzed(color))
-                        } catch {
-                            await send(.profileAnalysisFailed)
-                        }
-                    }
-                }
-
-            case .profileAnalyzed(let profile):
-                state.analyzedProfile = profile
-                state.isAnalyzingColor = false
-                state.showRecordPanel = false
-                if state.onboardingStep == .createStarPrompt {
-                    state.onboardingStep = .closingMessage
-                }
-                return .none
-
-            case .colorAnalyzed(let color):
-                state.analyzedProfile = StarVisualProfile.from(legacyColor: color)
-                state.isAnalyzingColor = false
-                state.showRecordPanel = false
-                if state.onboardingStep == .createStarPrompt {
-                    state.onboardingStep = .closingMessage
-                }
-                return .none
-
-            case .profileAnalysisFailed:
-                state.analyzedProfile = .fallback
-                state.isAnalyzingColor = false
-                state.showRecordPanel = false
-                if state.onboardingStep == .createStarPrompt {
-                    state.onboardingStep = .closingMessage
-                }
-                return .none
-
-            // MARK: - Onboarding
-            case .checkOnboarding:
-                guard !state.hasCompletedOnboarding else { return .none }
-                if !state.allRecords.isEmpty {
-                    state.hasCompletedOnboarding = true
-                    return .none
-                }
-                state.onboardingStep = .welcome
-                return .none
-
-            case .onboardingAdvanceFromWelcome:
-                guard state.onboardingStep == .welcome else { return .none }
-                state.onboardingStep = .nicknameInput
-                return .none
-
-            case .onboardingNicknameChanged(let text):
-                state.onboardingNickname = text
-                state.onboardingNicknameError = nil
-                state.onboardingNicknameAvailable = nil
-                return .none
-
-            case .onboardingCheckNickname:
-                let trimmed = state.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
-                guard trimmed.count >= 2, trimmed.count <= 10 else {
-                    state.onboardingNicknameError = "2~10자로 입력해주세요"
-                    return .none
-                }
-                state.onboardingNicknameChecking = true
-                state.onboardingNicknameError = nil
-                state.onboardingNicknameAvailable = nil
-                let nickname = trimmed
-                return .run { send in
-                    do {
-                        let available = try await userClient.checkNickname(nickname)
-                        await send(.onboardingNicknameCheckResult(available))
-                    } catch {
-                        await send(.onboardingNicknameCheckFailed("확인 중 오류가 발생했어요"))
-                    }
-                }
-
-            case .onboardingNicknameCheckResult(let available):
-                state.onboardingNicknameChecking = false
-                if available {
-                    state.onboardingNicknameAvailable = true
-                    state.onboardingNicknameError = nil
-                } else {
-                    state.onboardingNicknameAvailable = false
-                    state.onboardingNicknameError = "이미 사용 중인 닉네임이에요"
-                }
-                return .none
-
-            case .onboardingNicknameCheckFailed(let message):
-                state.onboardingNicknameChecking = false
-                state.onboardingNicknameError = message
-                return .none
-
-            case .onboardingNicknameConfirm:
-                let trimmed = state.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
-                guard state.onboardingNicknameAvailable == true else { return .none }
-                state.onboardingNicknameSaving = true
-                let nickname = trimmed
-                return .run { send in
-                    guard let userId = authClient.currentUser()?.uid else { return }
-                    try await userClient.setNickname(userId, nickname)
-                    await send(.onboardingNicknameSaveCompleted)
-                }
-
-            case .onboardingNicknameSaveCompleted:
-                state.onboardingNicknameSaving = false
-                state.userDisplayName = state.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
-                state.onboardingStep = .galaxyBirthIntro
-                return .none
-
-            case .onboardingAdvanceFromGuide:
-                guard state.onboardingStep == .monthlyGalaxyGuide else { return .none }
-                state.onboardingStep = .tapGalaxyPrompt
-                return .none
-
-            case .onboardingComplete:
-                guard state.onboardingStep != .completed else { return .none }
-                state.onboardingStep = .completed
-                state.hasCompletedOnboarding = true
-                return .run { _ in
-                    guard let userId = authClient.currentUser()?.uid else { return }
-                    try? await userClient.markOnboardingCompleted(userId)
-                }
-
-            case .skipOnboarding:
-                state.onboardingStep = .completed
-                state.hasCompletedOnboarding = true
-                return .run { _ in
-                    guard let userId = authClient.currentUser()?.uid else { return }
-                    try? await userClient.markOnboardingCompleted(userId)
-                }
-
-            // MARK: - Navigation (View에서 scene 메서드 호출)
-            case .navigateToGalaxy(let yearMonth):
-                state.pendingNavigation = .galaxy(yearMonth)
-                return .none
-
-            case .navigateToGalaxyThenStar(let yearMonth, let record):
-                state.pendingNavigation = .galaxyThenStar(yearMonth: yearMonth, record: record)
-                return .none
-
-            case .navigateToStar(let record):
-                state.pendingNavigation = .star(record)
-                return .none
-
-            case .binding:
-                return .none
-            }
+            reduceSceneCallbacks(into: &state, action: action)
+        }
+        Reduce { state, action in
+            reduceSearch(into: &state, action: action)
+        }
+        Reduce { state, action in
+            reduceRecordPanel(into: &state, action: action)
+        }
+        Reduce { state, action in
+            reduceOnboarding(into: &state, action: action)
+        }
+        Reduce { state, action in
+            reduceNavigation(into: &state, action: action)
         }
     }
 }

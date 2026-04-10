@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BA1D1922D933597BE5BF961 /* ConstellationFeature+SceneCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0392CAE9EA640EBA7768B09 /* ConstellationFeature+SceneCallbacks.swift */; };
 		0C39B564E89E7B6003B1601F /* ConstellationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BC6E80DACE5A9B3097A51 /* ConstellationScene.swift */; };
 		0DBB87C8B64513EB268132E5 /* ConstellationScene+Constellations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB66E1AF6AA838CFF651F69 /* ConstellationScene+Constellations.swift */; };
+		23EF283AA50D1DD9559DB572 /* ConstellationFeature+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E70C0BB59A52599452D77 /* ConstellationFeature+Search.swift */; };
 		2B517700F63BCBE47F739E4A /* ConstellationScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78AB6AE568D02AD05AEF401 /* ConstellationScene+Background.swift */; };
 		2D213865826EB5D48DB0980D /* ConstellationScene+Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10827ACB10409945EE65459D /* ConstellationScene+Touch.swift */; };
 		3DC2FD036C0B8806B4792D5C /* ConstellationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4808C664080F310251BB4B7 /* ConstellationFeature.swift */; };
@@ -16,12 +18,14 @@
 		54F775254A1FA13CE09AC6AA /* libDomainEntity.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 77CD21361F3A07E675832057 /* libDomainEntity.a */; };
 		634E932A5D7F0A17F67303AF /* GoalPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E641B660704EF6031CB0D78F /* GoalPanelView.swift */; };
 		66FD28D775A3063176B6EA3E /* ConstellationScene+Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E967D8C62613C837C20A21 /* ConstellationScene+Brightness.swift */; };
+		6737820234C1C8CD69736343 /* ConstellationFeature+Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C8F911B6DC381E8146D89 /* ConstellationFeature+Guide.swift */; };
 		70BAA720A89017EBEE32227E /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = E258867B52BF736A447AA5A6 /* libDomainClient.a */; };
 		7581F063AAC0E6409CC7E144 /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 37FA726EBE1E948257650A13 /* libSharedDesignSystem.a */; };
 		76BDFB7FFA0C7C069ABE25E2 /* GoalEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24A322D6C77CD764CF91C38 /* GoalEditView.swift */; };
 		7E2C858D1E3DCE75E44E8F60 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098F1770BDE33FAFCA65B6E /* ComposableArchitecture.framework */; };
 		AC9BA81BB68691CFC1C17E1C /* ConstellationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC98B976A239F2EAFD1CA7 /* ConstellationView.swift */; };
 		CC80AB536AD82A2A26247441 /* ConstellationGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88A79A52D225473384DC9B5 /* ConstellationGuideView.swift */; };
+		D9C5D56A1189B065A69CF25B /* ConstellationFeature+Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2C1898CDD7C1F78BE16BA6 /* ConstellationFeature+Goal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,15 +55,19 @@
 
 /* Begin PBXFileReference section */
 		10827ACB10409945EE65459D /* ConstellationScene+Touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationScene+Touch.swift"; sourceTree = "<group>"; };
+		116C8F911B6DC381E8146D89 /* ConstellationFeature+Guide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationFeature+Guide.swift"; sourceTree = "<group>"; };
 		350C2A37B320DD083A6AD3A4 /* ConstellationScene+Zoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationScene+Zoom.swift"; sourceTree = "<group>"; };
 		37FA726EBE1E948257650A13 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E2C1898CDD7C1F78BE16BA6 /* ConstellationFeature+Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationFeature+Goal.swift"; sourceTree = "<group>"; };
 		776BC6E80DACE5A9B3097A51 /* ConstellationScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationScene.swift; sourceTree = "<group>"; };
 		77CD21361F3A07E675832057 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BC98B976A239F2EAFD1CA7 /* ConstellationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationView.swift; sourceTree = "<group>"; };
 		7DB66E1AF6AA838CFF651F69 /* ConstellationScene+Constellations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationScene+Constellations.swift"; sourceTree = "<group>"; };
 		8ABE6DDFA7E97B20D3829B51 /* libFeatureConstellation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureConstellation.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0392CAE9EA640EBA7768B09 /* ConstellationFeature+SceneCallbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationFeature+SceneCallbacks.swift"; sourceTree = "<group>"; };
 		B2E967D8C62613C837C20A21 /* ConstellationScene+Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationScene+Brightness.swift"; sourceTree = "<group>"; };
 		C88A79A52D225473384DC9B5 /* ConstellationGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationGuideView.swift; sourceTree = "<group>"; };
+		E17E70C0BB59A52599452D77 /* ConstellationFeature+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationFeature+Search.swift"; sourceTree = "<group>"; };
 		E258867B52BF736A447AA5A6 /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4808C664080F310251BB4B7 /* ConstellationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationFeature.swift; sourceTree = "<group>"; };
 		E641B660704EF6031CB0D78F /* GoalPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalPanelView.swift; sourceTree = "<group>"; };
@@ -126,6 +134,10 @@
 			children = (
 				5E5EE0C23324D56255ACF4CB /* Scenes */,
 				E4808C664080F310251BB4B7 /* ConstellationFeature.swift */,
+				3E2C1898CDD7C1F78BE16BA6 /* ConstellationFeature+Goal.swift */,
+				116C8F911B6DC381E8146D89 /* ConstellationFeature+Guide.swift */,
+				B0392CAE9EA640EBA7768B09 /* ConstellationFeature+SceneCallbacks.swift */,
+				E17E70C0BB59A52599452D77 /* ConstellationFeature+Search.swift */,
 				C88A79A52D225473384DC9B5 /* ConstellationGuideView.swift */,
 				79BC98B976A239F2EAFD1CA7 /* ConstellationView.swift */,
 				F24A322D6C77CD764CF91C38 /* GoalEditView.swift */,
@@ -201,6 +213,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C5D56A1189B065A69CF25B /* ConstellationFeature+Goal.swift in Sources */,
+				6737820234C1C8CD69736343 /* ConstellationFeature+Guide.swift in Sources */,
+				0BA1D1922D933597BE5BF961 /* ConstellationFeature+SceneCallbacks.swift in Sources */,
+				23EF283AA50D1DD9559DB572 /* ConstellationFeature+Search.swift in Sources */,
 				3DC2FD036C0B8806B4792D5C /* ConstellationFeature.swift in Sources */,
 				CC80AB536AD82A2A26247441 /* ConstellationGuideView.swift in Sources */,
 				AC9BA81BB68691CFC1C17E1C /* ConstellationView.swift in Sources */,
