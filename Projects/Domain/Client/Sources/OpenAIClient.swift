@@ -2,6 +2,22 @@ import Foundation
 import ComposableArchitecture
 import DomainEntity
 
+public enum OpenAIError: LocalizedError, Equatable {
+    case apiKeyNotConfigured
+    case httpError(statusCode: Int)
+    case malformedResponse
+    case decodingFailed
+
+    public var errorDescription: String? {
+        switch self {
+        case .apiKeyNotConfigured: return "OpenAI API 키가 설정되지 않았어요"
+        case .httpError(let code): return "OpenAI 요청이 실패했어요 (HTTP \(code))"
+        case .malformedResponse: return "OpenAI 응답 형식이 올바르지 않아요"
+        case .decodingFailed: return "OpenAI 응답을 해석하지 못했어요"
+        }
+    }
+}
+
 public struct OpenAIClient {
     public var analyzeColor: (String) async throws -> RecordColor
     public var analyzeEmotion: (String) async throws -> StarVisualProfile
@@ -19,7 +35,7 @@ extension OpenAIClient: DependencyKey {
     public static let liveValue = OpenAIClient(
         analyzeColor: { content in
             guard let apiKey = Self.loadAPIKey() else {
-                return RecordColor.fallback
+                throw OpenAIError.apiKeyNotConfigured
             }
 
             let url = URL(string: "https://api.openai.com/v1/chat/completions")!
@@ -55,9 +71,11 @@ extension OpenAIClient: DependencyKey {
 
             let (data, response) = try await URLSession.shared.data(for: request)
 
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                return RecordColor.fallback
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw OpenAIError.malformedResponse
+            }
+            guard httpResponse.statusCode == 200 else {
+                throw OpenAIError.httpError(statusCode: httpResponse.statusCode)
             }
 
             guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -65,20 +83,24 @@ extension OpenAIClient: DependencyKey {
                   let firstChoice = choices.first,
                   let message = firstChoice["message"] as? [String: Any],
                   let contentString = message["content"] as? String else {
-                return RecordColor.fallback
+                throw OpenAIError.malformedResponse
             }
 
             let trimmed = contentString.trimmingCharacters(in: .whitespacesAndNewlines)
             guard let colorData = trimmed.data(using: .utf8) else {
-                return RecordColor.fallback
+                throw OpenAIError.decodingFailed
             }
 
-            let decoded = try JSONDecoder().decode(RecordColor.self, from: colorData)
-            return decoded.clamped()
+            do {
+                let decoded = try JSONDecoder().decode(RecordColor.self, from: colorData)
+                return decoded.clamped()
+            } catch {
+                throw OpenAIError.decodingFailed
+            }
         },
         analyzeEmotion: { content in
             guard let apiKey = Self.loadAPIKey() else {
-                throw OpenAIError.requestFailed
+                throw OpenAIError.apiKeyNotConfigured
             }
 
             let url = URL(string: "https://api.openai.com/v1/chat/completions")!
@@ -131,9 +153,11 @@ extension OpenAIClient: DependencyKey {
 
             let (data, response) = try await URLSession.shared.data(for: request)
 
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                throw OpenAIError.requestFailed
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw OpenAIError.malformedResponse
+            }
+            guard httpResponse.statusCode == 200 else {
+                throw OpenAIError.httpError(statusCode: httpResponse.statusCode)
             }
 
             guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -141,13 +165,13 @@ extension OpenAIClient: DependencyKey {
                   let firstChoice = choices.first,
                   let message = firstChoice["message"] as? [String: Any],
                   let contentString = message["content"] as? String else {
-                throw OpenAIError.parseFailed
+                throw OpenAIError.malformedResponse
             }
 
             let trimmed = contentString.trimmingCharacters(in: .whitespacesAndNewlines)
             guard let jsonData = trimmed.data(using: .utf8),
                   let parsed = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
-                throw OpenAIError.parseFailed
+                throw OpenAIError.decodingFailed
             }
 
             func parseColor(_ key: String) -> RecordColor {
@@ -178,11 +202,6 @@ extension OpenAIClient: DependencyKey {
             )
         }
     )
-
-    enum OpenAIError: Error {
-        case requestFailed
-        case parseFailed
-    }
 
     private static func loadAPIKey() -> String? {
         guard let key = Bundle.main.infoDictionary?["OPENAI_API_KEY"] as? String,
