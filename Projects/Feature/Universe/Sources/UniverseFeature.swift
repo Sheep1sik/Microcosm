@@ -81,6 +81,28 @@ public struct UniverseFeature {
             case galaxyThenStar(yearMonth: String, record: Record)
         }
 
+        // Pending Star Creation (AI 분석 완료 후 scene에 전달할 스냅샷)
+        public var pendingStarCreation: PendingStarCreation?
+
+        public struct PendingStarCreation: Equatable {
+            public let content: String
+            public let starName: String
+            public let profile: StarVisualProfile
+            public let isOnboardingRecord: Bool
+
+            public init(
+                content: String,
+                starName: String,
+                profile: StarVisualProfile,
+                isOnboardingRecord: Bool
+            ) {
+                self.content = content
+                self.starName = starName
+                self.profile = profile
+                self.isOnboardingRecord = isOnboardingRecord
+            }
+        }
+
         // Computed
         public var isCurrentMonthGalaxy: Bool {
             guard let ym = currentYearMonth else { return false }
@@ -170,7 +192,8 @@ public struct UniverseFeature {
             isSearching: Bool = false,
             debouncedQuery: String = "",
             previewRevision: UInt = 0,
-            pendingNavigation: PendingNavigation? = nil
+            pendingNavigation: PendingNavigation? = nil,
+            pendingStarCreation: PendingStarCreation? = nil
         ) {
             self.hasCompletedOnboarding = hasCompletedOnboarding
             self.onboardingStep = onboardingStep
@@ -199,6 +222,7 @@ public struct UniverseFeature {
             self.debouncedQuery = debouncedQuery
             self.previewRevision = previewRevision
             self.pendingNavigation = pendingNavigation
+            self.pendingStarCreation = pendingStarCreation
         }
     }
 
@@ -231,6 +255,7 @@ public struct UniverseFeature {
         case colorAnalyzed(RecordColor)
         case profileAnalyzed(StarVisualProfile)
         case profileAnalysisFailed
+        case clearPendingStarCreation
 
         // Onboarding
         case checkOnboarding

@@ -139,6 +139,9 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
 
         let profile = StarVisualProfile.fallback
         await store.send(.profileAnalyzed(profile)) {
+            $0.pendingStarCreation = .init(
+                content: "", starName: "", profile: profile, isOnboardingRecord: false
+            )
             $0.analyzedProfile = profile
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
@@ -157,6 +160,9 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
         }
 
         await store.send(.profileAnalyzed(.fallback)) {
+            $0.pendingStarCreation = .init(
+                content: "", starName: "", profile: .fallback, isOnboardingRecord: true
+            )
             $0.analyzedProfile = .fallback
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
@@ -179,6 +185,9 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
         let color = RecordColor(r: 0.2, g: 0.4, b: 0.8)
         let expected = StarVisualProfile.from(legacyColor: color)
         await store.send(.colorAnalyzed(color)) {
+            $0.pendingStarCreation = .init(
+                content: "", starName: "", profile: expected, isOnboardingRecord: false
+            )
             $0.analyzedProfile = expected
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
@@ -199,6 +208,9 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
         let color = RecordColor(r: 0.5, g: 0.6, b: 0.7)
         let expected = StarVisualProfile.from(legacyColor: color)
         await store.send(.colorAnalyzed(color)) {
+            $0.pendingStarCreation = .init(
+                content: "", starName: "", profile: expected, isOnboardingRecord: true
+            )
             $0.analyzedProfile = expected
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
@@ -219,6 +231,9 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
         }
 
         await store.send(.profileAnalysisFailed) {
+            $0.pendingStarCreation = .init(
+                content: "", starName: "", profile: .fallback, isOnboardingRecord: false
+            )
             $0.analyzedProfile = .fallback
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
@@ -237,6 +252,9 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
         }
 
         await store.send(.profileAnalysisFailed) {
+            $0.pendingStarCreation = .init(
+                content: "", starName: "", profile: .fallback, isOnboardingRecord: true
+            )
             $0.analyzedProfile = .fallback
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false

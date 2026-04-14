@@ -36,11 +36,6 @@ public struct UniverseView: View {
     @FocusState private var isTextFocused: Bool
     @FocusState private var isSearchFocused: Bool
 
-    // 저장 중인 기록 정보 (GPT 분석 완료 후 scene에 전달)
-    @State private var pendingSaveContent: String = ""
-    @State private var pendingSaveName: String = ""
-    @State private var pendingSaveIsOnboarding: Bool = false
-
     public init(store: StoreOf<UniverseFeature>) {
         self.store = store
     }
@@ -49,7 +44,7 @@ public struct UniverseView: View {
         mainContent
             .toolbar(store.isInGalaxyDetail || store.isOnboarding ? .hidden : .visible, for: .tabBar)
             .animation(.easeOut(duration: 0.3), value: store.showRecordPanel)
-            .modifier(SceneChangeHandlers(store: store, scene: scene, pendingSaveContent: $pendingSaveContent, pendingSaveName: $pendingSaveName, pendingSaveIsOnboarding: $pendingSaveIsOnboarding, isTextFocused: $isTextFocused))
+            .modifier(SceneChangeHandlers(store: store, scene: scene, isTextFocused: $isTextFocused))
             .alert("오늘의 기록을 이미 작성했어요", isPresented: $store.showLimitAlert) {
                 Button("확인", role: .cancel) {}
             } message: {
@@ -200,9 +195,6 @@ public struct UniverseView: View {
 private struct SceneChangeHandlers: ViewModifier {
     @Bindable var store: StoreOf<UniverseFeature>
     let scene: UniverseScene
-    @Binding var pendingSaveContent: String
-    @Binding var pendingSaveName: String
-    @Binding var pendingSaveIsOnboarding: Bool
     var isTextFocused: FocusState<Bool>.Binding
 
     func body(content: Content) -> some View {
@@ -218,11 +210,15 @@ private struct SceneChangeHandlers: ViewModifier {
                     scene.refreshGalaxies()
                 }
             }
-            .onChange(of: store.analyzedProfile) {
-                handleProfileAnalyzed()
-            }
             .onChange(of: store.isAnalyzingColor) {
-                handleAnalyzingColor()
+                if store.isAnalyzingColor {
+                    DispatchQueue.main.async {
+                        isTextFocused.wrappedValue = false
+                    }
+                }
+            }
+            .onChange(of: store.pendingStarCreation) {
+                handlePendingStarCreation()
             }
             .onChange(of: store.completedConstellationIds) {
                 scene.updateCompletedConstellations(ids: store.completedConstellationIds)
@@ -242,34 +238,18 @@ private struct SceneChangeHandlers: ViewModifier {
         }
     }
 
-    private func handleProfileAnalyzed() {
-        guard let profile = store.analyzedProfile else { return }
+    private func handlePendingStarCreation() {
+        guard let pending = store.pendingStarCreation else { return }
         scene.confirmPreviewStar()
-        let content = pendingSaveContent
-        let name = pendingSaveName
-        let isOnboarding = pendingSaveIsOnboarding
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             scene.createRecordAndRefresh(
-                content: content,
-                profile: profile,
-                starName: name,
-                isOnboardingRecord: isOnboarding
+                content: pending.content,
+                profile: pending.profile,
+                starName: pending.starName,
+                isOnboardingRecord: pending.isOnboardingRecord
             )
         }
-        pendingSaveContent = ""
-        pendingSaveName = ""
-        pendingSaveIsOnboarding = false
-    }
-
-    private func handleAnalyzingColor() {
-        if store.isAnalyzingColor {
-            pendingSaveContent = store.recordContent.trimmingCharacters(in: .whitespacesAndNewlines)
-            pendingSaveName = store.starName
-            pendingSaveIsOnboarding = store.onboardingStep == .createStarPrompt
-            DispatchQueue.main.async {
-                isTextFocused.wrappedValue = false
-            }
-        }
+        store.send(.clearPendingStarCreation)
     }
 }
 

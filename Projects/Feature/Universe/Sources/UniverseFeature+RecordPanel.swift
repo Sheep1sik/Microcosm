@@ -71,6 +71,7 @@ extension UniverseFeature {
             }
 
         case .profileAnalyzed(let profile):
+            state.pendingStarCreation = Self.composePendingStarCreation(state: state, profile: profile)
             state.analyzedProfile = profile
             state.isAnalyzingColor = false
             state.showRecordPanel = false
@@ -80,7 +81,9 @@ extension UniverseFeature {
             return .none
 
         case .colorAnalyzed(let color):
-            state.analyzedProfile = StarVisualProfile.from(legacyColor: color)
+            let derived = StarVisualProfile.from(legacyColor: color)
+            state.pendingStarCreation = Self.composePendingStarCreation(state: state, profile: derived)
+            state.analyzedProfile = derived
             state.isAnalyzingColor = false
             state.showRecordPanel = false
             if state.onboardingStep == .createStarPrompt {
@@ -89,6 +92,7 @@ extension UniverseFeature {
             return .none
 
         case .profileAnalysisFailed:
+            state.pendingStarCreation = Self.composePendingStarCreation(state: state, profile: .fallback)
             state.analyzedProfile = .fallback
             state.isAnalyzingColor = false
             state.showRecordPanel = false
@@ -97,8 +101,26 @@ extension UniverseFeature {
             }
             return .none
 
+        case .clearPendingStarCreation:
+            state.pendingStarCreation = nil
+            return .none
+
         default:
             return .none
         }
+    }
+
+    /// 분석 완료 시점의 recordContent/starName/isOnboarding을 스냅샷으로 묶어
+    /// scene에 전달할 pending 페이로드를 구성한다. onboardingStep 전이 전에 호출해야 한다.
+    private static func composePendingStarCreation(
+        state: State,
+        profile: StarVisualProfile
+    ) -> State.PendingStarCreation {
+        State.PendingStarCreation(
+            content: state.recordContent.trimmingCharacters(in: .whitespacesAndNewlines),
+            starName: state.starName,
+            profile: profile,
+            isOnboardingRecord: state.onboardingStep == .createStarPrompt
+        )
     }
 }
