@@ -94,13 +94,11 @@ struct RootFeature {
 
             case .userProfileUpdated(let profile):
                 state.userProfile = profile
-                state.mainTab.universe.userDisplayName = profile.nickname ?? state.displayName
-                state.mainTab.universe.hasCompletedOnboarding = profile.hasCompletedOnboarding
-                state.mainTab.constellation.hasSeenConstellationGuide = profile.hasSeenConstellationGuide
-                state.mainTab.profile.userProfile = profile
-                state.mainTab.profile.displayName = profile.nickname ?? state.displayName
-                state.mainTab.userId = state.userId
-                return .none
+                return .send(.mainTab(.sessionUpdated(
+                    userId: state.userId,
+                    displayName: state.displayName,
+                    profile: profile
+                )))
 
             case .splash:
                 return .none

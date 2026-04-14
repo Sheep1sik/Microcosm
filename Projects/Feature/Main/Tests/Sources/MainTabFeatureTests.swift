@@ -5,6 +5,7 @@ import FeatureUniverse
 import FeatureConstellation
 import FeatureProfile
 import DomainEntity
+import DomainClient
 
 @MainActor
 final class MainTabFeatureTests: XCTestCase {
@@ -24,6 +25,54 @@ final class MainTabFeatureTests: XCTestCase {
         }
         await store.send(.tabSelected(.universe)) {
             $0.selectedTab = .universe
+        }
+    }
+
+    // MARK: - sessionUpdated
+
+    func test_sessionUpdated_프로필_fanout_단일액션_처리() async {
+        let store = TestStore(initialState: MainTabFeature.State()) {
+            MainTabFeature()
+        }
+
+        var profile = UserProfile()
+        profile.nickname = "별지기"
+        profile.hasCompletedOnboarding = true
+        profile.hasSeenConstellationGuide = true
+
+        await store.send(.sessionUpdated(
+            userId: "user-1",
+            displayName: "fallback",
+            profile: profile
+        )) {
+            $0.userId = "user-1"
+            $0.universe.userDisplayName = "별지기"
+            $0.universe.hasCompletedOnboarding = true
+            $0.constellation.userDisplayName = "별지기"
+            $0.constellation.hasSeenConstellationGuide = true
+            $0.profile.userProfile = profile
+            $0.profile.displayName = "별지기"
+        }
+    }
+
+    func test_sessionUpdated_nickname_없으면_displayName_fallback() async {
+        let store = TestStore(initialState: MainTabFeature.State()) {
+            MainTabFeature()
+        }
+
+        var profile = UserProfile()
+        profile.nickname = nil
+
+        await store.send(.sessionUpdated(
+            userId: "user-1",
+            displayName: "fallback",
+            profile: profile
+        )) {
+            $0.userId = "user-1"
+            $0.universe.userDisplayName = "fallback"
+            $0.constellation.userDisplayName = "fallback"
+            $0.profile.userProfile = profile
+            $0.profile.displayName = "fallback"
         }
     }
 

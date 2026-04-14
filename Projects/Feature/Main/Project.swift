@@ -23,6 +23,7 @@ let project = Project.makeModule(
             target: .init(
                 dependencies: [
                     .target(name: ModulePath.Feature.name + ModulePath.Feature.Main.rawValue),
+                    .domain(sources: .Client),
                     .external(name: "ComposableArchitecture"),
                 ]
             )

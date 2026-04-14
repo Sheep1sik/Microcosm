@@ -40,6 +40,7 @@ public struct MainTabFeature {
         case binding(BindingAction<State>)
         case onAppear
         case tabSelected(State.Tab)
+        case sessionUpdated(userId: String?, displayName: String?, profile: UserProfile)
         case recordsUpdated([Record])
         case goalsUpdated([Goal])
         case universe(UniverseFeature.Action)
@@ -80,6 +81,18 @@ public struct MainTabFeature {
 
             case .tabSelected(let tab):
                 state.selectedTab = tab
+                return .none
+
+            case .sessionUpdated(let userId, let displayName, let profile):
+                // Root 에서 분산 갱신되던 프로필 연관 상태를 한 곳에서 처리.
+                let effectiveName = profile.nickname ?? displayName
+                state.userId = userId
+                state.universe.userDisplayName = effectiveName
+                state.universe.hasCompletedOnboarding = profile.hasCompletedOnboarding
+                state.constellation.userDisplayName = effectiveName
+                state.constellation.hasSeenConstellationGuide = profile.hasSeenConstellationGuide
+                state.profile.userProfile = profile
+                state.profile.displayName = effectiveName
                 return .none
 
             case .recordsUpdated(let records):
