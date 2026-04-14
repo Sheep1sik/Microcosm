@@ -16,5 +16,14 @@ let project = Project.makeModule(
                 ]
             )
         ),
+        .domain(
+            tests: .Client,
+            target: .init(
+                dependencies: [
+                    .target(name: ModulePath.Domain.name + ModulePath.Domain.Client.rawValue),
+                    .external(name: "ComposableArchitecture"),
+                ]
+            )
+        ),
     ]
 )
