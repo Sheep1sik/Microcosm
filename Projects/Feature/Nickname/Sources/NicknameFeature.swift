@@ -93,6 +93,7 @@ public struct NicknameFeature {
 
             case .nicknameCheckFailed(let message):
                 state.isChecking = false
+                state.isSaving = false
                 state.errorMessage = message
                 return .none
 
@@ -101,9 +102,20 @@ public struct NicknameFeature {
                 let trimmed = state.nickname.trimmingCharacters(in: .whitespacesAndNewlines)
                 state.isSaving = true
                 return .run { send in
-                    guard let userId = authClient.currentUser()?.uid else { return }
-                    try await userClient.setNickname(userId, trimmed)
-                    await send(.saveCompleted)
+                    guard let userId = authClient.currentUser()?.uid else {
+                        await send(.nicknameCheckFailed("로그인이 만료되었어요. 다시 시도해주세요"))
+                        return
+                    }
+                    do {
+                        try await userClient.setNickname(userId, trimmed)
+                        await send(.saveCompleted)
+                    } catch UserClientError.nicknameTaken {
+                        await send(.nicknameCheckFailed("이미 사용 중인 닉네임이에요"))
+                    } catch UserClientError.nicknameInvalid {
+                        await send(.nicknameCheckFailed("사용할 수 없는 닉네임이에요"))
+                    } catch {
+                        await send(.nicknameCheckFailed("저장에 실패했어요. 잠시 후 다시 시도해주세요"))
+                    }
                 }
 
             case .saveCompleted:

@@ -62,6 +62,12 @@ struct RootFeature {
                 state.userId = user?.uid
                 state.displayName = user?.displayName
                 if let userId = user?.uid {
+                    // 인증되면 즉시 메인으로 전환. 프로필은 별도 스트림으로 따라옴.
+                    // (네트워크 지연/실패로 프로필 스트림이 늦어도 메인 진입이 막히지 않음)
+                    state.mainTab.userId = userId
+                    if state.mode == .splash || state.mode == .login {
+                        state.mode = .main
+                    }
                     let displayName = user?.displayName
                     let email = user?.email
                     return .merge(
@@ -94,14 +100,6 @@ struct RootFeature {
                 state.mainTab.profile.userProfile = profile
                 state.mainTab.profile.displayName = profile.nickname ?? state.displayName
                 state.mainTab.userId = state.userId
-
-                if state.mode == .splash || state.mode == .login {
-                    if state.userId == nil {
-                        state.mode = .login
-                    } else {
-                        state.mode = .main
-                    }
-                }
                 return .none
 
             case .splash:

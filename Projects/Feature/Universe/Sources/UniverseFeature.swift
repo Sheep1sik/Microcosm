@@ -24,6 +24,11 @@ public struct UniverseFeature {
         public var hasCompletedOnboarding = false
         public var onboardingStep: OnboardingStep? = nil
         public var onboardingGalaxyScreenCenter: CGPoint?
+        /// records observer가 최소 1회 yield 했는지. checkOnboarding 결정은
+        /// 이 플래그가 true가 되어 `allRecords`가 신뢰 가능해진 뒤에만 수행.
+        /// (View 진입 직후 records 없는 상태에서 잘못 welcome으로 진입하는 레이스 방지)
+        public var hasReceivedInitialRecords = false
+        public var pendingOnboardingCheck = false
 
         // Onboarding Nickname
         public var onboardingNickname = ""
@@ -142,6 +147,8 @@ public struct UniverseFeature {
             hasCompletedOnboarding: Bool = false,
             onboardingStep: OnboardingStep? = nil,
             onboardingGalaxyScreenCenter: CGPoint? = nil,
+            hasReceivedInitialRecords: Bool = false,
+            pendingOnboardingCheck: Bool = false,
             onboardingNickname: String = "",
             onboardingNicknameChecking: Bool = false,
             onboardingNicknameError: String? = nil,
@@ -168,6 +175,8 @@ public struct UniverseFeature {
             self.hasCompletedOnboarding = hasCompletedOnboarding
             self.onboardingStep = onboardingStep
             self.onboardingGalaxyScreenCenter = onboardingGalaxyScreenCenter
+            self.hasReceivedInitialRecords = hasReceivedInitialRecords
+            self.pendingOnboardingCheck = pendingOnboardingCheck
             self.onboardingNickname = onboardingNickname
             self.onboardingNicknameChecking = onboardingNicknameChecking
             self.onboardingNicknameError = onboardingNicknameError

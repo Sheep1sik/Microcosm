@@ -11,7 +11,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
     func test_checkOnboarding_신규유저_welcomeStep으로_설정() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
-                hasCompletedOnboarding: false
+                hasCompletedOnboarding: false,
+                hasReceivedInitialRecords: true
             )
         ) {
             UniverseFeature()
@@ -25,7 +26,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
     func test_checkOnboarding_이미완료_상태변경없음() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
-                hasCompletedOnboarding: true
+                hasCompletedOnboarding: true,
+                hasReceivedInitialRecords: true
             )
         ) {
             UniverseFeature()
@@ -38,6 +40,7 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         let store = TestStore(
             initialState: UniverseFeature.State(
                 hasCompletedOnboarding: false,
+                hasReceivedInitialRecords: true,
                 allRecords: [Record(content: "테스트 기록")]
             )
         ) {
@@ -46,6 +49,77 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
 
         await store.send(.checkOnboarding) {
             $0.hasCompletedOnboarding = true
+        }
+    }
+
+    // MARK: - Race Condition (M7)
+
+    func test_checkOnboarding_records미도착_보류후_records도착시_welcome으로() async {
+        let store = TestStore(
+            initialState: UniverseFeature.State(
+                hasCompletedOnboarding: false,
+                hasReceivedInitialRecords: false
+            )
+        ) {
+            UniverseFeature()
+        }
+
+        // View에서 scene setup 시 즉시 호출되는 checkOnboarding은 보류됨
+        await store.send(.checkOnboarding) {
+            $0.pendingOnboardingCheck = true
+        }
+
+        // records observer가 빈 배열을 처음 yield → 보류된 checkOnboarding 자동 리졸브
+        await store.send(.recordsUpdated([])) {
+            $0.hasReceivedInitialRecords = true
+            $0.pendingOnboardingCheck = false
+        }
+
+        await store.receive(\.checkOnboarding) {
+            $0.onboardingStep = .welcome
+        }
+    }
+
+    func test_checkOnboarding_records미도착_보류후_기록존재면_온보딩건너뜀() async {
+        let store = TestStore(
+            initialState: UniverseFeature.State(
+                hasCompletedOnboarding: false,
+                hasReceivedInitialRecords: false
+            )
+        ) {
+            UniverseFeature()
+        }
+
+        await store.send(.checkOnboarding) {
+            $0.pendingOnboardingCheck = true
+        }
+
+        let record = Record(content: "기존 기록")
+        await store.send(.recordsUpdated([record])) {
+            $0.hasReceivedInitialRecords = true
+            $0.pendingOnboardingCheck = false
+            $0.allRecords = [record]
+        }
+
+        await store.receive(\.checkOnboarding) {
+            $0.hasCompletedOnboarding = true
+        }
+    }
+
+    func test_recordsUpdated_보류중이아니면_체크자동실행안함() async {
+        let store = TestStore(
+            initialState: UniverseFeature.State(
+                hasCompletedOnboarding: false,
+                hasReceivedInitialRecords: false,
+                pendingOnboardingCheck: false
+            )
+        ) {
+            UniverseFeature()
+        }
+
+        // View에서 checkOnboarding 미호출 → 보류 없음 → records 도착해도 자동 실행 없음
+        await store.send(.recordsUpdated([])) {
+            $0.hasReceivedInitialRecords = true
         }
     }
 
@@ -283,7 +357,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
     func test_전체_온보딩_플로우_순차_진행() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
-                hasCompletedOnboarding: false
+                hasCompletedOnboarding: false,
+                hasReceivedInitialRecords: true
             )
         ) {
             UniverseFeature()

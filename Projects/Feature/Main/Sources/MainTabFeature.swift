@@ -91,40 +91,7 @@ public struct MainTabFeature {
 
             case .goalsUpdated(let goals):
                 state.constellation.allGoals = goals
-
-                // 별자리 완성/해제 메시지 체크
-                let change = ConstellationFeature.checkConstellationCompletion(
-                    goals: goals,
-                    previouslyCompletedIds: &state.constellation.previouslyCompletedIds
-                )
-                // 첫 로드 시에는 메시지 없이 previouslyCompletedIds만 초기화
-                if !state.constellation.hasInitialGoalsLoaded {
-                    state.constellation.hasInitialGoalsLoaded = true
-                } else {
-                    if let completedId = change.newlyCompleted {
-                        let def = ConstellationCatalog.find(completedId)
-                        state.constellation.completedConstellationMessage = "\(def?.nameKO ?? completedId)의\n모든 별들이 빛을 찾았어요!"
-                        let name = state.universe.userDisplayName ?? "우주인"
-                        state.constellation.completedConstellationSubtitle = "완성된 별자리는 \(name)님의 소우주에서도 볼 수 있어요"
-                    } else if let lostId = change.newlyLost {
-                        let def = ConstellationCatalog.find(lostId)
-                        state.constellation.completedConstellationMessage = "\(def?.nameKO ?? lostId)의\n별자리가 빛을 잃었어요"
-                        state.constellation.completedConstellationSubtitle = "목표를 다시 달성하면 별자리가 빛을 되찾아요"
-                    }
-                }
-
-                // 완성된 별자리 ID 계산 → Universe 배경에 표시
-                let completedIds = ConstellationCatalog.all.compactMap { def -> String? in
-                    let cGoals = goals.filter { $0.constellationId == def.id }
-                    guard !cGoals.isEmpty else { return nil }
-                    // 모든 별에 목표가 있고 모두 완료
-                    let allStarIndices = Set(def.stars.map(\.index))
-                    let starIndicesWithGoals = Set(cGoals.map(\.starIndex))
-                    guard allStarIndices.isSubset(of: starIndicesWithGoals) else { return nil }
-                    let allDone = cGoals.allSatisfy(\.isCompleted)
-                    return allDone ? def.id : nil
-                }
-                state.universe.completedConstellationIds = completedIds
+                Self.recomputeCompletion(state: &state, goals: goals, isFromObserver: true)
                 return .none
 
             case .universe:
@@ -136,33 +103,7 @@ public struct MainTabFeature {
                  .constellation(.goalSaved),
                  .constellation(.goalDeleted):
                 // 낙관적 업데이트 후 즉시 완성/해제 체크
-                if state.constellation.hasInitialGoalsLoaded {
-                    let change = ConstellationFeature.checkConstellationCompletion(
-                        goals: state.constellation.allGoals,
-                        previouslyCompletedIds: &state.constellation.previouslyCompletedIds
-                    )
-                    if let completedId = change.newlyCompleted {
-                        let def = ConstellationCatalog.find(completedId)
-                        state.constellation.completedConstellationMessage = "\(def?.nameKO ?? completedId)의\n모든 별들이 빛을 찾았어요!"
-                        let name = state.universe.userDisplayName ?? "우주인"
-                        state.constellation.completedConstellationSubtitle = "완성된 별자리는 \(name)님의 소우주에서도 볼 수 있어요"
-                    } else if let lostId = change.newlyLost {
-                        let def = ConstellationCatalog.find(lostId)
-                        state.constellation.completedConstellationMessage = "\(def?.nameKO ?? lostId)의\n별자리가 빛을 잃었어요"
-                        state.constellation.completedConstellationSubtitle = "목표를 다시 달성하면 별자리가 빛을 되찾아요"
-                    }
-                }
-
-                // 완성된 별자리 ID 갱신
-                let updatedCompletedIds = ConstellationCatalog.all.compactMap { def -> String? in
-                    let cGoals = state.constellation.allGoals.filter { $0.constellationId == def.id }
-                    guard !cGoals.isEmpty else { return nil }
-                    let allStarIndices = Set(def.stars.map(\.index))
-                    let starIndicesWithGoals = Set(cGoals.map(\.starIndex))
-                    guard allStarIndices.isSubset(of: starIndicesWithGoals) else { return nil }
-                    return cGoals.allSatisfy(\.isCompleted) ? def.id : nil
-                }
-                state.universe.completedConstellationIds = updatedCompletedIds
+                Self.recomputeCompletion(state: &state, goals: state.constellation.allGoals, isFromObserver: false)
                 return .none
 
             case .constellation:
@@ -174,6 +115,52 @@ public struct MainTabFeature {
             case .binding:
                 return .none
             }
+        }
+    }
+
+    // MARK: - Completion Recompute
+
+    /// 별자리 완성/해제 메시지 갱신 + Universe 배경에 표시될 완성 ID 계산.
+    /// - Parameter isFromObserver: `goalsUpdated`(true)는 첫 로드 시 메시지를 띄우지 않음.
+    ///   낙관적 업데이트 경로(false)는 항상 메시지 평가.
+    private static func recomputeCompletion(state: inout State, goals: [Goal], isFromObserver: Bool) {
+        let shouldEmitMessage: Bool
+        if isFromObserver {
+            if !state.constellation.hasInitialGoalsLoaded {
+                state.constellation.hasInitialGoalsLoaded = true
+                shouldEmitMessage = false
+            } else {
+                shouldEmitMessage = true
+            }
+        } else {
+            shouldEmitMessage = state.constellation.hasInitialGoalsLoaded
+        }
+
+        let change = ConstellationFeature.checkConstellationCompletion(
+            goals: goals,
+            previouslyCompletedIds: &state.constellation.previouslyCompletedIds
+        )
+
+        if shouldEmitMessage {
+            if let completedId = change.newlyCompleted {
+                let def = ConstellationCatalog.find(completedId)
+                state.constellation.completedConstellationMessage = "\(def?.nameKO ?? completedId)의\n모든 별들이 빛을 찾았어요!"
+                let name = state.universe.userDisplayName ?? "우주인"
+                state.constellation.completedConstellationSubtitle = "완성된 별자리는 \(name)님의 소우주에서도 볼 수 있어요"
+            } else if let lostId = change.newlyLost {
+                let def = ConstellationCatalog.find(lostId)
+                state.constellation.completedConstellationMessage = "\(def?.nameKO ?? lostId)의\n별자리가 빛을 잃었어요"
+                state.constellation.completedConstellationSubtitle = "목표를 다시 달성하면 별자리가 빛을 되찾아요"
+            }
+        }
+
+        state.universe.completedConstellationIds = ConstellationCatalog.all.compactMap { def in
+            let cGoals = goals.filter { $0.constellationId == def.id }
+            guard !cGoals.isEmpty else { return nil }
+            let allStarIndices = Set(def.stars.map(\.index))
+            let starIndicesWithGoals = Set(cGoals.map(\.starIndex))
+            guard allStarIndices.isSubset(of: starIndicesWithGoals) else { return nil }
+            return cGoals.allSatisfy(\.isCompleted) ? def.id : nil
         }
     }
 }

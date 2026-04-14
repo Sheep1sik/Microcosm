@@ -16,6 +16,16 @@ extension UniverseFeature {
 
         case .recordsUpdated(let records):
             state.allRecords = records
+            // 최초 records yield 후에만 onboarding 결정을 신뢰. 이후 보류 중인
+            // checkOnboarding 요청을 리졸브한다. (UniverseView setupScene → records 미도착
+            // 상태에서 잘못 welcome으로 진입하는 레이스 방지)
+            if !state.hasReceivedInitialRecords {
+                state.hasReceivedInitialRecords = true
+                if state.pendingOnboardingCheck {
+                    state.pendingOnboardingCheck = false
+                    return .send(.checkOnboarding)
+                }
+            }
             return .none
 
         case .openRecordPanel:

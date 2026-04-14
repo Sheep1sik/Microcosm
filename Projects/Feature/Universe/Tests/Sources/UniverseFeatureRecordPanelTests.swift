@@ -18,6 +18,7 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
         let records = [Record(content: "a"), Record(content: "b")]
         await store.send(.recordsUpdated(records)) {
             $0.allRecords = records
+            $0.hasReceivedInitialRecords = true
         }
     }
 

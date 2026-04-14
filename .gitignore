@@ -13,3 +13,12 @@ Timeline.xctimeline
 PlaygroundPage.xcplaygroundpage
 Playgrounds/
 **/Secrets.xcconfig
+
+# Tuist generated artifacts
+Derived/
+**/Derived/
+
+# Agent harness / session artifacts
+.claude/
+CLAUDE.md
+_workspace/

@@ -27,6 +27,26 @@ public struct UserProfile: Equatable {
     }
 }
 
+public enum UserClientError: LocalizedError, Equatable {
+    case nicknameTaken
+    case nicknameInvalid
+
+    public var errorDescription: String? {
+        switch self {
+        case .nicknameTaken: return "이미 사용 중인 닉네임이에요"
+        case .nicknameInvalid: return "사용할 수 없는 닉네임이에요"
+        }
+    }
+}
+
+/// 닉네임 정규화: 양 끝 공백 제거 + 소문자 + 유니코드 정규화.
+/// `setNickname` / `checkNickname` 양쪽이 동일 기준으로 비교/저장하기 위한 단일 진입점.
+public func normalizeNickname(_ raw: String) -> String {
+    raw.trimmingCharacters(in: .whitespacesAndNewlines)
+       .lowercased()
+       .precomposedStringWithCanonicalMapping
+}
+
 public struct UserClient {
     public var observe: (String) -> AsyncStream<UserProfile>
     public var createIfNeeded: (String) async throws -> Void
@@ -95,10 +115,13 @@ extension UserClient: DependencyKey {
                 ], merge: true)
             }
         },
-        setNickname: { userId, nickname in
+        setNickname: { userId, rawNickname in
             // `nicknames/{nickname}` 인덱스 컬렉션을 이용한 원자적 예약/변경.
             // 트랜잭션으로 (1) 중복 검사 (2) 신규 예약 (3) 기존 예약 해제 (4) users 문서 갱신을 수행한다.
             // 이 구조는 보안 규칙에서 다른 사용자의 프로필 문서 접근을 허용하지 않아도 되도록 해준다.
+            let nickname = normalizeNickname(rawNickname)
+            guard !nickname.isEmpty else { throw UserClientError.nicknameInvalid }
+
             let db = Firestore.firestore()
             let userRef = db.collection("users").document(userId)
             let newNicknameRef = db.collection("nicknames").document(nickname)
@@ -118,16 +141,12 @@ extension UserClient: DependencyKey {
                 if nicknameSnap.exists {
                     let existingOwner = nicknameSnap.data()?["userId"] as? String
                     if existingOwner != userId {
-                        errorPointer?.pointee = NSError(
-                            domain: "UserClient.setNickname",
-                            code: 409,
-                            userInfo: [NSLocalizedDescriptionKey: "이미 사용 중인 닉네임이에요"]
-                        )
+                        errorPointer?.pointee = UserClientError.nicknameTaken as NSError
                         return nil
                     }
                 }
 
-                // 신규 닉네임 예약.
+                // 신규 닉네임 예약. 원본 표시용과 정규화 키를 함께 저장한다.
                 transaction.setData(
                     [
                         "userId": userId,
@@ -147,9 +166,11 @@ extension UserClient: DependencyKey {
                 return nil
             })
         },
-        checkNickname: { nickname in
+        checkNickname: { rawNickname in
             // `nicknames/{nickname}` 단일 문서 존재 여부만 확인.
             // 과거 whereField 기반 구현은 다른 사용자 프로필 열람 권한을 필요로 했으므로 제거됨.
+            let nickname = normalizeNickname(rawNickname)
+            guard !nickname.isEmpty else { return false }
             let db = Firestore.firestore()
             let snapshot = try await db.collection("nicknames").document(nickname).getDocument()
             return !snapshot.exists

@@ -105,8 +105,10 @@ public struct ProfileFeature {
                 }
 
             case .changeNicknameTapped:
-                state.nicknameState = NicknameFeature.State(isOnboarding: false)
-                state.nicknameState.nickname = state.userProfile.nickname ?? ""
+                state.nicknameState = NicknameFeature.State(
+                    nickname: state.userProfile.nickname ?? "",
+                    isOnboarding: false
+                )
                 state.showNicknameChange = true
                 return .none
 

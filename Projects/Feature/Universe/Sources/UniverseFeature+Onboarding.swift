@@ -6,6 +6,12 @@ extension UniverseFeature {
     func reduceOnboarding(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .checkOnboarding:
+            // records observer가 최초 yield 하기 전이면 결정을 보류.
+            // recordsUpdated 첫 호출 시 자동으로 다시 평가한다.
+            guard state.hasReceivedInitialRecords else {
+                state.pendingOnboardingCheck = true
+                return .none
+            }
             guard !state.hasCompletedOnboarding else { return .none }
             if !state.allRecords.isEmpty {
                 state.hasCompletedOnboarding = true
@@ -72,10 +78,16 @@ extension UniverseFeature {
                     await send(.onboardingNicknameCheckFailed("로그인이 만료되었어요. 다시 시도해주세요"))
                     return
                 }
-                try await userClient.setNickname(userId, nickname)
-                await send(.onboardingNicknameSaveCompleted)
-            } catch: { _, send in
-                await send(.onboardingNicknameCheckFailed("저장에 실패했어요. 잠시 후 다시 시도해주세요"))
+                do {
+                    try await userClient.setNickname(userId, nickname)
+                    await send(.onboardingNicknameSaveCompleted)
+                } catch UserClientError.nicknameTaken {
+                    await send(.onboardingNicknameCheckFailed("이미 사용 중인 닉네임이에요"))
+                } catch UserClientError.nicknameInvalid {
+                    await send(.onboardingNicknameCheckFailed("사용할 수 없는 닉네임이에요"))
+                } catch {
+                    await send(.onboardingNicknameCheckFailed("저장에 실패했어요. 잠시 후 다시 시도해주세요"))
+                }
             }
 
         case .onboardingNicknameSaveCompleted:
