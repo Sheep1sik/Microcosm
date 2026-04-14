@@ -39,6 +39,7 @@
 		2C1E7117D51DE1F237E356BF /* UniverseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AB2FBC4E08D76B219B4E0 /* UniverseScene.swift */; };
 		2C57016F3483F4C557D68496 /* grpcpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 362BB901E32B9A0243F99150 /* grpcpp.xcframework */; };
 		30098B3AE567F4BAED2D799A /* Firebase_FirebaseCore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B2C524264066062835324CAE /* Firebase_FirebaseCore.bundle */; };
+		3162E563ADEB1E94FCF43E23 /* UniverseScene+GalaxyBirth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A88C1766A13B208F610DEB5 /* UniverseScene+GalaxyBirth.swift */; };
 		32F01A46F6BEE52D6844E41E /* OnboardingOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729E7A7A3FCCD34F24F3240C /* OnboardingOverlayView.swift */; };
 		33134ED90E8EE29EEF65A2D8 /* UniverseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E42BDFF5F056CC93DB4CA54 /* UniverseView.swift */; };
 		33705CBD20D4CAEC89476AC4 /* FirebaseFirestoreTarget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F733BE64896D8DDFCDC18C /* FirebaseFirestoreTarget.framework */; };
@@ -53,6 +54,7 @@
 		459FBEF5FD2BB81BD12E6661 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BC5AAE47979B5C08DFEAA1 /* Foundation.framework */; };
 		45F073D325D94AAE394BC126 /* Firebase_FirebaseCoreInternal.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 991EAE44C56AFCE55E06CE46 /* Firebase_FirebaseCoreInternal.bundle */; };
 		46BE1E9077A35DC25E21D93A /* swift-sharing_Sharing.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = AC9B684D7EA8FE83876E778D /* swift-sharing_Sharing.bundle */; };
+		4708911D8E35B37B64457C22 /* UniverseScene+SolarSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C9C188C463671D9A31A87F /* UniverseScene+SolarSystem.swift */; };
 		48B97254E39AFF4BC3ADBD87 /* FirebaseAuthInternal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1054758BCAB868B273E19A10 /* FirebaseAuthInternal.framework */; };
 		4E039646CF6DD4C8FB47ED6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A9DDB4A74F0C28CDC6C9DD /* UIKit.framework */; };
 		4EA915FCCDB5793283964FFF /* UniverseFeature+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8FF61EC77C4C1DF41D2A68 /* UniverseFeature+Navigation.swift */; };
@@ -79,10 +81,12 @@
 		74979942E20CCA1C114ACD0B /* GoogleUtilities_GoogleUtilities_NSData.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = D1A997D0AEF94BE45E388034 /* GoogleUtilities_GoogleUtilities_NSData.bundle */; };
 		7661054D0EE764A606926B53 /* UniverseFeature+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F16FECFE33050798319E2D /* UniverseFeature+Onboarding.swift */; };
 		78BC408682A8D62F7E851D60 /* UniverseFeatureOnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C95C2D916FA5D992B5837 /* UniverseFeatureOnboardingTests.swift */; };
+		7966E97E12546C88A2DF3B47 /* UniverseScene+Galaxies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ECBF04726986D3DE13BE23 /* UniverseScene+Galaxies.swift */; };
 		7E04DFECBC3FB226A3B8FA9F /* UniverseScene+Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBE69C705A0EA89798C38DB /* UniverseScene+Previews.swift */; };
 		7F0E517ED82438D713F3F0D6 /* leveldb_leveldb.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = F9FA3C96A8F30B0A120FE53A /* leveldb_leveldb.bundle */; };
 		7F43ACB203C015E7240DA60E /* Firebase_FirebaseCoreExtension.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 73BC59DB0732BAD7B1CCCB1B /* Firebase_FirebaseCoreExtension.bundle */; };
 		8028C9C5C77DC22F6313A98C /* AppAuth_AppAuthCore.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = EBA3BE218CF12C1A26FF1E82 /* AppAuth_AppAuthCore.bundle */; };
+		8328CEF202F2331BE1B71AB1 /* UniverseScene+RecordPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0567E580239C54A33C66187F /* UniverseScene+RecordPlacement.swift */; };
 		83330A3F53F6A8DEA2E19F20 /* GTMAppAuth_GTMAppAuth.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E977B4D4044BF4C646EEA2E2 /* GTMAppAuth_GTMAppAuth.bundle */; };
 		86E399CB93C87220632E4033 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A126DE5A4AD7DFBF7F77E3C4 /* FBLPromises.framework */; };
 		8DE83E407F114814F8927008 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFFAF9C1E0FEFFDB4B37086 /* Firebase.framework */; };
@@ -121,6 +125,7 @@
 		C64A2E7685557638928A6F45 /* UniverseFeatureSceneCallbacksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C44283121F27B4FFECA79 /* UniverseFeatureSceneCallbacksTests.swift */; };
 		C91EBBE6808A16009673727C /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = B98DC4C2D40605D0F95F9FD9 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle */; };
 		CAA8855E2F5820ECA388A834 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEB19BD2E324E76808F0E9F /* SafariServices.framework */; };
+		CD75612D9078E4F2E4325940 /* UniverseScene+RecordCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3E990C0FAC043D19526DF /* UniverseScene+RecordCreation.swift */; };
 		D0D9F24E84FD2549CDF9A6E3 /* FirebaseCoreExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B79CD2D33FA05C32506059E1 /* FirebaseCoreExtension.framework */; };
 		D42B1D6ED2085C67EDEBD39F /* opensslWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60C4AF4E5D4062ABB0A2713 /* opensslWrapper.framework */; };
 		DA94F3AC3210793F827D4025 /* UniverseFeature+SceneCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39B6B451FF79CB2400BC0F7 /* UniverseFeature+SceneCallbacks.swift */; };
@@ -227,6 +232,7 @@
 		0059888C15E8817D34612029 /* GoogleSignIn_GoogleSignIn.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleSignIn_GoogleSignIn.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B74C76532589A3B74D2A25 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
 		02F8DA88A1E3DDBC5CBD55D2 /* grpcWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = grpcWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0567E580239C54A33C66187F /* UniverseScene+RecordPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+RecordPlacement.swift"; sourceTree = "<group>"; };
 		05F40BF9D3427E374A181F95 /* FirebaseSharedSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseSharedSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A22FFD9339230C56B51A5D7 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		0C73511FFC19D11A43DFDADF /* GoogleUtilities_Network.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Network.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,6 +243,7 @@
 		11BDDA3961503230DD90CBE9 /* Promises_FBLPromises.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Promises_FBLPromises.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		127FD52571E0173D08F9FFA7 /* UniverseScene+CompletedConstellations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+CompletedConstellations.swift"; sourceTree = "<group>"; };
 		138BE14974988EB923953E80 /* FeatureUniverseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeatureUniverseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		13C9C188C463671D9A31A87F /* UniverseScene+SolarSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+SolarSystem.swift"; sourceTree = "<group>"; };
 		163E4C3E3BFBB46CDB8AE38D /* UniverseScene+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+Background.swift"; sourceTree = "<group>"; };
 		1765CC4D3EAF56FDA63DE960 /* FirebaseAppCheckInterop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseAppCheckInterop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5AB3E4E810597B2D1EC889 /* GoogleUtilities_GoogleUtilities_Environment.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Environment.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +251,7 @@
 		1B6C44283121F27B4FFECA79 /* UniverseFeatureSceneCallbacksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseFeatureSceneCallbacksTests.swift; sourceTree = "<group>"; };
 		216AB2FBC4E08D76B219B4E0 /* UniverseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseScene.swift; sourceTree = "<group>"; };
 		242064A9AB880D50B4587303 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTMSessionFetcher_GTMSessionFetcherCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		26A3E990C0FAC043D19526DF /* UniverseScene+RecordCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+RecordCreation.swift"; sourceTree = "<group>"; };
 		2AFC201661D0A1E2DC0644C1 /* RecordPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPanelView.swift; sourceTree = "<group>"; };
 		32F6F2AC4D5D68D2370BD2EF /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		361D95B222BF582ABC8CDECA /* GoogleUtilities_Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -284,6 +292,7 @@
 		77C42C7EAAB66A8A78723002 /* UniverseScene+GalaxyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+GalaxyDetail.swift"; sourceTree = "<group>"; };
 		788E499FB6B7FD40C0010C8B /* nanopb_nanopb.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nanopb_nanopb.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		797222DF9BDF5A3D6A0040CE /* GoogleUtilities_Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A88C1766A13B208F610DEB5 /* UniverseScene+GalaxyBirth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+GalaxyBirth.swift"; sourceTree = "<group>"; };
 		7AB78E94B24A456B1A31C015 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		7ACEB4A2C38C57F910A0126E /* GoogleSignIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleSignIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CB1375743D7901CA9E78D88 /* GoogleUtilities_Environment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Environment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +303,7 @@
 		93C414478CBDE554400A31A0 /* OnboardingOverlayView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingOverlayView+Preview.swift"; sourceTree = "<group>"; };
 		93E5680072AB430DFF9E1F91 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97596C675A1630FFA73A9480 /* UniverseFeatureRecordPanelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseFeatureRecordPanelTests.swift; sourceTree = "<group>"; };
+		97ECBF04726986D3DE13BE23 /* UniverseScene+Galaxies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+Galaxies.swift"; sourceTree = "<group>"; };
 		991EAE44C56AFCE55E06CE46 /* Firebase_FirebaseCoreInternal.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseCoreInternal.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B81BBEFAC7065C696785994 /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E71D8D99E2A70FB15E046F9 /* UniverseScene+Minimap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseScene+Minimap.swift"; sourceTree = "<group>"; };
@@ -516,9 +526,14 @@
 				216AB2FBC4E08D76B219B4E0 /* UniverseScene.swift */,
 				163E4C3E3BFBB46CDB8AE38D /* UniverseScene+Background.swift */,
 				127FD52571E0173D08F9FFA7 /* UniverseScene+CompletedConstellations.swift */,
+				97ECBF04726986D3DE13BE23 /* UniverseScene+Galaxies.swift */,
+				7A88C1766A13B208F610DEB5 /* UniverseScene+GalaxyBirth.swift */,
 				77C42C7EAAB66A8A78723002 /* UniverseScene+GalaxyDetail.swift */,
 				9E71D8D99E2A70FB15E046F9 /* UniverseScene+Minimap.swift */,
 				AFBE69C705A0EA89798C38DB /* UniverseScene+Previews.swift */,
+				26A3E990C0FAC043D19526DF /* UniverseScene+RecordCreation.swift */,
+				0567E580239C54A33C66187F /* UniverseScene+RecordPlacement.swift */,
+				13C9C188C463671D9A31A87F /* UniverseScene+SolarSystem.swift */,
 				559DEC8E846389DC155F6923 /* UniverseScene+Touch.swift */,
 			);
 			path = Scenes;
@@ -823,9 +838,14 @@
 				E847B1FE9EF07324769BF929 /* RecordPanelView.swift in Sources */,
 				BCD3420B1F339275DDF600A2 /* UniverseScene+Background.swift in Sources */,
 				924576AFA27765AD13052766 /* UniverseScene+CompletedConstellations.swift in Sources */,
+				7966E97E12546C88A2DF3B47 /* UniverseScene+Galaxies.swift in Sources */,
+				3162E563ADEB1E94FCF43E23 /* UniverseScene+GalaxyBirth.swift in Sources */,
 				9291C187251BFD51E5BD7227 /* UniverseScene+GalaxyDetail.swift in Sources */,
 				5B54DDD872C132949D299FC7 /* UniverseScene+Minimap.swift in Sources */,
 				7E04DFECBC3FB226A3B8FA9F /* UniverseScene+Previews.swift in Sources */,
+				CD75612D9078E4F2E4325940 /* UniverseScene+RecordCreation.swift in Sources */,
+				8328CEF202F2331BE1B71AB1 /* UniverseScene+RecordPlacement.swift in Sources */,
+				4708911D8E35B37B64457C22 /* UniverseScene+SolarSystem.swift in Sources */,
 				DB140719BD0ED68EA10DBC13 /* UniverseScene+Touch.swift in Sources */,
 				2C1E7117D51DE1F237E356BF /* UniverseScene.swift in Sources */,
 				1D64E1A79E60F794A957E4D9 /* SearchOverlayView.swift in Sources */,

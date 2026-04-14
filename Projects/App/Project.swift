@@ -24,6 +24,8 @@ let project = Project.makeModule(
             target: .init(
                 infoPlist: .extendingDefault(with: [
                     "CFBundleDisplayName": "소우주",
+                    "CFBundleShortVersionString": "1.0.0",
+                    "CFBundleVersion": "1",
                     "UILaunchScreen": ["UIColorName": "LaunchBackground"],
                     "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"],
                     "UIUserInterfaceStyle": "Dark",
