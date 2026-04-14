@@ -2,6 +2,7 @@ import SwiftUI
 import ComposableArchitecture
 import DomainEntity
 import DomainClient
+import SharedDesignSystem
 
 public typealias Record = DomainEntity.Record
 
