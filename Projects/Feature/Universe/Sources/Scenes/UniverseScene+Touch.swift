@@ -33,23 +33,28 @@ extension UniverseScene {
             let arr = Array(active)
             let p1 = arr[0].location(in: view); let p2 = arr[1].location(in: view)
             let dist = hypot(p2.x - p1.x, p2.y - p1.y)
-            if pinchStartDist > 10 {
-                let newScale = pinchStartScale * (pinchStartDist / dist)
-                if sceneState == .universe {
-                    cameraNode.setScale(max(0.5, min(3.0, newScale)))
-                } else {
-                    cameraNode.setScale(max(0.06, min(0.35, newScale)))
-                }
-            }
+            let range: ClosedRange<CGFloat> = (sceneState == .universe)
+                ? UniverseTouchMath.universeScaleRange
+                : UniverseTouchMath.galaxyDetailScaleRange
+            let newScale = UniverseTouchMath.pinchScale(
+                startScale: pinchStartScale,
+                startDist: pinchStartDist,
+                currentDist: dist,
+                currentScale: cameraNode.xScale,
+                range: range
+            )
+            cameraNode.setScale(newScale)
         } else if active.count == 1, let touch = active.first {
             let cur = touch.location(in: view)
             if let last = lastTouchPos {
-                let dx = cur.x - last.x
-                let dy = cur.y - last.y
-                let s = cameraNode.xScale
-                cameraNode.position.x -= dx * s
-                cameraNode.position.y += dy * s
-                velocity = CGVector(dx: -dx * s, dy: dy * s)
+                let result = UniverseTouchMath.panDelta(
+                    current: cur,
+                    last: last,
+                    cameraScale: cameraNode.xScale
+                )
+                cameraNode.position.x += result.cameraDelta.dx
+                cameraNode.position.y += result.cameraDelta.dy
+                velocity = result.velocity
             }
             lastTouchPos = cur
         }
@@ -64,13 +69,16 @@ extension UniverseScene {
             let endPos = touch.location(in: view)
             let dist = hypot(endPos.x - startPos.x, endPos.y - startPos.y)
             let elapsed = touch.timestamp - touchStartTime
-            if dist < 10 && elapsed < 0.3 {
+            switch UniverseTouchMath.classifyGesture(distance: dist, elapsed: elapsed) {
+            case .tap:
                 let scenePos = convertPoint(fromView: endPos)
                 handleTap(at: scenePos)
-            } else if dist > 50 && elapsed < 0.6 {
+            case .swipe:
                 if sceneState == .recordDetail {
                     dismissRecordDetail()
                 }
+            case .none:
+                break
             }
         }
         touchStartPos = nil
@@ -104,8 +112,7 @@ extension UniverseScene {
             }
             if let back = backButton {
                 let localPos = cameraNode.convert(scenePos, from: self)
-                let hitRect = CGRect(x: back.position.x - 15, y: back.position.y - 20,
-                                     width: 60, height: 44)
+                let hitRect = UniverseTouchMath.backButtonHitRect(center: back.position)
                 if hitRect.contains(localPos) { zoomOut() }
             }
         case .recordDetail:
@@ -116,29 +123,23 @@ extension UniverseScene {
     }
 
     func hitTestDetailStar(at scenePos: CGPoint) -> Int? {
-        var bestIndex: Int?
-        var bestDist: CGFloat = .greatestFiniteMagnitude
+        var candidates: [UniverseTouchMath.DetailStarHitCandidate] = []
         for node in detailNodes {
-            guard let name = node.name, name.hasPrefix("detailStar_") else { continue }
-            let dist = hypot(scenePos.x - node.position.x, scenePos.y - node.position.y)
-            if dist < 25 && dist < bestDist {
-                bestDist = dist
-                bestIndex = Int(name.replacingOccurrences(of: "detailStar_", with: ""))
-            }
+            guard let name = node.name, name.hasPrefix("detailStar_"),
+                  let index = Int(name.replacingOccurrences(of: "detailStar_", with: "")) else { continue }
+            candidates.append(.init(index: index, position: node.position))
         }
-        return bestIndex
+        return UniverseTouchMath.hitTestDetailStar(at: scenePos, candidates: candidates)
     }
 
     func hitTestGalaxy(at scenePos: CGPoint) -> String? {
-        var bestKey: String?
-        var bestDist: CGFloat = .greatestFiniteMagnitude
-        for (key, galaxy) in activeGalaxies {
-            let dist = hypot(scenePos.x - galaxy.position.x, scenePos.y - galaxy.position.y)
-            if dist < galaxy.diameter && dist < bestDist {
-                bestDist = dist
-                bestKey = key
-            }
+        let candidates = activeGalaxies.map { key, galaxy in
+            UniverseTouchMath.GalaxyHitCandidate(
+                key: key,
+                position: galaxy.position,
+                diameter: galaxy.diameter
+            )
         }
-        return bestKey
+        return UniverseTouchMath.hitTestGalaxy(at: scenePos, candidates: candidates)
     }
 }

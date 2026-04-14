@@ -336,20 +336,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "511A66D4945F525686E33C17"
-               BuildableName = "FeatureAuthTests.xctest"
-               BlueprintName = "FeatureAuthTests"
-               ReferencedContainer = "container:Projects/Feature/Auth/FeatureAuth.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "FEB8502575C240A8A7C138B1"
                BuildableName = "libFeatureConstellation.a"
                BlueprintName = "FeatureConstellation"
@@ -367,6 +353,20 @@
                BlueprintIdentifier = "C62951D5F12265650ECDE4F9"
                BuildableName = "libFeatureMain.a"
                BlueprintName = "FeatureMain"
+               ReferencedContainer = "container:Projects/Feature/Main/FeatureMain.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "47A82D280773C8B375CE9E03"
+               BuildableName = "FeatureMainTests.xctest"
+               BlueprintName = "FeatureMainTests"
                ReferencedContainer = "container:Projects/Feature/Main/FeatureMain.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -423,6 +423,20 @@
                BlueprintIdentifier = "653635B0ED97709D4E8B62F5"
                BuildableName = "libFeatureUniverse.a"
                BlueprintName = "FeatureUniverse"
+               ReferencedContainer = "container:Projects/Feature/Universe/FeatureUniverse.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AD6CAD1417370B2C44C74692"
+               BuildableName = "FeatureUniverseTests.xctest"
+               BlueprintName = "FeatureUniverseTests"
                ReferencedContainer = "container:Projects/Feature/Universe/FeatureUniverse.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -1685,10 +1699,21 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "511A66D4945F525686E33C17"
-               BuildableName = "FeatureAuthTests.xctest"
-               BlueprintName = "FeatureAuthTests"
-               ReferencedContainer = "container:Projects/Feature/Auth/FeatureAuth.xcodeproj">
+               BlueprintIdentifier = "47A82D280773C8B375CE9E03"
+               BuildableName = "FeatureMainTests.xctest"
+               BlueprintName = "FeatureMainTests"
+               ReferencedContainer = "container:Projects/Feature/Main/FeatureMain.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AD6CAD1417370B2C44C74692"
+               BuildableName = "FeatureUniverseTests.xctest"
+               BlueprintName = "FeatureUniverseTests"
+               ReferencedContainer = "container:Projects/Feature/Universe/FeatureUniverse.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

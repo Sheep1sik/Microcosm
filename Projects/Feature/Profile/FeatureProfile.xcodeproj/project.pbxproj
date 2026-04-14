@@ -10,6 +10,7 @@
 		02C37EDF614ADCF3F6E385F2 /* libDomainEntity.a in Dependencies */ = {isa = PBXBuildFile; fileRef = FF52A95E33506FDEE8BF9D77 /* libDomainEntity.a */; };
 		1BCC80B3735D20DCBD313D7C /* libFeatureNickname.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 56D962965853758794231208 /* libFeatureNickname.a */; };
 		3685F627E28413EDC33534C0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BCF4D976A24C245D37D0B /* ProfileView.swift */; };
+		4470F67C172BC3E72DC9B8E1 /* EmotionStatisticsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE85F4626D373498C56272E /* EmotionStatisticsCalculator.swift */; };
 		67BDE63100A803D72329E441 /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 5F59C6456040FB5A2B9B8FCA /* libDomainClient.a */; };
 		86783114A884E0AAFCC0174B /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2E9A762989E18FFF8F26D5 /* ComposableArchitecture.framework */; };
 		934FDE53804FE7D7836E9890 /* EmotionStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB32B6A79A9E365890C33198 /* EmotionStatisticsView.swift */; };
@@ -52,6 +53,7 @@
 		AB32B6A79A9E365890C33198 /* EmotionStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionStatisticsView.swift; sourceTree = "<group>"; };
 		ECF0351F386E4E438BD02B3B /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59B2D46530E8C458A66AC76 /* libFeatureProfile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureProfile.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAE85F4626D373498C56272E /* EmotionStatisticsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionStatisticsCalculator.swift; sourceTree = "<group>"; };
 		FF52A95E33506FDEE8BF9D77 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 		74447B709BA83FFDC1D8FBD5 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				FAE85F4626D373498C56272E /* EmotionStatisticsCalculator.swift */,
 				AB32B6A79A9E365890C33198 /* EmotionStatisticsView.swift */,
 				877C44D1C235866E4F81E217 /* ProfileFeature.swift */,
 				7B5BCF4D976A24C245D37D0B /* ProfileView.swift */,
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4470F67C172BC3E72DC9B8E1 /* EmotionStatisticsCalculator.swift in Sources */,
 				934FDE53804FE7D7836E9890 /* EmotionStatisticsView.swift in Sources */,
 				962E9334C0BB9CBCFC82C031 /* ProfileFeature.swift in Sources */,
 				3685F627E28413EDC33534C0 /* ProfileView.swift in Sources */,
