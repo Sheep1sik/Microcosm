@@ -18,7 +18,6 @@ struct RootFeature {
         // 인증 정보
         var userId: String?
         var displayName: String?
-        var userProfile: UserProfile = UserProfile()
 
         enum Mode: Equatable {
             case splash
@@ -87,13 +86,13 @@ struct RootFeature {
                         }.cancellable(id: CancelID.userObserver, cancelInFlight: true)
                     )
                 } else {
-                    state.userProfile = UserProfile()
+                    state.mainTab.profile.userProfile = UserProfile()
                     state.mode = .login
                     return .cancel(id: CancelID.userObserver)
                 }
 
             case .userProfileUpdated(let profile):
-                state.userProfile = profile
+                // 프로필은 MainTab 이 단일 source of truth. Root 는 payload 만 전달.
                 return .send(.mainTab(.sessionUpdated(
                     userId: state.userId,
                     displayName: state.displayName,
