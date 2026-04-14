@@ -7,149 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02D9551BDF5DB6035ACAD9B5 /* Firebase_FirebaseAuth.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7EDCB8A696E34FD9FAB55254 /* Firebase_FirebaseAuth.bundle */; };
-		058C6DE86DA031772342463D /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70B0810D16DE613E6910D4CD /* SafariServices.framework */; };
-		07E579EBDC72B924C4816310 /* GoogleUtilities_NSData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273FC27B8B9DF2BEAB0E65E2 /* GoogleUtilities_NSData.framework */; };
-		087087F38C628BD4412D2662 /* GoogleUtilities_GoogleUtilities_Logger.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EEFFBA1AADA4BCAF74723FDD /* GoogleUtilities_GoogleUtilities_Logger.bundle */; };
-		08E8419EC8A5CDC5D3216C4C /* GoogleUtilities_GoogleUtilities_Logger.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = EEFFBA1AADA4BCAF74723FDD /* GoogleUtilities_GoogleUtilities_Logger.bundle */; };
-		097391E58E6350D3091A9ECF /* Firebase_FirebaseCore.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = BA1961F5CDFC066B412751A5 /* Firebase_FirebaseCore.bundle */; };
-		0AF41CD968CFF19097333152 /* GoogleUtilities_GoogleUtilities_Environment.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 1350F155F7E7BD383ED80836 /* GoogleUtilities_GoogleUtilities_Environment.bundle */; };
-		0B9E11DF15F4245D47946752 /* GTMSessionFetcherCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987D0154274BC85390B5460 /* GTMSessionFetcherCore.framework */; };
-		0BF9D9A9B6DE3AFC51A8AFC2 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C91E5DAB4C2AD729E4415E /* FBLPromises.framework */; };
-		1070900282FA9542AD5695BF /* FirebaseFirestoreInternalWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7B336457522FBEA9459390 /* FirebaseFirestoreInternalWrapper.framework */; };
-		120C2E7DE59F38546BE4AF4A /* gRPC_grpcppWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 18354B6BEBEF4FA8BE61FEE8 /* gRPC_grpcppWrapper.bundle */; };
-		134B835327025F3A98C9E04B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0935EDD86F7F39E277CC2 /* libz.tbd */; };
-		1896C6843FE75DC44FFBDA5C /* AppAuth_AppAuth.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31A5D220858D33412CA1FEB9 /* AppAuth_AppAuth.bundle */; };
-		1B93AB6B2B6D0973FF7A88BA /* third_party_IsAppEncrypted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368299EEC81A006B8FE8C62E /* third_party_IsAppEncrypted.framework */; };
-		1CFEDE80B0B5656149507FDD /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACE385983C657ED4D10B721 /* FirebaseCore.framework */; };
-		21F4E30BBB88AC1C89E2F1C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5692064C8EC32CB5104B4B1B /* UIKit.framework */; };
-		2341F06CF795949791FA0F9F /* DeviceCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B42EE7D443A581B4A72F86 /* DeviceCheck.framework */; };
-		24C85BFB47CE465672A82802 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE69AD193F51FF88FD8D7E4A /* SystemConfiguration.framework */; };
-		27E3D7771FA8859E24E2689A /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B251534E648F9B13F7AE22C5 /* GoogleSignIn.framework */; };
-		2D1E123420AB0CE2ECD42B11 /* GoogleUtilities_GoogleUtilities_Reachability.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BC21BA047243F82B1C48C123 /* GoogleUtilities_GoogleUtilities_Reachability.bundle */; };
-		318946188AEE527090D47C2F /* opensslWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39132C0888395C48F0A68CB /* opensslWrapper.framework */; };
 		33F0D602C64255A09000BB30 /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 3378E6198B2426BFB8FF4552 /* libDomainClient.a */; };
-		35619BB388FC3A83BAD6E981 /* grpc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60899DEB1E8C2D44C4EA5735 /* grpc.xcframework */; };
-		3872A56C1F571C735A50B598 /* openssl_grpc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6430D5BD1DFA45E6BFD35E79 /* openssl_grpc.xcframework */; };
-		38B6C3FE884A6B819E6DBC98 /* FirebaseFirestoreTarget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5EB2E9ADC91DA19C5B0746 /* FirebaseFirestoreTarget.framework */; };
 		3FD48CC2D06A2B882F7DFD94 /* libDomainEntity.a in Dependencies */ = {isa = PBXBuildFile; fileRef = D2C30521251874BEDB70E827 /* libDomainEntity.a */; };
-		43A44ACF87F10805E9F0E688 /* GTMAppAuth_GTMAppAuth.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 7332C3DD685F276A337F3CEB /* GTMAppAuth_GTMAppAuth.bundle */; };
-		44017B5EC44BB757797ABBDC /* Promises_FBLPromises.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E27785C00FE30F14BC78D12 /* Promises_FBLPromises.bundle */; };
-		45F62F8870821AB57CE8C6B2 /* nanopb_nanopb.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = C6B8209D83577E7FF6105057 /* nanopb_nanopb.bundle */; };
-		489294C6816D02BA43C4BC91 /* leveldb_leveldb.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44712825499C6FD264FB1904 /* leveldb_leveldb.bundle */; };
-		48B365AAB5DF78F793D38F2B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4198C777757C1491B88BF43F /* CoreText.framework */; };
-		4A3010CC73E82A5451ABB14C /* AppCheckCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 703B0CD6277DA54E366BFD11 /* AppCheckCore.framework */; };
-		4D50E8273AF5F575C451E453 /* libDomainClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3378E6198B2426BFB8FF4552 /* libDomainClient.a */; };
-		5324E0883E2E2C2BF8EC8413 /* FirebaseFirestoreInternal.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D08716D9B45A1DB4D9B0859 /* FirebaseFirestoreInternal.xcframework */; };
-		54BCB7FEECF324B13CA4F45D /* gRPC_grpcWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED53530DA0ADF223C5578030 /* gRPC_grpcWrapper.bundle */; };
-		5571219941F2656CE8A423EA /* AppAuth_AppAuthCore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2DCA93FD51434BDB2C9B07B1 /* AppAuth_AppAuthCore.bundle */; };
-		5785D43B84DD13D77BE3D91A /* GoogleUtilities_Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DD3B1C6FB21076FF35DA41 /* GoogleUtilities_Logger.framework */; };
-		5A19916A764B93DBF97A1683 /* libFeatureMain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7923381FD4154FDA933C0721 /* libFeatureMain.a */; };
-		5B735A1696DE908E7D2FAFE3 /* Firebase_FirebaseFirestore.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 774C9433CB0DCCBF9634098F /* Firebase_FirebaseFirestore.bundle */; };
 		5BB40B5821C13A3625C88CA8 /* libFeatureConstellation.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 178F99CE722797CCC9039D3E /* libFeatureConstellation.a */; };
-		5DEC066076280CF55641923D /* GoogleUtilities_GoogleUtilities_NSData.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = BDECCAD89BD8996FF01FE46B /* GoogleUtilities_GoogleUtilities_NSData.bundle */; };
-		6278B62BC7253DF877B32562 /* nanopb_nanopb.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C6B8209D83577E7FF6105057 /* nanopb_nanopb.bundle */; };
-		68590ECD4B8DABD080384380 /* FirebaseCoreInternal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B27CB659A5DB4CA0F12764 /* FirebaseCoreInternal.framework */; };
-		69506515E59B18A702859C76 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FED63DD2A770DDDC3F4185 /* Firebase.framework */; };
-		6C0150557A56FE42F94B1669 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 646CFCAC267747BE27EE97D0 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle */; };
-		6CBE2E8129BD44DA7FB08DBD /* libFeatureProfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF8599910B638D70BB0326A9 /* libFeatureProfile.a */; };
-		6D5DBCD74DF622BDD334F9D8 /* GTMAppAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BCD6DEAD3D46C2E1075E06C /* GTMAppAuth.framework */; };
-		6F1F752A5FB789F6274FC19B /* libFeatureUniverse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */; };
-		71490DA2F5F35A9A5FDAE0F6 /* libFeatureNickname.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FE814FC5B98887CE0D3458 /* libFeatureNickname.a */; };
-		7336DC59D861CFB31F8BE30C /* grpcppWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3CE2E2E608A864D60245B7 /* grpcppWrapper.framework */; };
-		74E7404E71A81126144C7653 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2FC2F9F5991345B0423DCE4 /* CoreGraphics.framework */; };
-		761C66427039CCB7AE7F27B1 /* abseil_abslWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E671F67364790564004BF620 /* abseil_abslWrapper.bundle */; };
 		78C6D2C455F0FE182E266764 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95BA4D02B4815DA50B0CD76 /* ComposableArchitecture.framework */; };
-		79C26EF383072F15CD7F8DE7 /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 309979FA88257B5DA6537225 /* FirebaseFirestore.framework */; };
-		7C92F36B3882145740D4FD08 /* libDomainEntity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C30521251874BEDB70E827 /* libDomainEntity.a */; };
-		7E3495BFA0CF94BACF725BEC /* AppAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C11C13E91E4D59F3954B17 /* AppAuth.framework */; };
-		82F7B7E548A8C8DD7921D77A /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4054CB01FEF6762371A34C42 /* nanopb.framework */; };
-		833D024347950CE08FE31CA1 /* GoogleUtilities_Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE3F952EA806DA27A59D671 /* GoogleUtilities_Network.framework */; };
-		835A6E8063A8A811A6F86295 /* FirebaseCoreExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2751B813EF73FE6C043A3A /* FirebaseCoreExtension.framework */; };
-		839DAECA6787CF16627C6571 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 473C342025682B0F9B0258AC /* Security.framework */; };
-		85CBC508B7E4750939D07981 /* GoogleUtilities_GoogleUtilities_Network.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A35E992BBDE1FFA6EAA512BA /* GoogleUtilities_GoogleUtilities_Network.bundle */; };
-		86EECE9F87459B2D80DE7637 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852B6C370853E341D8C3484 /* Foundation.framework */; };
-		873CEDA2CD5B442B5A3DBEFE /* GTMAppAuth_GTMAppAuth.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7332C3DD685F276A337F3CEB /* GTMAppAuth_GTMAppAuth.bundle */; };
-		874A145EE941D522B6112FC6 /* gRPC_grpcWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = ED53530DA0ADF223C5578030 /* gRPC_grpcWrapper.bundle */; };
-		8769D3674D1F534D3D5F9537 /* GoogleUtilities_UserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9C74A035EE78A4E6E491655 /* GoogleUtilities_UserDefaults.framework */; };
 		880E7DF6E59E8618F3414595 /* libFeatureProfile.a in Dependencies */ = {isa = PBXBuildFile; fileRef = BF8599910B638D70BB0326A9 /* libFeatureProfile.a */; };
-		88EEED5024733D313B5F99EF /* Promises_FBLPromises.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 2E27785C00FE30F14BC78D12 /* Promises_FBLPromises.bundle */; };
-		890EDD7E7E451DBB0ED6B55D /* FirebaseAuthInterop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED16A359FEDD335B34EFDF0 /* FirebaseAuthInterop.framework */; };
-		8A602F72A9E9303439965727 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1646E986B2C9FDB6BE1A38B9 /* AppKit.framework */; platformFilters = (macos, ); };
-		8EBF4344EB2B5750CE992609 /* Firebase_FirebaseCoreInternal.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 575392004D9EE1BC5736AA1C /* Firebase_FirebaseCoreInternal.bundle */; };
-		906E55C71BEBBD1CB9BD1F0E /* GoogleSignIn_GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FDF5342B73A289A71A622B52 /* GoogleSignIn_GoogleSignIn.bundle */; };
-		972BFD5B400874DF1478B3C1 /* gRPC_grpcppWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18354B6BEBEF4FA8BE61FEE8 /* gRPC_grpcppWrapper.bundle */; };
 		99DD3E3EB6FB5FD56B2F70D6 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C542B177DC7517604DB17 /* MainTabFeature.swift */; };
-		9B62430A9948D2AF629854E2 /* GoogleUtilities_AppDelegateSwizzler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CEB1F24AB4C3027CF29C6E /* GoogleUtilities_AppDelegateSwizzler.framework */; };
-		9CD055850C0E86EA03733869 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = E6A09023D507A257D30A1006 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle */; };
-		A15F09B0556B7C6E1D6668C9 /* GoogleUtilities_GoogleUtilities_Network.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = A35E992BBDE1FFA6EAA512BA /* GoogleUtilities_GoogleUtilities_Network.bundle */; };
-		A1EDEB5E945E11BD2BE29197 /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59115DDD30D3C4DA87EBAD05 /* FirebaseAuth.framework */; };
-		A355BD64ADE3DE20CA9D38B3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F458E1F9394F470F4297DECE /* libc++.tbd */; };
 		A52A4306C3541B3D59B8DCF9 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD1FC4CA907676807B7A7C0 /* MainTabView.swift */; };
-		AC4960C6E6A8D64E96C20AF8 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D7E560839ACF00DFC5D7FA /* LocalAuthentication.framework */; };
-		AD914138CBA0B23B2419D42C /* GoogleUtilities_GoogleUtilities_Environment.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1350F155F7E7BD383ED80836 /* GoogleUtilities_GoogleUtilities_Environment.bundle */; };
-		ADE4F77E846A0BF5AE042FEB /* Firebase_FirebaseCoreInternal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 575392004D9EE1BC5736AA1C /* Firebase_FirebaseCoreInternal.bundle */; };
-		B1019CB38E29BD1DD67F6E8E /* gRPC_opensslWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 70DE33CF3FC2BDDB32E9A9BC /* gRPC_opensslWrapper.bundle */; };
-		B4A7ED20D3132811F00D7CC3 /* swift-sharing_Sharing.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 70BF9A5DB1304BAB06CD1A9B /* swift-sharing_Sharing.bundle */; };
-		B5D6FD332A744F56BC403EDD /* grpcWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8661DD2ED87681695FB34C34 /* grpcWrapper.framework */; };
-		B96B9B4FC018B788585C4E31 /* GoogleUtilities_GoogleUtilities_Reachability.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = BC21BA047243F82B1C48C123 /* GoogleUtilities_GoogleUtilities_Reachability.bundle */; };
-		C079138643E1574D6062FF66 /* Firebase_FirebaseCoreExtension.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 3AA1A8BA4DA069811AA86271 /* Firebase_FirebaseCoreExtension.bundle */; };
-		C49ED86DA1742A2E00FD0D9C /* Firebase_FirebaseCore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BA1961F5CDFC066B412751A5 /* Firebase_FirebaseCore.bundle */; };
-		C501E3E0FFAC3D1A08C103EA /* AppAuthCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A47E5D49B4083E23828D4CA /* AppAuthCore.framework */; };
-		C8C1B9E4630A7BFE67AE92A3 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 646CFCAC267747BE27EE97D0 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle */; };
-		CDC5C10A3A2B7398F2109FDE /* GTMSessionFetcher_GTMSessionFetcherCore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6A09023D507A257D30A1006 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle */; };
-		CF659051050D2E40F3FC999C /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95BA4D02B4815DA50B0CD76 /* ComposableArchitecture.framework */; };
-		CFE84A6C942E76674ED3F5AD /* FirebaseAuthInternal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB7F0A8EECCDCB8E0666D09 /* FirebaseAuthInternal.framework */; };
-		D02518159D859F47F7B7DED8 /* libSharedDesignSystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB283A18B8E0AEE3A524248 /* libSharedDesignSystem.a */; };
-		D4376A05A26C760ED2E3B823 /* libFeatureConstellation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 178F99CE722797CCC9039D3E /* libFeatureConstellation.a */; };
-		DC20D1F3DFF0265AA6EDEC6C /* GoogleSignIn_GoogleSignIn.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = FDF5342B73A289A71A622B52 /* GoogleSignIn_GoogleSignIn.bundle */; };
-		DC8E5801BFA25BA3E05D43F8 /* FirebaseAppCheckInterop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092E19D593FC141D67643C92 /* FirebaseAppCheckInterop.framework */; };
-		DCE011BD35DB5B5B7F4914D4 /* MainTabFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5558E03A01151ED28C4020 /* MainTabFeatureTests.swift */; };
-		DDE3FAAC4E45E2C04C3960DB /* RecaptchaInterop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EC26BEA9CA126E0FCCC73F /* RecaptchaInterop.framework */; };
-		E2A889BA1CB2B901FD3D1DD1 /* Firebase_FirebaseFirestore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 774C9433CB0DCCBF9634098F /* Firebase_FirebaseFirestore.bundle */; };
-		E2C08CC8458285C3B6AC1543 /* GoogleUtilities_Environment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B558EB8AC4BFDD6137162EB3 /* GoogleUtilities_Environment.framework */; };
-		E2DBD2D9F4B45786DCEE9D4D /* leveldb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749BCA3A3E8E27A585825A0E /* leveldb.framework */; };
-		E4A12B354AAEC6A553D66937 /* Firebase_FirebaseCoreExtension.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1A8BA4DA069811AA86271 /* Firebase_FirebaseCoreExtension.bundle */; };
-		E54EC6CABAEFD53C49541449 /* abseil_abslWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = E671F67364790564004BF620 /* abseil_abslWrapper.bundle */; };
-		E7CE5FEFAD3433E5D1E8DE34 /* swift-sharing_Sharing.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70BF9A5DB1304BAB06CD1A9B /* swift-sharing_Sharing.bundle */; };
-		E8B62113C8E66CA634D4C8F2 /* absl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6417A819B510E0BBE6C016 /* absl.xcframework */; };
-		EA95CC087A16DC945D5E1F24 /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 435ED227313A6A22409E055C /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle */; };
-		ECAAA51D1F63ADC5DD010344 /* AppAuth_AppAuth.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 31A5D220858D33412CA1FEB9 /* AppAuth_AppAuth.bundle */; };
 		ED3CD9E73433FD53A7BD4410 /* libFeatureUniverse.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */; };
-		EF7B76073AD4A36A2C8A99AD /* gRPC_opensslWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70DE33CF3FC2BDDB32E9A9BC /* gRPC_opensslWrapper.bundle */; };
-		F19B101DD4CD7D09EDA1D7A1 /* leveldb_leveldb.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 44712825499C6FD264FB1904 /* leveldb_leveldb.bundle */; };
-		F4D32DDDC9B51B55B0216EB7 /* abslWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D44FBD9A086F9F16141AF41 /* abslWrapper.framework */; };
-		F6716639AC1A9D6B8825ED10 /* grpcpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70E2BAF9B74F3630CB4FAC4 /* grpcpp.xcframework */; };
-		F85AC72B4FFDCDAF53B149E6 /* AppAuth_AppAuthCore.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 2DCA93FD51434BDB2C9B07B1 /* AppAuth_AppAuthCore.bundle */; };
-		F9A8518B3DEBA3284910401B /* Firebase_FirebaseAuth.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 7EDCB8A696E34FD9FAB55254 /* Firebase_FirebaseAuth.bundle */; };
-		FB310C4BB08FE9765518EDBA /* GoogleUtilities_Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1384FDE54598C095AB69CD8 /* GoogleUtilities_Reachability.framework */; };
-		FC160B90BD04D76DEE52A7AE /* GoogleUtilities_GoogleUtilities_NSData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDECCAD89BD8996FF01FE46B /* GoogleUtilities_GoogleUtilities_NSData.bundle */; };
-		FD044100DB681C1005722763 /* FirebaseSharedSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE808675CB195FE0A663F136 /* FirebaseSharedSwift.framework */; };
 		FE8B956D20A191348643D074 /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 4DB283A18B8E0AEE3A524248 /* libSharedDesignSystem.a */; };
-		FFF0FC802B0D90E013657750 /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 435ED227313A6A22409E055C /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		3974DFEF76C76653A409B631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52DB8CC19AD669D9B07D887C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C62951D5F12265650ECDE4F9;
-			remoteInfo = FeatureMain;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		18CC3E626074518FDF607DF1 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3D383783128BC0BFBD1A5D5A /* Dependencies */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
@@ -161,40 +30,6 @@
 				880E7DF6E59E8618F3414595 /* libFeatureProfile.a in Dependencies */,
 				ED3CD9E73433FD53A7BD4410 /* libFeatureUniverse.a in Dependencies */,
 				FE8B956D20A191348643D074 /* libSharedDesignSystem.a in Dependencies */,
-			);
-			name = Dependencies;
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		6126C4E078F496891CA3D0AA /* Dependencies */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstSubfolderSpec = 16;
-			files = (
-				ECAAA51D1F63ADC5DD010344 /* AppAuth_AppAuth.bundle in Dependencies */,
-				F85AC72B4FFDCDAF53B149E6 /* AppAuth_AppAuthCore.bundle in Dependencies */,
-				F9A8518B3DEBA3284910401B /* Firebase_FirebaseAuth.bundle in Dependencies */,
-				097391E58E6350D3091A9ECF /* Firebase_FirebaseCore.bundle in Dependencies */,
-				C079138643E1574D6062FF66 /* Firebase_FirebaseCoreExtension.bundle in Dependencies */,
-				8EBF4344EB2B5750CE992609 /* Firebase_FirebaseCoreInternal.bundle in Dependencies */,
-				5B735A1696DE908E7D2FAFE3 /* Firebase_FirebaseFirestore.bundle in Dependencies */,
-				43A44ACF87F10805E9F0E688 /* GTMAppAuth_GTMAppAuth.bundle in Dependencies */,
-				9CD055850C0E86EA03733869 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle in Dependencies */,
-				DC20D1F3DFF0265AA6EDEC6C /* GoogleSignIn_GoogleSignIn.bundle in Dependencies */,
-				EA95CC087A16DC945D5E1F24 /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle in Dependencies */,
-				0AF41CD968CFF19097333152 /* GoogleUtilities_GoogleUtilities_Environment.bundle in Dependencies */,
-				08E8419EC8A5CDC5D3216C4C /* GoogleUtilities_GoogleUtilities_Logger.bundle in Dependencies */,
-				5DEC066076280CF55641923D /* GoogleUtilities_GoogleUtilities_NSData.bundle in Dependencies */,
-				A15F09B0556B7C6E1D6668C9 /* GoogleUtilities_GoogleUtilities_Network.bundle in Dependencies */,
-				B96B9B4FC018B788585C4E31 /* GoogleUtilities_GoogleUtilities_Reachability.bundle in Dependencies */,
-				C8C1B9E4630A7BFE67AE92A3 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle in Dependencies */,
-				88EEED5024733D313B5F99EF /* Promises_FBLPromises.bundle in Dependencies */,
-				E54EC6CABAEFD53C49541449 /* abseil_abslWrapper.bundle in Dependencies */,
-				874A145EE941D522B6112FC6 /* gRPC_grpcWrapper.bundle in Dependencies */,
-				120C2E7DE59F38546BE4AF4A /* gRPC_grpcppWrapper.bundle in Dependencies */,
-				B1019CB38E29BD1DD67F6E8E /* gRPC_opensslWrapper.bundle in Dependencies */,
-				F19B101DD4CD7D09EDA1D7A1 /* leveldb_leveldb.bundle in Dependencies */,
-				45F62F8870821AB57CE8C6B2 /* nanopb_nanopb.bundle in Dependencies */,
-				B4A7ED20D3132811F00D7CC3 /* swift-sharing_Sharing.bundle in Dependencies */,
 			);
 			name = Dependencies;
 			runOnlyForDeploymentPostprocessing = 1;
@@ -212,96 +47,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		056B31748098C33BD4A00592 /* FeatureMainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeatureMainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		06D7E560839ACF00DFC5D7FA /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
-		08B42EE7D443A581B4A72F86 /* DeviceCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceCheck.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/DeviceCheck.framework; sourceTree = DEVELOPER_DIR; };
-		092E19D593FC141D67643C92 /* FirebaseAppCheckInterop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseAppCheckInterop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1350F155F7E7BD383ED80836 /* GoogleUtilities_GoogleUtilities_Environment.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Environment.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		14EC26BEA9CA126E0FCCC73F /* RecaptchaInterop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RecaptchaInterop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		15FED63DD2A770DDDC3F4185 /* Firebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Firebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1646E986B2C9FDB6BE1A38B9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		178F99CE722797CCC9039D3E /* libFeatureConstellation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureConstellation.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		18354B6BEBEF4FA8BE61FEE8 /* gRPC_grpcppWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRPC_grpcppWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		273FC27B8B9DF2BEAB0E65E2 /* GoogleUtilities_NSData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_NSData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A47E5D49B4083E23828D4CA /* AppAuthCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppAuthCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C6417A819B510E0BBE6C016 /* absl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = absl.xcframework; sourceTree = "<group>"; };
-		2DCA93FD51434BDB2C9B07B1 /* AppAuth_AppAuthCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppAuth_AppAuthCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E27785C00FE30F14BC78D12 /* Promises_FBLPromises.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Promises_FBLPromises.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		309979FA88257B5DA6537225 /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		31A5D220858D33412CA1FEB9 /* AppAuth_AppAuth.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppAuth_AppAuth.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		3378E6198B2426BFB8FF4552 /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureUniverse.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		34C0935EDD86F7F39E277CC2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
-		35C0E1B37B8BBA139574D694 /* FeatureMainTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureMainTests-Info.plist"; sourceTree = "<group>"; };
-		368299EEC81A006B8FE8C62E /* third_party_IsAppEncrypted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = third_party_IsAppEncrypted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3AA1A8BA4DA069811AA86271 /* Firebase_FirebaseCoreExtension.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseCoreExtension.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		4054CB01FEF6762371A34C42 /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4198C777757C1491B88BF43F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
-		435ED227313A6A22409E055C /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		44712825499C6FD264FB1904 /* leveldb_leveldb.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = leveldb_leveldb.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		473C342025682B0F9B0258AC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		4A7B336457522FBEA9459390 /* FirebaseFirestoreInternalWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseFirestoreInternalWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BB7F0A8EECCDCB8E0666D09 /* FirebaseAuthInternal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseAuthInternal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB283A18B8E0AEE3A524248 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5692064C8EC32CB5104B4B1B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		575392004D9EE1BC5736AA1C /* Firebase_FirebaseCoreInternal.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseCoreInternal.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		59115DDD30D3C4DA87EBAD05 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1C542B177DC7517604DB17 /* MainTabFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeature.swift; sourceTree = "<group>"; };
-		5BE3F952EA806DA27A59D671 /* GoogleUtilities_Network.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Network.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		60899DEB1E8C2D44C4EA5735 /* grpc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = grpc.xcframework; sourceTree = "<group>"; };
-		6430D5BD1DFA45E6BFD35E79 /* openssl_grpc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = openssl_grpc.xcframework; sourceTree = "<group>"; };
-		646CFCAC267747BE27EE97D0 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_UserDefaults.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		65DD3B1C6FB21076FF35DA41 /* GoogleUtilities_Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		703B0CD6277DA54E366BFD11 /* AppCheckCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppCheckCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		70B0810D16DE613E6910D4CD /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SafariServices.framework; sourceTree = DEVELOPER_DIR; };
-		70BF9A5DB1304BAB06CD1A9B /* swift-sharing_Sharing.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swift-sharing_Sharing.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		70DE33CF3FC2BDDB32E9A9BC /* gRPC_opensslWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRPC_opensslWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		7332C3DD685F276A337F3CEB /* GTMAppAuth_GTMAppAuth.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTMAppAuth_GTMAppAuth.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		749BCA3A3E8E27A585825A0E /* leveldb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = leveldb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		774C9433CB0DCCBF9634098F /* Firebase_FirebaseFirestore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseFirestore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		7923381FD4154FDA933C0721 /* libFeatureMain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureMain.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B5EB2E9ADC91DA19C5B0746 /* FirebaseFirestoreTarget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseFirestoreTarget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EDCB8A696E34FD9FAB55254 /* Firebase_FirebaseAuth.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseAuth.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		8661DD2ED87681695FB34C34 /* grpcWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = grpcWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BCD6DEAD3D46C2E1075E06C /* GTMAppAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTMAppAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D08716D9B45A1DB4D9B0859 /* FirebaseFirestoreInternal.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseFirestoreInternal.xcframework; sourceTree = "<group>"; };
-		8D2751B813EF73FE6C043A3A /* FirebaseCoreExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseCoreExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F5558E03A01151ED28C4020 /* MainTabFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabFeatureTests.swift; sourceTree = "<group>"; };
-		92CEB1F24AB4C3027CF29C6E /* GoogleUtilities_AppDelegateSwizzler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_AppDelegateSwizzler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D44FBD9A086F9F16141AF41 /* abslWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = abslWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2FC2F9F5991345B0423DCE4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		A35E992BBDE1FFA6EAA512BA /* GoogleUtilities_GoogleUtilities_Network.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Network.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		A70E2BAF9B74F3630CB4FAC4 /* grpcpp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = grpcpp.xcframework; sourceTree = "<group>"; };
-		AACE385983C657ED4D10B721 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE69AD193F51FF88FD8D7E4A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		B0B27CB659A5DB4CA0F12764 /* FirebaseCoreInternal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseCoreInternal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B251534E648F9B13F7AE22C5 /* GoogleSignIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleSignIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B558EB8AC4BFDD6137162EB3 /* GoogleUtilities_Environment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Environment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA1961F5CDFC066B412751A5 /* Firebase_FirebaseCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		BC21BA047243F82B1C48C123 /* GoogleUtilities_GoogleUtilities_Reachability.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Reachability.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD3CE2E2E608A864D60245B7 /* grpcppWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = grpcppWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDECCAD89BD8996FF01FE46B /* GoogleUtilities_GoogleUtilities_NSData.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_NSData.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE808675CB195FE0A663F136 /* FirebaseSharedSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseSharedSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BED16A359FEDD335B34EFDF0 /* FirebaseAuthInterop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseAuthInterop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF8599910B638D70BB0326A9 /* libFeatureProfile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureProfile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD1FC4CA907676807B7A7C0 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		C6B8209D83577E7FF6105057 /* nanopb_nanopb.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nanopb_nanopb.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9C74A035EE78A4E6E491655 /* GoogleUtilities_UserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_UserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C30521251874BEDB70E827 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D39132C0888395C48F0A68CB /* opensslWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = opensslWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7C11C13E91E4D59F3954B17 /* AppAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D852B6C370853E341D8C3484 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		E1384FDE54598C095AB69CD8 /* GoogleUtilities_Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E671F67364790564004BF620 /* abseil_abslWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = abseil_abslWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6A09023D507A257D30A1006 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTMSessionFetcher_GTMSessionFetcherCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		E95BA4D02B4815DA50B0CD76 /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED53530DA0ADF223C5578030 /* gRPC_grpcWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRPC_grpcWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		EEFFBA1AADA4BCAF74723FDD /* GoogleUtilities_GoogleUtilities_Logger.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Logger.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1FE814FC5B98887CE0D3458 /* libFeatureNickname.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureNickname.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F458E1F9394F470F4297DECE /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
-		F7C91E5DAB4C2AD729E4415E /* FBLPromises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBLPromises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F987D0154274BC85390B5460 /* GTMSessionFetcherCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTMSessionFetcherCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDF5342B73A289A71A622B52 /* GoogleSignIn_GoogleSignIn.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleSignIn_GoogleSignIn.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,234 +68,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F04AC43DC5102CBC78560A3F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8A602F72A9E9303439965727 /* AppKit.framework in Frameworks */,
-				74E7404E71A81126144C7653 /* CoreGraphics.framework in Frameworks */,
-				48B365AAB5DF78F793D38F2B /* CoreText.framework in Frameworks */,
-				2341F06CF795949791FA0F9F /* DeviceCheck.framework in Frameworks */,
-				86EECE9F87459B2D80DE7637 /* Foundation.framework in Frameworks */,
-				AC4960C6E6A8D64E96C20AF8 /* LocalAuthentication.framework in Frameworks */,
-				058C6DE86DA031772342463D /* SafariServices.framework in Frameworks */,
-				839DAECA6787CF16627C6571 /* Security.framework in Frameworks */,
-				24C85BFB47CE465672A82802 /* SystemConfiguration.framework in Frameworks */,
-				21F4E30BBB88AC1C89E2F1C2 /* UIKit.framework in Frameworks */,
-				A355BD64ADE3DE20CA9D38B3 /* libc++.tbd in Frameworks */,
-				134B835327025F3A98C9E04B /* libz.tbd in Frameworks */,
-				7E3495BFA0CF94BACF725BEC /* AppAuth.framework in Frameworks */,
-				C501E3E0FFAC3D1A08C103EA /* AppAuthCore.framework in Frameworks */,
-				4A3010CC73E82A5451ABB14C /* AppCheckCore.framework in Frameworks */,
-				CF659051050D2E40F3FC999C /* ComposableArchitecture.framework in Frameworks */,
-				4D50E8273AF5F575C451E453 /* libDomainClient.a in Frameworks */,
-				7C92F36B3882145740D4FD08 /* libDomainEntity.a in Frameworks */,
-				0BF9D9A9B6DE3AFC51A8AFC2 /* FBLPromises.framework in Frameworks */,
-				D4376A05A26C760ED2E3B823 /* libFeatureConstellation.a in Frameworks */,
-				5A19916A764B93DBF97A1683 /* libFeatureMain.a in Frameworks */,
-				71490DA2F5F35A9A5FDAE0F6 /* libFeatureNickname.a in Frameworks */,
-				6CBE2E8129BD44DA7FB08DBD /* libFeatureProfile.a in Frameworks */,
-				6F1F752A5FB789F6274FC19B /* libFeatureUniverse.a in Frameworks */,
-				69506515E59B18A702859C76 /* Firebase.framework in Frameworks */,
-				DC8E5801BFA25BA3E05D43F8 /* FirebaseAppCheckInterop.framework in Frameworks */,
-				A1EDEB5E945E11BD2BE29197 /* FirebaseAuth.framework in Frameworks */,
-				CFE84A6C942E76674ED3F5AD /* FirebaseAuthInternal.framework in Frameworks */,
-				890EDD7E7E451DBB0ED6B55D /* FirebaseAuthInterop.framework in Frameworks */,
-				1CFEDE80B0B5656149507FDD /* FirebaseCore.framework in Frameworks */,
-				835A6E8063A8A811A6F86295 /* FirebaseCoreExtension.framework in Frameworks */,
-				68590ECD4B8DABD080384380 /* FirebaseCoreInternal.framework in Frameworks */,
-				79C26EF383072F15CD7F8DE7 /* FirebaseFirestore.framework in Frameworks */,
-				1070900282FA9542AD5695BF /* FirebaseFirestoreInternalWrapper.framework in Frameworks */,
-				38B6C3FE884A6B819E6DBC98 /* FirebaseFirestoreTarget.framework in Frameworks */,
-				FD044100DB681C1005722763 /* FirebaseSharedSwift.framework in Frameworks */,
-				6D5DBCD74DF622BDD334F9D8 /* GTMAppAuth.framework in Frameworks */,
-				0B9E11DF15F4245D47946752 /* GTMSessionFetcherCore.framework in Frameworks */,
-				27E3D7771FA8859E24E2689A /* GoogleSignIn.framework in Frameworks */,
-				9B62430A9948D2AF629854E2 /* GoogleUtilities_AppDelegateSwizzler.framework in Frameworks */,
-				E2C08CC8458285C3B6AC1543 /* GoogleUtilities_Environment.framework in Frameworks */,
-				5785D43B84DD13D77BE3D91A /* GoogleUtilities_Logger.framework in Frameworks */,
-				07E579EBDC72B924C4816310 /* GoogleUtilities_NSData.framework in Frameworks */,
-				833D024347950CE08FE31CA1 /* GoogleUtilities_Network.framework in Frameworks */,
-				FB310C4BB08FE9765518EDBA /* GoogleUtilities_Reachability.framework in Frameworks */,
-				8769D3674D1F534D3D5F9537 /* GoogleUtilities_UserDefaults.framework in Frameworks */,
-				DDE3FAAC4E45E2C04C3960DB /* RecaptchaInterop.framework in Frameworks */,
-				D02518159D859F47F7B7DED8 /* libSharedDesignSystem.a in Frameworks */,
-				F4D32DDDC9B51B55B0216EB7 /* abslWrapper.framework in Frameworks */,
-				B5D6FD332A744F56BC403EDD /* grpcWrapper.framework in Frameworks */,
-				7336DC59D861CFB31F8BE30C /* grpcppWrapper.framework in Frameworks */,
-				E2DBD2D9F4B45786DCEE9D4D /* leveldb.framework in Frameworks */,
-				82F7B7E548A8C8DD7921D77A /* nanopb.framework in Frameworks */,
-				318946188AEE527090D47C2F /* opensslWrapper.framework in Frameworks */,
-				1B93AB6B2B6D0973FF7A88BA /* third_party_IsAppEncrypted.framework in Frameworks */,
-				E8B62113C8E66CA634D4C8F2 /* absl.xcframework in Frameworks */,
-				5324E0883E2E2C2BF8EC8413 /* FirebaseFirestoreInternal.xcframework in Frameworks */,
-				35619BB388FC3A83BAD6E981 /* grpc.xcframework in Frameworks */,
-				F6716639AC1A9D6B8825ED10 /* grpcpp.xcframework in Frameworks */,
-				3872A56C1F571C735A50B598 /* openssl_grpc.xcframework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		06D5567139B39C9939C570D8 /* InfoPlists */ = {
-			isa = PBXGroup;
-			children = (
-				35C0E1B37B8BBA139574D694 /* FeatureMainTests-Info.plist */,
-			);
-			path = InfoPlists;
-			sourceTree = "<group>";
-		};
-		1672EC9DAA6D7B358B928325 /* .build */ = {
-			isa = PBXGroup;
-			children = (
-				8310CBC7CD4E8B9C30F2717C /* artifacts */,
-			);
-			path = .build;
-			sourceTree = "<group>";
-		};
-		1BBA9666F2A99B942F99C790 /* abseil-cpp-binary */ = {
-			isa = PBXGroup;
-			children = (
-				594CD18C6F926EF33B2EAAC4 /* absl */,
-			);
-			path = "abseil-cpp-binary";
-			sourceTree = "<group>";
-		};
-		3A0EA266A9CB25BC0EDEB5F6 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				8F5558E03A01151ED28C4020 /* MainTabFeatureTests.swift */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		3E3C6B48C8A9BEF6BADA39E6 /* Tuist */ = {
-			isa = PBXGroup;
-			children = (
-				1672EC9DAA6D7B358B928325 /* .build */,
-			);
-			name = Tuist;
-			path = ../../../Tuist;
-			sourceTree = "<group>";
-		};
-		594CD18C6F926EF33B2EAAC4 /* absl */ = {
-			isa = PBXGroup;
-			children = (
-				2C6417A819B510E0BBE6C016 /* absl.xcframework */,
-			);
-			path = absl;
-			sourceTree = "<group>";
-		};
-		5FB6A1787B0B907BA630412A /* grpc */ = {
-			isa = PBXGroup;
-			children = (
-				60899DEB1E8C2D44C4EA5735 /* grpc.xcframework */,
-			);
-			path = grpc;
-			sourceTree = "<group>";
-		};
-		67B971B1C8FFA6A2DB56F805 /* firebase-ios-sdk */ = {
-			isa = PBXGroup;
-			children = (
-				F2E94CCE294ED9FCD9A979F6 /* FirebaseFirestoreInternal */,
-			);
-			path = "firebase-ios-sdk";
-			sourceTree = "<group>";
-		};
 		6ADE8AFD38848E78DC19018B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E671F67364790564004BF620 /* abseil_abslWrapper.bundle */,
-				9D44FBD9A086F9F16141AF41 /* abslWrapper.framework */,
-				31A5D220858D33412CA1FEB9 /* AppAuth_AppAuth.bundle */,
-				2DCA93FD51434BDB2C9B07B1 /* AppAuth_AppAuthCore.bundle */,
-				D7C11C13E91E4D59F3954B17 /* AppAuth.framework */,
-				2A47E5D49B4083E23828D4CA /* AppAuthCore.framework */,
-				703B0CD6277DA54E366BFD11 /* AppCheckCore.framework */,
 				E95BA4D02B4815DA50B0CD76 /* ComposableArchitecture.framework */,
-				F7C91E5DAB4C2AD729E4415E /* FBLPromises.framework */,
-				056B31748098C33BD4A00592 /* FeatureMainTests.xctest */,
-				7EDCB8A696E34FD9FAB55254 /* Firebase_FirebaseAuth.bundle */,
-				BA1961F5CDFC066B412751A5 /* Firebase_FirebaseCore.bundle */,
-				3AA1A8BA4DA069811AA86271 /* Firebase_FirebaseCoreExtension.bundle */,
-				575392004D9EE1BC5736AA1C /* Firebase_FirebaseCoreInternal.bundle */,
-				774C9433CB0DCCBF9634098F /* Firebase_FirebaseFirestore.bundle */,
-				15FED63DD2A770DDDC3F4185 /* Firebase.framework */,
-				092E19D593FC141D67643C92 /* FirebaseAppCheckInterop.framework */,
-				59115DDD30D3C4DA87EBAD05 /* FirebaseAuth.framework */,
-				4BB7F0A8EECCDCB8E0666D09 /* FirebaseAuthInternal.framework */,
-				BED16A359FEDD335B34EFDF0 /* FirebaseAuthInterop.framework */,
-				AACE385983C657ED4D10B721 /* FirebaseCore.framework */,
-				8D2751B813EF73FE6C043A3A /* FirebaseCoreExtension.framework */,
-				B0B27CB659A5DB4CA0F12764 /* FirebaseCoreInternal.framework */,
-				309979FA88257B5DA6537225 /* FirebaseFirestore.framework */,
-				4A7B336457522FBEA9459390 /* FirebaseFirestoreInternalWrapper.framework */,
-				7B5EB2E9ADC91DA19C5B0746 /* FirebaseFirestoreTarget.framework */,
-				BE808675CB195FE0A663F136 /* FirebaseSharedSwift.framework */,
-				FDF5342B73A289A71A622B52 /* GoogleSignIn_GoogleSignIn.bundle */,
-				B251534E648F9B13F7AE22C5 /* GoogleSignIn.framework */,
-				92CEB1F24AB4C3027CF29C6E /* GoogleUtilities_AppDelegateSwizzler.framework */,
-				B558EB8AC4BFDD6137162EB3 /* GoogleUtilities_Environment.framework */,
-				435ED227313A6A22409E055C /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle */,
-				1350F155F7E7BD383ED80836 /* GoogleUtilities_GoogleUtilities_Environment.bundle */,
-				EEFFBA1AADA4BCAF74723FDD /* GoogleUtilities_GoogleUtilities_Logger.bundle */,
-				A35E992BBDE1FFA6EAA512BA /* GoogleUtilities_GoogleUtilities_Network.bundle */,
-				BDECCAD89BD8996FF01FE46B /* GoogleUtilities_GoogleUtilities_NSData.bundle */,
-				BC21BA047243F82B1C48C123 /* GoogleUtilities_GoogleUtilities_Reachability.bundle */,
-				646CFCAC267747BE27EE97D0 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle */,
-				65DD3B1C6FB21076FF35DA41 /* GoogleUtilities_Logger.framework */,
-				5BE3F952EA806DA27A59D671 /* GoogleUtilities_Network.framework */,
-				273FC27B8B9DF2BEAB0E65E2 /* GoogleUtilities_NSData.framework */,
-				E1384FDE54598C095AB69CD8 /* GoogleUtilities_Reachability.framework */,
-				C9C74A035EE78A4E6E491655 /* GoogleUtilities_UserDefaults.framework */,
-				18354B6BEBEF4FA8BE61FEE8 /* gRPC_grpcppWrapper.bundle */,
-				ED53530DA0ADF223C5578030 /* gRPC_grpcWrapper.bundle */,
-				70DE33CF3FC2BDDB32E9A9BC /* gRPC_opensslWrapper.bundle */,
-				BD3CE2E2E608A864D60245B7 /* grpcppWrapper.framework */,
-				8661DD2ED87681695FB34C34 /* grpcWrapper.framework */,
-				7332C3DD685F276A337F3CEB /* GTMAppAuth_GTMAppAuth.bundle */,
-				8BCD6DEAD3D46C2E1075E06C /* GTMAppAuth.framework */,
-				E6A09023D507A257D30A1006 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle */,
-				F987D0154274BC85390B5460 /* GTMSessionFetcherCore.framework */,
-				44712825499C6FD264FB1904 /* leveldb_leveldb.bundle */,
-				749BCA3A3E8E27A585825A0E /* leveldb.framework */,
 				3378E6198B2426BFB8FF4552 /* libDomainClient.a */,
 				D2C30521251874BEDB70E827 /* libDomainEntity.a */,
 				178F99CE722797CCC9039D3E /* libFeatureConstellation.a */,
 				7923381FD4154FDA933C0721 /* libFeatureMain.a */,
-				F1FE814FC5B98887CE0D3458 /* libFeatureNickname.a */,
 				BF8599910B638D70BB0326A9 /* libFeatureProfile.a */,
 				339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */,
 				4DB283A18B8E0AEE3A524248 /* libSharedDesignSystem.a */,
-				C6B8209D83577E7FF6105057 /* nanopb_nanopb.bundle */,
-				4054CB01FEF6762371A34C42 /* nanopb.framework */,
-				D39132C0888395C48F0A68CB /* opensslWrapper.framework */,
-				2E27785C00FE30F14BC78D12 /* Promises_FBLPromises.bundle */,
-				14EC26BEA9CA126E0FCCC73F /* RecaptchaInterop.framework */,
-				70BF9A5DB1304BAB06CD1A9B /* swift-sharing_Sharing.bundle */,
-				368299EEC81A006B8FE8C62E /* third_party_IsAppEncrypted.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		8310CBC7CD4E8B9C30F2717C /* artifacts */ = {
-			isa = PBXGroup;
-			children = (
-				1BBA9666F2A99B942F99C790 /* abseil-cpp-binary */,
-				67B971B1C8FFA6A2DB56F805 /* firebase-ios-sdk */,
-				CF3C8FB0C24F88E9A9122C51 /* grpc-binary */,
-			);
-			path = artifacts;
 			sourceTree = "<group>";
 		};
 		B120DAAB4DB2867A594494D1 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				C496707062BDC2E6CD919FD9 /* Derived */,
 				BE069A529D11260C1D108FF1 /* Sources */,
-				E811C213E8D7501744091A8D /* Tests */,
-				3E3C6B48C8A9BEF6BADA39E6 /* Tuist */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -554,109 +103,17 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		C496707062BDC2E6CD919FD9 /* Derived */ = {
-			isa = PBXGroup;
-			children = (
-				06D5567139B39C9939C570D8 /* InfoPlists */,
-			);
-			path = Derived;
-			sourceTree = "<group>";
-		};
-		C852F6BA62C4840C9223D529 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1646E986B2C9FDB6BE1A38B9 /* AppKit.framework */,
-				A2FC2F9F5991345B0423DCE4 /* CoreGraphics.framework */,
-				4198C777757C1491B88BF43F /* CoreText.framework */,
-				08B42EE7D443A581B4A72F86 /* DeviceCheck.framework */,
-				D852B6C370853E341D8C3484 /* Foundation.framework */,
-				F458E1F9394F470F4297DECE /* libc++.tbd */,
-				34C0935EDD86F7F39E277CC2 /* libz.tbd */,
-				06D7E560839ACF00DFC5D7FA /* LocalAuthentication.framework */,
-				70B0810D16DE613E6910D4CD /* SafariServices.framework */,
-				473C342025682B0F9B0258AC /* Security.framework */,
-				AE69AD193F51FF88FD8D7E4A /* SystemConfiguration.framework */,
-				5692064C8EC32CB5104B4B1B /* UIKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		C8E56461FA59728C570F9EFD = {
 			isa = PBXGroup;
 			children = (
 				6ADE8AFD38848E78DC19018B /* Products */,
 				B120DAAB4DB2867A594494D1 /* Project */,
-				C852F6BA62C4840C9223D529 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		CF3C8FB0C24F88E9A9122C51 /* grpc-binary */ = {
-			isa = PBXGroup;
-			children = (
-				5FB6A1787B0B907BA630412A /* grpc */,
-				D9BBD6028B49D984D6ACE20B /* grpcpp */,
-				F71B8BC7F18422BC93ADDD61 /* openssl_grpc */,
-			);
-			path = "grpc-binary";
-			sourceTree = "<group>";
-		};
-		D9BBD6028B49D984D6ACE20B /* grpcpp */ = {
-			isa = PBXGroup;
-			children = (
-				A70E2BAF9B74F3630CB4FAC4 /* grpcpp.xcframework */,
-			);
-			path = grpcpp;
-			sourceTree = "<group>";
-		};
-		E811C213E8D7501744091A8D /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				3A0EA266A9CB25BC0EDEB5F6 /* Sources */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		F2E94CCE294ED9FCD9A979F6 /* FirebaseFirestoreInternal */ = {
-			isa = PBXGroup;
-			children = (
-				8D08716D9B45A1DB4D9B0859 /* FirebaseFirestoreInternal.xcframework */,
-			);
-			path = FirebaseFirestoreInternal;
-			sourceTree = "<group>";
-		};
-		F71B8BC7F18422BC93ADDD61 /* openssl_grpc */ = {
-			isa = PBXGroup;
-			children = (
-				6430D5BD1DFA45E6BFD35E79 /* openssl_grpc.xcframework */,
-			);
-			path = openssl_grpc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		47A82D280773C8B375CE9E03 /* FeatureMainTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 013A5B8E9F4E567751B13B3F /* Build configuration list for PBXNativeTarget "FeatureMainTests" */;
-			buildPhases = (
-				9AE3406138E11C7F35BE9EBD /* Sources */,
-				D9ACE09AB653093135BFED44 /* Resources */,
-				F04AC43DC5102CBC78560A3F /* Frameworks */,
-				18CC3E626074518FDF607DF1 /* Embed Frameworks */,
-				6126C4E078F496891CA3D0AA /* Dependencies */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7785D282ADACB926E916508F /* PBXTargetDependency */,
-			);
-			name = FeatureMainTests;
-			packageProductDependencies = (
-			);
-			productName = FeatureMainTests;
-			productReference = 056B31748098C33BD4A00592 /* FeatureMainTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		C62951D5F12265650ECDE4F9 /* FeatureMain */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC86632E74C9FC94DA14BFC5 /* Build configuration list for PBXNativeTarget "FeatureMain" */;
@@ -702,7 +159,6 @@
 			projectRoot = "";
 			targets = (
 				C62951D5F12265650ECDE4F9 /* FeatureMain */,
-				47A82D280773C8B375CE9E03 /* FeatureMainTests */,
 			);
 		};
 /* End PBXProject section */
@@ -715,49 +171,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9ACE09AB653093135BFED44 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1896C6843FE75DC44FFBDA5C /* AppAuth_AppAuth.bundle in Resources */,
-				5571219941F2656CE8A423EA /* AppAuth_AppAuthCore.bundle in Resources */,
-				02D9551BDF5DB6035ACAD9B5 /* Firebase_FirebaseAuth.bundle in Resources */,
-				C49ED86DA1742A2E00FD0D9C /* Firebase_FirebaseCore.bundle in Resources */,
-				E4A12B354AAEC6A553D66937 /* Firebase_FirebaseCoreExtension.bundle in Resources */,
-				ADE4F77E846A0BF5AE042FEB /* Firebase_FirebaseCoreInternal.bundle in Resources */,
-				E2A889BA1CB2B901FD3D1DD1 /* Firebase_FirebaseFirestore.bundle in Resources */,
-				873CEDA2CD5B442B5A3DBEFE /* GTMAppAuth_GTMAppAuth.bundle in Resources */,
-				CDC5C10A3A2B7398F2109FDE /* GTMSessionFetcher_GTMSessionFetcherCore.bundle in Resources */,
-				906E55C71BEBBD1CB9BD1F0E /* GoogleSignIn_GoogleSignIn.bundle in Resources */,
-				FFF0FC802B0D90E013657750 /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle in Resources */,
-				AD914138CBA0B23B2419D42C /* GoogleUtilities_GoogleUtilities_Environment.bundle in Resources */,
-				087087F38C628BD4412D2662 /* GoogleUtilities_GoogleUtilities_Logger.bundle in Resources */,
-				FC160B90BD04D76DEE52A7AE /* GoogleUtilities_GoogleUtilities_NSData.bundle in Resources */,
-				85CBC508B7E4750939D07981 /* GoogleUtilities_GoogleUtilities_Network.bundle in Resources */,
-				2D1E123420AB0CE2ECD42B11 /* GoogleUtilities_GoogleUtilities_Reachability.bundle in Resources */,
-				6C0150557A56FE42F94B1669 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle in Resources */,
-				44017B5EC44BB757797ABBDC /* Promises_FBLPromises.bundle in Resources */,
-				761C66427039CCB7AE7F27B1 /* abseil_abslWrapper.bundle in Resources */,
-				54BCB7FEECF324B13CA4F45D /* gRPC_grpcWrapper.bundle in Resources */,
-				972BFD5B400874DF1478B3C1 /* gRPC_grpcppWrapper.bundle in Resources */,
-				EF7B76073AD4A36A2C8A99AD /* gRPC_opensslWrapper.bundle in Resources */,
-				489294C6816D02BA43C4BC91 /* leveldb_leveldb.bundle in Resources */,
-				6278B62BC7253DF877B32562 /* nanopb_nanopb.bundle in Resources */,
-				E7CE5FEFAD3433E5D1E8DE34 /* swift-sharing_Sharing.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9AE3406138E11C7F35BE9EBD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DCE011BD35DB5B5B7F4914D4 /* MainTabFeatureTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E2956C14FBC3BADA47387A8E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -768,15 +184,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7785D282ADACB926E916508F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FeatureMain;
-			target = C62951D5F12265650ECDE4F9 /* FeatureMain */;
-			targetProxy = 3974DFEF76C76653A409B631 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		35045ADE1D96599F494AF68B /* Debug */ = {
@@ -938,191 +345,6 @@
 				PRODUCT_NAME = FeatureMain;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
-				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		377D1737690FD2EE6941B890 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/abseil-cpp-binary/absl",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/firebase-ios-sdk/FirebaseFirestoreInternal",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/grpc-binary/grpc",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/grpc-binary/grpcpp",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/grpc-binary/openssl_grpc",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuth",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuth/iOS",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuth/macOS",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuth/macOS/LoopbackHTTPServer",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuthCore",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleSignIn-iOS",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleSignIn-iOS/GoogleSignIn/Sources/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/AppDelegateSwizzler/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/Environment/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/Logger/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/NSData+zlib/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/Network/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/Reachability/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/UserDefaults/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/third_party/IsAppEncrypted/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/abseil-cpp-binary/absl-Wrapper/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/app-check",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/app-check/AppCheckCore/Sources/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseAppCheck/Interop/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseAuth/Interop/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseAuth/Sources/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseCore/Extension",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseCore/Sources/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseFirestoreInternal",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/SwiftPM-PlatformExclude/FirebaseFirestoreWrap/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/grpc-binary/grpc-Wrapper/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/grpc-binary/grpcpp-Wrapper/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/grpc-binary/openssl-grpc-Wrapper/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/gtm-session-fetcher/Sources/Core/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/interop-ios-for-google-sdks/RecaptchaEnterprise/RecaptchaInterop/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/leveldb",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/leveldb/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/nanopb/spm_headers",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/swift-navigation/Sources/UIKitNavigationShim/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include",
-				);
-				INFOPLIST_FILE = "Derived/InfoPlists/FeatureMainTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
-				);
-				OTHER_SWIFT_FLAGS = (
-					"$(inherited)",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "";
-				PRODUCT_NAME = FeatureMainTests;
-				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1373,187 +595,6 @@
 			};
 			name = Release;
 		};
-		A086672A9D0BCBF8AF239E25 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/abseil-cpp-binary/absl",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/firebase-ios-sdk/FirebaseFirestoreInternal",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/grpc-binary/grpc",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/grpc-binary/grpcpp",
-					"$(SRCROOT)/../../../Tuist/.build/artifacts/grpc-binary/openssl_grpc",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuth",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuth/iOS",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuth/macOS",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuth/macOS/LoopbackHTTPServer",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/AppAuth-iOS/Sources/AppAuthCore",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleSignIn-iOS",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleSignIn-iOS/GoogleSignIn/Sources/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/AppDelegateSwizzler/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/Environment/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/Logger/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/NSData+zlib/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/Network/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/Reachability/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/GoogleUtilities/UserDefaults/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/GoogleUtilities/third_party/IsAppEncrypted/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/abseil-cpp-binary/absl-Wrapper/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/app-check",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/app-check/AppCheckCore/Sources/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseAppCheck/Interop/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseAuth/Interop/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseAuth/Sources/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseCore/Extension",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseCore/Sources/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/FirebaseFirestoreInternal",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/SwiftPM-PlatformExclude/FirebaseFirestoreWrap/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/grpc-binary/grpc-Wrapper/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/grpc-binary/grpcpp-Wrapper/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/grpc-binary/openssl-grpc-Wrapper/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/gtm-session-fetcher/Sources/Core/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/interop-ios-for-google-sdks/RecaptchaEnterprise/RecaptchaInterop/Public",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/leveldb",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/leveldb/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/nanopb/spm_headers",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/swift-navigation/Sources/UIKitNavigationShim/include",
-					"$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include",
-				);
-				INFOPLIST_FILE = "Derived/InfoPlists/FeatureMainTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
-				);
-				OTHER_SWIFT_FLAGS = (
-					"$(inherited)",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "";
-				PRODUCT_NAME = FeatureMainTests;
-				SDKROOT = iphoneos;
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 		EEC1AB60357A3530787F3AED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1618,15 +659,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		013A5B8E9F4E567751B13B3F /* Build configuration list for PBXNativeTarget "FeatureMainTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				377D1737690FD2EE6941B890 /* Debug */,
-				A086672A9D0BCBF8AF239E25 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		789224ED9B40F717BE59E42B /* Build configuration list for PBXProject "FeatureMain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

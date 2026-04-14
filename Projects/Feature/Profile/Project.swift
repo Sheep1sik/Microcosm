@@ -16,5 +16,17 @@ let project = Project.makeModule(
                 ]
             )
         ),
+        .feature(
+            tests: .Profile,
+            target: .init(
+                dependencies: [
+                    .target(name: ModulePath.Feature.name + ModulePath.Feature.Profile.rawValue),
+                    .feature(sources: .Nickname),
+                    .domain(sources: .Client),
+                    .domain(sources: .Entity),
+                    .external(name: "ComposableArchitecture"),
+                ]
+            )
+        ),
     ]
 )

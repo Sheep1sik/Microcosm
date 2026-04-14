@@ -11,10 +11,13 @@
 		1DFC1E425835C7824A5769AB /* GoalClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F16363E15E4D5234940AAA /* GoalClient.swift */; };
 		2012F6A8DD0F9FF37F813A57 /* GoogleSignIn.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = 2E8D7B139D0D0F0F5FE3D3B2 /* GoogleSignIn.framework */; };
 		29270558215922F50DCB395F /* FirebaseFirestoreTarget.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = 325588A78D67F8A40ABF1084 /* FirebaseFirestoreTarget.framework */; };
+		30A0F25D28D7897420E8F35B /* Record+Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27E1FCF30176CB809E61710 /* Record+Firestore.swift */; };
+		3A18A8E24C165F3A5299354B /* Goal+Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7AD91018DBFDE502EDD54 /* Goal+Firestore.swift */; };
 		732F4A982FFFBF0CACE0E301 /* RecordClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC051CDB03428F229BB2B42 /* RecordClient.swift */; };
 		8248E6266E483E72DEBB296D /* UserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0980B59C1B40FF186646649 /* UserClient.swift */; };
 		A98E497C78EAA285C4476952 /* OpenAIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CBF4E64084DAF41B301EC6 /* OpenAIClient.swift */; };
 		B6AED2B647A44CC8C49A71CD /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A364915225E5B79D92805B76 /* ComposableArchitecture.framework */; };
+		D8AF26194C1B24D66EE83CC0 /* RecordEmotionLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A434BCDBD8F765A23E138AA /* RecordEmotionLegacy.swift */; };
 		D8D37B3559CA743F822649CD /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5541C81F3532E2127D510D6C /* AuthClient.swift */; };
 		DEAA93D379562CBE225F3957 /* FirebaseAuth.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = 128DF3EF7D0F57F58E8BFD86 /* FirebaseAuth.framework */; };
 /* End PBXBuildFile section */
@@ -50,10 +53,13 @@
 		2E8D7B139D0D0F0F5FE3D3B2 /* GoogleSignIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleSignIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FDB734022D4D7BD9CCBB27B /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		325588A78D67F8A40ABF1084 /* FirebaseFirestoreTarget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseFirestoreTarget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A434BCDBD8F765A23E138AA /* RecordEmotionLegacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordEmotionLegacy.swift; sourceTree = "<group>"; };
 		3DC051CDB03428F229BB2B42 /* RecordClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordClient.swift; sourceTree = "<group>"; };
 		5541C81F3532E2127D510D6C /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
+		5EE7AD91018DBFDE502EDD54 /* Goal+Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+Firestore.swift"; sourceTree = "<group>"; };
 		A364915225E5B79D92805B76 /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F16363E15E4D5234940AAA /* GoalClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalClient.swift; sourceTree = "<group>"; };
+		B27E1FCF30176CB809E61710 /* Record+Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+Firestore.swift"; sourceTree = "<group>"; };
 		B7CBF4E64084DAF41B301EC6 /* OpenAIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIClient.swift; sourceTree = "<group>"; };
 		C0980B59C1B40FF186646649 /* UserClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClient.swift; sourceTree = "<group>"; };
 		E8373FC5D27F3A2D0DDC7A79 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,9 +81,12 @@
 			isa = PBXGroup;
 			children = (
 				5541C81F3532E2127D510D6C /* AuthClient.swift */,
+				5EE7AD91018DBFDE502EDD54 /* Goal+Firestore.swift */,
 				A3F16363E15E4D5234940AAA /* GoalClient.swift */,
 				B7CBF4E64084DAF41B301EC6 /* OpenAIClient.swift */,
+				B27E1FCF30176CB809E61710 /* Record+Firestore.swift */,
 				3DC051CDB03428F229BB2B42 /* RecordClient.swift */,
+				3A434BCDBD8F765A23E138AA /* RecordEmotionLegacy.swift */,
 				C0980B59C1B40FF186646649 /* UserClient.swift */,
 			);
 			path = Sources;
@@ -180,9 +189,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D37B3559CA743F822649CD /* AuthClient.swift in Sources */,
+				3A18A8E24C165F3A5299354B /* Goal+Firestore.swift in Sources */,
 				1DFC1E425835C7824A5769AB /* GoalClient.swift in Sources */,
 				A98E497C78EAA285C4476952 /* OpenAIClient.swift in Sources */,
+				30A0F25D28D7897420E8F35B /* Record+Firestore.swift in Sources */,
 				732F4A982FFFBF0CACE0E301 /* RecordClient.swift in Sources */,
+				D8AF26194C1B24D66EE83CC0 /* RecordEmotionLegacy.swift in Sources */,
 				8248E6266E483E72DEBB296D /* UserClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
