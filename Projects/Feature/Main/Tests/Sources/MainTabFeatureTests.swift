@@ -112,17 +112,13 @@ final class MainTabFeatureTests: XCTestCase {
             MainTabFeature()
         }
 
-        // CMi 는 별 2개(index 0,1) — 두 별 모두 완성된 목표가 있으면 별자리 완성.
-        let goals = [
-            Self.completedGoal(constellationId: "CMi", starIndex: 0),
-            Self.completedGoal(constellationId: "CMi", starIndex: 1),
-        ]
+        let goals = Self.allStarsCompleted()
 
         await store.send(.goalsUpdated(goals)) {
             $0.constellation.allGoals = goals
             $0.constellation.hasInitialGoalsLoaded = true
-            $0.constellation.previouslyCompletedIds = ["CMi"]
-            $0.universe.completedConstellationIds = ["CMi"]
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
             // 메시지는 생성되지 않음 (isFromObserver + 첫 로드)
         }
     }
@@ -137,16 +133,13 @@ final class MainTabFeatureTests: XCTestCase {
 
         let store = TestStore(initialState: initial) { MainTabFeature() }
 
-        let goals = [
-            Self.completedGoal(constellationId: "CMi", starIndex: 0),
-            Self.completedGoal(constellationId: "CMi", starIndex: 1),
-        ]
+        let goals = Self.allStarsCompleted()
 
         await store.send(.goalsUpdated(goals)) {
             $0.constellation.allGoals = goals
-            $0.constellation.previouslyCompletedIds = ["CMi"]
-            $0.universe.completedConstellationIds = ["CMi"]
-            $0.constellation.completedConstellationMessage = "작은개자리의\n모든 별들이 빛을 찾았어요!"
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
+            $0.constellation.completedConstellationMessage = "\(Self.testConstellationNameKO)의\n모든 별들이 빛을 찾았어요!"
             $0.constellation.completedConstellationSubtitle = "완성된 별자리는 별지기님의 소우주에서도 볼 수 있어요"
         }
     }
@@ -157,40 +150,34 @@ final class MainTabFeatureTests: XCTestCase {
 
         let store = TestStore(initialState: initial) { MainTabFeature() }
 
-        let goals = [
-            Self.completedGoal(constellationId: "CMi", starIndex: 0),
-            Self.completedGoal(constellationId: "CMi", starIndex: 1),
-        ]
+        let goals = Self.allStarsCompleted()
 
         await store.send(.goalsUpdated(goals)) {
             $0.constellation.allGoals = goals
-            $0.constellation.previouslyCompletedIds = ["CMi"]
-            $0.universe.completedConstellationIds = ["CMi"]
-            $0.constellation.completedConstellationMessage = "작은개자리의\n모든 별들이 빛을 찾았어요!"
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
+            $0.constellation.completedConstellationMessage = "\(Self.testConstellationNameKO)의\n모든 별들이 빛을 찾았어요!"
             $0.constellation.completedConstellationSubtitle = "완성된 별자리는 우주인님의 소우주에서도 볼 수 있어요"
         }
     }
 
     func test_goalsUpdated_완성됐던별자리_해제시_lostMessage_생성() async {
-        // 사전 조건: 이미 CMi가 완성 상태로 기록돼 있음.
+        // 사전 조건: 이미 테스트 별자리가 완성 상태로 기록돼 있음.
         var initial = MainTabFeature.State()
         initial.constellation.hasInitialGoalsLoaded = true
-        initial.constellation.previouslyCompletedIds = ["CMi"]
-        initial.universe.completedConstellationIds = ["CMi"]
+        initial.constellation.previouslyCompletedIds = [Self.testConstellationId]
+        initial.universe.completedConstellationIds = [Self.testConstellationId]
 
         let store = TestStore(initialState: initial) { MainTabFeature() }
 
         // 한 별의 목표가 미완료 상태로 갱신되면 별자리는 해제.
-        let goals = [
-            Self.completedGoal(constellationId: "CMi", starIndex: 0),
-            Self.incompleteGoal(constellationId: "CMi", starIndex: 1),
-        ]
+        let goals = Self.allStarsCompletedExceptLast()
 
         await store.send(.goalsUpdated(goals)) {
             $0.constellation.allGoals = goals
             $0.constellation.previouslyCompletedIds = []
             $0.universe.completedConstellationIds = []
-            $0.constellation.completedConstellationMessage = "작은개자리의\n별자리가 빛을 잃었어요"
+            $0.constellation.completedConstellationMessage = "\(Self.testConstellationNameKO)의\n별자리가 빛을 잃었어요"
             $0.constellation.completedConstellationSubtitle = "목표를 다시 달성하면 별자리가 빛을 되찾아요"
         }
     }
@@ -200,27 +187,24 @@ final class MainTabFeatureTests: XCTestCase {
     func test_constellation_toggleGoalCompletion_초기로드후_완성메시지_생성() async {
         // 사전 조건:
         // - 초기 goalsUpdated 가 끝난 상태(hasInitialGoalsLoaded = true)
-        // - 두 별 모두 미완료 상태인 CMi 목표가 이미 state 에 있음
-        // 액션: 두 번째 별 목표가 완료 상태로 toggle (낙관적)
+        // - 모든 별이 완료 상태인 테스트 별자리 목표가 이미 state 에 있음
+        // 액션: 토글 (낙관적)
         // 검증: recomputeCompletion 이 호출되어 완성 메시지 생성
         var initial = MainTabFeature.State()
         initial.constellation.hasInitialGoalsLoaded = true
         initial.universe.userDisplayName = "별지기"
         // 액션은 단순 트리거이므로 allGoals 자체는 이미 완성 상태로 둔다.
         // (ConstellationFeature.toggleGoalCompletion 의 실제 변환 로직은 별도 테스트 영역.)
-        initial.constellation.allGoals = [
-            Self.completedGoal(constellationId: "CMi", starIndex: 0),
-            Self.completedGoal(constellationId: "CMi", starIndex: 1),
-        ]
+        initial.constellation.allGoals = Self.allStarsCompleted()
 
         let store = TestStore(initialState: initial) { MainTabFeature() }
         // 자식 reducer 는 본 테스트 관심사가 아니므로 비활성.
         store.exhaustivity = .off
 
         await store.send(.constellation(.toggleGoalCompletion(goalId: "ignored"))) {
-            $0.constellation.previouslyCompletedIds = ["CMi"]
-            $0.universe.completedConstellationIds = ["CMi"]
-            $0.constellation.completedConstellationMessage = "작은개자리의\n모든 별들이 빛을 찾았어요!"
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
+            $0.constellation.completedConstellationMessage = "\(Self.testConstellationNameKO)의\n모든 별들이 빛을 찾았어요!"
             $0.constellation.completedConstellationSubtitle = "완성된 별자리는 별지기님의 소우주에서도 볼 수 있어요"
         }
     }
@@ -230,18 +214,15 @@ final class MainTabFeatureTests: XCTestCase {
         // shouldEmitMessage 는 false 라 메시지가 생성되지 않아야 한다.
         var initial = MainTabFeature.State()
         initial.constellation.hasInitialGoalsLoaded = false
-        initial.constellation.allGoals = [
-            Self.completedGoal(constellationId: "CMi", starIndex: 0),
-            Self.completedGoal(constellationId: "CMi", starIndex: 1),
-        ]
+        initial.constellation.allGoals = Self.allStarsCompleted()
 
         let store = TestStore(initialState: initial) { MainTabFeature() }
         store.exhaustivity = .off
 
         await store.send(.constellation(.toggleGoalCompletion(goalId: "ignored"))) {
             // 메시지/자막은 nil 유지, 다만 ID 추적 + 배경 표시는 갱신된다.
-            $0.constellation.previouslyCompletedIds = ["CMi"]
-            $0.universe.completedConstellationIds = ["CMi"]
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
         }
     }
 
@@ -253,8 +234,8 @@ final class MainTabFeatureTests: XCTestCase {
 
         let store = TestStore(initialState: initial) { MainTabFeature() }
 
-        // CMi 는 별 2개 필요한데 index 0 에만 목표 등록.
-        let goals = [Self.completedGoal(constellationId: "CMi", starIndex: 0)]
+        // 별 중 하나에만 목표가 등록된 상황 → 별자리 미완성.
+        let goals = Self.partialStarsCompleted(count: 1)
 
         await store.send(.goalsUpdated(goals)) {
             $0.constellation.allGoals = goals
@@ -262,7 +243,48 @@ final class MainTabFeatureTests: XCTestCase {
         }
     }
 
-    // MARK: - Test Helpers
+    // MARK: - Test Fixture
+    // 별 수/이름을 catalog 에서 읽어 fixture drift 를 방지한다.
+    // (CMi 별 수가 바뀌어도 로직 테스트는 유효해야 한다.)
+
+    private static let testConstellationId = "CMi"
+
+    private static var testConstellationDef: ConstellationDefinition {
+        guard let def = ConstellationCatalog.find(testConstellationId) else {
+            fatalError("테스트 fixture 가 참조하는 '\(testConstellationId)' 이 catalog 에 없음")
+        }
+        return def
+    }
+
+    private static var testConstellationNameKO: String { testConstellationDef.nameKO }
+
+    /// 별자리의 모든 별에 대해 완료된 goal 을 생성 (별자리 완성 상태).
+    private static func allStarsCompleted() -> [Goal] {
+        testConstellationDef.stars.map {
+            completedGoal(constellationId: testConstellationId, starIndex: $0.index)
+        }
+    }
+
+    /// 마지막 별만 미완료 → 완성됐던 별자리가 해제되는 시나리오.
+    private static func allStarsCompletedExceptLast() -> [Goal] {
+        let stars = testConstellationDef.stars
+        var goals = stars.dropLast().map {
+            completedGoal(constellationId: testConstellationId, starIndex: $0.index)
+        }
+        if let last = stars.last {
+            goals.append(incompleteGoal(constellationId: testConstellationId, starIndex: last.index))
+        }
+        return goals
+    }
+
+    /// 별자리 별 중 prefix 만 완료 → 별자리 미완성 시나리오.
+    private static func partialStarsCompleted(count: Int = 1) -> [Goal] {
+        testConstellationDef.stars.prefix(count).map {
+            completedGoal(constellationId: testConstellationId, starIndex: $0.index)
+        }
+    }
+
+    // MARK: - Goal Builders
 
     private static func completedGoal(constellationId: String, starIndex: Int) -> Goal {
         Goal(
