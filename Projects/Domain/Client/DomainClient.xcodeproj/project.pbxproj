@@ -23,7 +23,6 @@
 		25A67E423EE142C2DC81C89B /* RecordClient+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF64952D69536E23657AEC5D /* RecordClient+Test.swift */; };
 		25C1320F2105395C09E43D35 /* AppAuth_AppAuth.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 83FB6395EA932B74BBB08796 /* AppAuth_AppAuth.bundle */; };
 		2908F6F7DE5C474B4E76BCBA /* AuthClient+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC9C20B804452AD174F6F4B /* AuthClient+Test.swift */; };
-		29270558215922F50DCB395F /* FirebaseFirestoreTarget.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = 325588A78D67F8A40ABF1084 /* FirebaseFirestoreTarget.framework */; };
 		2B1FF56DF7F2DE5CC4C056C4 /* libDomainClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDB734022D4D7BD9CCBB27B /* libDomainClient.a */; };
 		2B690D758E1DE6728A21A57C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FD814655982869B584A49D /* Security.framework */; };
 		2CEE5E5A0DF013B0502C84FA /* Promises_FBLPromises.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 4C2B523B82BCE8D408DEBD37 /* Promises_FBLPromises.bundle */; };
@@ -175,7 +174,6 @@
 				AFF5564354F153A13D561222 /* libCoreFirebaseKit.a in Dependencies */,
 				13182738F8F516981D36B2F2 /* libDomainEntity.a in Dependencies */,
 				DEAA93D379562CBE225F3957 /* FirebaseAuth.framework in Dependencies */,
-				29270558215922F50DCB395F /* FirebaseFirestoreTarget.framework in Dependencies */,
 				2012F6A8DD0F9FF37F813A57 /* GoogleSignIn.framework in Dependencies */,
 			);
 			name = Dependencies;

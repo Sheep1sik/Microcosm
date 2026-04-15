@@ -11,7 +11,6 @@ let project = Project.makeModule(
                     .domain(sources: .Entity),
                     .core(sources: .FirebaseKit),
                     .external(name: "FirebaseAuth"),
-                    .external(name: "FirebaseFirestore"),
                     .external(name: "GoogleSignIn"),
                     .external(name: "ComposableArchitecture"),
                 ]
