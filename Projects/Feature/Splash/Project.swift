@@ -13,5 +13,14 @@ let project = Project.makeModule(
                 ]
             )
         ),
+        .feature(
+            tests: .Splash,
+            target: .init(
+                dependencies: [
+                    .target(name: ModulePath.Feature.name + ModulePath.Feature.Splash.rawValue),
+                    .external(name: "ComposableArchitecture"),
+                ]
+            )
+        ),
     ]
 )

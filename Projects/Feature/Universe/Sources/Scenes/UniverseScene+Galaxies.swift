@@ -1,12 +1,19 @@
 import SpriteKit
 import DomainEntity
 import SharedDesignSystem
+import SharedRecordVisuals
 
 extension UniverseScene {
 
     // MARK: - Dynamic Galaxies
 
     func refreshGalaxies() {
+        // records observer 응답 전까지는 온보딩 여부가 결정되지 않은 상태.
+        // 이 시점에 은하를 그리면 isFirstLoad 경로로 현재월 빈 은하가 즉시(애니메이션 없이) 생성돼,
+        // 이후 `.galaxyBirthIntro`에서 출생 모션이 existing-branch로 흡수돼 사라진다.
+        // 완전 early return 으로 첫 호출 자체를 미뤄 isFirstLoad 플래그를 소비하지 않는다.
+        if sceneDelegate?.isOnboardingUndecided() == true { return }
+
         let allRecords = sceneDelegate?.getAllRecords() ?? []
 
         let calendar = Calendar.current
@@ -117,24 +124,35 @@ extension UniverseScene {
     // MARK: - Galaxy Helpers
 
     func galaxyPosition(year: Int, month: Int) -> CGPoint {
+        let key = "galaxyPosition_\(String(format: "%04d-%02d", year, month))"
+        if let arr = UserDefaults.standard.array(forKey: key) as? [Double], arr.count == 2 {
+            return CGPoint(x: arr[0], y: arr[1])
+        }
+
         let margin: CGFloat = 350
         let sunCenter = CGPoint(x: worldSize.width / 2, y: worldSize.height / 2 + 200)
         let sunExclusion: CGFloat = 650
         let galaxyMinDist: CGFloat = 300
 
         let existingPositions = activeGalaxies.values.map { $0.position }
+        let pos = randomGalaxyPosition(margin: margin, sunCenter: sunCenter,
+                                       sunExclusion: sunExclusion, galaxyMinDist: galaxyMinDist,
+                                       existingPositions: existingPositions)
+        UserDefaults.standard.set([Double(pos.x), Double(pos.y)], forKey: key)
+        return pos
+    }
 
+    private func randomGalaxyPosition(margin: CGFloat, sunCenter: CGPoint,
+                                      sunExclusion: CGFloat, galaxyMinDist: CGFloat,
+                                      existingPositions: [CGPoint]) -> CGPoint {
         for _ in 0..<50 {
             let x = CGFloat.random(in: margin...(worldSize.width - margin))
             let y = CGFloat.random(in: margin...(worldSize.height - margin))
-
             if hypot(x - sunCenter.x, y - sunCenter.y) < sunExclusion { continue }
-
             let tooClose = existingPositions.contains { p in
                 hypot(x - p.x, y - p.y) < galaxyMinDist
             }
             if tooClose { continue }
-
             return CGPoint(x: x, y: y)
         }
         // 폴백: 태양계만 피하기
@@ -150,10 +168,19 @@ extension UniverseScene {
     }
 
     func galaxyProperties(year: Int, month: Int) -> (arms: Int, tilt: CGFloat, wind: CGFloat, ellipticity: CGFloat) {
+        let key = "galaxyProperties_\(String(format: "%04d-%02d", year, month))"
+        if let arr = UserDefaults.standard.array(forKey: key) as? [Double], arr.count == 4 {
+            return (arms: Int(arr[0]), tilt: CGFloat(arr[1]),
+                    wind: CGFloat(arr[2]), ellipticity: CGFloat(arr[3]))
+        }
         let arms = Int.random(in: 2...5)
         let tilt = CGFloat.random(in: -1.57...1.57)
         let wind = CGFloat.random(in: 2.0...5.0)
         let ellipticity = CGFloat.random(in: 0.25...0.65)
+        UserDefaults.standard.set(
+            [Double(arms), Double(tilt), Double(wind), Double(ellipticity)],
+            forKey: key
+        )
         return (arms, tilt, wind, ellipticity)
     }
 

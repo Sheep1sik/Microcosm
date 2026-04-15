@@ -1,0 +1,14 @@
+# SwiftFormat 최소 규칙 — 공백/임포트 정렬/self 정리만
+--exclude Tuist,Plugins,**/Derived,**/Generated
+--swiftversion 5.10
+--indent 4
+--maxwidth 140
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--commas inline
+--trimwhitespace always
+--importgrouping testable-bottom
+--self remove
+--semicolons never
+--header strip

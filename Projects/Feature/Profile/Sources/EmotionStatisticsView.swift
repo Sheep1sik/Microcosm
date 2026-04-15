@@ -2,6 +2,7 @@ import SwiftUI
 import Charts
 import DomainEntity
 import SharedDesignSystem
+import SharedRecordVisuals
 
 // MARK: - Emotion Statistics View
 

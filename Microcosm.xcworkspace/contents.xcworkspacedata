@@ -11,9 +11,6 @@
          location = "group:Domain/Domain.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:Feature/Feature.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:Shared/Shared.xcodeproj">
       </FileRef>
       <Group
@@ -45,6 +42,9 @@
             location = "group:Profile/FeatureProfile.xcodeproj">
          </FileRef>
          <FileRef
+            location = "group:Root/FeatureRoot.xcodeproj">
+         </FileRef>
+         <FileRef
             location = "group:Splash/FeatureSplash.xcodeproj">
          </FileRef>
          <FileRef
@@ -56,6 +56,9 @@
          name = "Shared">
          <FileRef
             location = "group:DesignSystem/SharedDesignSystem.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:RecordVisuals/SharedRecordVisuals.xcodeproj">
          </FileRef>
       </Group>
    </Group>

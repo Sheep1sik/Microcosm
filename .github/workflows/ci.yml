@@ -1,0 +1,71 @@
+name: iOS CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: SwiftLint
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: Run SwiftLint (warning-only)
+        run: swiftlint --reporter github-actions-logging
+
+  build:
+    name: Generate & Build
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Cache Tuist dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            Tuist/.build
+          key: ${{ runner.os }}-tuist-${{ hashFiles('Tuist/Package.swift', 'Tuist/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-tuist-
+
+      - name: Create Secrets.xcconfig stub (gitignored)
+        run: |
+          cat > Projects/App/Secrets.xcconfig <<'EOF'
+          // CI stub — real keys injected via repository secrets in deploy workflow
+          OPENAI_API_KEY = ci_stub_key_not_used
+          EOF
+
+      - name: Tuist install
+        run: mise exec -- tuist install
+
+      - name: Tuist generate
+        run: mise exec -- tuist generate --no-open
+
+      - name: Build for simulator
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -workspace Microcosm.xcworkspace \
+            -scheme "Microcosm" \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build

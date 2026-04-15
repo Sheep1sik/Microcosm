@@ -9,11 +9,9 @@
 /* Begin PBXBuildFile section */
 		056FB8F1F653C1AA185B04C7 /* CosmicAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AFB930D80F71F0EE8ED280 /* CosmicAlertView.swift */; };
 		2215653D3A89862F89D59793 /* AppTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4499B36F6A956E467A260002 /* AppTypography.swift */; };
-		45A075D01890F0C5243A8288 /* RecordColor+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9581D6B8838EB3C4E84B9EF4 /* RecordColor+UI.swift */; };
 		4B734DBCB46E9EC8DDCD0EEA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5044140883A329189A0917 /* AppColors.swift */; };
 		5B0A60FFEE9348D47C5CE8D6 /* CanvasPreviewViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */; };
 		88236CD72B772422E33FF03D /* FormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F6AEFA6F2741263E21D278 /* FormatHelper.swift */; };
-		D1A45AB3AF6AC146103E04CA /* libDomainEntity.a in Dependencies */ = {isa = PBXBuildFile; fileRef = B867F6B79B5AFB08870F45C8 /* libDomainEntity.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,16 +25,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		998DF43FC74BB7960607110B /* Dependencies */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstSubfolderSpec = 16;
-			files = (
-				D1A45AB3AF6AC146103E04CA /* libDomainEntity.a in Dependencies */,
-			);
-			name = Dependencies;
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -46,8 +34,6 @@
 		85F6AEFA6F2741263E21D278 /* FormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatHelper.swift; sourceTree = "<group>"; };
 		87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasPreviewViews.swift; sourceTree = "<group>"; };
 		90AFB930D80F71F0EE8ED280 /* CosmicAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmicAlertView.swift; sourceTree = "<group>"; };
-		9581D6B8838EB3C4E84B9EF4 /* RecordColor+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordColor+UI.swift"; sourceTree = "<group>"; };
-		B867F6B79B5AFB08870F45C8 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +58,6 @@
 		7C5C1797D057E923EA7612EB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B867F6B79B5AFB08870F45C8 /* libDomainEntity.a */,
 				6AC1697A7DAC909AC709777C /* libSharedDesignSystem.a */,
 			);
 			name = Products;
@@ -94,7 +79,6 @@
 				87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */,
 				90AFB930D80F71F0EE8ED280 /* CosmicAlertView.swift */,
 				85F6AEFA6F2741263E21D278 /* FormatHelper.swift */,
-				9581D6B8838EB3C4E84B9EF4 /* RecordColor+UI.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -110,7 +94,6 @@
 				A82C5359C7312774175B4D62 /* Resources */,
 				826FE33371783E018DF44EEB /* Frameworks */,
 				3C70685A16F7B5282FF12086 /* Embed Frameworks */,
-				998DF43FC74BB7960607110B /* Dependencies */,
 			);
 			buildRules = (
 			);
@@ -171,7 +154,6 @@
 				5B0A60FFEE9348D47C5CE8D6 /* CanvasPreviewViews.swift in Sources */,
 				056FB8F1F653C1AA185B04C7 /* CosmicAlertView.swift in Sources */,
 				88236CD72B772422E33FF03D /* FormatHelper.swift in Sources */,
-				45A075D01890F0C5243A8288 /* RecordColor+UI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

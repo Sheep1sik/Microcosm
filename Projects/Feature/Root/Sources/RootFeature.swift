@@ -7,26 +7,28 @@ import FeatureAuth
 import FeatureMain
 
 @Reducer
-struct RootFeature {
+public struct RootFeature {
     @ObservableState
-    struct State: Equatable {
-        var mode: Mode = .splash
-        var splash = SplashFeature.State()
-        var login = LoginFeature.State()
-        var mainTab = MainTabFeature.State()
+    public struct State: Equatable {
+        public var mode: Mode = .splash
+        public var splash = SplashFeature.State()
+        public var login = LoginFeature.State()
+        public var mainTab = MainTabFeature.State()
 
         // 인증 정보
-        var userId: String?
-        var displayName: String?
+        public var userId: String?
+        public var displayName: String?
 
-        enum Mode: Equatable {
+        public enum Mode: Equatable {
             case splash
             case login
             case main
         }
+
+        public init() {}
     }
 
-    enum Action: BindableAction {
+    public enum Action: BindableAction {
         case binding(BindingAction<State>)
         case onAppear
         case authStateChanged(FirebaseAuth.User?)
@@ -41,7 +43,9 @@ struct RootFeature {
 
     private enum CancelID { case authObserver, userObserver }
 
-    var body: some ReducerOf<Self> {
+    public init() {}
+
+    public var body: some ReducerOf<Self> {
         BindingReducer()
 
         Scope(state: \.splash, action: \.splash) { SplashFeature() }

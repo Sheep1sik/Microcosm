@@ -6,10 +6,14 @@ import FeatureSplash
 import FeatureAuth
 import FeatureMain
 
-struct RootView: View {
+public struct RootView: View {
     @Bindable var store: StoreOf<RootFeature>
 
-    var body: some View {
+    public init(store: StoreOf<RootFeature>) {
+        self.store = store
+    }
+
+    public var body: some View {
         Group {
             switch store.mode {
             case .splash:

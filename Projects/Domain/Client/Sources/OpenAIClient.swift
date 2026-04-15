@@ -203,10 +203,19 @@ extension OpenAIClient: DependencyKey {
         }
     )
 
+    // ⚠️ 임시 구조 — OPENAI_API_KEY 는 빌드 타임에 Info.plist 로 embed 되어
+    // 앱 번들(.ipa)에 그대로 포함됩니다. OpenAI 키는 사용량 과금 직결이므로
+    // 배포 빌드에서는 이 경로 사용 금지.
+    // 장기 해결: Firebase Functions 등 서버 프록시 경유 (이슈: security/openai-key-proxy)
     private static func loadAPIKey() -> String? {
+        let stubValues: Set<String> = [
+            "YOUR_API_KEY_HERE",
+            "your_openai_api_key_here",
+            "ci_stub_key_not_used"
+        ]
         guard let key = Bundle.main.infoDictionary?["OPENAI_API_KEY"] as? String,
               !key.isEmpty,
-              key != "YOUR_API_KEY_HERE" else {
+              !stubValues.contains(key) else {
             return nil
         }
         return key

@@ -10,9 +10,13 @@
 		0FEF4A6E823A95BFC6AABAFF /* Constellation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B71C4A245C6000C08CFC4 /* Constellation.swift */; };
 		2A99C896577D91B651E518B3 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F5E662EDABC77FF029A22 /* Goal.swift */; };
 		569F614BB0D49B18183A7E02 /* RecordVisuals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14A98F50BD54A483E5B9E15 /* RecordVisuals.swift */; };
+		85D2FF679EA3F78FF87892CC /* ConstellationCatalog+ChunkC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF93CF4ECA51649883334E0 /* ConstellationCatalog+ChunkC.swift */; };
 		88D71D3C79976F4DFB7CACD9 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C8003F70A3F45132DEE3E /* Record.swift */; };
 		A573AC5E0105DC65CE15FFE9 /* ConstellationCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A8AC3B26BCDFEBBAEE015D /* ConstellationCatalog.swift */; };
 		BE12A17471B8039B34FF5BC9 /* SplitMix64.swift in Sources */ = {isa = PBXBuildFile; fileRef = F848270384C1C86F08615DB9 /* SplitMix64.swift */; };
+		E16C7273D5F023DAA76E4398 /* ConstellationCatalog+ChunkB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B502B2F83588EFA73FD840DC /* ConstellationCatalog+ChunkB.swift */; };
+		E4080C836E40BB5B9C2DE8F4 /* ConstellationCatalog+ChunkA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7672FE5E158AE0A035AB4 /* ConstellationCatalog+ChunkA.swift */; };
+		FBC074007D2BA9C071C438BB /* ConstellationCatalog+ChunkD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC1958DA9C222FC2FF5012C /* ConstellationCatalog+ChunkD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,11 +33,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0EC7672FE5E158AE0A035AB4 /* ConstellationCatalog+ChunkA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationCatalog+ChunkA.swift"; sourceTree = "<group>"; };
+		1DC1958DA9C222FC2FF5012C /* ConstellationCatalog+ChunkD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationCatalog+ChunkD.swift"; sourceTree = "<group>"; };
 		46A8AC3B26BCDFEBBAEE015D /* ConstellationCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationCatalog.swift; sourceTree = "<group>"; };
 		4D2C8003F70A3F45132DEE3E /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		5FA15115F64D00470D29159F /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9B71C4A245C6000C08CFC4 /* Constellation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constellation.swift; sourceTree = "<group>"; };
+		9FF93CF4ECA51649883334E0 /* ConstellationCatalog+ChunkC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationCatalog+ChunkC.swift"; sourceTree = "<group>"; };
 		A14A98F50BD54A483E5B9E15 /* RecordVisuals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVisuals.swift; sourceTree = "<group>"; };
+		B502B2F83588EFA73FD840DC /* ConstellationCatalog+ChunkB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstellationCatalog+ChunkB.swift"; sourceTree = "<group>"; };
 		C96F5E662EDABC77FF029A22 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		F848270384C1C86F08615DB9 /* SplitMix64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitMix64.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,6 +62,10 @@
 			children = (
 				8B9B71C4A245C6000C08CFC4 /* Constellation.swift */,
 				46A8AC3B26BCDFEBBAEE015D /* ConstellationCatalog.swift */,
+				0EC7672FE5E158AE0A035AB4 /* ConstellationCatalog+ChunkA.swift */,
+				B502B2F83588EFA73FD840DC /* ConstellationCatalog+ChunkB.swift */,
+				9FF93CF4ECA51649883334E0 /* ConstellationCatalog+ChunkC.swift */,
+				1DC1958DA9C222FC2FF5012C /* ConstellationCatalog+ChunkD.swift */,
 				C96F5E662EDABC77FF029A22 /* Goal.swift */,
 				4D2C8003F70A3F45132DEE3E /* Record.swift */,
 				A14A98F50BD54A483E5B9E15 /* RecordVisuals.swift */,
@@ -153,6 +165,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FEF4A6E823A95BFC6AABAFF /* Constellation.swift in Sources */,
+				E4080C836E40BB5B9C2DE8F4 /* ConstellationCatalog+ChunkA.swift in Sources */,
+				E16C7273D5F023DAA76E4398 /* ConstellationCatalog+ChunkB.swift in Sources */,
+				85D2FF679EA3F78FF87892CC /* ConstellationCatalog+ChunkC.swift in Sources */,
+				FBC074007D2BA9C071C438BB /* ConstellationCatalog+ChunkD.swift in Sources */,
 				A573AC5E0105DC65CE15FFE9 /* ConstellationCatalog.swift in Sources */,
 				2A99C896577D91B651E518B3 /* Goal.swift in Sources */,
 				88D71D3C79976F4DFB7CACD9 /* Record.swift in Sources */,

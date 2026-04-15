@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "889701595646A30881D30ED8"
-               BuildableName = "libFeature.a"
-               BlueprintName = "Feature"
-               ReferencedContainer = "container:Feature.xcodeproj">
+               BlueprintIdentifier = "BB2ED108BAD855AB15C8E8FD"
+               BuildableName = "libFeatureRoot.a"
+               BlueprintName = "FeatureRoot"
+               ReferencedContainer = "container:FeatureRoot.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,9 +26,19 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      disableMainThreadChecker = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6221B4019307AA8EF01F8965"
+               BuildableName = "FeatureRootTests.xctest"
+               BlueprintName = "FeatureRootTests"
+               ReferencedContainer = "container:FeatureRoot.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -44,10 +54,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "889701595646A30881D30ED8"
-            BuildableName = "libFeature.a"
-            BlueprintName = "Feature"
-            ReferencedContainer = "container:Feature.xcodeproj">
+            BlueprintIdentifier = "BB2ED108BAD855AB15C8E8FD"
+            BuildableName = "libFeatureRoot.a"
+            BlueprintName = "FeatureRoot"
+            ReferencedContainer = "container:FeatureRoot.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </LaunchAction>
@@ -60,10 +70,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "889701595646A30881D30ED8"
-            BuildableName = "libFeature.a"
-            BlueprintName = "Feature"
-            ReferencedContainer = "container:Feature.xcodeproj">
+            BlueprintIdentifier = "BB2ED108BAD855AB15C8E8FD"
+            BuildableName = "libFeatureRoot.a"
+            BlueprintName = "FeatureRoot"
+            ReferencedContainer = "container:FeatureRoot.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

@@ -2,6 +2,7 @@ import XCTest
 import ComposableArchitecture
 @testable import FeatureUniverse
 import DomainEntity
+import FeatureNickname
 
 @MainActor
 final class UniverseFeatureOnboardingTests: XCTestCase {
@@ -12,7 +13,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         let store = TestStore(
             initialState: UniverseFeature.State(
                 hasCompletedOnboarding: false,
-                hasReceivedInitialRecords: true
+                hasReceivedInitialRecords: true,
+                hasReceivedInitialProfile: true
             )
         ) {
             UniverseFeature()
@@ -27,7 +29,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         let store = TestStore(
             initialState: UniverseFeature.State(
                 hasCompletedOnboarding: true,
-                hasReceivedInitialRecords: true
+                hasReceivedInitialRecords: true,
+                hasReceivedInitialProfile: true
             )
         ) {
             UniverseFeature()
@@ -41,6 +44,7 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
             initialState: UniverseFeature.State(
                 hasCompletedOnboarding: false,
                 hasReceivedInitialRecords: true,
+                hasReceivedInitialProfile: true,
                 allRecords: [Record(content: "테스트 기록")]
             )
         ) {
@@ -58,7 +62,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         let store = TestStore(
             initialState: UniverseFeature.State(
                 hasCompletedOnboarding: false,
-                hasReceivedInitialRecords: false
+                hasReceivedInitialRecords: false,
+                hasReceivedInitialProfile: true
             )
         ) {
             UniverseFeature()
@@ -84,7 +89,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         let store = TestStore(
             initialState: UniverseFeature.State(
                 hasCompletedOnboarding: false,
-                hasReceivedInitialRecords: false
+                hasReceivedInitialRecords: false,
+                hasReceivedInitialProfile: true
             )
         ) {
             UniverseFeature()
@@ -103,6 +109,72 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
 
         await store.receive(\.checkOnboarding) {
             $0.hasCompletedOnboarding = true
+        }
+    }
+
+    // MARK: - Race Condition (profile 지연) — 기존 유저가 재시작 시 다시 welcome 로
+    // 진입해 닉네임을 덮어쓰는 회귀 방지용 테스트.
+
+    func test_checkOnboarding_profile미도착_보류후_profile도착시_완료유저는_welcome생략() async {
+        let store = TestStore(
+            initialState: UniverseFeature.State(
+                hasCompletedOnboarding: false,
+                hasReceivedInitialRecords: true,
+                hasReceivedInitialProfile: false
+            )
+        ) {
+            UniverseFeature()
+        }
+
+        await store.send(.checkOnboarding) {
+            $0.pendingOnboardingCheck = true
+        }
+
+        // profile observer 가 완료 플래그를 싣고 처음 yield. reducer 가 외부에서 직접
+        // hasCompletedOnboarding 을 true 로 주입받는 MainTab 경로를 시뮬레이션.
+        await store.send(.binding(.set(\.hasCompletedOnboarding, true))) {
+            $0.hasCompletedOnboarding = true
+        }
+        await store.send(.profileReceived) {
+            $0.hasReceivedInitialProfile = true
+            $0.pendingOnboardingCheck = false
+        }
+
+        await store.receive(\.checkOnboarding)
+    }
+
+    func test_checkOnboarding_records와profile_모두미도착_둘다도착해야_welcome() async {
+        let store = TestStore(
+            initialState: UniverseFeature.State(
+                hasCompletedOnboarding: false,
+                hasReceivedInitialRecords: false,
+                hasReceivedInitialProfile: false
+            )
+        ) {
+            UniverseFeature()
+        }
+
+        await store.send(.checkOnboarding) {
+            $0.pendingOnboardingCheck = true
+        }
+
+        // records 먼저 도착 → drain 시도 → checkOnboarding 재발송 → guard 에서 profile 미도착
+        // 으로 다시 pending
+        await store.send(.recordsUpdated([])) {
+            $0.hasReceivedInitialRecords = true
+            $0.pendingOnboardingCheck = false
+        }
+        await store.receive(\.checkOnboarding) {
+            $0.pendingOnboardingCheck = true
+        }
+
+        // profile 도 도착 → drain → welcome 진입
+        await store.send(.profileReceived) {
+            $0.hasReceivedInitialProfile = true
+            $0.pendingOnboardingCheck = false
+        }
+        await store.receive(\.checkOnboarding) {
+            $0.onboardingStep = .welcome
         }
     }
 
@@ -157,15 +229,20 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         let store = TestStore(
             initialState: UniverseFeature.State(
                 onboardingStep: .nicknameInput,
-                onboardingNickname: "테스트유저",
-                onboardingNicknameSaving: true
+                onboardingNickname: NicknameFeature.State(
+                    nickname: "테스트유저",
+                    isSaving: true
+                )
             )
         ) {
             UniverseFeature()
         }
 
-        await store.send(.onboardingNicknameSaveCompleted) {
-            $0.onboardingNicknameSaving = false
+        // NicknameFeature.saveCompleted → delegate(.nicknameSet) → Universe 가 받아 step 전환
+        await store.send(.onboardingNickname(.saveCompleted)) {
+            $0.onboardingNickname.isSaving = false
+        }
+        await store.receive(\.onboardingNickname.delegate.nicknameSet) {
             $0.userDisplayName = "테스트유저"
             $0.onboardingStep = .galaxyBirthIntro
         }
@@ -358,7 +435,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         let store = TestStore(
             initialState: UniverseFeature.State(
                 hasCompletedOnboarding: false,
-                hasReceivedInitialRecords: true
+                hasReceivedInitialRecords: true,
+                hasReceivedInitialProfile: true
             )
         ) {
             UniverseFeature()
@@ -377,9 +455,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
             $0.onboardingStep = .nicknameInput
         }
 
-        // 3. 닉네임 저장 완료 → galaxyBirthIntro
-        await store.send(.onboardingNicknameSaveCompleted) {
-            $0.onboardingNicknameSaving = false
+        // 3. 닉네임 저장 완료 → galaxyBirthIntro (NicknameFeature delegate 경유)
+        await store.send(.onboardingNickname(.delegate(.nicknameSet))) {
             $0.userDisplayName = ""
             $0.onboardingStep = .galaxyBirthIntro
         }

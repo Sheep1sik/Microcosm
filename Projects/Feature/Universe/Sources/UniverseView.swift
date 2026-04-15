@@ -42,7 +42,7 @@ public struct UniverseView: View {
 
     public var body: some View {
         mainContent
-            .toolbar(store.isInGalaxyDetail || store.isOnboarding ? .hidden : .visible, for: .tabBar)
+            .toolbar(store.isInGalaxyDetail || store.isOnboarding || store.isSearching ? .hidden : .visible, for: .tabBar)
             .animation(.easeOut(duration: 0.3), value: store.showRecordPanel)
             .modifier(SceneChangeHandlers(store: store, scene: scene, isTextFocused: $isTextFocused))
             .alert("오늘의 기록을 이미 작성했어요", isPresented: $store.showLimitAlert) {
@@ -205,6 +205,14 @@ private struct SceneChangeHandlers: ViewModifier {
             .onChange(of: store.allRecords) {
                 scene.refreshGalaxies()
             }
+            .onChange(of: store.hasReceivedInitialRecords && store.hasReceivedInitialProfile) {
+                _, bothReady in
+                // records / profile 둘 다 도착한 시점에만 그릴 기회를 준다.
+                // setupScene 의 첫 refreshGalaxies 와 allRecords/onboardingStep onChange 만으로는
+                // (1) `[]→[]` 엣지 (온보딩 완료했지만 기록이 0개인 유저), (2) records-first race
+                // 두 경우에 화면이 비는 회귀가 있어 보완 경로로 둔다.
+                if bothReady { scene.refreshGalaxies() }
+            }
             .onChange(of: store.onboardingStep) {
                 if store.onboardingStep == .galaxyBirthIntro {
                     scene.refreshGalaxies()
@@ -265,6 +273,10 @@ protocol UniverseSceneDelegate: AnyObject {
     @MainActor func getAllRecords() -> [DomainEntity.Record]
     func getIsOnboarding() -> Bool
     func getOnboardingStep() -> OnboardingStep?
+    /// records observer가 최소 1회 응답하기 전까지는 true.
+    /// 이 상태에서 은하를 그리면 온보딩 여부 결정 전에 현재월 은하가 애니메이션 없이 먼저 생성돼
+    /// 이후 `.galaxyBirthIntro` 단계의 출생 모션이 사라지는 회귀를 유발한다.
+    func isOnboardingUndecided() -> Bool
     func addRecord(_ record: DomainEntity.Record)
     func didTapEmptyArea()
 }
@@ -313,6 +325,13 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
 
     func getOnboardingStep() -> OnboardingStep? {
         store.onboardingStep
+    }
+
+    func isOnboardingUndecided() -> Bool {
+        // records 와 profile 둘 다 도착해야 온보딩 여부가 신뢰 가능하다.
+        // profile 이 늦게 오면 `isOnboarding`(step=nil)이 false 로 평가돼
+        // 신규 유저인데도 isFirstLoad 경로로 빈 현재월 은하가 즉시 생성되는 회귀가 있다.
+        !store.hasReceivedInitialRecords || !store.hasReceivedInitialProfile
     }
 
     func addRecord(_ record: DomainEntity.Record) {

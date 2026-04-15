@@ -30,6 +30,17 @@ public extension TargetDependency {
     }
 }
 
+// MARK: TargetDependency + Core
+public extension TargetDependency {
+    static var core: Self {
+        .project(target: ModulePath.Core.name, path: .core)
+    }
+
+    static func core(sources module: ModulePath.Core) -> Self {
+        .project(target: ModulePath.Core.name + module.rawValue, path: .core(subModule: module))
+    }
+}
+
 // MARK: TargetDependency + Shared
 public extension TargetDependency {
     static var shared: Self {

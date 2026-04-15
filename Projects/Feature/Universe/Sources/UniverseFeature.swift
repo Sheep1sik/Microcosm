@@ -3,6 +3,8 @@ import ComposableArchitecture
 import DomainEntity
 import DomainClient
 import SharedDesignSystem
+import SharedRecordVisuals
+import FeatureNickname
 
 public typealias Record = DomainEntity.Record
 
@@ -29,14 +31,15 @@ public struct UniverseFeature {
         /// 이 플래그가 true가 되어 `allRecords`가 신뢰 가능해진 뒤에만 수행.
         /// (View 진입 직후 records 없는 상태에서 잘못 welcome으로 진입하는 레이스 방지)
         public var hasReceivedInitialRecords = false
+        /// user profile observer가 최소 1회 yield 했는지. records 와 profile 은 독립 스트림이라
+        /// 둘 중 어느 쪽이 먼저 도착할지 보장되지 않는다. profile 이 늦게 오면
+        /// `hasCompletedOnboarding` 이 default(false) 로 평가돼 기존 유저가 다시 `.welcome`
+        /// 으로 진입하는 회귀가 있어(닉네임 덮어씀), 두 플래그 모두 true 인 뒤에만 결정한다.
+        public var hasReceivedInitialProfile = false
         public var pendingOnboardingCheck = false
 
-        // Onboarding Nickname
-        public var onboardingNickname = ""
-        public var onboardingNicknameChecking = false
-        public var onboardingNicknameError: String?
-        public var onboardingNicknameAvailable: Bool?
-        public var onboardingNicknameSaving = false
+        // Onboarding Nickname (FeatureNickname 모듈로 위임)
+        public var onboardingNickname = NicknameFeature.State()
 
         public var isOnboarding: Bool { onboardingStep != nil && onboardingStep != .completed }
 
@@ -171,12 +174,9 @@ public struct UniverseFeature {
             onboardingStep: OnboardingStep? = nil,
             onboardingGalaxyScreenCenter: CGPoint? = nil,
             hasReceivedInitialRecords: Bool = false,
+            hasReceivedInitialProfile: Bool = false,
             pendingOnboardingCheck: Bool = false,
-            onboardingNickname: String = "",
-            onboardingNicknameChecking: Bool = false,
-            onboardingNicknameError: String? = nil,
-            onboardingNicknameAvailable: Bool? = nil,
-            onboardingNicknameSaving: Bool = false,
+            onboardingNickname: NicknameFeature.State = NicknameFeature.State(),
             userDisplayName: String? = nil,
             allRecords: [Record] = [],
             isInGalaxyDetail: Bool = false,
@@ -200,12 +200,9 @@ public struct UniverseFeature {
             self.onboardingStep = onboardingStep
             self.onboardingGalaxyScreenCenter = onboardingGalaxyScreenCenter
             self.hasReceivedInitialRecords = hasReceivedInitialRecords
+            self.hasReceivedInitialProfile = hasReceivedInitialProfile
             self.pendingOnboardingCheck = pendingOnboardingCheck
             self.onboardingNickname = onboardingNickname
-            self.onboardingNicknameChecking = onboardingNicknameChecking
-            self.onboardingNicknameError = onboardingNicknameError
-            self.onboardingNicknameAvailable = onboardingNicknameAvailable
-            self.onboardingNicknameSaving = onboardingNicknameSaving
             self.userDisplayName = userDisplayName
             self.allRecords = allRecords
             self.isInGalaxyDetail = isInGalaxyDetail
@@ -232,6 +229,9 @@ public struct UniverseFeature {
 
         // Records
         case recordsUpdated([Record])
+
+        // Profile (user profile observer가 최소 1회 yield 됐음을 알림)
+        case profileReceived
 
         // Scene Callbacks
         case sceneDidEnterGalaxyDetail(key: String, records: [Record])
@@ -262,12 +262,7 @@ public struct UniverseFeature {
         case checkOnboarding
         case onboardingAdvanceFromWelcome
         case onboardingAdvanceFromGuide
-        case onboardingNicknameChanged(String)
-        case onboardingCheckNickname
-        case onboardingNicknameCheckResult(Bool)
-        case onboardingNicknameCheckFailed(String)
-        case onboardingNicknameConfirm
-        case onboardingNicknameSaveCompleted
+        case onboardingNickname(NicknameFeature.Action)
         case onboardingComplete
         case skipOnboarding
 
@@ -288,6 +283,10 @@ public struct UniverseFeature {
 
     public var body: some ReducerOf<Self> {
         BindingReducer()
+
+        Scope(state: \.onboardingNickname, action: \.onboardingNickname) {
+            NicknameFeature()
+        }
 
         // 기능별로 분리된 Reduce 블록들. 각 블록은 자신이 처리하는 액션만 매칭하고
         // 나머지는 default → .none 으로 흘려보낸다. 분할 파일은:

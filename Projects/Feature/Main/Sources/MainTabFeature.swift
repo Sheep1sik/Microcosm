@@ -93,14 +93,18 @@ public struct MainTabFeature {
                 state.constellation.hasSeenConstellationGuide = profile.hasSeenConstellationGuide
                 state.profile.userProfile = profile
                 state.profile.displayName = effectiveName
-                return .none
+                // Universe reducer 에게 profile 최초 도착을 알려 pending checkOnboarding 을
+                // drain 시킨다. State 직접 대입만 하면 reducer 내부의 flag/pending 경로가
+                // 안 돌아가 records 만 먼저 도착한 유저가 welcome 으로 잘못 진입한다.
+                return .send(.universe(.profileReceived))
 
             case .recordsUpdated(let records):
-                state.universe.allRecords = records
+                // Universe 는 reducer 내부에서 hasReceivedInitialRecords 플래그를 토글하고
+                // 보류 중인 checkOnboarding 을 재발송한다. state 직접 대입은 이 경로를 우회하므로
+                // 반드시 action 포워딩으로 전달해야 한다.
                 state.profile.allRecords = records
-                // 닉네임 동기화
                 state.constellation.userDisplayName = state.universe.userDisplayName
-                return .none
+                return .send(.universe(.recordsUpdated(records)))
 
             case .goalsUpdated(let goals):
                 state.constellation.allGoals = goals
