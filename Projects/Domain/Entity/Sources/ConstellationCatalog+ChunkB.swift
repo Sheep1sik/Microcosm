@@ -2,6 +2,9 @@ import Foundation
 
 // Auto-generated chunk - do not edit by hand
 
+// swiftlint:disable file_length
+// 카탈로그 데이터 덩어리이므로 file_length 예외 허용
+
 extension ConstellationCatalog {
     static let chunkB: [ConstellationDefinition] = [
         ConstellationDefinition(id: "Cir", nameEN: "Circinus", nameKO: "컴퍼스자리", stars: [
