@@ -2,6 +2,7 @@ import XCTest
 import ComposableArchitecture
 @testable import FeatureUniverse
 import DomainEntity
+import FeatureNickname
 
 @MainActor
 final class UniverseFeatureOnboardingTests: XCTestCase {
@@ -228,15 +229,20 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
         let store = TestStore(
             initialState: UniverseFeature.State(
                 onboardingStep: .nicknameInput,
-                onboardingNickname: "테스트유저",
-                onboardingNicknameSaving: true
+                onboardingNickname: NicknameFeature.State(
+                    nickname: "테스트유저",
+                    isSaving: true
+                )
             )
         ) {
             UniverseFeature()
         }
 
-        await store.send(.onboardingNicknameSaveCompleted) {
-            $0.onboardingNicknameSaving = false
+        // NicknameFeature.saveCompleted → delegate(.nicknameSet) → Universe 가 받아 step 전환
+        await store.send(.onboardingNickname(.saveCompleted)) {
+            $0.onboardingNickname.isSaving = false
+        }
+        await store.receive(\.onboardingNickname.delegate.nicknameSet) {
             $0.userDisplayName = "테스트유저"
             $0.onboardingStep = .galaxyBirthIntro
         }
@@ -449,9 +455,8 @@ final class UniverseFeatureOnboardingTests: XCTestCase {
             $0.onboardingStep = .nicknameInput
         }
 
-        // 3. 닉네임 저장 완료 → galaxyBirthIntro
-        await store.send(.onboardingNicknameSaveCompleted) {
-            $0.onboardingNicknameSaving = false
+        // 3. 닉네임 저장 완료 → galaxyBirthIntro (NicknameFeature delegate 경유)
+        await store.send(.onboardingNickname(.delegate(.nicknameSet))) {
             $0.userDisplayName = ""
             $0.onboardingStep = .galaxyBirthIntro
         }

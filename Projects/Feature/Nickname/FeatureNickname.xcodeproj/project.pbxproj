@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -219,7 +219,7 @@
 		2BB5C66F553D51CC059DF69A /* gRPC_grpcppWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRPC_grpcppWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		314EAE436756ECE1FDA3FB9B /* GoogleUtilities_GoogleUtilities_Logger.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Logger.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		31FA867D42CBCE7FA9D811F7 /* RecaptchaInterop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RecaptchaInterop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		345B6687CCF1E863393A4FA4 /* grpc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = grpc.xcframework; sourceTree = "<group>"; };
+		345B6687CCF1E863393A4FA4 /* grpc.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; path = grpc.xcframework; sourceTree = "<group>"; };
 		34C1EFD6C98434C420D21F63 /* swift-sharing_Sharing.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swift-sharing_Sharing.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D73158E863D57F87669A5A /* libFeatureNickname.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureNickname.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		390DB7B0BFA52873E686387D /* AppAuth_AppAuth.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppAuth_AppAuth.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,7 +231,7 @@
 		4A69E7C7A83E280C41906042 /* GoogleUtilities_Network.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Network.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC49A40D7F5EC00BA03E2ED /* GoogleSignIn_GoogleSignIn.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleSignIn_GoogleSignIn.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D0ACE7154DA3BAF7A55D5C1 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5FDA39BC6CF5B503180CD78E /* absl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = absl.xcframework; sourceTree = "<group>"; };
+		5FDA39BC6CF5B503180CD78E /* absl.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; path = absl.xcframework; sourceTree = "<group>"; };
 		68C3925DD16A1E2708D8FD0B /* Firebase_FirebaseFirestore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseFirestore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB986E1572BB694649232C8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		6B9CB8AE2AE08F6819513527 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,13 +257,13 @@
 		AD5300340E017D134D5B90EE /* leveldb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = leveldb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE8314C9F2C2F6BAF638DDE0 /* GoogleUtilities_GoogleUtilities_Network.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Network.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA63E30F12F450E3DE3ED58 /* opensslWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = opensslWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2980F865E0954E1E95BF196 /* FirebaseFirestoreInternal.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseFirestoreInternal.xcframework; sourceTree = "<group>"; };
+		B2980F865E0954E1E95BF196 /* FirebaseFirestoreInternal.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; path = FirebaseFirestoreInternal.xcframework; sourceTree = "<group>"; };
 		C1D2E984A182C1ABAF010C3B /* GoogleUtilities_GoogleUtilities_NSData.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_NSData.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		C779662EBD5C8D25C812BBDE /* NicknameFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameFeatureTests.swift; sourceTree = "<group>"; };
 		C7CE492CC94B6295B14B5BC2 /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8DFB7A5325FAAA1C62EE838 /* abslWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = abslWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1F4660F08A2A4B84D68D50 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC52CF1BDC64BD503E5BE56C /* openssl_grpc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = openssl_grpc.xcframework; sourceTree = "<group>"; };
+		CC52CF1BDC64BD503E5BE56C /* openssl_grpc.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; path = openssl_grpc.xcframework; sourceTree = "<group>"; };
 		CD11DB5082D11519031327A5 /* abseil_abslWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = abseil_abslWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF39CE874027BD2D4074EDF0 /* FirebaseCoreExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseCoreExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFAB99312C8A9D882BEE5FBD /* GTMSessionFetcher_GTMSessionFetcherCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTMSessionFetcher_GTMSessionFetcherCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,7 +272,7 @@
 		D0D76F39FC82D928D0A0EF32 /* Firebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Firebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AF166615CD8275D32BCC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D44D11AF2E3331EA1A8A41F7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		D8CC9D2101D52FBD602F1EB0 /* grpcpp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = grpcpp.xcframework; sourceTree = "<group>"; };
+		D8CC9D2101D52FBD602F1EB0 /* grpcpp.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; path = grpcpp.xcframework; sourceTree = "<group>"; };
 		DD500938F802D20A75C04527 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		DDEC737924A68C99C8E0216B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		E08DF74836BAF283B7424266 /* GoogleSignIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleSignIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -663,8 +663,6 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 29991C1D3EDFDD024EAB3609 /* Build configuration list for PBXProject "FeatureNickname" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -852,89 +850,14 @@
 					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
 					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
 				);
-				OTHER_SWIFT_FLAGS = (
-					"$(inherited)",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros",
-				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros";
 				PRODUCT_BUNDLE_IDENTIFIER = "";
 				PRODUCT_NAME = FeatureNicknameTests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1024,79 +947,7 @@
 					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				OTHER_SWIFT_FLAGS = (
-					"$(inherited)",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros",
-				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros";
 				PRODUCT_BUNDLE_IDENTIFIER = "";
 				PRODUCT_NAME = FeatureNickname;
 				SDKROOT = iphoneos;
@@ -1104,10 +955,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1210,79 +1058,7 @@
 					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
 					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
 				);
-				OTHER_SWIFT_FLAGS = (
-					"$(inherited)",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros",
-				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros";
 				PRODUCT_BUNDLE_IDENTIFIER = "";
 				PRODUCT_NAME = FeatureNicknameTests;
 				SDKROOT = iphoneos;
@@ -1445,79 +1221,7 @@
 					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				OTHER_SWIFT_FLAGS = (
-					"$(inherited)",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin",
-					"-load-plugin-executable",
-					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros",
-				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/firebase-ios-sdk/CoreOnly/Sources/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/promises/Sources/FBLPromises/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuth/AppAuth.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppAuthCore/AppAuthCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/AppCheckCore/AppCheckCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAppCheckInterop/FirebaseAppCheckInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInternal/FirebaseAuthInternal.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseAuthInterop/FirebaseAuthInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCore/FirebaseCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseCoreExtension/FirebaseCoreExtension.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreInternalWrapper/FirebaseFirestoreInternalWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/FirebaseFirestoreTarget/FirebaseFirestoreTarget.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GTMSessionFetcherCore/GTMSessionFetcherCore.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleSignIn/GoogleSignIn.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_AppDelegateSwizzler/GoogleUtilities_AppDelegateSwizzler.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Environment/GoogleUtilities_Environment.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Logger/GoogleUtilities_Logger.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_NSData/GoogleUtilities_NSData.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Network/GoogleUtilities_Network.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_Reachability/GoogleUtilities_Reachability.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/GoogleUtilities_UserDefaults/GoogleUtilities_UserDefaults.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/RecaptchaInterop/RecaptchaInterop.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/abslWrapper/abslWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcWrapper/grpcWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/grpcppWrapper/grpcppWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/leveldb/leveldb.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/nanopb/nanopb.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/opensslWrapper/opensslWrapper.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../../Tuist/.build/tuist-derived/third_party_IsAppEncrypted/third_party_IsAppEncrypted.modulemap -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros";
 				PRODUCT_BUNDLE_IDENTIFIER = "";
 				PRODUCT_NAME = FeatureNickname;
 				SDKROOT = iphoneos;

@@ -4,6 +4,7 @@ import DomainEntity
 import DomainClient
 import SharedDesignSystem
 import SharedRecordVisuals
+import FeatureNickname
 
 public typealias Record = DomainEntity.Record
 
@@ -37,12 +38,8 @@ public struct UniverseFeature {
         public var hasReceivedInitialProfile = false
         public var pendingOnboardingCheck = false
 
-        // Onboarding Nickname
-        public var onboardingNickname = ""
-        public var onboardingNicknameChecking = false
-        public var onboardingNicknameError: String?
-        public var onboardingNicknameAvailable: Bool?
-        public var onboardingNicknameSaving = false
+        // Onboarding Nickname (FeatureNickname 모듈로 위임)
+        public var onboardingNickname = NicknameFeature.State()
 
         public var isOnboarding: Bool { onboardingStep != nil && onboardingStep != .completed }
 
@@ -179,11 +176,7 @@ public struct UniverseFeature {
             hasReceivedInitialRecords: Bool = false,
             hasReceivedInitialProfile: Bool = false,
             pendingOnboardingCheck: Bool = false,
-            onboardingNickname: String = "",
-            onboardingNicknameChecking: Bool = false,
-            onboardingNicknameError: String? = nil,
-            onboardingNicknameAvailable: Bool? = nil,
-            onboardingNicknameSaving: Bool = false,
+            onboardingNickname: NicknameFeature.State = NicknameFeature.State(),
             userDisplayName: String? = nil,
             allRecords: [Record] = [],
             isInGalaxyDetail: Bool = false,
@@ -210,10 +203,6 @@ public struct UniverseFeature {
             self.hasReceivedInitialProfile = hasReceivedInitialProfile
             self.pendingOnboardingCheck = pendingOnboardingCheck
             self.onboardingNickname = onboardingNickname
-            self.onboardingNicknameChecking = onboardingNicknameChecking
-            self.onboardingNicknameError = onboardingNicknameError
-            self.onboardingNicknameAvailable = onboardingNicknameAvailable
-            self.onboardingNicknameSaving = onboardingNicknameSaving
             self.userDisplayName = userDisplayName
             self.allRecords = allRecords
             self.isInGalaxyDetail = isInGalaxyDetail
@@ -273,12 +262,7 @@ public struct UniverseFeature {
         case checkOnboarding
         case onboardingAdvanceFromWelcome
         case onboardingAdvanceFromGuide
-        case onboardingNicknameChanged(String)
-        case onboardingCheckNickname
-        case onboardingNicknameCheckResult(Bool)
-        case onboardingNicknameCheckFailed(String)
-        case onboardingNicknameConfirm
-        case onboardingNicknameSaveCompleted
+        case onboardingNickname(NicknameFeature.Action)
         case onboardingComplete
         case skipOnboarding
 
@@ -299,6 +283,10 @@ public struct UniverseFeature {
 
     public var body: some ReducerOf<Self> {
         BindingReducer()
+
+        Scope(state: \.onboardingNickname, action: \.onboardingNickname) {
+            NicknameFeature()
+        }
 
         // 기능별로 분리된 Reduce 블록들. 각 블록은 자신이 처리하는 액션만 매칭하고
         // 나머지는 default → .none 으로 흘려보낸다. 분할 파일은:

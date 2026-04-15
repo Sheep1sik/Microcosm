@@ -40,75 +40,13 @@ extension UniverseFeature {
             state.onboardingStep = .nicknameInput
             return .none
 
-        case .onboardingNicknameChanged(let text):
-            state.onboardingNickname = text
-            state.onboardingNicknameError = nil
-            state.onboardingNicknameAvailable = nil
-            return .none
-
-        case .onboardingCheckNickname:
-            let trimmed = state.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard trimmed.count >= 2, trimmed.count <= 10 else {
-                state.onboardingNicknameError = "2~10자로 입력해주세요"
-                return .none
-            }
-            state.onboardingNicknameChecking = true
-            state.onboardingNicknameError = nil
-            state.onboardingNicknameAvailable = nil
-            let nickname = trimmed
-            return .run { send in
-                do {
-                    let available = try await userClient.checkNickname(nickname)
-                    await send(.onboardingNicknameCheckResult(available))
-                } catch {
-                    await send(.onboardingNicknameCheckFailed("확인 중 오류가 발생했어요"))
-                }
-            }
-
-        case .onboardingNicknameCheckResult(let available):
-            state.onboardingNicknameChecking = false
-            if available {
-                state.onboardingNicknameAvailable = true
-                state.onboardingNicknameError = nil
-            } else {
-                state.onboardingNicknameAvailable = false
-                state.onboardingNicknameError = "이미 사용 중인 닉네임이에요"
-            }
-            return .none
-
-        case .onboardingNicknameCheckFailed(let message):
-            state.onboardingNicknameChecking = false
-            state.onboardingNicknameSaving = false
-            state.onboardingNicknameError = message
-            return .none
-
-        case .onboardingNicknameConfirm:
-            let trimmed = state.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard state.onboardingNicknameAvailable == true else { return .none }
-            state.onboardingNicknameSaving = true
-            state.onboardingNicknameError = nil
-            let nickname = trimmed
-            return .run { send in
-                guard let userId = authClient.currentUser()?.uid else {
-                    await send(.onboardingNicknameCheckFailed("로그인이 만료되었어요. 다시 시도해주세요"))
-                    return
-                }
-                do {
-                    try await userClient.setNickname(userId, nickname)
-                    await send(.onboardingNicknameSaveCompleted)
-                } catch UserClientError.nicknameTaken {
-                    await send(.onboardingNicknameCheckFailed("이미 사용 중인 닉네임이에요"))
-                } catch UserClientError.nicknameInvalid {
-                    await send(.onboardingNicknameCheckFailed("사용할 수 없는 닉네임이에요"))
-                } catch {
-                    await send(.onboardingNicknameCheckFailed("저장에 실패했어요. 잠시 후 다시 시도해주세요"))
-                }
-            }
-
-        case .onboardingNicknameSaveCompleted:
-            state.onboardingNicknameSaving = false
-            state.userDisplayName = state.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
+        case .onboardingNickname(.delegate(.nicknameSet)):
+            // NicknameFeature 가 서버 저장까지 완료한 시점. galaxyBirthIntro 로 전환.
+            state.userDisplayName = state.onboardingNickname.nickname.trimmingCharacters(in: .whitespacesAndNewlines)
             state.onboardingStep = .galaxyBirthIntro
+            return .none
+
+        case .onboardingNickname:
             return .none
 
         case .onboardingAdvanceFromGuide:

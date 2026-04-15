@@ -40,6 +40,7 @@ public struct NicknameFeature {
         case saveCompleted
         case delegate(Delegate)
 
+        @CasePathable
         public enum Delegate {
             case nicknameSet
         }

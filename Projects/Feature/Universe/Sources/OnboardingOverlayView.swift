@@ -2,6 +2,7 @@ import SwiftUI
 import ComposableArchitecture
 import DomainEntity
 import SharedDesignSystem
+import FeatureNickname
 
 struct OnboardingOverlayView: View {
     let store: StoreOf<UniverseFeature>
@@ -112,20 +113,21 @@ struct OnboardingOverlayView: View {
                 Spacer()
 
                 if showNicknameInput {
+                    let nicknameState = store.onboardingNickname
                     VStack(spacing: 10) {
                         HStack(spacing: 10) {
                             // 상태 아이콘
-                            if store.onboardingNicknameAvailable == true {
+                            if nicknameState.isAvailable == true {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundStyle(AppColors.accent)
                                     .transition(.scale.combined(with: .opacity))
                             }
 
                             TextField("", text: Binding(
-                                get: { store.onboardingNickname },
-                                set: { store.send(.onboardingNicknameChanged($0)) }
+                                get: { nicknameState.nickname },
+                                set: { store.send(.onboardingNickname(.nicknameChanged($0))) }
                             ))
-                            .placeholder(when: store.onboardingNickname.isEmpty) {
+                            .placeholder(when: nicknameState.nickname.isEmpty) {
                                 Text("2~10자 닉네임")
                                     .foregroundStyle(.white.opacity(0.3))
                             }
@@ -134,15 +136,15 @@ struct OnboardingOverlayView: View {
                             .focused($isNicknameFocused)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
-                            .onSubmit { store.send(.onboardingCheckNickname) }
+                            .onSubmit { store.send(.onboardingNickname(.checkNickname)) }
 
                             // 중복확인 or 시작하기 버튼
-                            if store.onboardingNicknameAvailable == true {
+                            if nicknameState.isAvailable == true {
                                 Button {
-                                    store.send(.onboardingNicknameConfirm)
+                                    store.send(.onboardingNickname(.confirmTapped))
                                 } label: {
                                     Group {
-                                        if store.onboardingNicknameSaving {
+                                        if nicknameState.isSaving {
                                             ProgressView().tint(.black)
                                         } else {
                                             Text("시작하기")
@@ -154,14 +156,14 @@ struct OnboardingOverlayView: View {
                                     .padding(.vertical, 7)
                                     .background(Capsule().fill(AppColors.accent))
                                 }
-                                .disabled(store.onboardingNicknameSaving)
+                                .disabled(nicknameState.isSaving)
                                 .transition(.scale(scale: 0.8).combined(with: .opacity))
                             } else {
                                 Button {
-                                    store.send(.onboardingCheckNickname)
+                                    store.send(.onboardingNickname(.checkNickname))
                                 } label: {
                                     Group {
-                                        if store.onboardingNicknameChecking {
+                                        if nicknameState.isChecking {
                                             ProgressView().tint(.white)
                                         } else {
                                             Text("중복확인")
@@ -179,7 +181,7 @@ struct OnboardingOverlayView: View {
                                         )
                                     )
                                 }
-                                .disabled(!onboardingCanCheck || store.onboardingNicknameChecking)
+                                .disabled(!onboardingCanCheck || nicknameState.isChecking)
                             }
                         }
                         .padding(.horizontal, 14)
@@ -192,16 +194,16 @@ struct OnboardingOverlayView: View {
                                         .stroke(onboardingBorderColor, lineWidth: 1)
                                 )
                         )
-                        .animation(.easeInOut(duration: 0.2), value: store.onboardingNicknameAvailable)
+                        .animation(.easeInOut(duration: 0.2), value: nicknameState.isAvailable)
 
                         // 에러 메시지만 표시 (성공 시 아이콘으로 대체)
-                        if let error = store.onboardingNicknameError {
+                        if let error = nicknameState.errorMessage {
                             Text(error)
                                 .font(.system(size: 12))
                                 .foregroundStyle(.red.opacity(0.8))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .transition(.opacity)
-                                .animation(.easeInOut(duration: 0.2), value: store.onboardingNicknameError)
+                                .animation(.easeInOut(duration: 0.2), value: nicknameState.errorMessage)
                         }
                     }
                     .padding(.horizontal, 16)
@@ -225,14 +227,14 @@ struct OnboardingOverlayView: View {
     }
 
     private var onboardingCanCheck: Bool {
-        let trimmed = store.onboardingNickname.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmed = store.onboardingNickname.nickname.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.count >= 2 && trimmed.count <= 10
     }
 
     private var onboardingBorderColor: Color {
-        if store.onboardingNicknameError != nil {
+        if store.onboardingNickname.errorMessage != nil {
             return .red.opacity(0.5)
-        } else if store.onboardingNicknameAvailable == true {
+        } else if store.onboardingNickname.isAvailable == true {
             return AppColors.accent.opacity(0.5)
         }
         return Color.white.opacity(0.08)

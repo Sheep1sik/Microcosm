@@ -8,6 +8,7 @@ let project = Project.makeModule(
             sources: .Universe,
             target: .init(
                 dependencies: [
+                    .feature(sources: .Nickname),
                     .domain(sources: .Entity),
                     .domain(sources: .Client),
                     .shared(sources: .DesignSystem),
