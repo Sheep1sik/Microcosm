@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "2620"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -479,6 +479,20 @@
                BlueprintIdentifier = "F82B34409657995821BE38C8"
                BuildableName = "libFeatureSplash.a"
                BlueprintName = "FeatureSplash"
+               ReferencedContainer = "container:Projects/Feature/Splash/FeatureSplash.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "337F572065B4A6FC2BE4BA3E"
+               BuildableName = "FeatureSplashTests.xctest"
+               BlueprintName = "FeatureSplashTests"
                ReferencedContainer = "container:Projects/Feature/Splash/FeatureSplash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -1828,6 +1842,17 @@
                BuildableName = "FeatureProfileTests.xctest"
                BlueprintName = "FeatureProfileTests"
                ReferencedContainer = "container:Projects/Feature/Profile/FeatureProfile.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "337F572065B4A6FC2BE4BA3E"
+               BuildableName = "FeatureSplashTests.xctest"
+               BlueprintName = "FeatureSplashTests"
+               ReferencedContainer = "container:Projects/Feature/Splash/FeatureSplash.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
