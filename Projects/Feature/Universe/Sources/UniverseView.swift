@@ -205,14 +205,13 @@ private struct SceneChangeHandlers: ViewModifier {
             .onChange(of: store.allRecords) {
                 scene.refreshGalaxies()
             }
-            .onChange(of: store.hasReceivedInitialRecords) {
-                // records 가 빈 배열(`[]→[]`)로 도착해 allRecords onChange 가 트리거되지 않는
-                // 엣지 케이스(온보딩 완료했지만 기록이 0개인 유저 등)를 위한 보완 경로.
-                // setupScene 의 첫 refreshGalaxies 는 `isOnboardingUndecided`에서 early-return 되므로,
-                // observer 응답이 도착한 시점에 한 번 호출해 현재월 빈 은하를 만들어준다.
-                if store.hasReceivedInitialRecords {
-                    scene.refreshGalaxies()
-                }
+            .onChange(of: store.hasReceivedInitialRecords && store.hasReceivedInitialProfile) {
+                _, bothReady in
+                // records / profile 둘 다 도착한 시점에만 그릴 기회를 준다.
+                // setupScene 의 첫 refreshGalaxies 와 allRecords/onboardingStep onChange 만으로는
+                // (1) `[]→[]` 엣지 (온보딩 완료했지만 기록이 0개인 유저), (2) records-first race
+                // 두 경우에 화면이 비는 회귀가 있어 보완 경로로 둔다.
+                if bothReady { scene.refreshGalaxies() }
             }
             .onChange(of: store.onboardingStep) {
                 if store.onboardingStep == .galaxyBirthIntro {
@@ -329,7 +328,10 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
     }
 
     func isOnboardingUndecided() -> Bool {
-        !store.hasReceivedInitialRecords
+        // records 와 profile 둘 다 도착해야 온보딩 여부가 신뢰 가능하다.
+        // profile 이 늦게 오면 `isOnboarding`(step=nil)이 false 로 평가돼
+        // 신규 유저인데도 isFirstLoad 경로로 빈 현재월 은하가 즉시 생성되는 회귀가 있다.
+        !store.hasReceivedInitialRecords || !store.hasReceivedInitialProfile
     }
 
     func addRecord(_ record: DomainEntity.Record) {
