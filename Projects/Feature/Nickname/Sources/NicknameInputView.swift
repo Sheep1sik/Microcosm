@@ -148,6 +148,7 @@ public struct NicknameInputView: View {
             }
         }
         .navigationBarHidden(true)
+        .toolbar(.hidden, for: .tabBar)
         .preferredColorScheme(.dark)
         .onAppear { isFocused = true }
     }

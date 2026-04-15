@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "2620"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -280,6 +280,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B237145CDFAA56B093971D02"
+               BuildableName = "DomainClientTests.xctest"
+               BlueprintName = "DomainClientTests"
+               ReferencedContainer = "container:Projects/Domain/Client/DomainClient.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "E8BF43FC03CE747ED2FC5AD8"
                BuildableName = "libDomainEntity.a"
                BlueprintName = "DomainEntity"
@@ -336,9 +350,37 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "511A66D4945F525686E33C17"
+               BuildableName = "FeatureAuthTests.xctest"
+               BlueprintName = "FeatureAuthTests"
+               ReferencedContainer = "container:Projects/Feature/Auth/FeatureAuth.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "FEB8502575C240A8A7C138B1"
                BuildableName = "libFeatureConstellation.a"
                BlueprintName = "FeatureConstellation"
+               ReferencedContainer = "container:Projects/Feature/Constellation/FeatureConstellation.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D8DBF33C701FC026064BD6D8"
+               BuildableName = "FeatureConstellationTests.xctest"
+               BlueprintName = "FeatureConstellationTests"
                ReferencedContainer = "container:Projects/Feature/Constellation/FeatureConstellation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -392,9 +434,37 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "77299CF54CE57EEFFFFC389D"
+               BuildableName = "FeatureNicknameTests.xctest"
+               BlueprintName = "FeatureNicknameTests"
+               ReferencedContainer = "container:Projects/Feature/Nickname/FeatureNickname.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "C0A551C0EEC1642417872C54"
                BuildableName = "libFeatureProfile.a"
                BlueprintName = "FeatureProfile"
+               ReferencedContainer = "container:Projects/Feature/Profile/FeatureProfile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E6370396A3AE24C0472E5E44"
+               BuildableName = "FeatureProfileTests.xctest"
+               BlueprintName = "FeatureProfileTests"
                ReferencedContainer = "container:Projects/Feature/Profile/FeatureProfile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -1699,10 +1769,65 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B237145CDFAA56B093971D02"
+               BuildableName = "DomainClientTests.xctest"
+               BlueprintName = "DomainClientTests"
+               ReferencedContainer = "container:Projects/Domain/Client/DomainClient.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "511A66D4945F525686E33C17"
+               BuildableName = "FeatureAuthTests.xctest"
+               BlueprintName = "FeatureAuthTests"
+               ReferencedContainer = "container:Projects/Feature/Auth/FeatureAuth.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D8DBF33C701FC026064BD6D8"
+               BuildableName = "FeatureConstellationTests.xctest"
+               BlueprintName = "FeatureConstellationTests"
+               ReferencedContainer = "container:Projects/Feature/Constellation/FeatureConstellation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "47A82D280773C8B375CE9E03"
                BuildableName = "FeatureMainTests.xctest"
                BlueprintName = "FeatureMainTests"
                ReferencedContainer = "container:Projects/Feature/Main/FeatureMain.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "77299CF54CE57EEFFFFC389D"
+               BuildableName = "FeatureNicknameTests.xctest"
+               BlueprintName = "FeatureNicknameTests"
+               ReferencedContainer = "container:Projects/Feature/Nickname/FeatureNickname.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E6370396A3AE24C0472E5E44"
+               BuildableName = "FeatureProfileTests.xctest"
+               BlueprintName = "FeatureProfileTests"
+               ReferencedContainer = "container:Projects/Feature/Profile/FeatureProfile.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference

@@ -6,9 +6,12 @@ extension UniverseFeature {
     func reduceOnboarding(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .checkOnboarding:
-            // records observer가 최초 yield 하기 전이면 결정을 보류.
-            // recordsUpdated 첫 호출 시 자동으로 다시 평가한다.
-            guard state.hasReceivedInitialRecords else {
+            // records 와 profile 모두 최초 yield 가 끝나야 온보딩 결정이 신뢰 가능하다.
+            // profile 이 아직이면 `hasCompletedOnboarding` 이 default(false) 로 평가돼
+            // 기존 유저가 다시 welcome 으로 진입하는 회귀가 발생한다.
+            // 둘 중 하나라도 미도착이면 보류하고, recordsUpdated / profileReceived 첫 호출 시
+            // 자동으로 다시 평가한다.
+            guard state.hasReceivedInitialRecords, state.hasReceivedInitialProfile else {
                 state.pendingOnboardingCheck = true
                 return .none
             }
@@ -18,6 +21,18 @@ extension UniverseFeature {
                 return .none
             }
             state.onboardingStep = .welcome
+            return .none
+
+        case .profileReceived:
+            // 최초 profile yield 후에만 checkOnboarding 결정을 신뢰.
+            // 보류 중인 checkOnboarding 요청을 리졸브한다.
+            if !state.hasReceivedInitialProfile {
+                state.hasReceivedInitialProfile = true
+                if state.pendingOnboardingCheck, state.hasReceivedInitialRecords {
+                    state.pendingOnboardingCheck = false
+                    return .send(.checkOnboarding)
+                }
+            }
             return .none
 
         case .onboardingAdvanceFromWelcome:

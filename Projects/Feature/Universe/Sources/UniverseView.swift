@@ -42,7 +42,7 @@ public struct UniverseView: View {
 
     public var body: some View {
         mainContent
-            .toolbar(store.isInGalaxyDetail || store.isOnboarding ? .hidden : .visible, for: .tabBar)
+            .toolbar(store.isInGalaxyDetail || store.isOnboarding || store.isSearching ? .hidden : .visible, for: .tabBar)
             .animation(.easeOut(duration: 0.3), value: store.showRecordPanel)
             .modifier(SceneChangeHandlers(store: store, scene: scene, isTextFocused: $isTextFocused))
             .alert("오늘의 기록을 이미 작성했어요", isPresented: $store.showLimitAlert) {
@@ -205,6 +205,15 @@ private struct SceneChangeHandlers: ViewModifier {
             .onChange(of: store.allRecords) {
                 scene.refreshGalaxies()
             }
+            .onChange(of: store.hasReceivedInitialRecords) {
+                // records 가 빈 배열(`[]→[]`)로 도착해 allRecords onChange 가 트리거되지 않는
+                // 엣지 케이스(온보딩 완료했지만 기록이 0개인 유저 등)를 위한 보완 경로.
+                // setupScene 의 첫 refreshGalaxies 는 `isOnboardingUndecided`에서 early-return 되므로,
+                // observer 응답이 도착한 시점에 한 번 호출해 현재월 빈 은하를 만들어준다.
+                if store.hasReceivedInitialRecords {
+                    scene.refreshGalaxies()
+                }
+            }
             .onChange(of: store.onboardingStep) {
                 if store.onboardingStep == .galaxyBirthIntro {
                     scene.refreshGalaxies()
@@ -265,6 +274,10 @@ protocol UniverseSceneDelegate: AnyObject {
     @MainActor func getAllRecords() -> [DomainEntity.Record]
     func getIsOnboarding() -> Bool
     func getOnboardingStep() -> OnboardingStep?
+    /// records observer가 최소 1회 응답하기 전까지는 true.
+    /// 이 상태에서 은하를 그리면 온보딩 여부 결정 전에 현재월 은하가 애니메이션 없이 먼저 생성돼
+    /// 이후 `.galaxyBirthIntro` 단계의 출생 모션이 사라지는 회귀를 유발한다.
+    func isOnboardingUndecided() -> Bool
     func addRecord(_ record: DomainEntity.Record)
     func didTapEmptyArea()
 }
@@ -313,6 +326,10 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
 
     func getOnboardingStep() -> OnboardingStep? {
         store.onboardingStep
+    }
+
+    func isOnboardingUndecided() -> Bool {
+        !store.hasReceivedInitialRecords
     }
 
     func addRecord(_ record: DomainEntity.Record) {

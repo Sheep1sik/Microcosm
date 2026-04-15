@@ -190,7 +190,9 @@ final class UniverseScene: SKScene {
         setupBrightStars()
         setupDistantGalaxies()
         setupMinimap()
-        refreshGalaxies()
+        // refreshGalaxies() 는 setupScene() 에서 sceneDelegate 연결 후 호출한다.
+        // 이 시점엔 delegate 미연결이라 onboarding 여부를 알 수 없어 현재월 빈 은하를
+        // animated:false 경로로 잘못 생성하는 회귀가 발생했다.
     }
 
     // MARK: - Camera

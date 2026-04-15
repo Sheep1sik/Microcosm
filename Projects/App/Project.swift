@@ -38,7 +38,7 @@ let project = Project.makeModule(
                     "GIDClientID": "401642093565-inr52e52ielptgsjfk0lcm62uuecio4j.apps.googleusercontent.com",
                     "OPENAI_API_KEY": "$(OPENAI_API_KEY)",
                 ]),
-                entitlements: "Resources/Microcosm.entitlements",
+                entitlements: "Microcosm.entitlements",
                 dependencies: [
                     .feature,
                     .domain,

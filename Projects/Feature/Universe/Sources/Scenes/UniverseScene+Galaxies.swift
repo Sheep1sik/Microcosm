@@ -7,6 +7,12 @@ extension UniverseScene {
     // MARK: - Dynamic Galaxies
 
     func refreshGalaxies() {
+        // records observer 응답 전까지는 온보딩 여부가 결정되지 않은 상태.
+        // 이 시점에 은하를 그리면 isFirstLoad 경로로 현재월 빈 은하가 즉시(애니메이션 없이) 생성돼,
+        // 이후 `.galaxyBirthIntro`에서 출생 모션이 existing-branch로 흡수돼 사라진다.
+        // 완전 early return 으로 첫 호출 자체를 미뤄 isFirstLoad 플래그를 소비하지 않는다.
+        if sceneDelegate?.isOnboardingUndecided() == true { return }
+
         let allRecords = sceneDelegate?.getAllRecords() ?? []
 
         let calendar = Calendar.current
