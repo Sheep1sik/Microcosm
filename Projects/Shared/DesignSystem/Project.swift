@@ -7,9 +7,7 @@ let project = Project.makeModule(
         .shared(
             sources: .DesignSystem,
             target: .init(
-                dependencies: [
-                    .domain(sources: .Entity),
-                ]
+                dependencies: []
             )
         ),
     ]

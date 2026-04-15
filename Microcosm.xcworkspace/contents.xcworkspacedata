@@ -57,6 +57,9 @@
          <FileRef
             location = "group:DesignSystem/SharedDesignSystem.xcodeproj">
          </FileRef>
+         <FileRef
+            location = "group:RecordVisuals/SharedRecordVisuals.xcodeproj">
+         </FileRef>
       </Group>
    </Group>
    <Group

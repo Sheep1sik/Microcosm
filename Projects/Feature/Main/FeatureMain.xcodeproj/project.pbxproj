@@ -82,6 +82,7 @@
 		99DD3E3EB6FB5FD56B2F70D6 /* MainTabFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C542B177DC7517604DB17 /* MainTabFeature.swift */; };
 		9B62430A9948D2AF629854E2 /* GoogleUtilities_AppDelegateSwizzler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CEB1F24AB4C3027CF29C6E /* GoogleUtilities_AppDelegateSwizzler.framework */; };
 		9CD055850C0E86EA03733869 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = E6A09023D507A257D30A1006 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle */; };
+		9D606EC83AA705D4CC222AB1 /* libSharedRecordVisuals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B44CDB5F3A73E7406007D62E /* libSharedRecordVisuals.a */; };
 		A15F09B0556B7C6E1D6668C9 /* GoogleUtilities_GoogleUtilities_Network.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = A35E992BBDE1FFA6EAA512BA /* GoogleUtilities_GoogleUtilities_Network.bundle */; };
 		A1EDEB5E945E11BD2BE29197 /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59115DDD30D3C4DA87EBAD05 /* FirebaseAuth.framework */; };
 		A355BD64ADE3DE20CA9D38B3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F458E1F9394F470F4297DECE /* libc++.tbd */; };
@@ -276,6 +277,7 @@
 		AE69AD193F51FF88FD8D7E4A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		B0B27CB659A5DB4CA0F12764 /* FirebaseCoreInternal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseCoreInternal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B251534E648F9B13F7AE22C5 /* GoogleSignIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleSignIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B44CDB5F3A73E7406007D62E /* libSharedRecordVisuals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedRecordVisuals.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B558EB8AC4BFDD6137162EB3 /* GoogleUtilities_Environment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Environment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA1961F5CDFC066B412751A5 /* Firebase_FirebaseCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC21BA047243F82B1C48C123 /* GoogleUtilities_GoogleUtilities_Reachability.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Reachability.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -365,6 +367,7 @@
 				8769D3674D1F534D3D5F9537 /* GoogleUtilities_UserDefaults.framework in Frameworks */,
 				DDE3FAAC4E45E2C04C3960DB /* RecaptchaInterop.framework in Frameworks */,
 				D02518159D859F47F7B7DED8 /* libSharedDesignSystem.a in Frameworks */,
+				9D606EC83AA705D4CC222AB1 /* libSharedRecordVisuals.a in Frameworks */,
 				F4D32DDDC9B51B55B0216EB7 /* abslWrapper.framework in Frameworks */,
 				B5D6FD332A744F56BC403EDD /* grpcWrapper.framework in Frameworks */,
 				7336DC59D861CFB31F8BE30C /* grpcppWrapper.framework in Frameworks */,
@@ -513,6 +516,7 @@
 				BF8599910B638D70BB0326A9 /* libFeatureProfile.a */,
 				339B286840C7FB46C9A2C8FF /* libFeatureUniverse.a */,
 				4DB283A18B8E0AEE3A524248 /* libSharedDesignSystem.a */,
+				B44CDB5F3A73E7406007D62E /* libSharedRecordVisuals.a */,
 				C6B8209D83577E7FF6105057 /* nanopb_nanopb.bundle */,
 				4054CB01FEF6762371A34C42 /* nanopb.framework */,
 				D39132C0888395C48F0A68CB /* opensslWrapper.framework */,

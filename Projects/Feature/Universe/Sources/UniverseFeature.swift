@@ -3,6 +3,7 @@ import ComposableArchitecture
 import DomainEntity
 import DomainClient
 import SharedDesignSystem
+import SharedRecordVisuals
 
 public typealias Record = DomainEntity.Record
 

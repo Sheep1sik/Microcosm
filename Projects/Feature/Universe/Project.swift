@@ -11,6 +11,7 @@ let project = Project.makeModule(
                     .domain(sources: .Entity),
                     .domain(sources: .Client),
                     .shared(sources: .DesignSystem),
+                    .shared(sources: .RecordVisuals),
                     .external(name: "ComposableArchitecture"),
                 ]
             )

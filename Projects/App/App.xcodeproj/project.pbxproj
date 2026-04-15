@@ -106,6 +106,7 @@
 		CDE47B034BD27F1EBFB46D5C /* grpc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E28126718C2DD5E414DFF6 /* grpc.xcframework */; };
 		CE00E86F598AB77EDE96501E /* GoogleUtilities_Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C99EEBAAE10B045CF1A64A0E /* GoogleUtilities_Network.framework */; };
 		CEE72E5209DB009849EFC54B /* libFeatureAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D27C10B40489AACFEF3C27 /* libFeatureAuth.a */; };
+		D085A7C6C58EE81D00EA5EAA /* libSharedRecordVisuals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 110048C0E6F00E8B8A2DAC06 /* libSharedRecordVisuals.a */; };
 		D0D46B77C3A4AAD1BCF324DE /* abseil_abslWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 7612437871D90EA4A9855FF2 /* abseil_abslWrapper.bundle */; };
 		D1A666FCE26C7BAF8B59EDFE /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7362BC081FA4067CE198F59 /* RootFeature.swift */; };
 		D24CC295D1E7501D5A45268A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA3C5FAA7EFDD728B5A5DA0 /* UIKit.framework */; };
@@ -186,6 +187,7 @@
 		0598AE1E4F13BEACDADD4C7B /* RecaptchaInterop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RecaptchaInterop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A753EF2BDFD938E5832DBA1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		0BE35C6E44DDB3DC2EAFA79F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		110048C0E6F00E8B8A2DAC06 /* libSharedRecordVisuals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedRecordVisuals.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C3BF715EC3A4C7E893403F /* libDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		147CCBEC359EABDED4B76614 /* libFeatureMain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureMain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A24FC5D83E61ED5CD9BE219 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_UserDefaults.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -344,6 +346,7 @@
 				7405A0E0EB3CD855EAB2B076 /* RecaptchaInterop.framework in Frameworks */,
 				F373C384355C8E9CFA38CBAC /* libShared.a in Frameworks */,
 				8866865A9C9F08BC467B7592 /* libSharedDesignSystem.a in Frameworks */,
+				D085A7C6C58EE81D00EA5EAA /* libSharedRecordVisuals.a in Frameworks */,
 				4F4EC20A28AEE072272D0093 /* abslWrapper.framework in Frameworks */,
 				F505757CEF484CD120274FD1 /* grpcWrapper.framework in Frameworks */,
 				692B8BCEB8C913ACC146D6F3 /* grpcppWrapper.framework in Frameworks */,
@@ -609,6 +612,7 @@
 				63BF9DF72BC3B3E407FCEAC6 /* libFeatureUniverse.a */,
 				868000D6ADC7D6EE2261AFFF /* libShared.a */,
 				91A8F29FA06D8EECAE90D153 /* libSharedDesignSystem.a */,
+				110048C0E6F00E8B8A2DAC06 /* libSharedRecordVisuals.a */,
 				6105BB8177B33F2C396F62AF /* Microcosm.app */,
 				ADED33C4EE6E5E141B0AB27F /* nanopb_nanopb.bundle */,
 				5F4076E956478B59F7481B80 /* nanopb.framework */,

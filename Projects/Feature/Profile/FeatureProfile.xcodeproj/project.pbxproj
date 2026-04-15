@@ -29,6 +29,7 @@
 		1BCC80B3735D20DCBD313D7C /* libFeatureNickname.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 56D962965853758794231208 /* libFeatureNickname.a */; };
 		1D0B777A3973E39302E2C723 /* gRPC_grpcppWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = B3843BDDD68D8A212645D119 /* gRPC_grpcppWrapper.bundle */; };
 		20E01D1E3497329F2812F8AD /* GTMAppAuth_GTMAppAuth.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2222132213D3989ECE199EAD /* GTMAppAuth_GTMAppAuth.bundle */; };
+		219D498BE11EA51C1FF01506 /* libSharedRecordVisuals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE23739F0A70C42BED9F8432 /* libSharedRecordVisuals.a */; };
 		22E6F9DE57A418EF8D955475 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2E9A762989E18FFF8F26D5 /* ComposableArchitecture.framework */; };
 		23A9D55AE2CCAA894160127D /* GoogleUtilities_Environment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BACA3064B822AA2934B267 /* GoogleUtilities_Environment.framework */; };
 		268865D96A8BB80149B447B3 /* opensslWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 949FA820164D9314608498FC /* opensslWrapper.framework */; };
@@ -91,6 +92,7 @@
 		A2658B6A1E958B0A9D6C6247 /* Promises_FBLPromises.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41FA13523E55505897DA417D /* Promises_FBLPromises.bundle */; };
 		A36C10E116BB84CFA37ABD95 /* GoogleUtilities_GoogleUtilities_Network.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B054E43AECC5FFA2190F0FF9 /* GoogleUtilities_GoogleUtilities_Network.bundle */; };
 		A4D62F05BFB959F1C0317631 /* swift-sharing_Sharing.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA3E89D3A6E28D3875713010 /* swift-sharing_Sharing.bundle */; };
+		A8683DCD74ECEE2D583E643C /* libSharedRecordVisuals.a in Dependencies */ = {isa = PBXBuildFile; fileRef = DE23739F0A70C42BED9F8432 /* libSharedRecordVisuals.a */; };
 		A8B39583D3BB94AEC94A4C07 /* Firebase_FirebaseCore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D352D74AACF43D0FB3E831B8 /* Firebase_FirebaseCore.bundle */; };
 		AA956CBA1D95B14B11EB9D62 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A06AACFCEB7AAB6952652B /* FirebaseCore.framework */; };
 		AE9500D7BB652990E3A771E5 /* leveldb_leveldb.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1264A80FF3379373A6BDC595 /* leveldb_leveldb.bundle */; };
@@ -157,6 +159,7 @@
 				02C37EDF614ADCF3F6E385F2 /* libDomainEntity.a in Dependencies */,
 				1BCC80B3735D20DCBD313D7C /* libFeatureNickname.a in Dependencies */,
 				D1213B67F790828D3148C48B /* libSharedDesignSystem.a in Dependencies */,
+				A8683DCD74ECEE2D583E643C /* libSharedRecordVisuals.a in Dependencies */,
 			);
 			name = Dependencies;
 			runOnlyForDeploymentPostprocessing = 1;
@@ -282,6 +285,7 @@
 		D352D74AACF43D0FB3E831B8 /* Firebase_FirebaseCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D9A5B75E142FAB16BF3EF2 /* leveldb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = leveldb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD7F6584E946F4B2D8BC594 /* FirebaseCoreInternal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseCoreInternal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE23739F0A70C42BED9F8432 /* libSharedRecordVisuals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedRecordVisuals.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF5FD95E6DFBEC0F200C037E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		E1A30DFA96F430B457ED0850 /* grpcpp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = grpcpp.xcframework; sourceTree = "<group>"; };
 		E40ADECEF2B61E246C37376A /* AppAuth_AppAuth.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppAuth_AppAuth.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +354,7 @@
 				609CB2615493A6684A6CFD0F /* GoogleUtilities_UserDefaults.framework in Frameworks */,
 				53A3F2B8030ABDC51485E429 /* RecaptchaInterop.framework in Frameworks */,
 				06599AE305B16557AB1946B2 /* libSharedDesignSystem.a in Frameworks */,
+				219D498BE11EA51C1FF01506 /* libSharedRecordVisuals.a in Frameworks */,
 				AF23CE4C0B2EB5AF1C2A41D7 /* abslWrapper.framework in Frameworks */,
 				D1C7B2E04AF7CDAE403330B9 /* grpcWrapper.framework in Frameworks */,
 				0D12E59B02FB7225C18338F7 /* grpcppWrapper.framework in Frameworks */,
@@ -438,6 +443,7 @@
 				56D962965853758794231208 /* libFeatureNickname.a */,
 				F59B2D46530E8C458A66AC76 /* libFeatureProfile.a */,
 				ECF0351F386E4E438BD02B3B /* libSharedDesignSystem.a */,
+				DE23739F0A70C42BED9F8432 /* libSharedRecordVisuals.a */,
 				904EE494365E892E893411A6 /* nanopb_nanopb.bundle */,
 				39112534236FDBF0C5F14AD9 /* nanopb.framework */,
 				949FA820164D9314608498FC /* opensslWrapper.framework */,

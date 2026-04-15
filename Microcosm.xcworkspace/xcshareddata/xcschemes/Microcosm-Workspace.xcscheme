@@ -1232,6 +1232,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "142605BA63EBE3D6B10A9030"
+               BuildableName = "libSharedRecordVisuals.a"
+               BlueprintName = "SharedRecordVisuals"
+               ReferencedContainer = "container:Projects/Shared/RecordVisuals/SharedRecordVisuals.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "82CBDEFA4ED532AC90F265F5"
                BuildableName = "Sharing.framework"
                BlueprintName = "Sharing"

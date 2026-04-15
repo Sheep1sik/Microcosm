@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2EB05189A7582376D4D1BCF1 /* libDomainEntity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB170095624E1B47FA5A376 /* libDomainEntity.a */; };
 		38F4D9EF4F3E71C02B155A05 /* swift-sharing_Sharing.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 8F5DD146308FA8E5B6327EDE /* swift-sharing_Sharing.bundle */; };
 		4B5CA49F2DD62D15FD44D516 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089635CDDD2957D70CD4EC05 /* SplashView.swift */; };
 		5232D98385D77A9736C70068 /* swift-sharing_Sharing.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F5DD146308FA8E5B6327EDE /* swift-sharing_Sharing.bundle */; };
@@ -83,7 +82,6 @@
 		A4FC3E64896177EFD43BBE7A /* libFeatureSplash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureSplash.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2C1623930A7B98988C7C257 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
 		D7E45D9DB558857184A82E96 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EDB170095624E1B47FA5A376 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +98,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4F604E0C97D29FECF5797AB /* ComposableArchitecture.framework in Frameworks */,
-				2EB05189A7582376D4D1BCF1 /* libDomainEntity.a in Frameworks */,
 				848856696BE87EBAC2332672 /* libFeatureSplash.a in Frameworks */,
 				A4F30F9F67F08EED75B0E843 /* libSharedDesignSystem.a in Frameworks */,
 			);
@@ -138,7 +135,6 @@
 			children = (
 				8D239DBCB729E4434ED42221 /* ComposableArchitecture.framework */,
 				63A0C82CE96B94C13A242B84 /* FeatureSplashTests.xctest */,
-				EDB170095624E1B47FA5A376 /* libDomainEntity.a */,
 				A4FC3E64896177EFD43BBE7A /* libFeatureSplash.a */,
 				D7E45D9DB558857184A82E96 /* libSharedDesignSystem.a */,
 				8F5DD146308FA8E5B6327EDE /* swift-sharing_Sharing.bundle */,
