@@ -1,6 +1,5 @@
 import Foundation
 import ComposableArchitecture
-import DomainEntity
 
 extension OpenAIClient: TestDependencyKey {
     public static let testValue = OpenAIClient(

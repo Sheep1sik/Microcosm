@@ -1,6 +1,5 @@
 import Foundation
 import ComposableArchitecture
-import DomainEntity
 
 extension GoalClient: TestDependencyKey {
     public static let testValue = GoalClient(

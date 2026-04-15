@@ -1,6 +1,5 @@
 import Foundation
 import ComposableArchitecture
-import DomainEntity
 
 public struct UserProfile: Equatable {
     public var displayName: String

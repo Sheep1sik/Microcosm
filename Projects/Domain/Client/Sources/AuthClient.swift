@@ -1,6 +1,5 @@
 import Foundation
 import ComposableArchitecture
-import DomainEntity
 import FirebaseAuth
 import AuthenticationServices
 

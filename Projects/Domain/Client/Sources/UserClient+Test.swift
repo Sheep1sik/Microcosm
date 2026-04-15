@@ -1,6 +1,5 @@
 import Foundation
 import ComposableArchitecture
-import DomainEntity
 
 extension UserClient: TestDependencyKey {
     public static let testValue = UserClient(

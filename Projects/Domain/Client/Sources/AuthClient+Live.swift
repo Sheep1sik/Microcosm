@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 import ComposableArchitecture
-import DomainEntity
 import FirebaseAuth
 import GoogleSignIn
 import AuthenticationServices

@@ -1,6 +1,5 @@
 import Foundation
 import ComposableArchitecture
-import DomainEntity
 
 extension RecordClient: TestDependencyKey {
     public static let testValue = RecordClient(
