@@ -82,7 +82,10 @@ extension ConstellationScene {
                     (node as? SKShapeNode)?.strokeColor = UIColor(white: 1, alpha: alpha)
                 })
             }
-            rendered.labelNode?.run(SKAction.fadeAlpha(to: 0.25, duration: 0.3))
+            // 노드 alpha 는 항상 1.0 으로 복원해야 한다.
+            // fontColor 자체에 alpha 0.25 가 들어있어, 노드 alpha 까지 0.25 로 두면
+            // 두 값이 곱해져 렌더 alpha 가 0.0625 가 되고 글자가 1/4 로 흐려진다.
+            rendered.labelNode?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.3))
         }
 
         // 뒤로가기 버튼 제거
@@ -96,8 +99,9 @@ extension ConstellationScene {
         backButton = nil
 
         // 나머지 별자리 다시 보이기 + 모든 라벨 복원
+        // (라벨 노드 alpha 1.0 + fontColor alpha 0.25 = 렌더 0.25)
         for (otherId, rendered) in renderedConstellations {
-            rendered.labelNode?.run(SKAction.fadeAlpha(to: 0.25, duration: 0.4))
+            rendered.labelNode?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.4))
             if otherId != currentConstellationId {
                 rendered.containerNode.run(SKAction.fadeAlpha(to: 1, duration: 0.4))
             }
