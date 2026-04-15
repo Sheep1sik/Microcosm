@@ -166,8 +166,13 @@ final class MainTabFeatureTests: XCTestCase {
         // 회귀 방지: MainTab 이 records 를 Universe reducer 로 포워딩하지 않으면
         // hasReceivedInitialRecords 플래그가 영원히 false 가 되어 온보딩 welcome 이
         // 뜨지 않는 버그가 있었다. 이 테스트는 포워딩 경로 전체를 검증한다.
+        //
+        // checkOnboarding 은 records 와 profile 모두 도착해야 결정을 신뢰하므로
+        // (UniverseFeature+Onboarding.checkOnboarding 의 guard 참고),
+        // 이 경로만 검증하기 위해 hasReceivedInitialProfile 은 미리 true 로 둔다.
         var initial = MainTabFeature.State()
         initial.universe.pendingOnboardingCheck = true
+        initial.universe.hasReceivedInitialProfile = true
         let store = TestStore(initialState: initial) {
             MainTabFeature()
         }
