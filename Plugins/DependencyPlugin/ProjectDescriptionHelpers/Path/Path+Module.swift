@@ -28,6 +28,16 @@ extension ProjectDescription.Path {
 }
 
 extension ProjectDescription.Path {
+    static var core: Self {
+        .relativeToRoot("Projects/\(ModulePath.Core.name)")
+    }
+
+    static func core(subModule: ModulePath.Core) -> Self {
+        .relativeToRoot("Projects/\(ModulePath.Core.name)/\(subModule.rawValue)")
+    }
+}
+
+extension ProjectDescription.Path {
     static var shared: Self {
         .relativeToRoot("Projects/\(ModulePath.Shared.name)")
     }
