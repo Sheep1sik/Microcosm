@@ -54,6 +54,7 @@
 		5405C15220C880043C2B5A20 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D205904606C8FE2BB06C54AD /* SafariServices.framework */; };
 		54D97F94554FF36494655997 /* GoogleUtilities_GoogleUtilities_Reachability.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8DB873C96FEAC9F8EE8E2994 /* GoogleUtilities_GoogleUtilities_Reachability.bundle */; };
 		54F775254A1FA13CE09AC6AA /* libDomainEntity.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 77CD21361F3A07E675832057 /* libDomainEntity.a */; };
+		557E9A807E3A34CF4E1782CF /* libCoreFirebaseKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946D6A3E7DBD82865A70F3D6 /* libCoreFirebaseKit.a */; };
 		562A999CDAAB60D6F39760CF /* gRPC_opensslWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 830F32C76D8E5784592242AD /* gRPC_opensslWrapper.bundle */; };
 		5B67D9FFFE28B3B2C54C9799 /* abseil_abslWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96DCE3250B13C45B072ED1B4 /* abseil_abslWrapper.bundle */; };
 		5CCCCF896C8546A70AD87F19 /* gRPC_grpcWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E5438D5BAF4D973A9E3C7B87 /* gRPC_grpcWrapper.bundle */; };
@@ -276,6 +277,7 @@
 		8B206C1A7F3F09659FDBEE12 /* GoogleUtilities_AppDelegateSwizzler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_AppDelegateSwizzler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B93BFBFEB15065E711B5988 /* Firebase_FirebaseCoreInternal.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseCoreInternal.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB873C96FEAC9F8EE8E2994 /* GoogleUtilities_GoogleUtilities_Reachability.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Reachability.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		946D6A3E7DBD82865A70F3D6 /* libCoreFirebaseKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreFirebaseKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		96DCE3250B13C45B072ED1B4 /* abseil_abslWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = abseil_abslWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC10A561CF20A57EE3373C6 /* GoogleUtilities_GoogleUtilities_Logger.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Logger.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C78A18CFCE6E6BDFAC85AFA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
@@ -345,6 +347,7 @@
 				13EA85364538373B96612063 /* AppAuthCore.framework in Frameworks */,
 				D94DFC9793D62ACC67646EC4 /* AppCheckCore.framework in Frameworks */,
 				E8BA01AC056F31C30C583072 /* ComposableArchitecture.framework in Frameworks */,
+				557E9A807E3A34CF4E1782CF /* libCoreFirebaseKit.a in Frameworks */,
 				E9F7929BAA2A72740F2E5C19 /* libDomainClient.a in Frameworks */,
 				EAEDE40961148778AE5FB903 /* libDomainEntity.a in Frameworks */,
 				FBCB070602337FCC27CB3C83 /* FBLPromises.framework in Frameworks */,
@@ -599,6 +602,7 @@
 				C0ACD376F2F15BDBDFD74E3C /* GTMSessionFetcherCore.framework */,
 				CE101753973E6102BE8AB160 /* leveldb_leveldb.bundle */,
 				E8990610AB1A8442FE6518C7 /* leveldb.framework */,
+				946D6A3E7DBD82865A70F3D6 /* libCoreFirebaseKit.a */,
 				E258867B52BF736A447AA5A6 /* libDomainClient.a */,
 				77CD21361F3A07E675832057 /* libDomainEntity.a */,
 				8ABE6DDFA7E97B20D3829B51 /* libFeatureConstellation.a */,

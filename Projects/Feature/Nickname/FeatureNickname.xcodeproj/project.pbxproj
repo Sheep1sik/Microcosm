@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02A7AC50F8C834F7C91639AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5B100E36122FC6328F9087 /* UIKit.framework */; };
+		03B869744C8937C5C103F3B1 /* libCoreFirebaseKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B4803EC077C7B5F5372E75 /* libCoreFirebaseKit.a */; };
 		0764E416A64EF6E9B5683633 /* Firebase_FirebaseAuth.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 97A75F5E9CC5A278364DD8E8 /* Firebase_FirebaseAuth.bundle */; };
 		07C238B8A19E19A037D72BC8 /* libFeatureNickname.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35D73158E863D57F87669A5A /* libFeatureNickname.a */; };
 		09D195D9589E9D949E1348EC /* AppAuthCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C3DC8C9626EC05F58F52A3 /* AppAuthCore.framework */; };
@@ -232,6 +233,7 @@
 		4CC49A40D7F5EC00BA03E2ED /* GoogleSignIn_GoogleSignIn.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleSignIn_GoogleSignIn.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D0ACE7154DA3BAF7A55D5C1 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FDA39BC6CF5B503180CD78E /* absl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = absl.xcframework; sourceTree = "<group>"; };
+		65B4803EC077C7B5F5372E75 /* libCoreFirebaseKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreFirebaseKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C3925DD16A1E2708D8FD0B /* Firebase_FirebaseFirestore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseFirestore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB986E1572BB694649232C8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		6B9CB8AE2AE08F6819513527 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -319,6 +321,7 @@
 				09D195D9589E9D949E1348EC /* AppAuthCore.framework in Frameworks */,
 				DAF53B8800C7BF420E83CE00 /* AppCheckCore.framework in Frameworks */,
 				1D9769904A4BEC37D24C5747 /* ComposableArchitecture.framework in Frameworks */,
+				03B869744C8937C5C103F3B1 /* libCoreFirebaseKit.a in Frameworks */,
 				A2C5C006E20D60C51577A2E1 /* libDomainClient.a in Frameworks */,
 				1406EB9943C43423928B6A8F /* libDomainEntity.a in Frameworks */,
 				DB4DA0B0C11B5321F8062A52 /* FBLPromises.framework in Frameworks */,
@@ -568,6 +571,7 @@
 				16FA908776D5C98715FF7C98 /* GTMSessionFetcherCore.framework */,
 				4A2CF976F337CD6DBC659BD5 /* leveldb_leveldb.bundle */,
 				AD5300340E017D134D5B90EE /* leveldb.framework */,
+				65B4803EC077C7B5F5372E75 /* libCoreFirebaseKit.a */,
 				9CD38C65A9C506ECD6F6AA3F /* libDomainClient.a */,
 				5D0ACE7154DA3BAF7A55D5C1 /* libDomainEntity.a */,
 				35D73158E863D57F87669A5A /* libFeatureNickname.a */,

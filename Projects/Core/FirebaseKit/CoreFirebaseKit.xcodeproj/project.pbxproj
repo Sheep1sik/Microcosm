@@ -29,6 +29,7 @@
 		4737E761670C564544D1D961 /* gRPC_grpcWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5322D32E3153C5265DFE0DE4 /* gRPC_grpcWrapper.bundle */; };
 		4D88DEAAD6FEEFD97B878FBA /* gRPC_grpcWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 5322D32E3153C5265DFE0DE4 /* gRPC_grpcWrapper.bundle */; };
 		50A6365090F78229B070566A /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0847E3F4FD9B170FCFCCA91E /* AppKit.framework */; platformFilters = (macos, ); };
+		520501789F962D2613EEFF01 /* FirestoreDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A922B7DDB1E0B97ACCC998 /* FirestoreDB.swift */; };
 		5A5BFA4DCB5D5D8B5EC22AA4 /* Firebase_FirebaseFirestore.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = C2AAEDF4C206AC3DAE012E53 /* Firebase_FirebaseFirestore.bundle */; };
 		5D646DB5F113C3DE63A9EB82 /* abseil_abslWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 974AA3436192036C95354436 /* abseil_abslWrapper.bundle */; };
 		5FF76F6EBA68CB2656B8701E /* GoogleUtilities_GoogleUtilities_Network.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 4EAA256121D310717D537004 /* GoogleUtilities_GoogleUtilities_Network.bundle */; };
@@ -87,6 +88,7 @@
 		E7314FC10416A900FA190B38 /* gRPC_opensslWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 3E45B52CA1E7A35BFC87CC33 /* gRPC_opensslWrapper.bundle */; };
 		EBD3733BC1A7063D1E2E9134 /* GTMSessionFetcherCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4CFBBFCCB20E67CDA0DE19 /* GTMSessionFetcherCore.framework */; };
 		EE8C15B24D4198492C4AC942 /* FirebaseAuthInterop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 739A0B6CF7636A06D09125D8 /* FirebaseAuthInterop.framework */; };
+		F5DEC4210E36C5E76B567096 /* FirestoreTimestamp+Dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAEA4FE624FBCEE08F1C24 /* FirestoreTimestamp+Dict.swift */; };
 		F832B117F69EA35A16049207 /* GoogleUtilities_GoogleUtilities_NSData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BA62BE63BCF1ECDC502606E7 /* GoogleUtilities_GoogleUtilities_NSData.bundle */; };
 		FC9165CA4263F9136F77780F /* abseil_abslWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 974AA3436192036C95354436 /* abseil_abslWrapper.bundle */; };
 /* End PBXBuildFile section */
@@ -179,6 +181,7 @@
 		2AF3D7E6428BD8278D0551D7 /* GTMSessionFetcher_GTMSessionFetcherCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTMSessionFetcher_GTMSessionFetcherCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		340A8F00E93E8BDAAEC86444 /* GoogleUtilities_GoogleUtilities_Reachability.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Reachability.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C155E1F4F965B96F25C537 /* leveldb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = leveldb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		39FAEA4FE624FBCEE08F1C24 /* FirestoreTimestamp+Dict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirestoreTimestamp+Dict.swift"; sourceTree = "<group>"; };
 		3E45B52CA1E7A35BFC87CC33 /* gRPC_opensslWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRPC_opensslWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		4101F8C1984113C505242D65 /* CoreFirebaseKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreFirebaseKitTests.swift; sourceTree = "<group>"; };
 		41448C08551D95F0ED6E22E4 /* GoogleUtilities_AppDelegateSwizzler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_AppDelegateSwizzler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +203,7 @@
 		7F47C2F9942CD59D692C2F77 /* GoogleUtilities_Network.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Network.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D4138A728385B90106825F /* FirebaseSharedSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseSharedSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85D5345DAE1E8A87B5488530 /* FirebaseCoreExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseCoreExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86A922B7DDB1E0B97ACCC998 /* FirestoreDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDB.swift; sourceTree = "<group>"; };
 		875EE57A61EB28E1F792DD9F /* opensslWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = opensslWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		941F00914465DCE6FC270D72 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		974AA3436192036C95354436 /* abseil_abslWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = abseil_abslWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -292,6 +296,8 @@
 			isa = PBXGroup;
 			children = (
 				637E1D40631A51DA3F19C54B /* CoreFirebaseKit.swift */,
+				86A922B7DDB1E0B97ACCC998 /* FirestoreDB.swift */,
+				39FAEA4FE624FBCEE08F1C24 /* FirestoreTimestamp+Dict.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -626,6 +632,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D7E243EBB20835E364EE673 /* CoreFirebaseKit.swift in Sources */,
+				520501789F962D2613EEFF01 /* FirestoreDB.swift in Sources */,
+				F5DEC4210E36C5E76B567096 /* FirestoreTimestamp+Dict.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

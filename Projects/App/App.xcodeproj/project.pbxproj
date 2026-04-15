@@ -108,6 +108,7 @@
 		D085A7C6C58EE81D00EA5EAA /* libSharedRecordVisuals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 110048C0E6F00E8B8A2DAC06 /* libSharedRecordVisuals.a */; };
 		D0D46B77C3A4AAD1BCF324DE /* abseil_abslWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 7612437871D90EA4A9855FF2 /* abseil_abslWrapper.bundle */; };
 		D24CC295D1E7501D5A45268A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA3C5FAA7EFDD728B5A5DA0 /* UIKit.framework */; };
+		D33A74ED79D7837D6391EE76 /* libCoreFirebaseKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB5F1DFC317760F792766E0 /* libCoreFirebaseKit.a */; };
 		D53EB2513D04F63CC2D5A47E /* DeviceCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F52D4542B238323BDBEAA6 /* DeviceCheck.framework */; };
 		D61B0F2E2D2E979697E15921 /* Firebase_FirebaseCoreInternal.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = EFE2491E32CAC50F848EF255 /* Firebase_FirebaseCoreInternal.bundle */; };
 		D9DAB5876524973366D6199B /* GoogleUtilities_GoogleUtilities_Network.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 39BF2D18DFB89E880E42645F /* GoogleUtilities_GoogleUtilities_Network.bundle */; };
@@ -216,6 +217,7 @@
 		5644A2C6BA91393ECE37F584 /* GTMSessionFetcherCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTMSessionFetcherCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57CE120B5B547804ACE36B11 /* GTMAppAuth_GTMAppAuth.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTMAppAuth_GTMAppAuth.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		586B2137F5665C47D8CBF265 /* GoogleUtilities_Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AB5F1DFC317760F792766E0 /* libCoreFirebaseKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreFirebaseKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C67D8F554091B81EC88410C /* Star.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Star.fsh; sourceTree = "<group>"; };
 		5DDB2F4EA01B0EEF77406ED9 /* GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_AppDelegateSwizzler.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4076E956478B59F7481B80 /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,6 +307,7 @@
 				7968F20B088CD635C2EA5B24 /* AppAuthCore.framework in Frameworks */,
 				88718B9AAE2FB450F3F38D56 /* AppCheckCore.framework in Frameworks */,
 				067686C02763386B146B83DF /* ComposableArchitecture.framework in Frameworks */,
+				D33A74ED79D7837D6391EE76 /* libCoreFirebaseKit.a in Frameworks */,
 				C36CF03DF6C65CD0D18A7C4D /* libDomain.a in Frameworks */,
 				162B2117EF6DB6B0E345D1D6 /* libDomainClient.a in Frameworks */,
 				7023DB13D59B5E691F6B3651 /* libDomainEntity.a in Frameworks */,
@@ -585,6 +588,7 @@
 				5644A2C6BA91393ECE37F584 /* GTMSessionFetcherCore.framework */,
 				E8111373C30C72BF72DE54EF /* leveldb_leveldb.bundle */,
 				54CBBC56A908A7A9F569C833 /* leveldb.framework */,
+				5AB5F1DFC317760F792766E0 /* libCoreFirebaseKit.a */,
 				11C3BF715EC3A4C7E893403F /* libDomain.a */,
 				CC396A91081B3EB1201C560B /* libDomainClient.a */,
 				DF21012ACC23A1E1EA8E7D57 /* libDomainEntity.a */,

@@ -1,13 +1,13 @@
 import Foundation
 import ComposableArchitecture
-import FirebaseFirestore
+import CoreFirebaseKit
 
 extension UserClient: DependencyKey {
     public static let liveValue = UserClient(
         observe: { userId in
             AsyncStream { continuation in
-                let db = Firestore.firestore()
-                let listener = db.collection("users").document(userId)
+                let listener = FirestoreDB.shared
+                    .collection("users").document(userId)
                     .addSnapshotListener { snapshot, _ in
                         guard let data = snapshot?.data() else { return }
                         let profile = UserProfile(
@@ -25,8 +25,7 @@ extension UserClient: DependencyKey {
             }
         },
         createIfNeeded: { userId in
-            let db = Firestore.firestore()
-            let doc = db.collection("users").document(userId)
+            let doc = FirestoreDB.shared.collection("users").document(userId)
             let snapshot = try await doc.getDocument()
             if !snapshot.exists {
                 try await doc.setData([
@@ -43,7 +42,7 @@ extension UserClient: DependencyKey {
             let nickname = normalizeNickname(rawNickname)
             guard !nickname.isEmpty else { throw UserClientError.nicknameInvalid }
 
-            let db = Firestore.firestore()
+            let db = FirestoreDB.shared
             let userRef = db.collection("users").document(userId)
             let newNicknameRef = db.collection("nicknames").document(nickname)
 
@@ -92,33 +91,28 @@ extension UserClient: DependencyKey {
             // 과거 whereField 기반 구현은 다른 사용자 프로필 열람 권한을 필요로 했으므로 제거됨.
             let nickname = normalizeNickname(rawNickname)
             guard !nickname.isEmpty else { return false }
-            let db = Firestore.firestore()
-            let snapshot = try await db.collection("nicknames").document(nickname).getDocument()
+            let snapshot = try await FirestoreDB.shared
+                .collection("nicknames").document(nickname).getDocument()
             return !snapshot.exists
         },
         updateDisplayName: { userId, name in
             guard !name.isEmpty else { return }
-            let db = Firestore.firestore()
-            try await db.collection("users").document(userId)
+            try await FirestoreDB.shared.collection("users").document(userId)
                 .updateData(["displayName": name])
         },
         updateEmail: { userId, email in
             guard !email.isEmpty else { return }
-            let db = Firestore.firestore()
-            try await db.collection("users").document(userId)
+            try await FirestoreDB.shared.collection("users").document(userId)
                 .updateData(["email": email])
         },
         markOnboardingCompleted: { userId in
-            let db = Firestore.firestore()
-            try await db.collection("users").document(userId)
+            try await FirestoreDB.shared.collection("users").document(userId)
                 .updateData(["hasCompletedOnboarding": true])
         },
         resetOnboarding: { userId in
-            let db = Firestore.firestore()
-            // 온보딩 플래그 리셋
+            let db = FirestoreDB.shared
             try await db.collection("users").document(userId)
                 .updateData(["hasCompletedOnboarding": false])
-            // 기존 기록 삭제
             let records = try await db.collection("users").document(userId)
                 .collection("records").getDocuments()
             for doc in records.documents {
@@ -126,8 +120,7 @@ extension UserClient: DependencyKey {
             }
         },
         markConstellationGuideSeen: { userId in
-            let db = Firestore.firestore()
-            try await db.collection("users").document(userId)
+            try await FirestoreDB.shared.collection("users").document(userId)
                 .updateData(["hasSeenConstellationGuide": true])
         }
     )

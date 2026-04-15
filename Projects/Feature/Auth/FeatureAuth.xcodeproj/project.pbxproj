@@ -62,6 +62,7 @@
 		812392D5F8CDF5065ED36250 /* libDomainEntity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AC8E4F6C2F00817502BDBD /* libDomainEntity.a */; };
 		83D4B75F22287C9DB5E737BE /* GoogleUtilities_Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 961C1216F391E53DBAEA925E /* GoogleUtilities_Logger.framework */; };
 		846DE4DF6A8A0C2D8F8A23B0 /* FirebaseFirestoreTarget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9421D1C254A8978F5843B7E /* FirebaseFirestoreTarget.framework */; };
+		857B6DB7B840291771583138 /* libCoreFirebaseKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C02E2CC2C071023E263900 /* libCoreFirebaseKit.a */; };
 		894A4B8C31B30B0A6766141D /* libDomainClient.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 027575FD14BBEC079549EAB7 /* libDomainClient.a */; };
 		960DF4F96B697E031C654CEE /* Firebase_FirebaseCoreExtension.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CCF1FA0C5C47D626682257DF /* Firebase_FirebaseCoreExtension.bundle */; };
 		964F8DC74629783FE9E77DBD /* GoogleSignIn_GoogleSignIn.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 9399CD581C82448CE671703B /* GoogleSignIn_GoogleSignIn.bundle */; };
@@ -282,6 +283,7 @@
 		F41F92F8ACEA33A83CA6AD4D /* GoogleUtilities_GoogleUtilities_NSData.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_NSData.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7A1125AD56EDF67B1E0DC52 /* AppAuthCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppAuthCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B0D6EF30FADB3581635318 /* leveldb_leveldb.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = leveldb_leveldb.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9C02E2CC2C071023E263900 /* libCoreFirebaseKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreFirebaseKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F6C112A68C2ECFBC204E3F /* AppCheckCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppCheckCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6D035154860F82B72D6C78 /* FirebaseAuthInterop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseAuthInterop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB492E47E0A633A4A97DBF1 /* openssl_grpc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = openssl_grpc.xcframework; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				3BA4EEAACFD7AAB932BFAFDA /* AppAuthCore.framework in Frameworks */,
 				096BF82C3555128712B8AF1D /* AppCheckCore.framework in Frameworks */,
 				AEDDC918AF58DBBF5B8E26C4 /* ComposableArchitecture.framework in Frameworks */,
+				857B6DB7B840291771583138 /* libCoreFirebaseKit.a in Frameworks */,
 				B7235FA6431AE6CAAC11EC8C /* libDomainClient.a in Frameworks */,
 				812392D5F8CDF5065ED36250 /* libDomainEntity.a in Frameworks */,
 				AEE140EECCE0CE5F85960255 /* FBLPromises.framework in Frameworks */,
@@ -574,6 +577,7 @@
 				5860E177A102DDFD2432A46F /* GTMSessionFetcherCore.framework */,
 				F8B0D6EF30FADB3581635318 /* leveldb_leveldb.bundle */,
 				FFFD0445F7A9C31E43432299 /* leveldb.framework */,
+				F9C02E2CC2C071023E263900 /* libCoreFirebaseKit.a */,
 				027575FD14BBEC079549EAB7 /* libDomainClient.a */,
 				F2AC8E4F6C2F00817502BDBD /* libDomainEntity.a */,
 				A060A204D8EED02B80831242 /* libFeatureAuth.a */,

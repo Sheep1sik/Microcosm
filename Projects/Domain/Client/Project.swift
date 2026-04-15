@@ -9,6 +9,7 @@ let project = Project.makeModule(
             target: .init(
                 dependencies: [
                     .domain(sources: .Entity),
+                    .core(sources: .FirebaseKit),
                     .external(name: "FirebaseAuth"),
                     .external(name: "FirebaseFirestore"),
                     .external(name: "GoogleSignIn"),
