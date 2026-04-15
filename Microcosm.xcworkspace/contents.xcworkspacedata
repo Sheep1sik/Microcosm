@@ -11,9 +11,6 @@
          location = "group:Domain/Domain.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:Feature/Feature.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:Shared/Shared.xcodeproj">
       </FileRef>
       <Group

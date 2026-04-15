@@ -322,20 +322,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "889701595646A30881D30ED8"
-               BuildableName = "libFeature.a"
-               BlueprintName = "Feature"
-               ReferencedContainer = "container:Projects/Feature/Feature.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "C80260A69A17566DC99C0E89"
                BuildableName = "libFeatureAuth.a"
                BlueprintName = "FeatureAuth"

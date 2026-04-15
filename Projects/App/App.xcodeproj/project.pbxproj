@@ -86,7 +86,6 @@
 		A567D8F4E65000134E0D6615 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E554DAA4AB515DAF86082D9E /* GoogleService-Info.plist */; };
 		A77550F58C9CA0E0F14FCBDD /* GTMAppAuth_GTMAppAuth.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = 57CE120B5B547804ACE36B11 /* GTMAppAuth_GTMAppAuth.bundle */; };
 		A9CE201B262C2D0444C7DCD4 /* leveldb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54CBBC56A908A7A9F569C833 /* leveldb.framework */; };
-		AA25F77F30E64B2CD7F28753 /* libFeature.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB5A8380F86920C4EE26B78 /* libFeature.a */; };
 		B091571885FD774031FF8948 /* Firebase_FirebaseCore.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = AD69D01DF7849A86F4C17EF3 /* Firebase_FirebaseCore.bundle */; };
 		B1BD5DB40E30FC2314001E57 /* GoogleUtilities_GoogleUtilities_Logger.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC8C9536B1CA387C5E5002E9 /* GoogleUtilities_GoogleUtilities_Logger.bundle */; };
 		B23738AD245DEDDB5F856B73 /* Firebase_FirebaseCore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD69D01DF7849A86F4C17EF3 /* Firebase_FirebaseCore.bundle */; };
@@ -191,7 +190,6 @@
 		11C3BF715EC3A4C7E893403F /* libDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		147CCBEC359EABDED4B76614 /* libFeatureMain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureMain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A24FC5D83E61ED5CD9BE219 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_UserDefaults.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		1EB5A8380F86920C4EE26B78 /* libFeature.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeature.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		214161CC8E41F96EA70035C8 /* MicrocosmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrocosmApp.swift; sourceTree = "<group>"; };
 		23271AC291A95A1B56B635E3 /* gRPC_grpcWrapper.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gRPC_grpcWrapper.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		255DFB5369032FF8E4C1007C /* third_party_IsAppEncrypted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = third_party_IsAppEncrypted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -313,7 +311,6 @@
 				162B2117EF6DB6B0E345D1D6 /* libDomainClient.a in Frameworks */,
 				7023DB13D59B5E691F6B3651 /* libDomainEntity.a in Frameworks */,
 				3F51CDC26861F5EEF5DB8AB0 /* FBLPromises.framework in Frameworks */,
-				AA25F77F30E64B2CD7F28753 /* libFeature.a in Frameworks */,
 				CEE72E5209DB009849EFC54B /* libFeatureAuth.a in Frameworks */,
 				9670DDB84408995B2BB128B8 /* libFeatureConstellation.a in Frameworks */,
 				7BD3FF570C4643E2CA84CCBC /* libFeatureMain.a in Frameworks */,
@@ -602,7 +599,6 @@
 				11C3BF715EC3A4C7E893403F /* libDomain.a */,
 				CC396A91081B3EB1201C560B /* libDomainClient.a */,
 				DF21012ACC23A1E1EA8E7D57 /* libDomainEntity.a */,
-				1EB5A8380F86920C4EE26B78 /* libFeature.a */,
 				E8D27C10B40489AACFEF3C27 /* libFeatureAuth.a */,
 				447F762412D0584415FBA57F /* libFeatureConstellation.a */,
 				147CCBEC359EABDED4B76614 /* libFeatureMain.a */,
