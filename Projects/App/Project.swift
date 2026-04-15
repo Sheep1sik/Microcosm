@@ -40,9 +40,7 @@ let project = Project.makeModule(
                 ]),
                 entitlements: "Microcosm.entitlements",
                 dependencies: [
-                    .feature(sources: .Splash),
-                    .feature(sources: .Auth),
-                    .feature(sources: .Main),
+                    .feature(sources: .Root),
                     .domain,
                     .shared,
                 ]

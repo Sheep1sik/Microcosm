@@ -42,6 +42,9 @@
             location = "group:Profile/FeatureProfile.xcodeproj">
          </FileRef>
          <FileRef
+            location = "group:Root/FeatureRoot.xcodeproj">
+         </FileRef>
+         <FileRef
             location = "group:Splash/FeatureSplash.xcodeproj">
          </FileRef>
          <FileRef

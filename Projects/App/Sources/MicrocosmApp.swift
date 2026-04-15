@@ -3,6 +3,7 @@ import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
 import ComposableArchitecture
+import FeatureRoot
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(

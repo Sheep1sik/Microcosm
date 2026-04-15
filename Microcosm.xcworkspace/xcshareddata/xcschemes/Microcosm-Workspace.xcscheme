@@ -462,6 +462,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB2ED108BAD855AB15C8E8FD"
+               BuildableName = "libFeatureRoot.a"
+               BlueprintName = "FeatureRoot"
+               ReferencedContainer = "container:Projects/Feature/Root/FeatureRoot.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6221B4019307AA8EF01F8965"
+               BuildableName = "FeatureRootTests.xctest"
+               BlueprintName = "FeatureRootTests"
+               ReferencedContainer = "container:Projects/Feature/Root/FeatureRoot.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "F82B34409657995821BE38C8"
                BuildableName = "libFeatureSplash.a"
                BlueprintName = "FeatureSplash"
@@ -1842,6 +1870,17 @@
                BuildableName = "FeatureProfileTests.xctest"
                BlueprintName = "FeatureProfileTests"
                ReferencedContainer = "container:Projects/Feature/Profile/FeatureProfile.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6221B4019307AA8EF01F8965"
+               BuildableName = "FeatureRootTests.xctest"
+               BlueprintName = "FeatureRootTests"
+               ReferencedContainer = "container:Projects/Feature/Root/FeatureRoot.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
