@@ -42,7 +42,6 @@ public extension ModulePath {
 }
 
 // MARK: CoreModule
-// TODO(S2): Projects/Core 디렉터리 실체 생성 전까지 .core/.core(sources:) 사용 금지
 public extension ModulePath {
     enum Core: String, CaseIterable {
         public static let name: String = "Core"
