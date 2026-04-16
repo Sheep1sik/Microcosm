@@ -76,6 +76,21 @@ extension AuthClient: DependencyKey {
             },
             currentUser: {
                 Auth.auth().currentUser
+            },
+            clearLocalData: {
+                let defaults = UserDefaults.standard
+                let preserveKey = "com.microcosm.hasCompletedInitialInstallCleanup"
+                let preserved = defaults.bool(forKey: preserveKey)
+                let allKeys = defaults.dictionaryRepresentation().keys
+                for key in allKeys where key.hasPrefix("galaxyPosition_")
+                    || key.hasPrefix("galaxyProperties_")
+                    || key == "hasSeenConstellationGuide"
+                {
+                    defaults.removeObject(forKey: key)
+                }
+                if preserved {
+                    defaults.set(true, forKey: preserveKey)
+                }
             }
         )
     }()

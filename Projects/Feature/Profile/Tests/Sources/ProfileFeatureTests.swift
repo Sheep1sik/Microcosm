@@ -40,6 +40,7 @@ final class ProfileFeatureTests: XCTestCase {
             ProfileFeature()
         } withDependencies: {
             $0.authClient.signOut = { signOutCalled.setValue(true) }
+            $0.authClient.clearLocalData = { }
         }
 
         await store.send(.confirmSignOut) {
@@ -71,6 +72,7 @@ final class ProfileFeatureTests: XCTestCase {
             ProfileFeature()
         } withDependencies: {
             $0.authClient.deleteAccount = { deleted.setValue(true) }
+            $0.authClient.clearLocalData = { }
         }
 
         await store.send(.confirmDeleteAccount) {

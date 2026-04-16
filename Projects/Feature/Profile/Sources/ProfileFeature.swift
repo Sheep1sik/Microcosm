@@ -75,6 +75,7 @@ public struct ProfileFeature {
             case .confirmSignOut:
                 state.showSignOutAlert = false
                 return .run { send in
+                    authClient.clearLocalData()
                     try authClient.signOut()
                     await send(.delegate(.didSignOut))
                 }
@@ -91,6 +92,7 @@ public struct ProfileFeature {
                 state.showDeleteAlert = false
                 return .run { send in
                     try await authClient.deleteAccount()
+                    authClient.clearLocalData()
                     await send(.delegate(.didDeleteAccount))
                 }
 

@@ -9,6 +9,7 @@ extension AuthClient: TestDependencyKey {
         handleAppleSignIn: unimplemented("\(Self.self).handleAppleSignIn"),
         signOut: unimplemented("\(Self.self).signOut"),
         deleteAccount: unimplemented("\(Self.self).deleteAccount"),
-        currentUser: unimplemented("\(Self.self).currentUser")
+        currentUser: unimplemented("\(Self.self).currentUser"),
+        clearLocalData: unimplemented("\(Self.self).clearLocalData")
     )
 }

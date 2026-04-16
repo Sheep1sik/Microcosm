@@ -11,6 +11,7 @@ public struct AuthClient {
     public var signOut: () throws -> Void
     public var deleteAccount: () async throws -> Void
     public var currentUser: () -> FirebaseAuth.User?
+    public var clearLocalData: () -> Void
 
     public init(
         observeAuthState: @escaping () -> AsyncStream<FirebaseAuth.User?>,
@@ -19,7 +20,8 @@ public struct AuthClient {
         handleAppleSignIn: @escaping (ASAuthorization) async throws -> Void,
         signOut: @escaping () throws -> Void,
         deleteAccount: @escaping () async throws -> Void,
-        currentUser: @escaping () -> FirebaseAuth.User?
+        currentUser: @escaping () -> FirebaseAuth.User?,
+        clearLocalData: @escaping () -> Void
     ) {
         self.observeAuthState = observeAuthState
         self.signInWithGoogle = signInWithGoogle
@@ -28,6 +30,7 @@ public struct AuthClient {
         self.signOut = signOut
         self.deleteAccount = deleteAccount
         self.currentUser = currentUser
+        self.clearLocalData = clearLocalData
     }
 }
 

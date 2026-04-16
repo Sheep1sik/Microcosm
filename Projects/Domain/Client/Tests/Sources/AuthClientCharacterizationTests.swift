@@ -17,7 +17,8 @@ final class AuthClientCharacterizationTests: XCTestCase {
             handleAppleSignIn: { _ in },
             signOut: {},
             deleteAccount: {},
-            currentUser: { nil }
+            currentUser: { nil },
+            clearLocalData: {}
         )
         XCTAssertEqual(client.prepareAppleSignIn(), "nonce")
         XCTAssertNil(client.currentUser())
