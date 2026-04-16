@@ -14,6 +14,7 @@
 		6CE5484AD0B4994FF21B0AEF /* SplashFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779C1A0A2D7190E2FF9C5AEF /* SplashFeatureTests.swift */; };
 		848856696BE87EBAC2332672 /* libFeatureSplash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4FC3E64896177EFD43BBE7A /* libFeatureSplash.a */; };
 		933B8A917590FA61CE310EFD /* SplashFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C1623930A7B98988C7C257 /* SplashFeature.swift */; };
+		9DCD4E4361D2BE8B41FE7D9D /* libSharedUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4987DAF7EDB71C65F3CFBB8 /* libSharedUtil.a */; };
 		A4F30F9F67F08EED75B0E843 /* libSharedDesignSystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E45D9DB558857184A82E96 /* libSharedDesignSystem.a */; };
 		D4F604E0C97D29FECF5797AB /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D239DBCB729E4434ED42221 /* ComposableArchitecture.framework */; };
 		FBB1EA212B34B4EC11F9CC3B /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = D7E45D9DB558857184A82E96 /* libSharedDesignSystem.a */; };
@@ -81,6 +82,7 @@
 		8F5DD146308FA8E5B6327EDE /* swift-sharing_Sharing.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swift-sharing_Sharing.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4FC3E64896177EFD43BBE7A /* libFeatureSplash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeatureSplash.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2C1623930A7B98988C7C257 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
+		C4987DAF7EDB71C65F3CFBB8 /* libSharedUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedUtil.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7E45D9DB558857184A82E96 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -100,6 +102,7 @@
 				D4F604E0C97D29FECF5797AB /* ComposableArchitecture.framework in Frameworks */,
 				848856696BE87EBAC2332672 /* libFeatureSplash.a in Frameworks */,
 				A4F30F9F67F08EED75B0E843 /* libSharedDesignSystem.a in Frameworks */,
+				9DCD4E4361D2BE8B41FE7D9D /* libSharedUtil.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +140,7 @@
 				63A0C82CE96B94C13A242B84 /* FeatureSplashTests.xctest */,
 				A4FC3E64896177EFD43BBE7A /* libFeatureSplash.a */,
 				D7E45D9DB558857184A82E96 /* libSharedDesignSystem.a */,
+				C4987DAF7EDB71C65F3CFBB8 /* libSharedUtil.a */,
 				8F5DD146308FA8E5B6327EDE /* swift-sharing_Sharing.bundle */,
 			);
 			name = Products;

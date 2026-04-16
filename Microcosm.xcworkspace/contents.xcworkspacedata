@@ -49,6 +49,9 @@
             location = "group:Nickname/FeatureNickname.xcodeproj">
          </FileRef>
          <FileRef
+            location = "group:Onboarding/FeatureOnboarding.xcodeproj">
+         </FileRef>
+         <FileRef
             location = "group:Profile/FeatureProfile.xcodeproj">
          </FileRef>
          <FileRef
@@ -69,6 +72,9 @@
          </FileRef>
          <FileRef
             location = "group:RecordVisuals/SharedRecordVisuals.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:Util/SharedUtil.xcodeproj">
          </FileRef>
       </Group>
    </Group>

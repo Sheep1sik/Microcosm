@@ -476,6 +476,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E71536A40C188E0A24098C5C"
+               BuildableName = "libFeatureOnboarding.a"
+               BlueprintName = "FeatureOnboarding"
+               ReferencedContainer = "container:Projects/Feature/Onboarding/FeatureOnboarding.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "48A2BF8348C57F7415AB7965"
+               BuildableName = "FeatureOnboardingTests.xctest"
+               BlueprintName = "FeatureOnboardingTests"
+               ReferencedContainer = "container:Projects/Feature/Onboarding/FeatureOnboarding.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "C0A551C0EEC1642417872C54"
                BuildableName = "libFeatureProfile.a"
                BlueprintName = "FeatureProfile"
@@ -1302,6 +1330,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "562D4915E16CAFA68DCBE75F"
+               BuildableName = "libSharedUtil.a"
+               BlueprintName = "SharedUtil"
+               ReferencedContainer = "container:Projects/Shared/Util/SharedUtil.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "82CBDEFA4ED532AC90F265F5"
                BuildableName = "Sharing.framework"
                BlueprintName = "Sharing"
@@ -1912,6 +1954,17 @@
                BuildableName = "FeatureNicknameTests.xctest"
                BlueprintName = "FeatureNicknameTests"
                ReferencedContainer = "container:Projects/Feature/Nickname/FeatureNickname.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "48A2BF8348C57F7415AB7965"
+               BuildableName = "FeatureOnboardingTests.xctest"
+               BlueprintName = "FeatureOnboardingTests"
+               ReferencedContainer = "container:Projects/Feature/Onboarding/FeatureOnboarding.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference

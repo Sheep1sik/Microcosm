@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B3F8186F816AC35F773851A /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632266C13B1A17FC36023A1F /* Shared.swift */; };
+		C138CC181501905D841992D3 /* libSharedUtil.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 434CA24C9D6B637523A5D1EA /* libSharedUtil.a */; };
 		DF0F43574ED89C593F865A27 /* libSharedDesignSystem.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 41246ACC48BD6F75E49EDED0 /* libSharedDesignSystem.a */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				DF0F43574ED89C593F865A27 /* libSharedDesignSystem.a in Dependencies */,
+				C138CC181501905D841992D3 /* libSharedUtil.a in Dependencies */,
 			);
 			name = Dependencies;
 			runOnlyForDeploymentPostprocessing = 1;
@@ -36,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		41246ACC48BD6F75E49EDED0 /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		434CA24C9D6B637523A5D1EA /* libSharedUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedUtil.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		632266C13B1A17FC36023A1F /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		6403DC9A355EF9096596A834 /* libShared.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libShared.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -64,6 +67,7 @@
 			children = (
 				6403DC9A355EF9096596A834 /* libShared.a */,
 				41246ACC48BD6F75E49EDED0 /* libSharedDesignSystem.a */,
+				434CA24C9D6B637523A5D1EA /* libSharedUtil.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";

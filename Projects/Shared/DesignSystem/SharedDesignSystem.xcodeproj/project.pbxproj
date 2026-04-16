@@ -11,7 +11,8 @@
 		2215653D3A89862F89D59793 /* AppTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4499B36F6A956E467A260002 /* AppTypography.swift */; };
 		4B734DBCB46E9EC8DDCD0EEA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5044140883A329189A0917 /* AppColors.swift */; };
 		5B0A60FFEE9348D47C5CE8D6 /* CanvasPreviewViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */; };
-		88236CD72B772422E33FF03D /* FormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F6AEFA6F2741263E21D278 /* FormatHelper.swift */; };
+		6DAE62AA4B21D72DCBCE9019 /* StarfieldBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFE15988FDE2506D8DF571 /* StarfieldBackground.swift */; };
+		B5C317DDB6FB0CBA6FC5ADA9 /* libSharedUtil.a in Dependencies */ = {isa = PBXBuildFile; fileRef = 404AC18FB6582799DE8A03CC /* libSharedUtil.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,15 +26,26 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		998DF43FC74BB7960607110B /* Dependencies */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstSubfolderSpec = 16;
+			files = (
+				B5C317DDB6FB0CBA6FC5ADA9 /* libSharedUtil.a in Dependencies */,
+			);
+			name = Dependencies;
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		404AC18FB6582799DE8A03CC /* libSharedUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedUtil.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4499B36F6A956E467A260002 /* AppTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTypography.swift; sourceTree = "<group>"; };
 		6AC1697A7DAC909AC709777C /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F5044140883A329189A0917 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
-		85F6AEFA6F2741263E21D278 /* FormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatHelper.swift; sourceTree = "<group>"; };
 		87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasPreviewViews.swift; sourceTree = "<group>"; };
 		90AFB930D80F71F0EE8ED280 /* CosmicAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmicAlertView.swift; sourceTree = "<group>"; };
+		FDDFE15988FDE2506D8DF571 /* StarfieldBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarfieldBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				6AC1697A7DAC909AC709777C /* libSharedDesignSystem.a */,
+				404AC18FB6582799DE8A03CC /* libSharedUtil.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,7 +91,7 @@
 				4499B36F6A956E467A260002 /* AppTypography.swift */,
 				87A9336E3FDC6D7C63A6B725 /* CanvasPreviewViews.swift */,
 				90AFB930D80F71F0EE8ED280 /* CosmicAlertView.swift */,
-				85F6AEFA6F2741263E21D278 /* FormatHelper.swift */,
+				FDDFE15988FDE2506D8DF571 /* StarfieldBackground.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -94,6 +107,7 @@
 				A82C5359C7312774175B4D62 /* Resources */,
 				826FE33371783E018DF44EEB /* Frameworks */,
 				3C70685A16F7B5282FF12086 /* Embed Frameworks */,
+				998DF43FC74BB7960607110B /* Dependencies */,
 			);
 			buildRules = (
 			);
@@ -153,7 +167,7 @@
 				2215653D3A89862F89D59793 /* AppTypography.swift in Sources */,
 				5B0A60FFEE9348D47C5CE8D6 /* CanvasPreviewViews.swift in Sources */,
 				056FB8F1F653C1AA185B04C7 /* CosmicAlertView.swift in Sources */,
-				88236CD72B772422E33FF03D /* FormatHelper.swift in Sources */,
+				6DAE62AA4B21D72DCBCE9019 /* StarfieldBackground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
