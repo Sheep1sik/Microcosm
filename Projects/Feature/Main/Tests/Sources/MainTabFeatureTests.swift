@@ -2,6 +2,7 @@ import XCTest
 import ComposableArchitecture
 @testable import FeatureMain
 import FeatureUniverse
+import FeatureOnboarding
 import FeatureConstellation
 import FeatureProfile
 import DomainEntity
@@ -47,14 +48,15 @@ final class MainTabFeatureTests: XCTestCase {
         )) {
             $0.userId = "user-1"
             $0.universe.userDisplayName = "별지기"
-            $0.universe.hasCompletedOnboarding = true
+            $0.universe.onboarding.hasCompleted = true
+            $0.universe.onboarding.userDisplayName = "별지기"
             $0.constellation.userDisplayName = "별지기"
             $0.constellation.hasSeenConstellationGuide = true
             $0.profile.userProfile = profile
             $0.profile.displayName = "별지기"
         }
-        await store.receive(\.universe.profileReceived) {
-            $0.universe.hasReceivedInitialProfile = true
+        await store.receive(\.universe.onboarding.profileReceived) {
+            $0.universe.onboarding.hasReceivedInitialProfile = true
         }
     }
 
@@ -73,12 +75,13 @@ final class MainTabFeatureTests: XCTestCase {
         )) {
             $0.userId = "user-1"
             $0.universe.userDisplayName = "fallback"
+            $0.universe.onboarding.userDisplayName = "fallback"
             $0.constellation.userDisplayName = "fallback"
             $0.profile.userProfile = profile
             $0.profile.displayName = "fallback"
         }
-        await store.receive(\.universe.profileReceived) {
-            $0.universe.hasReceivedInitialProfile = true
+        await store.receive(\.universe.onboarding.profileReceived) {
+            $0.universe.onboarding.hasReceivedInitialProfile = true
         }
     }
 
@@ -86,23 +89,21 @@ final class MainTabFeatureTests: XCTestCase {
     // profile 보다 먼저 yield 되더라도 welcome 으로 재진입하지 않아야 한다.
     func test_sessionUpdated_records먼저와도_profile도착까지는_welcome미진입() async {
         var initial = MainTabFeature.State()
-        initial.universe.pendingOnboardingCheck = true
+        initial.universe.onboarding.pendingCheck = true
         let store = TestStore(initialState: initial) {
             MainTabFeature()
         }
 
-        // 1. records 먼저 도착 → hasReceivedInitialRecords=true, drain 시도
+        // 1. records 먼저 도착 → Universe.recordsUpdated → onboarding.recordsReceived
         await store.send(.recordsUpdated([]))
-        await store.receive(\.universe.recordsUpdated) {
-            $0.universe.hasReceivedInitialRecords = true
-            $0.universe.pendingOnboardingCheck = false
-        }
-        // 2. checkOnboarding 재평가 → profile 미도착이라 다시 pending
-        await store.receive(\.universe.checkOnboarding) {
-            $0.universe.pendingOnboardingCheck = true
+        // allRecords 기본값이 [] 이라 상태 변화 없음
+        await store.receive(\.universe.recordsUpdated)
+        await store.receive(\.universe.onboarding.recordsReceived) {
+            $0.universe.onboarding.hasReceivedInitialRecords = true
+            // pendingCheck 유지: profile 미도착이라 drain 안 됨
         }
 
-        // 3. profile 도착 (onboarding 완료 유저)
+        // 2. profile 도착 (onboarding 완료 유저)
         var profile = UserProfile()
         profile.hasCompletedOnboarding = true
         profile.nickname = "기존유저"
@@ -114,19 +115,20 @@ final class MainTabFeatureTests: XCTestCase {
         )) {
             $0.userId = "user-1"
             $0.universe.userDisplayName = "기존유저"
-            $0.universe.hasCompletedOnboarding = true
+            $0.universe.onboarding.hasCompleted = true
+            $0.universe.onboarding.userDisplayName = "기존유저"
             $0.constellation.userDisplayName = "기존유저"
             $0.profile.userProfile = profile
             $0.profile.displayName = "기존유저"
         }
 
-        // 4. profileReceived drain → checkOnboarding 재평가 → hasCompletedOnboarding=true
-        //    이므로 welcome 진입 없음 (onboardingStep 은 nil 유지)
-        await store.receive(\.universe.profileReceived) {
-            $0.universe.hasReceivedInitialProfile = true
-            $0.universe.pendingOnboardingCheck = false
+        // 3. profileReceived → pendingCheck + hasReceivedInitialRecords → drain → check
+        await store.receive(\.universe.onboarding.profileReceived) {
+            $0.universe.onboarding.hasReceivedInitialProfile = true
+            $0.universe.onboarding.pendingCheck = false
         }
-        await store.receive(\.universe.checkOnboarding)
+        // check 재평가 → hasCompleted=true 이므로 welcome 진입 없음
+        await store.receive(\.universe.onboarding.check)
     }
 
     // MARK: - recordsUpdated
@@ -142,7 +144,10 @@ final class MainTabFeatureTests: XCTestCase {
         }
         await store.receive(\.universe.recordsUpdated) {
             $0.universe.allRecords = records
-            $0.universe.hasReceivedInitialRecords = true
+        }
+        await store.receive(\.universe.onboarding.recordsReceived) {
+            $0.universe.onboarding.hasReceivedInitialRecords = true
+            $0.universe.onboarding.hasExistingRecords = true
         }
     }
 
@@ -157,8 +162,10 @@ final class MainTabFeatureTests: XCTestCase {
         await store.send(.recordsUpdated([])) {
             $0.constellation.userDisplayName = "별지기"
         }
-        await store.receive(\.universe.recordsUpdated) {
-            $0.universe.hasReceivedInitialRecords = true
+        await store.receive(\.universe.recordsUpdated)
+        await store.receive(\.universe.onboarding.recordsReceived) {
+            $0.universe.onboarding.hasReceivedInitialRecords = true
+            $0.universe.onboarding.hasExistingRecords = false
         }
     }
 
@@ -166,24 +173,22 @@ final class MainTabFeatureTests: XCTestCase {
         // 회귀 방지: MainTab 이 records 를 Universe reducer 로 포워딩하지 않으면
         // hasReceivedInitialRecords 플래그가 영원히 false 가 되어 온보딩 welcome 이
         // 뜨지 않는 버그가 있었다. 이 테스트는 포워딩 경로 전체를 검증한다.
-        //
-        // checkOnboarding 은 records 와 profile 모두 도착해야 결정을 신뢰하므로
-        // (UniverseFeature+Onboarding.checkOnboarding 의 guard 참고),
-        // 이 경로만 검증하기 위해 hasReceivedInitialProfile 은 미리 true 로 둔다.
         var initial = MainTabFeature.State()
-        initial.universe.pendingOnboardingCheck = true
-        initial.universe.hasReceivedInitialProfile = true
+        initial.universe.onboarding.pendingCheck = true
+        initial.universe.onboarding.hasReceivedInitialProfile = true
         let store = TestStore(initialState: initial) {
             MainTabFeature()
         }
 
         await store.send(.recordsUpdated([]))
-        await store.receive(\.universe.recordsUpdated) {
-            $0.universe.hasReceivedInitialRecords = true
-            $0.universe.pendingOnboardingCheck = false
+        await store.receive(\.universe.recordsUpdated)
+        await store.receive(\.universe.onboarding.recordsReceived) {
+            $0.universe.onboarding.hasReceivedInitialRecords = true
+            $0.universe.onboarding.hasExistingRecords = false
+            $0.universe.onboarding.pendingCheck = false
         }
-        await store.receive(\.universe.checkOnboarding) {
-            $0.universe.onboardingStep = .welcome
+        await store.receive(\.universe.onboarding.check) {
+            $0.universe.onboarding.step = .welcome
         }
     }
 

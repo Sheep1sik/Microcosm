@@ -8,11 +8,13 @@ let project = Project.makeModule(
             sources: .Universe,
             target: .init(
                 dependencies: [
+                    .feature(sources: .Onboarding),
                     .feature(sources: .Nickname),
                     .domain(sources: .Entity),
                     .domain(sources: .Client),
                     .shared(sources: .DesignSystem),
                     .shared(sources: .RecordVisuals),
+                    .shared(sources: .Util),
                     .external(name: "ComposableArchitecture"),
                 ]
             )
@@ -22,6 +24,7 @@ let project = Project.makeModule(
             target: .init(
                 dependencies: [
                     .target(name: ModulePath.Feature.name + ModulePath.Feature.Universe.rawValue),
+                    .feature(sources: .Onboarding),
                     .external(name: "ComposableArchitecture"),
                 ]
             )

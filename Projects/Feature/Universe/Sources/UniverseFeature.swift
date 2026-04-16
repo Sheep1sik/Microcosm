@@ -4,44 +4,19 @@ import DomainEntity
 import DomainClient
 import SharedDesignSystem
 import SharedRecordVisuals
+import SharedUtil
 import FeatureNickname
+import FeatureOnboarding
 
 public typealias Record = DomainEntity.Record
-
-public enum OnboardingStep: Int, Equatable {
-    case welcome
-    case nicknameInput
-    case galaxyBirthIntro
-    case monthlyGalaxyGuide
-    case tapGalaxyPrompt
-    case createStarPrompt
-    case closingMessage
-    case completed
-}
+public typealias OnboardingStep = FeatureOnboarding.OnboardingStep
 
 @Reducer
 public struct UniverseFeature {
     @ObservableState
     public struct State: Equatable {
-        // Onboarding
-        public var hasCompletedOnboarding = false
-        public var onboardingStep: OnboardingStep? = nil
-        public var onboardingGalaxyScreenCenter: CGPoint?
-        /// records observer가 최소 1회 yield 했는지. checkOnboarding 결정은
-        /// 이 플래그가 true가 되어 `allRecords`가 신뢰 가능해진 뒤에만 수행.
-        /// (View 진입 직후 records 없는 상태에서 잘못 welcome으로 진입하는 레이스 방지)
-        public var hasReceivedInitialRecords = false
-        /// user profile observer가 최소 1회 yield 했는지. records 와 profile 은 독립 스트림이라
-        /// 둘 중 어느 쪽이 먼저 도착할지 보장되지 않는다. profile 이 늦게 오면
-        /// `hasCompletedOnboarding` 이 default(false) 로 평가돼 기존 유저가 다시 `.welcome`
-        /// 으로 진입하는 회귀가 있어(닉네임 덮어씀), 두 플래그 모두 true 인 뒤에만 결정한다.
-        public var hasReceivedInitialProfile = false
-        public var pendingOnboardingCheck = false
-
-        // Onboarding Nickname (FeatureNickname 모듈로 위임)
-        public var onboardingNickname = NicknameFeature.State()
-
-        public var isOnboarding: Bool { onboardingStep != nil && onboardingStep != .completed }
+        // Onboarding (FeatureOnboarding 모듈로 위임)
+        public var onboarding = OnboardingFeature.State()
 
         // Auth Info
         public var userDisplayName: String?
@@ -170,13 +145,7 @@ public struct UniverseFeature {
         }
 
         public init(
-            hasCompletedOnboarding: Bool = false,
-            onboardingStep: OnboardingStep? = nil,
-            onboardingGalaxyScreenCenter: CGPoint? = nil,
-            hasReceivedInitialRecords: Bool = false,
-            hasReceivedInitialProfile: Bool = false,
-            pendingOnboardingCheck: Bool = false,
-            onboardingNickname: NicknameFeature.State = NicknameFeature.State(),
+            onboarding: OnboardingFeature.State = OnboardingFeature.State(),
             userDisplayName: String? = nil,
             allRecords: [Record] = [],
             isInGalaxyDetail: Bool = false,
@@ -196,13 +165,7 @@ public struct UniverseFeature {
             pendingNavigation: PendingNavigation? = nil,
             pendingStarCreation: PendingStarCreation? = nil
         ) {
-            self.hasCompletedOnboarding = hasCompletedOnboarding
-            self.onboardingStep = onboardingStep
-            self.onboardingGalaxyScreenCenter = onboardingGalaxyScreenCenter
-            self.hasReceivedInitialRecords = hasReceivedInitialRecords
-            self.hasReceivedInitialProfile = hasReceivedInitialProfile
-            self.pendingOnboardingCheck = pendingOnboardingCheck
-            self.onboardingNickname = onboardingNickname
+            self.onboarding = onboarding
             self.userDisplayName = userDisplayName
             self.allRecords = allRecords
             self.isInGalaxyDetail = isInGalaxyDetail
@@ -230,9 +193,6 @@ public struct UniverseFeature {
         // Records
         case recordsUpdated([Record])
 
-        // Profile (user profile observer가 최소 1회 yield 됐음을 알림)
-        case profileReceived
-
         // Scene Callbacks
         case sceneDidEnterGalaxyDetail(key: String, records: [Record])
         case sceneDidExitGalaxyDetail
@@ -258,13 +218,8 @@ public struct UniverseFeature {
         case profileAnalysisFailed
         case clearPendingStarCreation
 
-        // Onboarding
-        case checkOnboarding
-        case onboardingAdvanceFromWelcome
-        case onboardingAdvanceFromGuide
-        case onboardingNickname(NicknameFeature.Action)
-        case onboardingComplete
-        case skipOnboarding
+        // Onboarding (FeatureOnboarding 으로 위임)
+        case onboarding(OnboardingFeature.Action)
 
         // Navigation
         case navigateToGalaxy(String)
@@ -284,8 +239,8 @@ public struct UniverseFeature {
     public var body: some ReducerOf<Self> {
         BindingReducer()
 
-        Scope(state: \.onboardingNickname, action: \.onboardingNickname) {
-            NicknameFeature()
+        Scope(state: \.onboarding, action: \.onboarding) {
+            OnboardingFeature()
         }
 
         // 기능별로 분리된 Reduce 블록들. 각 블록은 자신이 처리하는 액션만 매칭하고
@@ -293,7 +248,6 @@ public struct UniverseFeature {
         // - UniverseFeature+SceneCallbacks.swift
         // - UniverseFeature+Search.swift
         // - UniverseFeature+RecordPanel.swift
-        // - UniverseFeature+Onboarding.swift
         // - UniverseFeature+Navigation.swift
         Reduce { state, action in
             reduceSceneCallbacks(into: &state, action: action)
@@ -303,9 +257,6 @@ public struct UniverseFeature {
         }
         Reduce { state, action in
             reduceRecordPanel(into: &state, action: action)
-        }
-        Reduce { state, action in
-            reduceOnboarding(into: &state, action: action)
         }
         Reduce { state, action in
             reduceNavigation(into: &state, action: action)

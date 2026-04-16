@@ -1,6 +1,7 @@
 import XCTest
 import ComposableArchitecture
 @testable import FeatureUniverse
+@testable import FeatureOnboarding
 import DomainEntity
 
 @MainActor
@@ -18,7 +19,10 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
         let records = [Record(content: "a"), Record(content: "b")]
         await store.send(.recordsUpdated(records)) {
             $0.allRecords = records
-            $0.hasReceivedInitialRecords = true
+        }
+        await store.receive(\.onboarding.recordsReceived) {
+            $0.onboarding.hasReceivedInitialRecords = true
+            $0.onboarding.hasExistingRecords = true
         }
     }
 
@@ -28,7 +32,7 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
         // 온보딩 createStarPrompt 단계에서는 일일 제한 체크를 건너뛴다.
         let store = TestStore(
             initialState: UniverseFeature.State(
-                onboardingStep: .createStarPrompt,
+                onboarding: OnboardingFeature.State(step: .createStarPrompt),
                 recordContent: "이전 잔여물",
                 starName: "잔여별",
                 isAnalyzingColor: true,
@@ -54,8 +58,7 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
         let todays = (0..<limit).map { Record(content: "today-\($0)") }
         let store = TestStore(
             initialState: UniverseFeature.State(
-                hasCompletedOnboarding: true,
-                onboardingStep: nil,
+                onboarding: OnboardingFeature.State(hasCompleted: true),
                 allRecords: todays
             )
         ) {
@@ -146,12 +149,14 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
         }
+        // starCreated 는 온보딩 step 이 nil 이므로 상태 변화 없음
+        await store.receive(\.onboarding.starCreated)
     }
 
     func test_profileAnalyzed_온보딩createStarPrompt일때_closingMessage로_전환() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
-                onboardingStep: .createStarPrompt,
+                onboarding: OnboardingFeature.State(step: .createStarPrompt),
                 showRecordPanel: true,
                 isAnalyzingColor: true
             )
@@ -166,7 +171,9 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
             $0.analyzedProfile = .fallback
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
-            $0.onboardingStep = .closingMessage
+        }
+        await store.receive(\.onboarding.starCreated) {
+            $0.onboarding.step = .closingMessage
         }
     }
 
@@ -192,12 +199,13 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
         }
+        await store.receive(\.onboarding.starCreated)
     }
 
     func test_colorAnalyzed_온보딩단계면_closingMessage로_전환() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
-                onboardingStep: .createStarPrompt,
+                onboarding: OnboardingFeature.State(step: .createStarPrompt),
                 showRecordPanel: true,
                 isAnalyzingColor: true
             )
@@ -214,7 +222,9 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
             $0.analyzedProfile = expected
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
-            $0.onboardingStep = .closingMessage
+        }
+        await store.receive(\.onboarding.starCreated) {
+            $0.onboarding.step = .closingMessage
         }
     }
 
@@ -238,12 +248,13 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
         }
+        await store.receive(\.onboarding.starCreated)
     }
 
     func test_profileAnalysisFailed_온보딩단계면_closingMessage로_전환() async {
         let store = TestStore(
             initialState: UniverseFeature.State(
-                onboardingStep: .createStarPrompt,
+                onboarding: OnboardingFeature.State(step: .createStarPrompt),
                 showRecordPanel: true,
                 isAnalyzingColor: true
             )
@@ -258,7 +269,9 @@ final class UniverseFeatureRecordPanelTests: XCTestCase {
             $0.analyzedProfile = .fallback
             $0.isAnalyzingColor = false
             $0.showRecordPanel = false
-            $0.onboardingStep = .closingMessage
+        }
+        await store.receive(\.onboarding.starCreated) {
+            $0.onboarding.step = .closingMessage
         }
     }
 }

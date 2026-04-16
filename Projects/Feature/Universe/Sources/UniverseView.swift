@@ -4,6 +4,7 @@ import ComposableArchitecture
 import DomainEntity
 import DomainClient
 import SharedDesignSystem
+import FeatureOnboarding
 
 // MARK: - SpriteKit UIViewRepresentable (키보드/레이아웃 변경 시 렌더링 중단 방지)
 
@@ -42,7 +43,7 @@ public struct UniverseView: View {
 
     public var body: some View {
         mainContent
-            .toolbar(store.isInGalaxyDetail || store.isOnboarding || store.isSearching ? .hidden : .visible, for: .tabBar)
+            .toolbar(store.isInGalaxyDetail || store.onboarding.isActive || store.isSearching ? .hidden : .visible, for: .tabBar)
             .animation(.easeOut(duration: 0.3), value: store.showRecordPanel)
             .modifier(SceneChangeHandlers(store: store, scene: scene, isTextFocused: $isTextFocused))
             .alert("오늘의 기록을 이미 작성했어요", isPresented: $store.showLimitAlert) {
@@ -69,7 +70,10 @@ public struct UniverseView: View {
 
             plusButton
 
-            OnboardingOverlayView(store: store)
+            OnboardingOverlayView(
+                store: store.scope(state: \.onboarding, action: \.onboarding),
+                showRecordPanel: store.showRecordPanel
+            )
 
             recordPanelOverlay
         }
@@ -80,7 +84,7 @@ public struct UniverseView: View {
 
     @ViewBuilder
     private var searchButton: some View {
-        if !store.showRecordPanel && !store.isOnboarding && !store.isSearching {
+        if !store.showRecordPanel && !store.onboarding.isActive && !store.isSearching {
             VStack {
                 HStack {
                     Spacer()
@@ -135,16 +139,16 @@ public struct UniverseView: View {
     private var plusButton: some View {
         let showPlusButton = store.isInGalaxyDetail
             && !store.showRecordPanel && !store.isSearching
-            && (store.onboardingStep == .createStarPrompt || !store.isOnboarding)
+            && (store.onboarding.step == .createStarPrompt || !store.onboarding.isActive)
         if showPlusButton {
-            let canCreate = store.onboardingStep == .createStarPrompt || store.canCreateRecord
+            let canCreate = store.onboarding.step == .createStarPrompt || store.canCreateRecord
             let remaining = store.remainingRecordCount
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
                     VStack(spacing: 6) {
-                        if store.onboardingStep != .createStarPrompt {
+                        if store.onboarding.step != .createStarPrompt {
                             Text("\(remaining)/\(UniverseFeature.State.dailyRecordLimit)")
                                 .font(.system(size: 11, weight: .medium))
                                 .foregroundStyle(.white.opacity(0.6))
@@ -166,7 +170,7 @@ public struct UniverseView: View {
                         }
                         .opacity(canCreate ? 1.0 : 0.4)
                         .overlay {
-                            if store.onboardingStep == .createStarPrompt {
+                            if store.onboarding.step == .createStarPrompt {
                                 PlusPulsingRing()
                             }
                         }
@@ -185,7 +189,7 @@ public struct UniverseView: View {
         sceneBridge = bridge
         scene.sceneDelegate = bridge
         scene.previewCache = bridge.previewImageCache
-        store.send(.checkOnboarding)
+        store.send(.onboarding(.check))
         scene.refreshGalaxies()
     }
 }
@@ -205,7 +209,7 @@ private struct SceneChangeHandlers: ViewModifier {
             .onChange(of: store.allRecords) {
                 scene.refreshGalaxies()
             }
-            .onChange(of: store.hasReceivedInitialRecords && store.hasReceivedInitialProfile) {
+            .onChange(of: store.onboarding.hasReceivedInitialRecords && store.onboarding.hasReceivedInitialProfile) {
                 _, bothReady in
                 // records / profile 둘 다 도착한 시점에만 그릴 기회를 준다.
                 // setupScene 의 첫 refreshGalaxies 와 allRecords/onboardingStep onChange 만으로는
@@ -213,8 +217,8 @@ private struct SceneChangeHandlers: ViewModifier {
                 // 두 경우에 화면이 비는 회귀가 있어 보완 경로로 둔다.
                 if bothReady { scene.refreshGalaxies() }
             }
-            .onChange(of: store.onboardingStep) {
-                if store.onboardingStep == .galaxyBirthIntro {
+            .onChange(of: store.onboarding.step) {
+                if store.onboarding.step == .galaxyBirthIntro {
                     scene.refreshGalaxies()
                 }
             }
@@ -320,18 +324,16 @@ final class SceneDelegateBridge: UniverseSceneDelegate {
     }
 
     func getIsOnboarding() -> Bool {
-        store.isOnboarding
+        store.onboarding.isActive
     }
 
     func getOnboardingStep() -> OnboardingStep? {
-        store.onboardingStep
+        store.onboarding.step
     }
 
     func isOnboardingUndecided() -> Bool {
         // records 와 profile 둘 다 도착해야 온보딩 여부가 신뢰 가능하다.
-        // profile 이 늦게 오면 `isOnboarding`(step=nil)이 false 로 평가돼
-        // 신규 유저인데도 isFirstLoad 경로로 빈 현재월 은하가 즉시 생성되는 회귀가 있다.
-        !store.hasReceivedInitialRecords || !store.hasReceivedInitialProfile
+        !store.onboarding.hasReceivedInitialRecords || !store.onboarding.hasReceivedInitialProfile
     }
 
     func addRecord(_ record: DomainEntity.Record) {

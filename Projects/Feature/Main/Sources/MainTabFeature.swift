@@ -2,6 +2,7 @@ import ComposableArchitecture
 import DomainEntity
 import DomainClient
 import FeatureUniverse
+import FeatureOnboarding
 import FeatureConstellation
 import FeatureProfile
 
@@ -88,7 +89,8 @@ public struct MainTabFeature {
                 let effectiveName = profile.nickname ?? displayName
                 state.userId = userId
                 state.universe.userDisplayName = effectiveName
-                state.universe.hasCompletedOnboarding = profile.hasCompletedOnboarding
+                state.universe.onboarding.hasCompleted = profile.hasCompletedOnboarding
+                state.universe.onboarding.userDisplayName = effectiveName
                 state.constellation.userDisplayName = effectiveName
                 state.constellation.hasSeenConstellationGuide = profile.hasSeenConstellationGuide
                 state.profile.userProfile = profile
@@ -96,7 +98,7 @@ public struct MainTabFeature {
                 // Universe reducer 에게 profile 최초 도착을 알려 pending checkOnboarding 을
                 // drain 시킨다. State 직접 대입만 하면 reducer 내부의 flag/pending 경로가
                 // 안 돌아가 records 만 먼저 도착한 유저가 welcome 으로 잘못 진입한다.
-                return .send(.universe(.profileReceived))
+                return .send(.universe(.onboarding(.profileReceived)))
 
             case .recordsUpdated(let records):
                 // Universe 는 reducer 내부에서 hasReceivedInitialRecords 플래그를 토글하고

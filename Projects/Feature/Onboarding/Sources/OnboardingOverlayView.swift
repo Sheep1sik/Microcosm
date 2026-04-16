@@ -1,14 +1,15 @@
 import SwiftUI
 import ComposableArchitecture
-import DomainEntity
 import SharedDesignSystem
 import FeatureNickname
 
-struct OnboardingOverlayView: View {
-    let store: StoreOf<UniverseFeature>
+public struct OnboardingOverlayView: View {
+    let store: StoreOf<OnboardingFeature>
+    let showRecordPanel: Bool
 
-    init(store: StoreOf<UniverseFeature>) {
+    public init(store: StoreOf<OnboardingFeature>, showRecordPanel: Bool) {
         self.store = store
+        self.showRecordPanel = showRecordPanel
     }
 
     @FocusState private var isNicknameFocused: Bool
@@ -17,8 +18,8 @@ struct OnboardingOverlayView: View {
     @State private var showNicknameInput = false
     @State private var showPulsingRing = false
 
-    var body: some View {
-        if let step = store.onboardingStep, step != .completed {
+    public var body: some View {
+        if let step = store.step, step != .completed {
             ZStack {
                 switch step {
                 case .welcome:
@@ -38,7 +39,6 @@ struct OnboardingOverlayView: View {
                 case .completed:
                     EmptyView()
                 }
-
             }
             .transition(.opacity)
             .animation(.easeInOut(duration: 0.4), value: step)
@@ -76,7 +76,7 @@ struct OnboardingOverlayView: View {
             }
         }
         .contentShape(Rectangle())
-        .onTapGesture { store.send(.onboardingAdvanceFromWelcome, animation: .easeInOut) }
+        .onTapGesture { store.send(.advanceFromWelcome, animation: .easeInOut) }
     }
 
     // MARK: - Nickname Input
@@ -113,10 +113,9 @@ struct OnboardingOverlayView: View {
                 Spacer()
 
                 if showNicknameInput {
-                    let nicknameState = store.onboardingNickname
+                    let nicknameState = store.nickname
                     VStack(spacing: 10) {
                         HStack(spacing: 10) {
-                            // 상태 아이콘
                             if nicknameState.isAvailable == true {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundStyle(AppColors.accent)
@@ -125,7 +124,7 @@ struct OnboardingOverlayView: View {
 
                             TextField("", text: Binding(
                                 get: { nicknameState.nickname },
-                                set: { store.send(.onboardingNickname(.nicknameChanged($0))) }
+                                set: { store.send(.nickname(.nicknameChanged($0))) }
                             ))
                             .placeholder(when: nicknameState.nickname.isEmpty) {
                                 Text("2~10자 닉네임")
@@ -136,12 +135,11 @@ struct OnboardingOverlayView: View {
                             .focused($isNicknameFocused)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
-                            .onSubmit { store.send(.onboardingNickname(.checkNickname)) }
+                            .onSubmit { store.send(.nickname(.checkNickname)) }
 
-                            // 중복확인 or 시작하기 버튼
                             if nicknameState.isAvailable == true {
                                 Button {
-                                    store.send(.onboardingNickname(.confirmTapped))
+                                    store.send(.nickname(.confirmTapped))
                                 } label: {
                                     Group {
                                         if nicknameState.isSaving {
@@ -160,7 +158,7 @@ struct OnboardingOverlayView: View {
                                 .transition(.scale(scale: 0.8).combined(with: .opacity))
                             } else {
                                 Button {
-                                    store.send(.onboardingNickname(.checkNickname))
+                                    store.send(.nickname(.checkNickname))
                                 } label: {
                                     Group {
                                         if nicknameState.isChecking {
@@ -175,13 +173,13 @@ struct OnboardingOverlayView: View {
                                     .padding(.vertical, 7)
                                     .background(
                                         Capsule().fill(
-                                            onboardingCanCheck
+                                            canCheck
                                                 ? AppColors.accent.opacity(0.6)
                                                 : Color.white.opacity(0.08)
                                         )
                                     )
                                 }
-                                .disabled(!onboardingCanCheck || nicknameState.isChecking)
+                                .disabled(!canCheck || nicknameState.isChecking)
                             }
                         }
                         .padding(.horizontal, 14)
@@ -191,12 +189,11 @@ struct OnboardingOverlayView: View {
                                 .fill(Color.white.opacity(0.06))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(onboardingBorderColor, lineWidth: 1)
+                                        .stroke(borderColor, lineWidth: 1)
                                 )
                         )
                         .animation(.easeInOut(duration: 0.2), value: nicknameState.isAvailable)
 
-                        // 에러 메시지만 표시 (성공 시 아이콘으로 대체)
                         if let error = nicknameState.errorMessage {
                             Text(error)
                                 .font(.system(size: 12))
@@ -226,15 +223,15 @@ struct OnboardingOverlayView: View {
         }
     }
 
-    private var onboardingCanCheck: Bool {
-        let trimmed = store.onboardingNickname.nickname.trimmingCharacters(in: .whitespacesAndNewlines)
+    private var canCheck: Bool {
+        let trimmed = store.nickname.nickname.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.count >= 2 && trimmed.count <= 10
     }
 
-    private var onboardingBorderColor: Color {
-        if store.onboardingNickname.errorMessage != nil {
+    private var borderColor: Color {
+        if store.nickname.errorMessage != nil {
             return .red.opacity(0.5)
-        } else if store.onboardingNickname.isAvailable == true {
+        } else if store.nickname.isAvailable == true {
             return AppColors.accent.opacity(0.5)
         }
         return Color.white.opacity(0.08)
@@ -291,14 +288,14 @@ struct OnboardingOverlayView: View {
             }
         }
         .contentShape(Rectangle())
-        .onTapGesture { store.send(.onboardingAdvanceFromGuide, animation: .easeInOut) }
+        .onTapGesture { store.send(.advanceFromGuide, animation: .easeInOut) }
     }
 
     // MARK: - Tap Galaxy Prompt
 
     private var tapGalaxyPromptView: some View {
         GeometryReader { geo in
-            let center = store.onboardingGalaxyScreenCenter
+            let center = store.galaxyScreenCenter
                 ?? CGPoint(x: geo.size.width / 2, y: geo.size.height / 2)
             ZStack {
                 TypewriterText(text: "은하를 클릭해보세요!") {
@@ -325,7 +322,7 @@ struct OnboardingOverlayView: View {
 
     private var createStarPromptView: some View {
         ZStack {
-            if !store.showRecordPanel {
+            if !showRecordPanel {
                 VStack {
                     VStack(spacing: 8) {
                         TypewriterText(text: "첫 번째 별을 만들어보세요!") {
@@ -381,16 +378,14 @@ struct OnboardingOverlayView: View {
             }
         }
         .contentShape(Rectangle())
-        .onTapGesture { store.send(.onboardingComplete, animation: .easeInOut) }
+        .onTapGesture { store.send(.complete, animation: .easeInOut) }
         .task {
             let name = store.userDisplayName ?? "우주인"
             let text = "\(name)님의 별들로 소우주를 채워주세요!"
             let typingDuration = Double(text.count) * 0.04 + 1.0
             try? await Task.sleep(nanoseconds: UInt64((typingDuration + 5.0) * 1_000_000_000))
             if Task.isCancelled { return }
-            store.send(.onboardingComplete, animation: .easeInOut)
+            store.send(.complete, animation: .easeInOut)
         }
     }
 }
-
-// 헬퍼 뷰 (TypewriterText, PulsingRing, placeholder) 는 OnboardingOverlayView+Helpers.swift 참조

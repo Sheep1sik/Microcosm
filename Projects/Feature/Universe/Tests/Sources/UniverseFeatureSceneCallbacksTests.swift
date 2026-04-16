@@ -21,6 +21,8 @@ final class UniverseFeatureSceneCallbacksTests: XCTestCase {
             $0.currentYearMonth = "2026-04"
             $0.currentDetailRecords = records
         }
+        // 온보딩 step 이 nil 이므로 상태 변화 없음
+        await store.receive(\.onboarding.enteredGalaxyDetail)
     }
 
     // MARK: - sceneDidExitGalaxyDetail
@@ -72,8 +74,9 @@ final class UniverseFeatureSceneCallbacksTests: XCTestCase {
         }
 
         let center = CGPoint(x: 200, y: 400)
-        await store.send(.sceneGalaxyScreenCenterUpdated(center)) {
-            $0.onboardingGalaxyScreenCenter = center
+        await store.send(.sceneGalaxyScreenCenterUpdated(center))
+        await store.receive(\.onboarding.galaxyScreenCenterUpdated) {
+            $0.onboarding.galaxyScreenCenter = center
         }
     }
 

@@ -2,30 +2,24 @@ import ProjectDescription
 import DependencyPlugin
 
 let project = Project.makeModule(
-    name: ModulePath.Feature.name + ModulePath.Feature.Main.rawValue,
+    name: ModulePath.Feature.name + ModulePath.Feature.Onboarding.rawValue,
     targets: [
         .feature(
-            sources: .Main,
+            sources: .Onboarding,
             target: .init(
                 dependencies: [
-                    .feature(sources: .Universe),
-                    .feature(sources: .Onboarding),
-                    .feature(sources: .Constellation),
-                    .feature(sources: .Profile),
+                    .feature(sources: .Nickname),
                     .domain(sources: .Client),
-                    .domain(sources: .Entity),
                     .shared(sources: .DesignSystem),
                     .external(name: "ComposableArchitecture"),
                 ]
             )
         ),
         .feature(
-            tests: .Main,
+            tests: .Onboarding,
             target: .init(
                 dependencies: [
-                    .target(name: ModulePath.Feature.name + ModulePath.Feature.Main.rawValue),
-                    .feature(sources: .Onboarding),
-                    .domain(sources: .Client),
+                    .target(name: ModulePath.Feature.name + ModulePath.Feature.Onboarding.rawValue),
                     .external(name: "ComposableArchitecture"),
                 ]
             )

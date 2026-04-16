@@ -16,20 +16,14 @@ extension UniverseFeature {
 
         case .recordsUpdated(let records):
             state.allRecords = records
-            // 최초 records yield 후에만 onboarding 결정을 신뢰. 이후 보류 중인
-            // checkOnboarding 요청을 리졸브한다. (UniverseView setupScene → records 미도착
-            // 상태에서 잘못 welcome으로 진입하는 레이스 방지)
-            if !state.hasReceivedInitialRecords {
-                state.hasReceivedInitialRecords = true
-                if state.pendingOnboardingCheck {
-                    state.pendingOnboardingCheck = false
-                    return .send(.checkOnboarding)
-                }
+            // 최초 records yield 시 온보딩에 알림. hasExistingRecords 도 함께 전달.
+            if !state.onboarding.hasReceivedInitialRecords {
+                return .send(.onboarding(.recordsReceived(hasRecords: !records.isEmpty)))
             }
             return .none
 
         case .openRecordPanel:
-            if state.onboardingStep != .createStarPrompt {
+            if state.onboarding.step != .createStarPrompt {
                 guard state.canCreateRecord else {
                     state.showLimitAlert = true
                     return .none
@@ -75,10 +69,7 @@ extension UniverseFeature {
             state.analyzedProfile = profile
             state.isAnalyzingColor = false
             state.showRecordPanel = false
-            if state.onboardingStep == .createStarPrompt {
-                state.onboardingStep = .closingMessage
-            }
-            return .none
+            return .send(.onboarding(.starCreated))
 
         case .colorAnalyzed(let color):
             let derived = StarVisualProfile.from(legacyColor: color)
@@ -86,20 +77,14 @@ extension UniverseFeature {
             state.analyzedProfile = derived
             state.isAnalyzingColor = false
             state.showRecordPanel = false
-            if state.onboardingStep == .createStarPrompt {
-                state.onboardingStep = .closingMessage
-            }
-            return .none
+            return .send(.onboarding(.starCreated))
 
         case .profileAnalysisFailed:
             state.pendingStarCreation = Self.composePendingStarCreation(state: state, profile: .fallback)
             state.analyzedProfile = .fallback
             state.isAnalyzingColor = false
             state.showRecordPanel = false
-            if state.onboardingStep == .createStarPrompt {
-                state.onboardingStep = .closingMessage
-            }
-            return .none
+            return .send(.onboarding(.starCreated))
 
         case .clearPendingStarCreation:
             state.pendingStarCreation = nil
@@ -111,7 +96,7 @@ extension UniverseFeature {
     }
 
     /// 분석 완료 시점의 recordContent/starName/isOnboarding을 스냅샷으로 묶어
-    /// scene에 전달할 pending 페이로드를 구성한다. onboardingStep 전이 전에 호출해야 한다.
+    /// scene에 전달할 pending 페이로드를 구성한다.
     private static func composePendingStarCreation(
         state: State,
         profile: StarVisualProfile
@@ -120,7 +105,7 @@ extension UniverseFeature {
             content: state.recordContent.trimmingCharacters(in: .whitespacesAndNewlines),
             starName: state.starName,
             profile: profile,
-            isOnboardingRecord: state.onboardingStep == .createStarPrompt
+            isOnboardingRecord: state.onboarding.step == .createStarPrompt
         )
     }
 }

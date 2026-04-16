@@ -29,7 +29,7 @@ struct RecordPanelView: View {
         let contentEmpty = store.recordContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
 
         VStack(spacing: 10) {
-            if store.onboardingStep != .createStarPrompt {
+            if store.onboarding.step != .createStarPrompt {
                 Text("오늘 남은 기록 \(remaining)/\(UniverseFeature.State.dailyRecordLimit)")
                     .font(.system(size: 11, weight: .medium))
                     .foregroundStyle(

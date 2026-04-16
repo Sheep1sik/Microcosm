@@ -2,17 +2,14 @@ import ComposableArchitecture
 import DomainEntity
 
 extension UniverseFeature {
-    /// SpriteKit scene 콜백 액션 처리. State 동기화만 수행하고 Effect는 발생시키지 않는다.
+    /// SpriteKit scene 콜백 액션 처리. State 동기화 및 온보딩 이벤트 포워딩.
     func reduceSceneCallbacks(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .sceneDidEnterGalaxyDetail(let key, let records):
             state.isInGalaxyDetail = true
             state.currentYearMonth = key
             state.currentDetailRecords = records
-            if state.onboardingStep == .tapGalaxyPrompt {
-                state.onboardingStep = .createStarPrompt
-            }
-            return .none
+            return .send(.onboarding(.enteredGalaxyDetail))
 
         case .sceneDidExitGalaxyDetail:
             state.isInGalaxyDetail = false
@@ -25,14 +22,10 @@ extension UniverseFeature {
             return .none
 
         case .sceneGalaxyBirthCompleted:
-            if state.onboardingStep == .galaxyBirthIntro {
-                state.onboardingStep = .monthlyGalaxyGuide
-            }
-            return .none
+            return .send(.onboarding(.galaxyBirthCompleted))
 
         case .sceneGalaxyScreenCenterUpdated(let center):
-            state.onboardingGalaxyScreenCenter = center
-            return .none
+            return .send(.onboarding(.galaxyScreenCenterUpdated(center)))
 
         case .scenePreviewImagesUpdated:
             state.previewRevision &+= 1

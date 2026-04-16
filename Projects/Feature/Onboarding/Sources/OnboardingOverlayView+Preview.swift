@@ -1,7 +1,6 @@
 #if DEBUG
 import SwiftUI
 import ComposableArchitecture
-import DomainEntity
 import SharedDesignSystem
 
 // MARK: - Onboarding Step Previews
@@ -9,13 +8,14 @@ import SharedDesignSystem
 #Preview("0. Welcome") {
     OnboardingOverlayView(
         store: Store(
-            initialState: UniverseFeature.State(
-                onboardingStep: .welcome,
+            initialState: OnboardingFeature.State(
+                step: .welcome,
                 userDisplayName: "테스트유저"
             )
         ) {
-            UniverseFeature()
-        }
+            OnboardingFeature()
+        },
+        showRecordPanel: false
     )
     .background(AppColors.background)
 }
@@ -23,13 +23,14 @@ import SharedDesignSystem
 #Preview("0.5. Nickname Input") {
     OnboardingOverlayView(
         store: Store(
-            initialState: UniverseFeature.State(
-                onboardingStep: .nicknameInput,
+            initialState: OnboardingFeature.State(
+                step: .nicknameInput,
                 userDisplayName: "테스트유저"
             )
         ) {
-            UniverseFeature()
-        }
+            OnboardingFeature()
+        },
+        showRecordPanel: false
     )
     .background(AppColors.background)
 }
@@ -37,13 +38,14 @@ import SharedDesignSystem
 #Preview("1. Galaxy Birth Intro") {
     OnboardingOverlayView(
         store: Store(
-            initialState: UniverseFeature.State(
-                onboardingStep: .galaxyBirthIntro,
+            initialState: OnboardingFeature.State(
+                step: .galaxyBirthIntro,
                 userDisplayName: "테스트유저"
             )
         ) {
-            UniverseFeature()
-        }
+            OnboardingFeature()
+        },
+        showRecordPanel: false
     )
     .background(AppColors.background)
 }
@@ -51,13 +53,14 @@ import SharedDesignSystem
 #Preview("2. Monthly Galaxy Guide") {
     OnboardingOverlayView(
         store: Store(
-            initialState: UniverseFeature.State(
-                onboardingStep: .monthlyGalaxyGuide,
+            initialState: OnboardingFeature.State(
+                step: .monthlyGalaxyGuide,
                 userDisplayName: "테스트유저"
             )
         ) {
-            UniverseFeature()
-        }
+            OnboardingFeature()
+        },
+        showRecordPanel: false
     )
     .background(AppColors.background)
 }
@@ -65,14 +68,15 @@ import SharedDesignSystem
 #Preview("3. Tap Galaxy Prompt") {
     OnboardingOverlayView(
         store: Store(
-            initialState: UniverseFeature.State(
-                onboardingStep: .tapGalaxyPrompt,
-                onboardingGalaxyScreenCenter: CGPoint(x: 200, y: 400),
+            initialState: OnboardingFeature.State(
+                step: .tapGalaxyPrompt,
+                galaxyScreenCenter: CGPoint(x: 200, y: 400),
                 userDisplayName: "테스트유저"
             )
         ) {
-            UniverseFeature()
-        }
+            OnboardingFeature()
+        },
+        showRecordPanel: false
     )
     .background(AppColors.background)
 }
@@ -80,14 +84,14 @@ import SharedDesignSystem
 #Preview("4. Create Star Prompt") {
     OnboardingOverlayView(
         store: Store(
-            initialState: UniverseFeature.State(
-                onboardingStep: .createStarPrompt,
-                userDisplayName: "테스트유저",
-                isInGalaxyDetail: true
+            initialState: OnboardingFeature.State(
+                step: .createStarPrompt,
+                userDisplayName: "테스트유저"
             )
         ) {
-            UniverseFeature()
-        }
+            OnboardingFeature()
+        },
+        showRecordPanel: false
     )
     .background(AppColors.background)
 }
@@ -95,13 +99,14 @@ import SharedDesignSystem
 #Preview("5. Closing Message") {
     OnboardingOverlayView(
         store: Store(
-            initialState: UniverseFeature.State(
-                onboardingStep: .closingMessage,
+            initialState: OnboardingFeature.State(
+                step: .closingMessage,
                 userDisplayName: "테스트유저"
             )
         ) {
-            UniverseFeature()
-        }
+            OnboardingFeature()
+        },
+        showRecordPanel: false
     )
     .background(AppColors.background)
 }
