@@ -8,11 +8,21 @@
          location = "group:App/App.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Core/Core.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Domain/Domain.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Shared/Shared.xcodeproj">
       </FileRef>
+      <Group
+         location = "group:Core"
+         name = "Core">
+         <FileRef
+            location = "group:FirebaseKit/CoreFirebaseKit.xcodeproj">
+         </FileRef>
+      </Group>
       <Group
          location = "group:Domain"
          name = "Domain">

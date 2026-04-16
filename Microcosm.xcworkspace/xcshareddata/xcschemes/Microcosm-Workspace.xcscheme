@@ -196,6 +196,48 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B90FCF66245CD7327BEE2CBF"
+               BuildableName = "libCore.a"
+               BlueprintName = "Core"
+               ReferencedContainer = "container:Projects/Core/Core.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EBB169D9545E1F6C6C4A2FA0"
+               BuildableName = "libCoreFirebaseKit.a"
+               BlueprintName = "CoreFirebaseKit"
+               ReferencedContainer = "container:Projects/Core/FirebaseKit/CoreFirebaseKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "89740BDE62C18340F11B8BF3"
+               BuildableName = "CoreFirebaseKitTests.xctest"
+               BlueprintName = "CoreFirebaseKitTests"
+               ReferencedContainer = "container:Projects/Core/FirebaseKit/CoreFirebaseKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "5D71332DAEA508F122BB62C1"
                BuildableName = "CustomDump.framework"
                BlueprintName = "CustomDump"
@@ -1806,6 +1848,17 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "89740BDE62C18340F11B8BF3"
+               BuildableName = "CoreFirebaseKitTests.xctest"
+               BlueprintName = "CoreFirebaseKitTests"
+               ReferencedContainer = "container:Projects/Core/FirebaseKit/CoreFirebaseKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
          <TestableReference
             skipped = "NO"
             parallelizable = "NO">
