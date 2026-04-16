@@ -23,7 +23,6 @@ public extension ModulePath {
         case Splash
         case Auth
         case Nickname
-        // TODO(S5): Projects/Feature/Onboarding 실체 생성 전까지 사용 금지
         case Onboarding
         case Main
         case Universe
@@ -55,5 +54,6 @@ public extension ModulePath {
         public static let name: String = "Shared"
         case DesignSystem
         case RecordVisuals
+        case Util
     }
 }

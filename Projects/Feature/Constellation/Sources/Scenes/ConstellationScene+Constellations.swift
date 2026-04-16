@@ -1,5 +1,6 @@
 import SpriteKit
 import DomainEntity
+import SharedUtil
 
 extension ConstellationScene {
 

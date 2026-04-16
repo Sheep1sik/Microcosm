@@ -6,6 +6,7 @@ let targets: [Target] = [
         target: .init(
             dependencies: [
                 .shared(sources: .DesignSystem),
+                .shared(sources: .Util),
             ]
         )
     ),

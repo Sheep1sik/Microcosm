@@ -2,6 +2,7 @@ import SpriteKit
 import DomainEntity
 import SharedDesignSystem
 import SharedRecordVisuals
+import SharedUtil
 
 extension UniverseScene {
 

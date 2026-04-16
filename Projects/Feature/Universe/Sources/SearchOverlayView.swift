@@ -3,6 +3,7 @@ import ComposableArchitecture
 import DomainEntity
 import SharedDesignSystem
 import SharedRecordVisuals
+import SharedUtil
 
 struct SearchOverlayView: View {
     @Bindable var store: StoreOf<UniverseFeature>
