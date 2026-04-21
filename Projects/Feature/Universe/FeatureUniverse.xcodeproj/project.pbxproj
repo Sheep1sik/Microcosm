@@ -81,6 +81,7 @@
 		713F11AF4312EF11207411E1 /* RecaptchaInterop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 419E6E85ADA7C737992AFFD4 /* RecaptchaInterop.framework */; };
 		73ACEFAB914224F7FAF82A4D /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B98DC4C2D40605D0F95F9FD9 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle */; };
 		74979942E20CCA1C114ACD0B /* GoogleUtilities_GoogleUtilities_NSData.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = D1A997D0AEF94BE45E388034 /* GoogleUtilities_GoogleUtilities_NSData.bundle */; };
+		786CCDA985B1E98AFE94D5DB /* UniverseSceneFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D847BB1881FB27840D046F /* UniverseSceneFeature.swift */; };
 		78BC408682A8D62F7E851D60 /* UniverseFeatureOnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C95C2D916FA5D992B5837 /* UniverseFeatureOnboardingTests.swift */; };
 		7966E97E12546C88A2DF3B47 /* UniverseScene+Galaxies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ECBF04726986D3DE13BE23 /* UniverseScene+Galaxies.swift */; };
 		7E04DFECBC3FB226A3B8FA9F /* UniverseScene+Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBE69C705A0EA89798C38DB /* UniverseScene+Previews.swift */; };
@@ -115,6 +116,7 @@
 		A0B1EE9C25D3115BA315F0A1 /* Firebase_FirebaseAuth.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4922315D96F38B899417D628 /* Firebase_FirebaseAuth.bundle */; };
 		A11FB0F6AC2A59D2780DE52E /* GoogleUtilities_GoogleUtilities_Network.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 72FF5A9A9494769ABF2DC9E3 /* GoogleUtilities_GoogleUtilities_Network.bundle */; };
 		A31A6B3FB7EA4A73689E2935 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E5680072AB430DFF9E1F91 /* FirebaseCore.framework */; };
+		A9DAC2451DEE1223A74B165D /* UniverseSceneRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC41455D522580025ACEBAA /* UniverseSceneRenderer.swift */; };
 		AA16761C730F4AB2FF265C74 /* GTMSessionFetcherCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C18A2B86C6BAB7A9AD565E /* GTMSessionFetcherCore.framework */; };
 		AAEDF2231FA45BE3F9F5AEC5 /* libFeatureUniverse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF94AAD268476DF9E516800 /* libFeatureUniverse.a */; };
 		AB5B0A1E3DA684442D15480A /* leveldb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC760BF62CE51CEDBDD3322 /* leveldb.framework */; };
@@ -141,6 +143,7 @@
 		E4B9C184E79899C6B2F71B72 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B74C76532589A3B74D2A25 /* LocalAuthentication.framework */; };
 		E6B3B1EE09F550E42131B7DA /* gRPC_opensslWrapper.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E5F76950E89ADDF853940793 /* gRPC_opensslWrapper.bundle */; };
 		E847B1FE9EF07324769BF929 /* RecordPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC201661D0A1E2DC0644C1 /* RecordPanelView.swift */; };
+		EA4516679E02045385618D60 /* UniverseSceneFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B25A84023E2B0D81ABA16FD /* UniverseSceneFeatureTests.swift */; };
 		ED4F238B8C8799800432EC35 /* GoogleSignIn_GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0059888C15E8817D34612029 /* GoogleSignIn_GoogleSignIn.bundle */; };
 		EFB2EAC564D1E352FF263310 /* PreviewImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541AA578ED788C68BEBFA043 /* PreviewImageCache.swift */; };
 		F04053D8F1549DA75F898097 /* gRPC_grpcWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = A89D93290860614E6B42B37E /* gRPC_grpcWrapper.bundle */; };
@@ -294,6 +297,7 @@
 		63687F8BEB47327C0D9BC171 /* FeatureUniverseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureUniverseTests-Info.plist"; sourceTree = "<group>"; };
 		670D6C061B623AC25361AEA3 /* AppAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE3B3AD19ADF5BE5025BBBB /* libDomainClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B25A84023E2B0D81ABA16FD /* UniverseSceneFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseSceneFeatureTests.swift; sourceTree = "<group>"; };
 		6D10B2695D13BCC992B1CF77 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		6F006D790A18670C5FAAEA61 /* libDomainEntity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomainEntity.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F3475ADFB9D246BF390E1EF /* libSharedDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedDesignSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -349,6 +353,8 @@
 		EBA3BE218CF12C1A26FF1E82 /* AppAuth_AppAuthCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppAuth_AppAuthCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC6FE105105E7E2621975070 /* libSharedRecordVisuals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedRecordVisuals.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE432E7E2559D9F4DE1F5FE5 /* AppAuthCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppAuthCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEC41455D522580025ACEBAA /* UniverseSceneRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseSceneRenderer.swift; sourceTree = "<group>"; };
+		F1D847BB1881FB27840D046F /* UniverseSceneFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseSceneFeature.swift; sourceTree = "<group>"; };
 		F45D54885EF300B4E523C0DC /* AppCheckCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppCheckCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F490D69145B9DD6F9017B55F /* GoogleUtilities_GoogleUtilities_Logger.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_Logger.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9FA3C96A8F30B0A120FE53A /* leveldb_leveldb.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = leveldb_leveldb.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -554,6 +560,8 @@
 				0567E580239C54A33C66187F /* UniverseScene+RecordPlacement.swift */,
 				13C9C188C463671D9A31A87F /* UniverseScene+SolarSystem.swift */,
 				559DEC8E846389DC155F6923 /* UniverseScene+Touch.swift */,
+				F1D847BB1881FB27840D046F /* UniverseSceneFeature.swift */,
+				EEC41455D522580025ACEBAA /* UniverseSceneRenderer.swift */,
 				BB9E16ABFD99F6DDEF61B70A /* UniverseTouchMath.swift */,
 			);
 			path = Scenes;
@@ -622,6 +630,7 @@
 				97596C675A1630FFA73A9480 /* UniverseFeatureRecordPanelTests.swift */,
 				1B6C44283121F27B4FFECA79 /* UniverseFeatureSceneCallbacksTests.swift */,
 				804B6F768D24F75ED74D6C4E /* UniverseFeatureSearchTests.swift */,
+				6B25A84023E2B0D81ABA16FD /* UniverseSceneFeatureTests.swift */,
 				FCD31BCA955F625927282841 /* UniverseTouchMathTests.swift */,
 			);
 			path = Sources;
@@ -846,6 +855,7 @@
 				F3C7734308AE6ED9692D65DC /* UniverseFeatureRecordPanelTests.swift in Sources */,
 				C64A2E7685557638928A6F45 /* UniverseFeatureSceneCallbacksTests.swift in Sources */,
 				370D16215E9E50287A0D7816 /* UniverseFeatureSearchTests.swift in Sources */,
+				EA4516679E02045385618D60 /* UniverseSceneFeatureTests.swift in Sources */,
 				0E1D77B479A448E535BD31B0 /* UniverseTouchMathTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -868,6 +878,8 @@
 				4708911D8E35B37B64457C22 /* UniverseScene+SolarSystem.swift in Sources */,
 				DB140719BD0ED68EA10DBC13 /* UniverseScene+Touch.swift in Sources */,
 				2C1E7117D51DE1F237E356BF /* UniverseScene.swift in Sources */,
+				786CCDA985B1E98AFE94D5DB /* UniverseSceneFeature.swift in Sources */,
+				A9DAC2451DEE1223A74B165D /* UniverseSceneRenderer.swift in Sources */,
 				8EF057B6EE2EA8094A70CF91 /* UniverseTouchMath.swift in Sources */,
 				1D64E1A79E60F794A957E4D9 /* SearchOverlayView.swift in Sources */,
 				4EA915FCCDB5793283964FFF /* UniverseFeature+Navigation.swift in Sources */,
