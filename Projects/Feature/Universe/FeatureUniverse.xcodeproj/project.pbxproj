@@ -117,6 +117,8 @@
 		A11FB0F6AC2A59D2780DE52E /* GoogleUtilities_GoogleUtilities_Network.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 72FF5A9A9494769ABF2DC9E3 /* GoogleUtilities_GoogleUtilities_Network.bundle */; };
 		A31A6B3FB7EA4A73689E2935 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E5680072AB430DFF9E1F91 /* FirebaseCore.framework */; };
 		A9DAC2451DEE1223A74B165D /* UniverseSceneRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC41455D522580025ACEBAA /* UniverseSceneRenderer.swift */; };
+		B1A2C3D4E5F607182930A1B2 /* UniverseSceneRenderer+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B3D4E5F6071829304A2B3C /* UniverseSceneRenderer+Background.swift */; };
+		D3E4F5061728394A5B6C7D8E /* UniverseSceneRenderer+Galaxies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F50617283940A5B6C7D8EF /* UniverseSceneRenderer+Galaxies.swift */; };
 		AA16761C730F4AB2FF265C74 /* GTMSessionFetcherCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C18A2B86C6BAB7A9AD565E /* GTMSessionFetcherCore.framework */; };
 		AAEDF2231FA45BE3F9F5AEC5 /* libFeatureUniverse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF94AAD268476DF9E516800 /* libFeatureUniverse.a */; };
 		AB5B0A1E3DA684442D15480A /* leveldb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC760BF62CE51CEDBDD3322 /* leveldb.framework */; };
@@ -353,6 +355,8 @@
 		EBA3BE218CF12C1A26FF1E82 /* AppAuth_AppAuthCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppAuth_AppAuthCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC6FE105105E7E2621975070 /* libSharedRecordVisuals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSharedRecordVisuals.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE432E7E2559D9F4DE1F5FE5 /* AppAuthCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppAuthCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2B3D4E5F6071829304A2B3C /* UniverseSceneRenderer+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseSceneRenderer+Background.swift"; sourceTree = "<group>"; };
+		E4F50617283940A5B6C7D8EF /* UniverseSceneRenderer+Galaxies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseSceneRenderer+Galaxies.swift"; sourceTree = "<group>"; };
 		EEC41455D522580025ACEBAA /* UniverseSceneRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseSceneRenderer.swift; sourceTree = "<group>"; };
 		F1D847BB1881FB27840D046F /* UniverseSceneFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseSceneFeature.swift; sourceTree = "<group>"; };
 		F45D54885EF300B4E523C0DC /* AppCheckCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppCheckCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -562,6 +566,8 @@
 				559DEC8E846389DC155F6923 /* UniverseScene+Touch.swift */,
 				F1D847BB1881FB27840D046F /* UniverseSceneFeature.swift */,
 				EEC41455D522580025ACEBAA /* UniverseSceneRenderer.swift */,
+				C2B3D4E5F6071829304A2B3C /* UniverseSceneRenderer+Background.swift */,
+				E4F50617283940A5B6C7D8EF /* UniverseSceneRenderer+Galaxies.swift */,
 				BB9E16ABFD99F6DDEF61B70A /* UniverseTouchMath.swift */,
 			);
 			path = Scenes;
@@ -880,6 +886,8 @@
 				2C1E7117D51DE1F237E356BF /* UniverseScene.swift in Sources */,
 				786CCDA985B1E98AFE94D5DB /* UniverseSceneFeature.swift in Sources */,
 				A9DAC2451DEE1223A74B165D /* UniverseSceneRenderer.swift in Sources */,
+				B1A2C3D4E5F607182930A1B2 /* UniverseSceneRenderer+Background.swift in Sources */,
+				D3E4F5061728394A5B6C7D8E /* UniverseSceneRenderer+Galaxies.swift in Sources */,
 				8EF057B6EE2EA8094A70CF91 /* UniverseTouchMath.swift in Sources */,
 				1D64E1A79E60F794A957E4D9 /* SearchOverlayView.swift in Sources */,
 				4EA915FCCDB5793283964FFF /* UniverseFeature+Navigation.swift in Sources */,

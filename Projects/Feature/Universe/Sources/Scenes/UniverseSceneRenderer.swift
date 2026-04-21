@@ -23,6 +23,62 @@ final class UniverseSceneRenderer: SKScene {
     // MARK: - Nodes
 
     private let cameraNode = SKCameraNode()
+    private(set) var dustStarNodes: [SKNode] = []
+    private(set) var renderedGalaxies: [String: SKNode] = [:]
+
+    // MARK: - Shared Shaders
+
+    lazy var galaxyShader: SKShader = {
+        let src: String
+        if let url = Bundle.main.url(forResource: "Galaxy", withExtension: "fsh"),
+           let content = try? String(contentsOf: url) {
+            src = content
+        } else {
+            src = "void main() { gl_FragColor = vec4(0.0); }"
+        }
+        let s = SKShader(source: src)
+        s.attributes = [
+            SKAttribute(name: "a_color", type: .vectorFloat4),
+            SKAttribute(name: "a_arm_count", type: .float),
+            SKAttribute(name: "a_wind", type: .float),
+            SKAttribute(name: "a_ellipticity", type: .float),
+        ]
+        return s
+    }()
+
+    lazy var starShader: SKShader = {
+        let src: String
+        if let url = Bundle.main.url(forResource: "Star", withExtension: "fsh"),
+           let content = try? String(contentsOf: url) {
+            src = content
+        } else {
+            src = "void main() { gl_FragColor = vec4(0.0); }"
+        }
+        let s = SKShader(source: src)
+        s.attributes = [SKAttribute(name: "a_color", type: .vectorFloat4)]
+        return s
+    }()
+
+    lazy var nebulaTexture: SKTexture = {
+        let sz: CGFloat = 128
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: sz, height: sz))
+        let image = renderer.image { ctx in
+            let center = CGPoint(x: sz / 2, y: sz / 2)
+            let colors = [
+                UIColor.white.withAlphaComponent(1.0).cgColor,
+                UIColor.white.withAlphaComponent(0.7).cgColor,
+                UIColor.white.withAlphaComponent(0.3).cgColor,
+                UIColor.white.withAlphaComponent(0.08).cgColor,
+                UIColor.white.withAlphaComponent(0).cgColor,
+            ] as CFArray
+            let locations: [CGFloat] = [0, 0.2, 0.45, 0.75, 1.0]
+            let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                                       colors: colors, locations: locations)!
+            ctx.cgContext.drawRadialGradient(gradient, startCenter: center, startRadius: 0,
+                                             endCenter: center, endRadius: sz / 2, options: [])
+        }
+        return SKTexture(image: image)
+    }()
 
     // MARK: - Init
 
@@ -43,6 +99,10 @@ final class UniverseSceneRenderer: SKScene {
         view.isMultipleTouchEnabled = true
         backgroundColor = AppColors.sceneBackground
         setupCamera()
+        setupDustField()
+        setupNebulae()
+        setupBrightStars()
+        setupDistantGalaxies()
         setupObservation()
     }
 
@@ -69,6 +129,10 @@ final class UniverseSceneRenderer: SKScene {
             guard let self else { return }
             self.reconcileCamera(self.store.camera)
         }
+        observe { [weak self] in
+            guard let self else { return }
+            self.reconcileGalaxies(self.store.galaxies)
+        }
     }
 
     // MARK: - Update Loop
@@ -78,6 +142,7 @@ final class UniverseSceneRenderer: SKScene {
         lastUpdateTime = currentTime
         guard dt > 0 else { return }
         store.send(.tick(deltaTime: dt))
+        updateDustStarVisibility()
     }
 
     // MARK: - Touch Forwarding
@@ -137,5 +202,19 @@ final class UniverseSceneRenderer: SKScene {
     private func reconcileCamera(_ camera: UniverseSceneFeature.CameraState) {
         cameraNode.position = camera.position
         cameraNode.setScale(camera.scale)
+    }
+
+    private func updateDustStarVisibility() {
+        let s = cameraNode.xScale
+        let margin: CGFloat = 100
+        let halfW = size.width * s / 2 + margin
+        let halfH = size.height * s / 2 + margin
+        let camX = cameraNode.position.x
+        let camY = cameraNode.position.y
+        for node in dustStarNodes {
+            let dx = abs(node.position.x - camX)
+            let dy = abs(node.position.y - camY)
+            node.isHidden = dx > halfW || dy > halfH
+        }
     }
 }
