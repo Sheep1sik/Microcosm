@@ -31,6 +31,24 @@ final class UniverseSceneRenderer: SKScene {
     private var zoomedGalaxyKey: String?
     private var lastRenderedStars: [UniverseSceneFeature.DetailStarState] = []
 
+    // Minimap
+    private(set) var minimapNode: SKNode?
+    private(set) var minimapViewport: SKShapeNode?
+    private(set) var minimapDots: [SKNode] = []
+
+    // Solar System
+    struct PlanetOrbitData {
+        let node: SKNode
+        let orbit: CGFloat
+        let ellipseRatio: CGFloat
+        let period: TimeInterval
+        let startAngle: CGFloat
+    }
+
+    private(set) var sunNode: SKNode?
+    private(set) var planetOrbits: [PlanetOrbitData] = []
+    private(set) var planetElapsedTime: TimeInterval = 0
+
     // MARK: - Shared Shaders
 
     lazy var galaxyShader: SKShader = {
@@ -108,6 +126,8 @@ final class UniverseSceneRenderer: SKScene {
         setupNebulae()
         setupBrightStars()
         setupDistantGalaxies()
+        setupSolarSystem()
+        setupMinimap()
         setupObservation()
     }
 
@@ -140,6 +160,11 @@ final class UniverseSceneRenderer: SKScene {
         }
         observe { [weak self] in
             guard let self else { return }
+            let _ = self.store.galaxies.mapValues { ($0.position, $0.diameter, $0.color) }
+            self.refreshMinimapDots()
+        }
+        observe { [weak self] in
+            guard let self else { return }
             self.reconcilePhase(self.store.phase)
         }
         observe { [weak self] in
@@ -156,6 +181,8 @@ final class UniverseSceneRenderer: SKScene {
         guard dt > 0 else { return }
         store.send(.tick(deltaTime: dt))
         updateDustStarVisibility()
+        updatePlanetOrbits(deltaTime: dt)
+        updateMinimap()
     }
 
     // MARK: - Touch Forwarding
