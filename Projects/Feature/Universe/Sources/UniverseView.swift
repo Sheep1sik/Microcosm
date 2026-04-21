@@ -23,6 +23,23 @@ private struct SpriteKitView: UIViewRepresentable {
     func updateUIView(_ uiView: SKView, context: Context) {}
 }
 
+// MARK: - New Renderer UIViewRepresentable
+
+private struct RendererSpriteKitView: UIViewRepresentable {
+    let scene: UniverseSceneRenderer
+
+    func makeUIView(context: Context) -> SKView {
+        let skView = SKView()
+        skView.ignoresSiblingOrder = true
+        skView.allowsTransparency = true
+        skView.backgroundColor = .clear
+        skView.presentScene(scene)
+        return skView
+    }
+
+    func updateUIView(_ uiView: SKView, context: Context) {}
+}
+
 public struct UniverseView: View {
     @Bindable var store: StoreOf<UniverseFeature>
 
@@ -32,6 +49,7 @@ public struct UniverseView: View {
         return scene
     }()
 
+    @State private var newRenderer: UniverseSceneRenderer?
     @State private var sceneBridge: SceneDelegateBridge?
 
     @FocusState private var isTextFocused: Bool
@@ -57,9 +75,20 @@ public struct UniverseView: View {
 
     private var mainContent: some View {
         ZStack {
-            SpriteKitView(scene: scene)
-                .ignoresSafeArea(.all)
-                .onAppear { setupScene() }
+            if store.useNewRenderer {
+                if let renderer = newRenderer {
+                    RendererSpriteKitView(scene: renderer)
+                        .ignoresSafeArea(.all)
+                } else {
+                    Color.clear
+                        .ignoresSafeArea(.all)
+                        .onAppear { setupNewRenderer() }
+                }
+            } else {
+                SpriteKitView(scene: scene)
+                    .ignoresSafeArea(.all)
+                    .onAppear { setupScene() }
+            }
 
             searchButton
 
@@ -191,6 +220,14 @@ public struct UniverseView: View {
         scene.previewCache = bridge.previewImageCache
         store.send(.onboarding(.check))
         scene.refreshGalaxies()
+    }
+
+    private func setupNewRenderer() {
+        guard newRenderer == nil else { return }
+        let sceneStore = store.scope(state: \.scene, action: \.scene)
+        let renderer = UniverseSceneRenderer(store: sceneStore)
+        newRenderer = renderer
+        store.send(.onboarding(.check))
     }
 }
 

@@ -15,6 +15,10 @@ public typealias OnboardingStep = FeatureOnboarding.OnboardingStep
 public struct UniverseFeature {
     @ObservableState
     public struct State: Equatable {
+        // Scene (새 TCA Renderer 구동용 child scope)
+        public var scene = UniverseSceneFeature.State()
+        public var useNewRenderer = false
+
         // Onboarding (FeatureOnboarding 모듈로 위임)
         public var onboarding = OnboardingFeature.State()
 
@@ -145,6 +149,8 @@ public struct UniverseFeature {
         }
 
         public init(
+            scene: UniverseSceneFeature.State = UniverseSceneFeature.State(),
+            useNewRenderer: Bool = false,
             onboarding: OnboardingFeature.State = OnboardingFeature.State(),
             userDisplayName: String? = nil,
             allRecords: [Record] = [],
@@ -165,6 +171,8 @@ public struct UniverseFeature {
             pendingNavigation: PendingNavigation? = nil,
             pendingStarCreation: PendingStarCreation? = nil
         ) {
+            self.scene = scene
+            self.useNewRenderer = useNewRenderer
             self.onboarding = onboarding
             self.userDisplayName = userDisplayName
             self.allRecords = allRecords
@@ -189,6 +197,9 @@ public struct UniverseFeature {
 
     public enum Action: BindableAction {
         case binding(BindingAction<State>)
+
+        // Scene (새 TCA Renderer)
+        case scene(UniverseSceneFeature.Action)
 
         // Records
         case recordsUpdated([Record])
@@ -221,6 +232,9 @@ public struct UniverseFeature {
         // Onboarding (FeatureOnboarding 으로 위임)
         case onboarding(OnboardingFeature.Action)
 
+        // Scene Sync
+        case syncGalaxiesToScene
+
         // Navigation
         case navigateToGalaxy(String)
         case navigateToGalaxyThenStar(yearMonth: String, record: Record)
@@ -239,16 +253,18 @@ public struct UniverseFeature {
     public var body: some ReducerOf<Self> {
         BindingReducer()
 
+        Scope(state: \.scene, action: \.scene) {
+            UniverseSceneFeature()
+        }
+
         Scope(state: \.onboarding, action: \.onboarding) {
             OnboardingFeature()
         }
 
-        // 기능별로 분리된 Reduce 블록들. 각 블록은 자신이 처리하는 액션만 매칭하고
-        // 나머지는 default → .none 으로 흘려보낸다. 분할 파일은:
-        // - UniverseFeature+SceneCallbacks.swift
-        // - UniverseFeature+Search.swift
-        // - UniverseFeature+RecordPanel.swift
-        // - UniverseFeature+Navigation.swift
+        Reduce { state, action in
+            reduceSceneDelegate(into: &state, action: action)
+        }
+
         Reduce { state, action in
             reduceSceneCallbacks(into: &state, action: action)
         }

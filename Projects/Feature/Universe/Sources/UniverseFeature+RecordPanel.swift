@@ -16,11 +16,14 @@ extension UniverseFeature {
 
         case .recordsUpdated(let records):
             state.allRecords = records
-            // 최초 records yield 시 온보딩에 알림. hasExistingRecords 도 함께 전달.
+            var effects: [Effect<Action>] = []
             if !state.onboarding.hasReceivedInitialRecords {
-                return .send(.onboarding(.recordsReceived(hasRecords: !records.isEmpty)))
+                effects.append(.send(.onboarding(.recordsReceived(hasRecords: !records.isEmpty))))
             }
-            return .none
+            if state.useNewRenderer {
+                effects.append(.send(.syncGalaxiesToScene))
+            }
+            return .merge(effects)
 
         case .openRecordPanel:
             if state.onboarding.step != .createStarPrompt {

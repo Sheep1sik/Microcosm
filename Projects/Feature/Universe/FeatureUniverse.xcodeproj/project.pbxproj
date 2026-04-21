@@ -141,6 +141,7 @@
 		D0D9F24E84FD2549CDF9A6E3 /* FirebaseCoreExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B79CD2D33FA05C32506059E1 /* FirebaseCoreExtension.framework */; };
 		D42B1D6ED2085C67EDEBD39F /* opensslWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60C4AF4E5D4062ABB0A2713 /* opensslWrapper.framework */; };
 		DA94F3AC3210793F827D4025 /* UniverseFeature+SceneCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39B6B451FF79CB2400BC0F7 /* UniverseFeature+SceneCallbacks.swift */; };
+		F1A2B3C4D5E6F7A8B9CADB01 /* UniverseFeature+SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3C4D5E6F7A8B9CADB0102 /* UniverseFeature+SceneDelegate.swift */; };
 		DB140719BD0ED68EA10DBC13 /* UniverseScene+Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DEC8E846389DC155F6923 /* UniverseScene+Touch.swift */; };
 		DC78BC70EBEEFFD59D3B6A78 /* grpcWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F8DA88A1E3DDBC5CBD55D2 /* grpcWrapper.framework */; };
 		E3D1ADC909D0A0ABE56FAE71 /* gRPC_opensslWrapper.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = E5F76950E89ADDF853940793 /* gRPC_opensslWrapper.bundle */; };
@@ -338,6 +339,7 @@
 		B14079A80219EBC169A89FB3 /* GoogleUtilities_AppDelegateSwizzler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleUtilities_AppDelegateSwizzler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C524264066062835324CAE /* Firebase_FirebaseCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Firebase_FirebaseCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B39B6B451FF79CB2400BC0F7 /* UniverseFeature+SceneCallbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseFeature+SceneCallbacks.swift"; sourceTree = "<group>"; };
+		A2B3C4D5E6F7A8B9CADB0102 /* UniverseFeature+SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniverseFeature+SceneDelegate.swift"; sourceTree = "<group>"; };
 		B79CD2D33FA05C32506059E1 /* FirebaseCoreExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseCoreExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98DC4C2D40605D0F95F9FD9 /* GoogleUtilities_GoogleUtilities_UserDefaults.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleUtilities_GoogleUtilities_UserDefaults.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9E16ABFD99F6DDEF61B70A /* UniverseTouchMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseTouchMath.swift; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				AF8FF61EC77C4C1DF41D2A68 /* UniverseFeature+Navigation.swift */,
 				7CCB0840E9441D79E7E684E7 /* UniverseFeature+RecordPanel.swift */,
 				B39B6B451FF79CB2400BC0F7 /* UniverseFeature+SceneCallbacks.swift */,
+				A2B3C4D5E6F7A8B9CADB0102 /* UniverseFeature+SceneDelegate.swift */,
 				DA876401F1256A11AAB9432F /* UniverseFeature+Search.swift */,
 				4E42BDFF5F056CC93DB4CA54 /* UniverseView.swift */,
 			);
@@ -905,6 +908,7 @@
 				4EA915FCCDB5793283964FFF /* UniverseFeature+Navigation.swift in Sources */,
 				271CC022A43AE81E8AE3DDB8 /* UniverseFeature+RecordPanel.swift in Sources */,
 				DA94F3AC3210793F827D4025 /* UniverseFeature+SceneCallbacks.swift in Sources */,
+				F1A2B3C4D5E6F7A8B9CADB01 /* UniverseFeature+SceneDelegate.swift in Sources */,
 				93D8DA0D22FC7AAEE99CDF01 /* UniverseFeature+Search.swift in Sources */,
 				58E23A673204D04F3DC6E4F8 /* UniverseFeature.swift in Sources */,
 				33134ED90E8EE29EEF65A2D8 /* UniverseView.swift in Sources */,
