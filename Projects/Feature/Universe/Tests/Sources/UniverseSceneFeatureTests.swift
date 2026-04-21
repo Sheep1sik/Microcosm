@@ -513,4 +513,278 @@ final class UniverseSceneFeatureTests: XCTestCase {
         )
         XCTAssertEqual(galaxy.id, "2026-04")
     }
+
+    // MARK: - Zoom In
+
+    func test_zoomIn_universe에서만_전환() async {
+        let galaxy = UniverseSceneFeature.GalaxyNodeState(
+            yearMonth: "2026-04",
+            position: CGPoint(x: 1500, y: 2500)
+        )
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State(
+                camera: .init(
+                    position: CGPoint(x: 2000, y: 2000),
+                    scale: 1.5,
+                    velocity: CGVector(dx: 3, dy: 3)
+                ),
+                galaxies: ["2026-04": galaxy]
+            )
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomIn(galaxyKey: "2026-04")) {
+            $0.camera.savedPosition = CGPoint(x: 2000, y: 2000)
+            $0.camera.savedScale = 1.5
+            $0.camera.velocity = .zero
+            $0.touch = UniverseSceneFeature.TouchState()
+            $0.phase = .zoomingIn(galaxyKey: "2026-04")
+        }
+    }
+
+    func test_zoomIn_galaxyDetail에서_무시() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State(
+                phase: .galaxyDetail(galaxyKey: "2026-03"),
+                galaxies: [
+                    "2026-03": .init(yearMonth: "2026-03", position: .init(x: 1000, y: 1000)),
+                    "2026-04": .init(yearMonth: "2026-04", position: .init(x: 1500, y: 2500)),
+                ]
+            )
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomIn(galaxyKey: "2026-04"))
+    }
+
+    func test_zoomIn_존재하지않는_은하_무시() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State()
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomIn(galaxyKey: "9999-99"))
+    }
+
+    // MARK: - Zoom In Completed
+
+    func test_zoomInCompleted_카메라설정_delegate발행() async {
+        let galaxy = UniverseSceneFeature.GalaxyNodeState(
+            yearMonth: "2026-04",
+            position: CGPoint(x: 1500, y: 2500)
+        )
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State(
+                phase: .zoomingIn(galaxyKey: "2026-04"),
+                camera: .init(
+                    position: CGPoint(x: 2000, y: 2000),
+                    scale: 1.0,
+                    savedPosition: CGPoint(x: 2000, y: 2000),
+                    savedScale: 1.5
+                ),
+                galaxies: ["2026-04": galaxy]
+            )
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomInCompleted) {
+            $0.camera.position = CGPoint(x: 1500, y: 2500)
+            $0.camera.scale = UniverseSceneFeature.galaxyDetailScale
+            $0.phase = .galaxyDetail(galaxyKey: "2026-04")
+        }
+        await store.receive(.delegate(.didEnterGalaxyDetail(key: "2026-04")))
+    }
+
+    func test_zoomInCompleted_은하삭제시_무시() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State(
+                phase: .zoomingIn(galaxyKey: "2026-04"),
+                galaxies: [:]
+            )
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomInCompleted)
+    }
+
+    func test_zoomInCompleted_universe에서_무시() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State()
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomInCompleted)
+    }
+
+    // MARK: - Zoom Out
+
+    func test_zoomOut_galaxyDetail에서_전환() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State(
+                phase: .galaxyDetail(galaxyKey: "2026-04"),
+                camera: .init(
+                    position: CGPoint(x: 1500, y: 2500),
+                    scale: 0.15,
+                    velocity: CGVector(dx: 2, dy: 2),
+                    savedPosition: CGPoint(x: 2000, y: 2000),
+                    savedScale: 1.5
+                ),
+                detailStars: [
+                    .init(index: 0, starName: "Test", position: .zero, size: 10, brightness: 0.5, color: .white),
+                ]
+            )
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomOut) {
+            $0.phase = .zoomingOut
+            $0.detailStars = []
+            $0.camera.velocity = .zero
+            $0.touch = UniverseSceneFeature.TouchState()
+        }
+        await store.receive(.delegate(.didExitGalaxyDetail))
+    }
+
+    func test_zoomOut_zoomingIn에서_무시() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State(
+                phase: .zoomingIn(galaxyKey: "2026-04"),
+                galaxies: ["2026-04": .init(yearMonth: "2026-04", position: .init(x: 1500, y: 2500))]
+            )
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomOut)
+    }
+
+    func test_zoomOut_universe에서_무시() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State()
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomOut)
+    }
+
+    // MARK: - Zoom Out Completed
+
+    func test_zoomOutCompleted_카메라복원_universe전환() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State(
+                phase: .zoomingOut,
+                camera: .init(
+                    position: CGPoint(x: 1500, y: 2500),
+                    scale: 0.15,
+                    savedPosition: CGPoint(x: 2000, y: 2000),
+                    savedScale: 1.5
+                )
+            )
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomOutCompleted) {
+            $0.camera.position = CGPoint(x: 2000, y: 2000)
+            $0.camera.scale = 1.5
+            $0.phase = .universe
+        }
+    }
+
+    func test_zoomOutCompleted_universe에서_무시() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State()
+        ) {
+            UniverseSceneFeature()
+        }
+
+        await store.send(.zoomOutCompleted)
+    }
+
+    // MARK: - Detail Stars
+
+    func test_detailStarsUpdated_반영() async {
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State(
+                phase: .galaxyDetail(galaxyKey: "2026-04")
+            )
+        ) {
+            UniverseSceneFeature()
+        }
+
+        let stars: [UniverseSceneFeature.DetailStarState] = [
+            .init(index: 0, starName: "별1", position: CGPoint(x: 10, y: 20), size: 12, brightness: 0.8, color: .white),
+            .init(index: 1, starName: "별2", position: CGPoint(x: 30, y: 40), size: 8, brightness: 0.5, color: .init(r: 1, g: 0.8, b: 0.6)),
+        ]
+
+        await store.send(.detailStarsUpdated(stars)) {
+            $0.detailStars = stars
+        }
+    }
+
+    // MARK: - Zoom Full Cycle
+
+    func test_zoom_전체사이클_universe_zoomIn_detail_zoomOut_universe() async {
+        let galaxy = UniverseSceneFeature.GalaxyNodeState(
+            yearMonth: "2026-04",
+            position: CGPoint(x: 1500, y: 2500)
+        )
+        let store = TestStore(
+            initialState: UniverseSceneFeature.State(
+                camera: .init(position: CGPoint(x: 2000, y: 2000), scale: 1.5),
+                galaxies: ["2026-04": galaxy]
+            )
+        ) {
+            UniverseSceneFeature()
+        }
+
+        // 1. zoomIn
+        await store.send(.zoomIn(galaxyKey: "2026-04")) {
+            $0.camera.savedPosition = CGPoint(x: 2000, y: 2000)
+            $0.camera.savedScale = 1.5
+            $0.camera.velocity = .zero
+            $0.touch = UniverseSceneFeature.TouchState()
+            $0.phase = .zoomingIn(galaxyKey: "2026-04")
+        }
+
+        // 2. zoomInCompleted
+        await store.send(.zoomInCompleted) {
+            $0.camera.position = CGPoint(x: 1500, y: 2500)
+            $0.camera.scale = UniverseSceneFeature.galaxyDetailScale
+            $0.phase = .galaxyDetail(galaxyKey: "2026-04")
+        }
+        await store.receive(.delegate(.didEnterGalaxyDetail(key: "2026-04")))
+
+        // 3. detailStars 수신
+        let stars: [UniverseSceneFeature.DetailStarState] = [
+            .init(index: 0, starName: "테스트", position: .zero, size: 10, brightness: 0.5, color: .white),
+        ]
+        await store.send(.detailStarsUpdated(stars)) {
+            $0.detailStars = stars
+        }
+
+        // 4. zoomOut
+        await store.send(.zoomOut) {
+            $0.phase = .zoomingOut
+            $0.detailStars = []
+            $0.camera.velocity = .zero
+            $0.touch = UniverseSceneFeature.TouchState()
+        }
+        await store.receive(.delegate(.didExitGalaxyDetail))
+
+        // 5. zoomOutCompleted
+        await store.send(.zoomOutCompleted) {
+            $0.camera.position = CGPoint(x: 2000, y: 2000)
+            $0.camera.scale = 1.5
+            $0.phase = .universe
+        }
+    }
 }

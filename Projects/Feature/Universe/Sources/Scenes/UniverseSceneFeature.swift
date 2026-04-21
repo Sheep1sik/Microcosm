@@ -23,6 +23,7 @@ public struct UniverseSceneFeature {
         public var galaxies: [String: GalaxyNodeState] = [:]
         public var viewportSize: CGSize = CGSize(width: 390, height: 844)
         public var needsInitialFocus: Bool = true
+        public var detailStars: [DetailStarState] = []
 
         public init(
             phase: ScenePhase = .universe,
@@ -30,7 +31,8 @@ public struct UniverseSceneFeature {
             touch: TouchState = .init(),
             galaxies: [String: GalaxyNodeState] = [:],
             viewportSize: CGSize = CGSize(width: 390, height: 844),
-            needsInitialFocus: Bool = true
+            needsInitialFocus: Bool = true,
+            detailStars: [DetailStarState] = []
         ) {
             self.phase = phase
             self.camera = camera
@@ -38,6 +40,7 @@ public struct UniverseSceneFeature {
             self.galaxies = galaxies
             self.viewportSize = viewportSize
             self.needsInitialFocus = needsInitialFocus
+            self.detailStars = detailStars
         }
     }
 
@@ -104,6 +107,49 @@ public struct UniverseSceneFeature {
         public static let white = RGBA(r: 1, g: 1, b: 1)
     }
 
+    // MARK: - DetailStarState
+
+    public struct DetailStarState: Equatable, Sendable, Identifiable {
+        public var id: Int { index }
+        public let index: Int
+        public let starName: String
+        public let position: CGPoint
+        public let size: CGFloat
+        public let brightness: CGFloat
+        public let color: RGBA
+        public let twinkleIntensity: CGFloat
+        public let twinkleSpeed: CGFloat
+        public let motionAmplitude: CGFloat
+        public let motionSpeed: CGFloat
+        public let dateText: String
+
+        public init(
+            index: Int,
+            starName: String,
+            position: CGPoint,
+            size: CGFloat,
+            brightness: CGFloat,
+            color: RGBA,
+            twinkleIntensity: CGFloat = 0.3,
+            twinkleSpeed: CGFloat = 0.5,
+            motionAmplitude: CGFloat = 0.5,
+            motionSpeed: CGFloat = 0.5,
+            dateText: String = ""
+        ) {
+            self.index = index
+            self.starName = starName
+            self.position = position
+            self.size = size
+            self.brightness = brightness
+            self.color = color
+            self.twinkleIntensity = twinkleIntensity
+            self.twinkleSpeed = twinkleSpeed
+            self.motionAmplitude = motionAmplitude
+            self.motionSpeed = motionSpeed
+            self.dateText = dateText
+        }
+    }
+
     // MARK: - CameraState
 
     public struct CameraState: Equatable, Sendable {
@@ -162,6 +208,11 @@ public struct UniverseSceneFeature {
         case touch(TouchAction)
         case viewportResized(CGSize)
         case galaxiesUpdated([String: GalaxyNodeState])
+        case zoomIn(galaxyKey: String)
+        case zoomInCompleted
+        case zoomOut
+        case zoomOutCompleted
+        case detailStarsUpdated([DetailStarState])
         case delegate(Delegate)
 
         public enum TouchAction: Sendable, Equatable {
@@ -177,6 +228,8 @@ public struct UniverseSceneFeature {
             case tappedGalaxy(key: String)
             case tappedEmptyArea(scenePoint: CGPoint)
             case swiped
+            case didEnterGalaxyDetail(key: String)
+            case didExitGalaxyDetail
         }
     }
 
@@ -199,6 +252,17 @@ public struct UniverseSceneFeature {
                 if state.needsInitialFocus, !galaxies.isEmpty, state.phase == .universe {
                     focusOnCurrentMonth(state: &state)
                 }
+                return .none
+            case let .zoomIn(galaxyKey):
+                return reduceZoomIn(into: &state, galaxyKey: galaxyKey)
+            case .zoomInCompleted:
+                return reduceZoomInCompleted(into: &state)
+            case .zoomOut:
+                return reduceZoomOut(into: &state)
+            case .zoomOutCompleted:
+                return reduceZoomOutCompleted(into: &state)
+            case let .detailStarsUpdated(stars):
+                state.detailStars = stars
                 return .none
             case .delegate:
                 return .none
@@ -391,5 +455,45 @@ public struct UniverseSceneFeature {
         camera.position.x = galaxy.position.x + dx * ratio
         camera.position.y = galaxy.position.y + dy * ratio
         camera.velocity = .zero
+    }
+
+    // MARK: - Zoom
+
+    static let galaxyDetailScale: CGFloat = 0.15
+
+    private func reduceZoomIn(into state: inout State, galaxyKey: String) -> Effect<Action> {
+        guard state.phase == .universe, state.galaxies[galaxyKey] != nil else { return .none }
+        state.camera.savedPosition = state.camera.position
+        state.camera.savedScale = state.camera.scale
+        state.camera.velocity = .zero
+        state.touch = TouchState()
+        state.phase = .zoomingIn(galaxyKey: galaxyKey)
+        return .none
+    }
+
+    private func reduceZoomInCompleted(into state: inout State) -> Effect<Action> {
+        guard case let .zoomingIn(galaxyKey) = state.phase else { return .none }
+        guard let galaxy = state.galaxies[galaxyKey] else { return .none }
+        state.camera.position = galaxy.position
+        state.camera.scale = Self.galaxyDetailScale
+        state.phase = .galaxyDetail(galaxyKey: galaxyKey)
+        return .send(.delegate(.didEnterGalaxyDetail(key: galaxyKey)))
+    }
+
+    private func reduceZoomOut(into state: inout State) -> Effect<Action> {
+        guard case .galaxyDetail = state.phase else { return .none }
+        state.phase = .zoomingOut
+        state.detailStars = []
+        state.camera.velocity = .zero
+        state.touch = TouchState()
+        return .send(.delegate(.didExitGalaxyDetail))
+    }
+
+    private func reduceZoomOutCompleted(into state: inout State) -> Effect<Action> {
+        guard state.phase == .zoomingOut else { return .none }
+        state.camera.position = state.camera.savedPosition
+        state.camera.scale = state.camera.savedScale
+        state.phase = .universe
+        return .none
     }
 }

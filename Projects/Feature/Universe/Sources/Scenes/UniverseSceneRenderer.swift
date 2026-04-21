@@ -25,6 +25,11 @@ final class UniverseSceneRenderer: SKScene {
     private let cameraNode = SKCameraNode()
     private(set) var dustStarNodes: [SKNode] = []
     private(set) var renderedGalaxies: [String: SKNode] = [:]
+    private(set) var detailNodes: [SKNode] = []
+    private(set) var backButtonNode: SKLabelNode?
+    private var isAnimatingZoom = false
+    private var zoomedGalaxyKey: String?
+    private var lastRenderedStars: [UniverseSceneFeature.DetailStarState] = []
 
     // MARK: - Shared Shaders
 
@@ -133,6 +138,14 @@ final class UniverseSceneRenderer: SKScene {
             guard let self else { return }
             self.reconcileGalaxies(self.store.galaxies)
         }
+        observe { [weak self] in
+            guard let self else { return }
+            self.reconcilePhase(self.store.phase)
+        }
+        observe { [weak self] in
+            guard let self else { return }
+            self.reconcileDetailStars(self.store.detailStars)
+        }
     }
 
     // MARK: - Update Loop
@@ -200,6 +213,7 @@ final class UniverseSceneRenderer: SKScene {
     // MARK: - Reconcile (State → SKNode)
 
     private func reconcileCamera(_ camera: UniverseSceneFeature.CameraState) {
+        guard !isAnimatingZoom else { return }
         cameraNode.position = camera.position
         cameraNode.setScale(camera.scale)
     }
