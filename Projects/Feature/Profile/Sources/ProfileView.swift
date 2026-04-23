@@ -85,7 +85,7 @@ public struct ProfileView: View {
                             .padding(.top, 8)
 
                             // 버전
-                            Text("소우주 v1.0.0")
+                            Text("소우주 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?")")
                                 .font(.caption2)
                                 .foregroundStyle(.white.opacity(0.15))
                                 .padding(.top, 8)
@@ -120,6 +120,19 @@ public struct ProfileView: View {
                     )
                     .transition(.opacity)
                     .animation(.easeInOut(duration: 0.2), value: store.showDeleteAlert)
+                }
+
+                // 탈퇴 실패 알림
+                if let failure = store.deleteFailure {
+                    CosmicAlertView(
+                        title: "탈퇴에 실패했어요",
+                        message: failure.message,
+                        confirmTitle: "확인",
+                        onConfirm: { store.send(.dismissDeleteError) },
+                        onCancel: { store.send(.dismissDeleteError) }
+                    )
+                    .transition(.opacity)
+                    .animation(.easeInOut(duration: 0.2), value: store.deleteFailure)
                 }
             }
             .navigationBarHidden(true)

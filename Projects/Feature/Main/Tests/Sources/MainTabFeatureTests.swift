@@ -89,6 +89,7 @@ final class MainTabFeatureTests: XCTestCase {
     // profile 보다 먼저 yield 되더라도 welcome 으로 재진입하지 않아야 한다.
     func test_sessionUpdated_records먼저와도_profile도착까지는_welcome미진입() async {
         var initial = MainTabFeature.State()
+        initial.userId = "user-1"
         initial.universe.onboarding.pendingCheck = true
         let store = TestStore(initialState: initial) {
             MainTabFeature()
@@ -134,7 +135,9 @@ final class MainTabFeatureTests: XCTestCase {
     // MARK: - recordsUpdated
 
     func test_recordsUpdated_universe와_profile에_동시전파() async {
-        let store = TestStore(initialState: MainTabFeature.State()) {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        let store = TestStore(initialState: initial) {
             MainTabFeature()
         }
         let records = [Record(content: "a"), Record(content: "b")]
@@ -152,9 +155,8 @@ final class MainTabFeatureTests: XCTestCase {
     }
 
     func test_recordsUpdated_constellation_userDisplayName_universe에서_복사() async {
-        // Root → MainTab → Universe 에 닉네임이 들어온 뒤,
-        // recordsUpdated 트리거 시 Constellation 도 동일 닉네임을 가져야 함.
         var initial = MainTabFeature.State()
+        initial.userId = "user-1"
         initial.universe.userDisplayName = "별지기"
 
         let store = TestStore(initialState: initial) { MainTabFeature() }
@@ -170,10 +172,8 @@ final class MainTabFeatureTests: XCTestCase {
     }
 
     func test_recordsUpdated_pendingOnboardingCheck_있으면_checkOnboarding_재발송() async {
-        // 회귀 방지: MainTab 이 records 를 Universe reducer 로 포워딩하지 않으면
-        // hasReceivedInitialRecords 플래그가 영원히 false 가 되어 온보딩 welcome 이
-        // 뜨지 않는 버그가 있었다. 이 테스트는 포워딩 경로 전체를 검증한다.
         var initial = MainTabFeature.State()
+        initial.userId = "user-1"
         initial.universe.onboarding.pendingCheck = true
         initial.universe.onboarding.hasReceivedInitialProfile = true
         let store = TestStore(initialState: initial) {
@@ -195,9 +195,9 @@ final class MainTabFeatureTests: XCTestCase {
     // MARK: - goalsUpdated (초기 로드)
 
     func test_goalsUpdated_초기로드는_메시지_미생성() async {
-        // 첫 goalsUpdated 는 hasInitialGoalsLoaded 를 true 로 올리고
-        // 완성 메시지는 띄우지 않는다 (앱 진입 시 완성된 별자리가 깜빡이는 것 방지).
-        let store = TestStore(initialState: MainTabFeature.State()) {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        let store = TestStore(initialState: initial) {
             MainTabFeature()
         }
 
@@ -215,8 +215,8 @@ final class MainTabFeatureTests: XCTestCase {
     // MARK: - goalsUpdated (후속 갱신)
 
     func test_goalsUpdated_초기로드후_새완성_메시지생성() async {
-        // 사전 조건: 초기 로드는 이미 끝났고, 아직 완성된 별자리는 없음.
         var initial = MainTabFeature.State()
+        initial.userId = "user-1"
         initial.constellation.hasInitialGoalsLoaded = true
         initial.universe.userDisplayName = "별지기"
 
@@ -235,6 +235,7 @@ final class MainTabFeatureTests: XCTestCase {
 
     func test_goalsUpdated_userDisplayName_없으면_기본값_우주인() async {
         var initial = MainTabFeature.State()
+        initial.userId = "user-1"
         initial.constellation.hasInitialGoalsLoaded = true
 
         let store = TestStore(initialState: initial) { MainTabFeature() }
@@ -251,8 +252,8 @@ final class MainTabFeatureTests: XCTestCase {
     }
 
     func test_goalsUpdated_완성됐던별자리_해제시_lostMessage_생성() async {
-        // 사전 조건: 이미 테스트 별자리가 완성 상태로 기록돼 있음.
         var initial = MainTabFeature.State()
+        initial.userId = "user-1"
         initial.constellation.hasInitialGoalsLoaded = true
         initial.constellation.previouslyCompletedIds = [Self.testConstellationId]
         initial.universe.completedConstellationIds = [Self.testConstellationId]
@@ -319,6 +320,7 @@ final class MainTabFeatureTests: XCTestCase {
 
     func test_completedConstellationIds_별일부에만_목표있으면_미완성() async {
         var initial = MainTabFeature.State()
+        initial.userId = "user-1"
         initial.constellation.hasInitialGoalsLoaded = true
 
         let store = TestStore(initialState: initial) { MainTabFeature() }

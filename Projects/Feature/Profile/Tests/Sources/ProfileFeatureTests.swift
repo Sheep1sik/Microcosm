@@ -63,24 +63,56 @@ final class ProfileFeatureTests: XCTestCase {
         }
     }
 
-    func test_confirmDeleteAccount_authClient_delete_호출후_delegate발행() async {
-        let deleted = LockIsolated(false)
+    func test_confirmDeleteAccount_즉시_delegate발행후_백그라운드삭제() async {
         var initial = ProfileFeature.State()
         initial.showDeleteAlert = true
 
         let store = TestStore(initialState: initial) {
             ProfileFeature()
         } withDependencies: {
-            $0.authClient.deleteAccount = { deleted.setValue(true) }
+            $0.authClient.deleteAccount = { }
             $0.authClient.clearLocalData = { }
+            $0.authClient.currentUser = { nil }
+            $0.userClient.deleteAllData = { _ in }
         }
 
         await store.send(.confirmDeleteAccount) {
             $0.showDeleteAlert = false
         }
         await store.receive(\.delegate)
+    }
 
-        XCTAssertTrue(deleted.value)
+    func test_dismissDeleteError_relogin필요시_signOut후_delegate() async {
+        let signOutCalled = LockIsolated(false)
+        var initial = ProfileFeature.State()
+        initial.deleteFailure = .requiresRecentLogin
+
+        let store = TestStore(initialState: initial) {
+            ProfileFeature()
+        } withDependencies: {
+            $0.authClient.signOut = { signOutCalled.setValue(true) }
+            $0.authClient.clearLocalData = { }
+        }
+
+        await store.send(.dismissDeleteError) {
+            $0.deleteFailure = nil
+        }
+        await store.receive(\.delegate)
+
+        XCTAssertTrue(signOutCalled.value)
+    }
+
+    func test_dismissDeleteError_일반에러시_signOut안함() async {
+        var initial = ProfileFeature.State()
+        initial.deleteFailure = .network
+
+        let store = TestStore(initialState: initial) {
+            ProfileFeature()
+        }
+
+        await store.send(.dismissDeleteError) {
+            $0.deleteFailure = nil
+        }
     }
 
     // MARK: - Nickname Change Sheet

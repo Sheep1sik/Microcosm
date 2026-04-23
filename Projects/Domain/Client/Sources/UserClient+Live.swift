@@ -122,6 +122,26 @@ extension UserClient: DependencyKey {
         markConstellationGuideSeen: { userId in
             try await FirestoreDB.shared.collection("users").document(userId)
                 .updateData(["hasSeenConstellationGuide": true])
+        },
+        deleteAllData: { userId in
+            let db = FirestoreDB.shared
+            let userRef = db.collection("users").document(userId)
+
+            let userSnap = try await userRef.getDocument()
+            let nickname = userSnap.data()?["nickname"] as? String
+
+            for sub in ["records", "goals"] {
+                let docs = try await userRef.collection(sub).getDocuments()
+                for doc in docs.documents {
+                    try await doc.reference.delete()
+                }
+            }
+
+            if let nickname, !nickname.isEmpty {
+                try await db.collection("nicknames").document(nickname).delete()
+            }
+
+            try await userRef.delete()
         }
     )
 }

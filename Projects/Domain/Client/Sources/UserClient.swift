@@ -55,6 +55,7 @@ public struct UserClient {
     public var markOnboardingCompleted: (String) async throws -> Void
     public var resetOnboarding: (String) async throws -> Void
     public var markConstellationGuideSeen: (String) async throws -> Void
+    public var deleteAllData: (String) async throws -> Void
 
     public init(
         observe: @escaping (String) -> AsyncStream<UserProfile>,
@@ -65,7 +66,8 @@ public struct UserClient {
         updateEmail: @escaping (String, String) async throws -> Void,
         markOnboardingCompleted: @escaping (String) async throws -> Void,
         resetOnboarding: @escaping (String) async throws -> Void,
-        markConstellationGuideSeen: @escaping (String) async throws -> Void
+        markConstellationGuideSeen: @escaping (String) async throws -> Void,
+        deleteAllData: @escaping (String) async throws -> Void
     ) {
         self.observe = observe
         self.createIfNeeded = createIfNeeded
@@ -76,6 +78,7 @@ public struct UserClient {
         self.markOnboardingCompleted = markOnboardingCompleted
         self.resetOnboarding = resetOnboarding
         self.markConstellationGuideSeen = markConstellationGuideSeen
+        self.deleteAllData = deleteAllData
     }
 }
 

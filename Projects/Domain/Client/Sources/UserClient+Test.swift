@@ -11,6 +11,7 @@ extension UserClient: TestDependencyKey {
         updateEmail: unimplemented("\(Self.self).updateEmail"),
         markOnboardingCompleted: unimplemented("\(Self.self).markOnboardingCompleted"),
         resetOnboarding: unimplemented("\(Self.self).resetOnboarding"),
-        markConstellationGuideSeen: unimplemented("\(Self.self).markConstellationGuideSeen")
+        markConstellationGuideSeen: unimplemented("\(Self.self).markConstellationGuideSeen"),
+        deleteAllData: unimplemented("\(Self.self).deleteAllData")
     )
 }
