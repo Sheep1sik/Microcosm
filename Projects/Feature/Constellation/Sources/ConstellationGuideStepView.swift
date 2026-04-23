@@ -109,7 +109,7 @@ struct ConstellationGuideStepView: View {
     private var guideTitle: String {
         switch step {
         case .welcome:
-            return "\(userName)님,\n이곳은 별자리 우주에요"
+            return "\(userName)님,\n이곳은 별자리우주예요"
         case .tapConstellation:
             return "별자리를 탭해보세요!"
         case .tapStar:
@@ -124,7 +124,7 @@ struct ConstellationGuideStepView: View {
     private var guideSubtitle: String {
         switch step {
         case .welcome:
-            return "이곳에서 별자리에 목표를 등록하고\n달성하면 별이 빛나기 시작해요"
+            return "별자리에 목표를 등록하고 달성하면\n별이 빛나기 시작해요"
         case .tapConstellation:
             return "아무 별자리나 탭해서 들어가보세요"
         case .tapStar:
