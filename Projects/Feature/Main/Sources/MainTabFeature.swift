@@ -40,6 +40,7 @@ public struct MainTabFeature {
     public enum Action: BindableAction {
         case binding(BindingAction<State>)
         case onAppear
+        case sessionEnded
         case tabSelected(State.Tab)
         case sessionUpdated(userId: String?, displayName: String?, profile: UserProfile)
         case recordsUpdated([Record])
@@ -80,6 +81,12 @@ public struct MainTabFeature {
                     }.cancellable(id: CancelID.goalObserver, cancelInFlight: true)
                 )
 
+            case .sessionEnded:
+                return .merge(
+                    .cancel(id: CancelID.recordObserver),
+                    .cancel(id: CancelID.goalObserver)
+                )
+
             case .tabSelected(let tab):
                 state.selectedTab = tab
                 return .none
@@ -101,14 +108,13 @@ public struct MainTabFeature {
                 return .send(.universe(.onboarding(.profileReceived)))
 
             case .recordsUpdated(let records):
-                // Universe 는 reducer 내부에서 hasReceivedInitialRecords 플래그를 토글하고
-                // 보류 중인 checkOnboarding 을 재발송한다. state 직접 대입은 이 경로를 우회하므로
-                // 반드시 action 포워딩으로 전달해야 한다.
+                guard state.userId != nil else { return .none }
                 state.profile.allRecords = records
                 state.constellation.userDisplayName = state.universe.userDisplayName
                 return .send(.universe(.recordsUpdated(records)))
 
             case .goalsUpdated(let goals):
+                guard state.userId != nil else { return .none }
                 state.constellation.allGoals = goals
                 Self.recomputeCompletion(state: &state, goals: goals, isFromObserver: true)
                 return .none

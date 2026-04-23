@@ -91,8 +91,12 @@ public struct RootFeature {
                     )
                 } else {
                     state.mainTab.profile.userProfile = UserProfile()
+                    state.mainTab.userId = nil
                     state.mode = .login
-                    return .cancel(id: CancelID.userObserver)
+                    return .merge(
+                        .cancel(id: CancelID.userObserver),
+                        .send(.mainTab(.sessionEnded))
+                    )
                 }
 
             case .userProfileUpdated(let profile):
@@ -112,12 +116,18 @@ public struct RootFeature {
             case .mainTab(.profile(.delegate(.didSignOut))):
                 state.mainTab = MainTabFeature.State()
                 state.mode = .login
-                return .cancel(id: CancelID.userObserver)
+                return .merge(
+                    .cancel(id: CancelID.userObserver),
+                    .send(.mainTab(.sessionEnded))
+                )
 
             case .mainTab(.profile(.delegate(.didDeleteAccount))):
                 state.mainTab = MainTabFeature.State()
                 state.mode = .login
-                return .cancel(id: CancelID.userObserver)
+                return .merge(
+                    .cancel(id: CancelID.userObserver),
+                    .send(.mainTab(.sessionEnded))
+                )
 
             case .mainTab:
                 return .none

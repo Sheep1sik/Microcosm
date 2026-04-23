@@ -110,25 +110,12 @@ public struct ProfileFeature {
             case .confirmDeleteAccount:
                 state.showDeleteAlert = false
                 return .run { [userId = authClient.currentUser()?.uid] send in
-                    if let userId {
-                        try await userClient.deleteAllData(userId)
-                    }
-                    try await authClient.deleteAccount()
-                    authClient.clearLocalData()
                     await send(.delegate(.didDeleteAccount))
-                } catch: { error, send in
-                    if let authError = error as? AuthError {
-                        switch authError {
-                        case .requiresRecentLogin:
-                            await send(.deleteAccountFailed(.requiresRecentLogin))
-                        case .network:
-                            await send(.deleteAccountFailed(.network))
-                        default:
-                            await send(.deleteAccountFailed(.general))
-                        }
-                    } else {
-                        await send(.deleteAccountFailed(.general))
+                    if let userId {
+                        try? await userClient.deleteAllData(userId)
                     }
+                    try? await authClient.deleteAccount()
+                    authClient.clearLocalData()
                 }
 
             case .deleteAccountFailed(let failure):
