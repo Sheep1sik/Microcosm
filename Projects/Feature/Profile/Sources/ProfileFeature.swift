@@ -12,6 +12,7 @@ public struct ProfileFeature {
         public var allRecords: [Record] = []
         public var showSignOutAlert = false
         public var showDeleteAlert = false
+        public var deleteFailure: DeleteFailure?
         public var showNicknameChange = false
         public var nicknameState = NicknameFeature.State(isOnboarding: false)
 
@@ -21,6 +22,7 @@ public struct ProfileFeature {
             allRecords: [Record] = [],
             showSignOutAlert: Bool = false,
             showDeleteAlert: Bool = false,
+            deleteFailure: DeleteFailure? = nil,
             showNicknameChange: Bool = false,
             nicknameState: NicknameFeature.State = NicknameFeature.State(isOnboarding: false)
         ) {
@@ -29,8 +31,23 @@ public struct ProfileFeature {
             self.allRecords = allRecords
             self.showSignOutAlert = showSignOutAlert
             self.showDeleteAlert = showDeleteAlert
+            self.deleteFailure = deleteFailure
             self.showNicknameChange = showNicknameChange
             self.nicknameState = nicknameState
+        }
+    }
+
+    public enum DeleteFailure: Equatable {
+        case requiresRecentLogin
+        case network
+        case general
+
+        public var message: String {
+            switch self {
+            case .requiresRecentLogin: return "보안을 위해 다시 로그인 후\n탈퇴를 시도해주세요"
+            case .network: return "네트워크 연결을 확인해주세요"
+            case .general: return "잠시 후 다시 시도해주세요"
+            }
         }
     }
 
@@ -41,7 +58,9 @@ public struct ProfileFeature {
         case dismissSignOutAlert
         case deleteAccountTapped
         case confirmDeleteAccount
+        case deleteAccountFailed(DeleteFailure)
         case dismissDeleteAlert
+        case dismissDeleteError
         case changeNicknameTapped
         case dismissNicknameChange
         case resetOnboardingTapped
@@ -90,14 +109,49 @@ public struct ProfileFeature {
 
             case .confirmDeleteAccount:
                 state.showDeleteAlert = false
-                return .run { send in
+                return .run { [userId = authClient.currentUser()?.uid] send in
+                    if let userId {
+                        try await userClient.deleteAllData(userId)
+                    }
                     try await authClient.deleteAccount()
                     authClient.clearLocalData()
                     await send(.delegate(.didDeleteAccount))
+                } catch: { error, send in
+                    if let authError = error as? AuthError {
+                        switch authError {
+                        case .requiresRecentLogin:
+                            await send(.deleteAccountFailed(.requiresRecentLogin))
+                        case .network:
+                            await send(.deleteAccountFailed(.network))
+                        default:
+                            await send(.deleteAccountFailed(.general))
+                        }
+                    } else {
+                        await send(.deleteAccountFailed(.general))
+                    }
                 }
+
+            case .deleteAccountFailed(let failure):
+                state.deleteFailure = failure
+                return .none
 
             case .dismissDeleteAlert:
                 state.showDeleteAlert = false
+                return .none
+
+            case .dismissDeleteError:
+                let failure = state.deleteFailure
+                state.deleteFailure = nil
+                if failure == .requiresRecentLogin {
+                    return .run { send in
+                        try authClient.signOut()
+                        authClient.clearLocalData()
+                        await send(.delegate(.didSignOut))
+                    } catch: { _, send in
+                        authClient.clearLocalData()
+                        await send(.delegate(.didSignOut))
+                    }
+                }
                 return .none
 
             case .resetOnboardingTapped:

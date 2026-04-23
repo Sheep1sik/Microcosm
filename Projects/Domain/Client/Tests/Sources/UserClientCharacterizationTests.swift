@@ -25,7 +25,7 @@ final class UserClientCharacterizationTests: XCTestCase {
         XCTAssertTrue(UserProfile(nickname: "bob").hasSetNickname)
     }
 
-    func test_UserClient_9개_closure_init_컴파일() {
+    func test_UserClient_10개_closure_init_컴파일() {
         let client = UserClient(
             observe: { _ in AsyncStream { $0.finish() } },
             createIfNeeded: { _ in },
@@ -35,7 +35,8 @@ final class UserClientCharacterizationTests: XCTestCase {
             updateEmail: { _, _ in },
             markOnboardingCompleted: { _ in },
             resetOnboarding: { _ in },
-            markConstellationGuideSeen: { _ in }
+            markConstellationGuideSeen: { _ in },
+            deleteAllData: { _ in }
         )
         _ = client.observe("uid")
     }

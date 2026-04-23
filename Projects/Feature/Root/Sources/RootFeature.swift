@@ -110,10 +110,12 @@ public struct RootFeature {
                 return .none
 
             case .mainTab(.profile(.delegate(.didSignOut))):
+                state.mainTab = MainTabFeature.State()
                 state.mode = .login
                 return .cancel(id: CancelID.userObserver)
 
             case .mainTab(.profile(.delegate(.didDeleteAccount))):
+                state.mainTab = MainTabFeature.State()
                 state.mode = .login
                 return .cancel(id: CancelID.userObserver)
 

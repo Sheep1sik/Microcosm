@@ -73,6 +73,8 @@ final class ProfileFeatureTests: XCTestCase {
         } withDependencies: {
             $0.authClient.deleteAccount = { deleted.setValue(true) }
             $0.authClient.clearLocalData = { }
+            $0.authClient.currentUser = { nil }
+            $0.userClient.deleteAllData = { _ in }
         }
 
         await store.send(.confirmDeleteAccount) {
@@ -81,6 +83,100 @@ final class ProfileFeatureTests: XCTestCase {
         await store.receive(\.delegate)
 
         XCTAssertTrue(deleted.value)
+    }
+
+    func test_confirmDeleteAccount_requiresRecentLogin시_relogin실패() async {
+        var initial = ProfileFeature.State()
+        initial.showDeleteAlert = true
+
+        let store = TestStore(initialState: initial) {
+            ProfileFeature()
+        } withDependencies: {
+            $0.authClient.deleteAccount = { throw AuthError.requiresRecentLogin }
+            $0.authClient.currentUser = { nil }
+            $0.userClient.deleteAllData = { _ in }
+        }
+
+        await store.send(.confirmDeleteAccount) {
+            $0.showDeleteAlert = false
+        }
+        await store.receive(\.deleteAccountFailed) {
+            $0.deleteFailure = .requiresRecentLogin
+        }
+    }
+
+    func test_confirmDeleteAccount_네트워크에러() async {
+        var initial = ProfileFeature.State()
+        initial.showDeleteAlert = true
+
+        let store = TestStore(initialState: initial) {
+            ProfileFeature()
+        } withDependencies: {
+            $0.authClient.deleteAccount = { throw AuthError.network }
+            $0.authClient.currentUser = { nil }
+            $0.userClient.deleteAllData = { _ in }
+        }
+
+        await store.send(.confirmDeleteAccount) {
+            $0.showDeleteAlert = false
+        }
+        await store.receive(\.deleteAccountFailed) {
+            $0.deleteFailure = .network
+        }
+    }
+
+    func test_confirmDeleteAccount_일반에러() async {
+        struct SomeError: Error {}
+        var initial = ProfileFeature.State()
+        initial.showDeleteAlert = true
+
+        let store = TestStore(initialState: initial) {
+            ProfileFeature()
+        } withDependencies: {
+            $0.authClient.deleteAccount = { throw SomeError() }
+            $0.authClient.currentUser = { nil }
+            $0.userClient.deleteAllData = { _ in }
+        }
+
+        await store.send(.confirmDeleteAccount) {
+            $0.showDeleteAlert = false
+        }
+        await store.receive(\.deleteAccountFailed) {
+            $0.deleteFailure = .general
+        }
+    }
+
+    func test_dismissDeleteError_relogin필요시_signOut후_delegate() async {
+        let signOutCalled = LockIsolated(false)
+        var initial = ProfileFeature.State()
+        initial.deleteFailure = .requiresRecentLogin
+
+        let store = TestStore(initialState: initial) {
+            ProfileFeature()
+        } withDependencies: {
+            $0.authClient.signOut = { signOutCalled.setValue(true) }
+            $0.authClient.clearLocalData = { }
+        }
+
+        await store.send(.dismissDeleteError) {
+            $0.deleteFailure = nil
+        }
+        await store.receive(\.delegate)
+
+        XCTAssertTrue(signOutCalled.value)
+    }
+
+    func test_dismissDeleteError_일반에러시_signOut안함() async {
+        var initial = ProfileFeature.State()
+        initial.deleteFailure = .network
+
+        let store = TestStore(initialState: initial) {
+            ProfileFeature()
+        }
+
+        await store.send(.dismissDeleteError) {
+            $0.deleteFailure = nil
+        }
     }
 
     // MARK: - Nickname Change Sheet

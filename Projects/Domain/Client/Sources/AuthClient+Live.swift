@@ -72,7 +72,18 @@ extension AuthClient: DependencyKey {
             },
             deleteAccount: {
                 guard let user = Auth.auth().currentUser else { return }
-                try await user.delete()
+                do {
+                    try await user.delete()
+                } catch let error as NSError {
+                    switch AuthErrorCode(rawValue: error.code) {
+                    case .requiresRecentLogin:
+                        throw AuthError.requiresRecentLogin
+                    case .networkError:
+                        throw AuthError.network
+                    default:
+                        throw AuthError.unknown
+                    }
+                }
             },
             currentUser: {
                 Auth.auth().currentUser
