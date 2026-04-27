@@ -4,6 +4,10 @@
 
 # 소우주 (Microcosm)
 
+[![App Store](https://img.shields.io/badge/App%20Store-Download-blue?style=flat-square&logo=apple&logoColor=white)](https://apps.apple.com/kr/app/%EC%86%8C%EC%9A%B0%EC%A3%BC/id6760713435)
+[![iOS 17.0+](https://img.shields.io/badge/iOS-17.0+-000000?style=flat-square&logo=apple)](https://developer.apple.com/ios/)
+[![Swift](https://img.shields.io/badge/Swift-6.0-F05138?style=flat-square&logo=swift&logoColor=white)](https://swift.org)
+
 **하루의 순간을, 하나의 별로 남기세요.**
 
 스쳐 지나가는 감정과, 기억하고 싶은 장면들 —
@@ -12,7 +16,7 @@
 그리고 이루고 싶은 목표는 별자리로 그려보세요.
 작은 별들이 하나씩 이어질 때, 당신만의 별자리가 완성됩니다.
 
-[![App Store](https://img.shields.io/badge/App%20Store-Download-blue?style=flat-square&logo=apple&logoColor=white)](https://apps.apple.com/kr/app/%EC%86%8C%EC%9A%B0%EC%A3%BC/id6760713435)
+오늘의 빛은 사라지지 않고, 당신의 소우주에 그대로 남아 있습니다.
 
 <br/>
 
@@ -20,26 +24,7 @@
 
 <br/>
 
-## PRD (Product Requirements Document)
-
-### 기획 배경
-
-일기 앱은 많지만, 대부분 텍스트 나열에 그칩니다.
-기록이 쌓여도 돌아보고 싶은 동기가 생기지 않는 것이 문제였습니다.
-
-**"기록 자체가 시각적으로 아름다우면, 돌아보는 행위도 자연스러워지지 않을까?"**
-
-이 질문에서 소우주가 시작되었습니다.
-AI가 글의 감정을 분석해 고유한 색과 빛을 가진 별로 변환하고,
-목표는 별자리로 시각화하여 기록과 성장을 밤하늘이라는 하나의 세계관으로 통합했습니다.
-
-### 타겟 사용자
-
-- 감정 기록을 습관으로 만들고 싶은 사람
-- 텍스트 일기에 지루함을 느끼는 사람
-- 목표를 시각적으로 추적하고 싶은 사람
-
-### 핵심 기능
+## Features
 
 | 기능 | 설명 |
 |------|------|
@@ -47,9 +32,9 @@ AI가 글의 감정을 분석해 고유한 색과 빛을 가진 별로 변환하
 | **월별 은하** | 기록이 월 단위로 은하에 모여 SpriteKit 씬에서 인터랙티브하게 탐색 가능 |
 | **별자리 목표** | 88개 실제 별자리 중 선택하여 목표를 설정하고, 하위 목표 달성 시 별이 하나씩 채워짐 |
 | **프로필 통계** | 감정 색상 분포, 기록 수 등 자신의 기록 패턴을 시각적으로 확인 |
-| **온보딩** | 8단계 인터랙티브 가이드로 소우주 세계관에 자연스럽게 진입 |
+| **온보딩** | 7단계 인터랙티브 가이드로 소우주 세계관에 자연스럽게 진입 |
 
-### AI 활용
+### AI 감정 분석
 
 사용자가 기록을 작성하면 OpenAI API(`gpt-4o-mini`)가 텍스트의 감정을 분석합니다.
 
@@ -69,13 +54,13 @@ AI가 글의 감정을 분석해 고유한 색과 빛을 가진 별로 변환하
 
 | Layer | Technology |
 |-------|-----------|
-| **UI** | SwiftUI + SpriteKit |
-| **State Management** | TCA (The Composable Architecture) |
+| **UI** | SwiftUI + SpriteKit (Metal Shader) |
+| **State Management** | TCA (The Composable Architecture) 1.17+ |
 | **Backend** | Firebase (Auth, Firestore) |
 | **Auth** | Google Sign-In, Apple Sign-In |
 | **AI** | OpenAI API (gpt-4o-mini) |
+| **Account Deletion** | Firebase Cloud Functions (Node.js) |
 | **Build System** | Tuist (Modular Architecture) |
-| **Testing** | Swift Testing |
 | **Code Quality** | SwiftLint |
 | **Minimum iOS** | iOS 17.0+ |
 
@@ -139,7 +124,7 @@ Projects/
 ├── Feature/                       # 기능 모듈
 │   ├── Root                       # 인증 상태 기반 네비게이션
 │   ├── Auth                       # 소셜 로그인 (Google, Apple)
-│   ├── Onboarding                 # 8단계 인터랙티브 온보딩
+│   ├── Onboarding                 # 7단계 인터랙티브 온보딩
 │   ├── Main                       # 탭 컨테이너 (Universe, Constellation, Profile)
 │   ├── Universe                   # 기록 → 별 생성, 월별 은하 뷰
 │   ├── Constellation              # 88개 별자리 기반 목표 관리
@@ -164,7 +149,7 @@ Projects/
 Splash → Auth Check
             ├─ 미인증 → 로그인 (Google / Apple)
             └─ 인증됨 → Main
-                        ├─ 온보딩 미완료 → 8단계 가이드
+                        ├─ 온보딩 미완료 → 7단계 가이드
                         └─ 메인 탭
                             ├─ Universe: 기록 작성 → AI 분석 → 별 생성 → 월별 은하
                             ├─ Constellation: 별자리 선택 → 목표 설정 → 달성 추적
@@ -206,3 +191,20 @@ Splash → Auth Check
 - **코드 리뷰** — Codex 교차 검증을 통한 구조 개선, 안전성 점검
 
 <br/>
+
+## Getting Started
+
+```bash
+# 1. 저장소 클론
+git clone https://github.com/Sheep1sik/Microcosm.git
+cd Microcosm
+
+# 2. Tuist로 프로젝트 생성
+tuist install
+tuist generate
+
+# 3. Xcode에서 빌드 및 실행
+open Microcosm.xcworkspace
+```
+
+> **Note:** Firebase 설정 파일(`GoogleService-Info.plist`)과 API 키 설정(`Secrets.xcconfig`)은 보안상 저장소에 포함되어 있지 않습니다.
