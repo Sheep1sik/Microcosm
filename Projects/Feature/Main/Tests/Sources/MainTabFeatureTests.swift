@@ -1,0 +1,396 @@
+import XCTest
+import ComposableArchitecture
+@testable import FeatureMain
+import FeatureUniverse
+import FeatureOnboarding
+import FeatureConstellation
+import FeatureProfile
+import DomainEntity
+import DomainClient
+
+@MainActor
+final class MainTabFeatureTests: XCTestCase {
+
+    // MARK: - tabSelected
+
+    func test_tabSelected_상태반영() async {
+        let store = TestStore(initialState: MainTabFeature.State()) {
+            MainTabFeature()
+        }
+
+        await store.send(.tabSelected(.constellation)) {
+            $0.selectedTab = .constellation
+        }
+        await store.send(.tabSelected(.profile)) {
+            $0.selectedTab = .profile
+        }
+        await store.send(.tabSelected(.universe)) {
+            $0.selectedTab = .universe
+        }
+    }
+
+    // MARK: - sessionUpdated
+
+    func test_sessionUpdated_프로필_fanout_단일액션_처리() async {
+        let store = TestStore(initialState: MainTabFeature.State()) {
+            MainTabFeature()
+        }
+
+        var profile = UserProfile()
+        profile.nickname = "별지기"
+        profile.hasCompletedOnboarding = true
+        profile.hasSeenConstellationGuide = true
+
+        await store.send(.sessionUpdated(
+            userId: "user-1",
+            displayName: "fallback",
+            profile: profile
+        )) {
+            $0.userId = "user-1"
+            $0.universe.userDisplayName = "별지기"
+            $0.universe.onboarding.hasCompleted = true
+            $0.universe.onboarding.userDisplayName = "별지기"
+            $0.constellation.userDisplayName = "별지기"
+            $0.constellation.hasSeenConstellationGuide = true
+            $0.profile.userProfile = profile
+            $0.profile.displayName = "별지기"
+        }
+        await store.receive(\.universe.onboarding.profileReceived) {
+            $0.universe.onboarding.hasReceivedInitialProfile = true
+        }
+    }
+
+    func test_sessionUpdated_nickname_없으면_displayName_fallback() async {
+        let store = TestStore(initialState: MainTabFeature.State()) {
+            MainTabFeature()
+        }
+
+        var profile = UserProfile()
+        profile.nickname = nil
+
+        await store.send(.sessionUpdated(
+            userId: "user-1",
+            displayName: "fallback",
+            profile: profile
+        )) {
+            $0.userId = "user-1"
+            $0.universe.userDisplayName = "fallback"
+            $0.universe.onboarding.userDisplayName = "fallback"
+            $0.constellation.userDisplayName = "fallback"
+            $0.profile.userProfile = profile
+            $0.profile.displayName = "fallback"
+        }
+        await store.receive(\.universe.onboarding.profileReceived) {
+            $0.universe.onboarding.hasReceivedInitialProfile = true
+        }
+    }
+
+    // 회귀 방지: 기존 유저(hasCompletedOnboarding=true)가 재시작 시 records 가
+    // profile 보다 먼저 yield 되더라도 welcome 으로 재진입하지 않아야 한다.
+    func test_sessionUpdated_records먼저와도_profile도착까지는_welcome미진입() async {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        initial.universe.onboarding.pendingCheck = true
+        let store = TestStore(initialState: initial) {
+            MainTabFeature()
+        }
+
+        // 1. records 먼저 도착 → Universe.recordsUpdated → onboarding.recordsReceived
+        await store.send(.recordsUpdated([]))
+        // allRecords 기본값이 [] 이라 상태 변화 없음
+        await store.receive(\.universe.recordsUpdated)
+        await store.receive(\.universe.onboarding.recordsReceived) {
+            $0.universe.onboarding.hasReceivedInitialRecords = true
+            // pendingCheck 유지: profile 미도착이라 drain 안 됨
+        }
+
+        // 2. profile 도착 (onboarding 완료 유저)
+        var profile = UserProfile()
+        profile.hasCompletedOnboarding = true
+        profile.nickname = "기존유저"
+
+        await store.send(.sessionUpdated(
+            userId: "user-1",
+            displayName: nil,
+            profile: profile
+        )) {
+            $0.userId = "user-1"
+            $0.universe.userDisplayName = "기존유저"
+            $0.universe.onboarding.hasCompleted = true
+            $0.universe.onboarding.userDisplayName = "기존유저"
+            $0.constellation.userDisplayName = "기존유저"
+            $0.profile.userProfile = profile
+            $0.profile.displayName = "기존유저"
+        }
+
+        // 3. profileReceived → pendingCheck + hasReceivedInitialRecords → drain → check
+        await store.receive(\.universe.onboarding.profileReceived) {
+            $0.universe.onboarding.hasReceivedInitialProfile = true
+            $0.universe.onboarding.pendingCheck = false
+        }
+        // check 재평가 → hasCompleted=true 이므로 welcome 진입 없음
+        await store.receive(\.universe.onboarding.check)
+    }
+
+    // MARK: - recordsUpdated
+
+    func test_recordsUpdated_universe와_profile에_동시전파() async {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        let store = TestStore(initialState: initial) {
+            MainTabFeature()
+        }
+        let records = [Record(content: "a"), Record(content: "b")]
+
+        await store.send(.recordsUpdated(records)) {
+            $0.profile.allRecords = records
+        }
+        await store.receive(\.universe.recordsUpdated) {
+            $0.universe.allRecords = records
+        }
+        await store.receive(\.universe.onboarding.recordsReceived) {
+            $0.universe.onboarding.hasReceivedInitialRecords = true
+            $0.universe.onboarding.hasExistingRecords = true
+        }
+    }
+
+    func test_recordsUpdated_constellation_userDisplayName_universe에서_복사() async {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        initial.universe.userDisplayName = "별지기"
+
+        let store = TestStore(initialState: initial) { MainTabFeature() }
+
+        await store.send(.recordsUpdated([])) {
+            $0.constellation.userDisplayName = "별지기"
+        }
+        await store.receive(\.universe.recordsUpdated)
+        await store.receive(\.universe.onboarding.recordsReceived) {
+            $0.universe.onboarding.hasReceivedInitialRecords = true
+            $0.universe.onboarding.hasExistingRecords = false
+        }
+    }
+
+    func test_recordsUpdated_pendingOnboardingCheck_있으면_checkOnboarding_재발송() async {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        initial.universe.onboarding.pendingCheck = true
+        initial.universe.onboarding.hasReceivedInitialProfile = true
+        let store = TestStore(initialState: initial) {
+            MainTabFeature()
+        }
+
+        await store.send(.recordsUpdated([]))
+        await store.receive(\.universe.recordsUpdated)
+        await store.receive(\.universe.onboarding.recordsReceived) {
+            $0.universe.onboarding.hasReceivedInitialRecords = true
+            $0.universe.onboarding.hasExistingRecords = false
+            $0.universe.onboarding.pendingCheck = false
+        }
+        await store.receive(\.universe.onboarding.check) {
+            $0.universe.onboarding.step = .welcome
+        }
+    }
+
+    // MARK: - goalsUpdated (초기 로드)
+
+    func test_goalsUpdated_초기로드는_메시지_미생성() async {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        let store = TestStore(initialState: initial) {
+            MainTabFeature()
+        }
+
+        let goals = Self.allStarsCompleted()
+
+        await store.send(.goalsUpdated(goals)) {
+            $0.constellation.allGoals = goals
+            $0.constellation.hasInitialGoalsLoaded = true
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
+            // 메시지는 생성되지 않음 (isFromObserver + 첫 로드)
+        }
+    }
+
+    // MARK: - goalsUpdated (후속 갱신)
+
+    func test_goalsUpdated_초기로드후_새완성_메시지생성() async {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        initial.constellation.hasInitialGoalsLoaded = true
+        initial.universe.userDisplayName = "별지기"
+
+        let store = TestStore(initialState: initial) { MainTabFeature() }
+
+        let goals = Self.allStarsCompleted()
+
+        await store.send(.goalsUpdated(goals)) {
+            $0.constellation.allGoals = goals
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
+            $0.constellation.completedConstellationMessage = "\(Self.testConstellationNameKO)의\n모든 별들이 빛을 찾았어요!"
+            $0.constellation.completedConstellationSubtitle = "완성된 별자리는 별지기님의 소우주에서도 볼 수 있어요"
+        }
+    }
+
+    func test_goalsUpdated_userDisplayName_없으면_기본값_우주인() async {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        initial.constellation.hasInitialGoalsLoaded = true
+
+        let store = TestStore(initialState: initial) { MainTabFeature() }
+
+        let goals = Self.allStarsCompleted()
+
+        await store.send(.goalsUpdated(goals)) {
+            $0.constellation.allGoals = goals
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
+            $0.constellation.completedConstellationMessage = "\(Self.testConstellationNameKO)의\n모든 별들이 빛을 찾았어요!"
+            $0.constellation.completedConstellationSubtitle = "완성된 별자리는 우주인님의 소우주에서도 볼 수 있어요"
+        }
+    }
+
+    func test_goalsUpdated_완성됐던별자리_해제시_lostMessage_생성() async {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        initial.constellation.hasInitialGoalsLoaded = true
+        initial.constellation.previouslyCompletedIds = [Self.testConstellationId]
+        initial.universe.completedConstellationIds = [Self.testConstellationId]
+
+        let store = TestStore(initialState: initial) { MainTabFeature() }
+
+        // 한 별의 목표가 미완료 상태로 갱신되면 별자리는 해제.
+        let goals = Self.allStarsCompletedExceptLast()
+
+        await store.send(.goalsUpdated(goals)) {
+            $0.constellation.allGoals = goals
+            $0.constellation.previouslyCompletedIds = []
+            $0.universe.completedConstellationIds = []
+            $0.constellation.completedConstellationMessage = "\(Self.testConstellationNameKO)의\n별자리가 빛을 잃었어요"
+            $0.constellation.completedConstellationSubtitle = "목표를 다시 달성하면 별자리가 빛을 되찾아요"
+        }
+    }
+
+    // MARK: - 낙관적 업데이트 경로 (constellation 액션 → recomputeCompletion)
+
+    func test_constellation_toggleGoalCompletion_초기로드후_완성메시지_생성() async {
+        // 사전 조건:
+        // - 초기 goalsUpdated 가 끝난 상태(hasInitialGoalsLoaded = true)
+        // - 모든 별이 완료 상태인 테스트 별자리 목표가 이미 state 에 있음
+        // 액션: 토글 (낙관적)
+        // 검증: recomputeCompletion 이 호출되어 완성 메시지 생성
+        var initial = MainTabFeature.State()
+        initial.constellation.hasInitialGoalsLoaded = true
+        initial.universe.userDisplayName = "별지기"
+        // 액션은 단순 트리거이므로 allGoals 자체는 이미 완성 상태로 둔다.
+        // (ConstellationFeature.toggleGoalCompletion 의 실제 변환 로직은 별도 테스트 영역.)
+        initial.constellation.allGoals = Self.allStarsCompleted()
+
+        let store = TestStore(initialState: initial) { MainTabFeature() }
+        // 자식 reducer 는 본 테스트 관심사가 아니므로 비활성.
+        store.exhaustivity = .off
+
+        await store.send(.constellation(.toggleGoalCompletion(goalId: "ignored"))) {
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
+            $0.constellation.completedConstellationMessage = "\(Self.testConstellationNameKO)의\n모든 별들이 빛을 찾았어요!"
+            $0.constellation.completedConstellationSubtitle = "완성된 별자리는 별지기님의 소우주에서도 볼 수 있어요"
+        }
+    }
+
+    func test_constellation_낙관적토글_초기로드전이면_메시지없음() async {
+        // hasInitialGoalsLoaded == false 인 시점에 낙관적 토글이 들어오면
+        // shouldEmitMessage 는 false 라 메시지가 생성되지 않아야 한다.
+        var initial = MainTabFeature.State()
+        initial.constellation.hasInitialGoalsLoaded = false
+        initial.constellation.allGoals = Self.allStarsCompleted()
+
+        let store = TestStore(initialState: initial) { MainTabFeature() }
+        store.exhaustivity = .off
+
+        await store.send(.constellation(.toggleGoalCompletion(goalId: "ignored"))) {
+            // 메시지/자막은 nil 유지, 다만 ID 추적 + 배경 표시는 갱신된다.
+            $0.constellation.previouslyCompletedIds = [Self.testConstellationId]
+            $0.universe.completedConstellationIds = [Self.testConstellationId]
+        }
+    }
+
+    // MARK: - completedConstellationIds 계산
+
+    func test_completedConstellationIds_별일부에만_목표있으면_미완성() async {
+        var initial = MainTabFeature.State()
+        initial.userId = "user-1"
+        initial.constellation.hasInitialGoalsLoaded = true
+
+        let store = TestStore(initialState: initial) { MainTabFeature() }
+
+        // 별 중 하나에만 목표가 등록된 상황 → 별자리 미완성.
+        let goals = Self.partialStarsCompleted(count: 1)
+
+        await store.send(.goalsUpdated(goals)) {
+            $0.constellation.allGoals = goals
+            // previouslyCompletedIds / completedConstellationIds 모두 비어있는 상태 유지.
+        }
+    }
+
+    // MARK: - Test Fixture
+    // 별 수/이름을 catalog 에서 읽어 fixture drift 를 방지한다.
+    // (CMi 별 수가 바뀌어도 로직 테스트는 유효해야 한다.)
+
+    private static let testConstellationId = "CMi"
+
+    private static var testConstellationDef: ConstellationDefinition {
+        guard let def = ConstellationCatalog.find(testConstellationId) else {
+            fatalError("테스트 fixture 가 참조하는 '\(testConstellationId)' 이 catalog 에 없음")
+        }
+        return def
+    }
+
+    private static var testConstellationNameKO: String { testConstellationDef.nameKO }
+
+    /// 별자리의 모든 별에 대해 완료된 goal 을 생성 (별자리 완성 상태).
+    private static func allStarsCompleted() -> [Goal] {
+        testConstellationDef.stars.map {
+            completedGoal(constellationId: testConstellationId, starIndex: $0.index)
+        }
+    }
+
+    /// 마지막 별만 미완료 → 완성됐던 별자리가 해제되는 시나리오.
+    private static func allStarsCompletedExceptLast() -> [Goal] {
+        let stars = testConstellationDef.stars
+        var goals = stars.dropLast().map {
+            completedGoal(constellationId: testConstellationId, starIndex: $0.index)
+        }
+        if let last = stars.last {
+            goals.append(incompleteGoal(constellationId: testConstellationId, starIndex: last.index))
+        }
+        return goals
+    }
+
+    /// 별자리 별 중 prefix 만 완료 → 별자리 미완성 시나리오.
+    private static func partialStarsCompleted(count: Int = 1) -> [Goal] {
+        testConstellationDef.stars.prefix(count).map {
+            completedGoal(constellationId: testConstellationId, starIndex: $0.index)
+        }
+    }
+
+    // MARK: - Goal Builders
+
+    private static func completedGoal(constellationId: String, starIndex: Int) -> Goal {
+        Goal(
+            constellationId: constellationId,
+            starIndex: starIndex,
+            title: "test-\(constellationId)-\(starIndex)",
+            completedAt: Date(timeIntervalSince1970: 1_000_000)
+        )
+    }
+
+    private static func incompleteGoal(constellationId: String, starIndex: Int) -> Goal {
+        Goal(
+            constellationId: constellationId,
+            starIndex: starIndex,
+            title: "incomplete-\(constellationId)-\(starIndex)"
+        )
+    }
+}

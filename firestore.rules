@@ -1,0 +1,61 @@
+rules_version = '2';
+
+// Microcosm (소우주) Firestore 보안 규칙
+//
+// 원칙:
+// 1. 모든 접근은 인증 필수 (request.auth != null).
+// 2. 사용자 문서 및 서브컬렉션은 소유자(uid 일치)만 접근.
+// 3. 닉네임 인덱스는 단일 get 허용, 목록(list) 차단으로 열람 방지.
+// 4. 그 외 모든 경로는 기본 deny.
+//
+// 배포: firebase deploy --only firestore:rules
+// 테스트: firebase emulators:start --only firestore
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─────────────────────────────────────────────
+    // 사용자 프로필: 소유자 전용
+    // ─────────────────────────────────────────────
+    match /users/{userId} {
+      allow read, write: if request.auth != null
+                         && request.auth.uid == userId;
+
+      // 기록 서브컬렉션
+      match /records/{recordId} {
+        allow read, write: if request.auth != null
+                           && request.auth.uid == userId;
+      }
+
+      // 목표(별자리) 서브컬렉션
+      match /goals/{goalId} {
+        allow read, write: if request.auth != null
+                           && request.auth.uid == userId;
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // 닉네임 인덱스: 중복 확인용 단일 문서 조회만 허용
+    // `nicknames/{nickname}` 문서 구조: { userId: String, createdAt: Timestamp }
+    // ─────────────────────────────────────────────
+    match /nicknames/{nickname} {
+      // 단일 문서 get만 허용 (타인이 어떤 닉네임을 가졌는지 열람 차단)
+      allow get: if request.auth != null;
+      allow list: if false;
+
+      // 신규 예약: 본인 uid로만, 허용된 필드만
+      allow create: if request.auth != null
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.keys().hasOnly(['userId', 'createdAt']);
+
+      // 수정: 소유자만, 소유권 이전 금지
+      allow update: if request.auth != null
+                    && resource.data.userId == request.auth.uid
+                    && request.resource.data.userId == request.auth.uid;
+
+      // 삭제: 소유자만 (닉네임 변경 시 이전 예약 해제)
+      allow delete: if request.auth != null
+                    && resource.data.userId == request.auth.uid;
+    }
+  }
+}

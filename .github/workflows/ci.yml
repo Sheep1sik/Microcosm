@@ -1,0 +1,102 @@
+name: iOS CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: SwiftLint
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: Run SwiftLint (warning-only)
+        run: swiftlint --reporter github-actions-logging
+
+  build:
+    name: Generate & Build
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Cache Tuist dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            Tuist/.build
+          key: ${{ runner.os }}-tuist-${{ hashFiles('Tuist/Package.swift', 'Tuist/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-tuist-
+
+      - name: Create Secrets.xcconfig stub (gitignored)
+        run: |
+          cat > Projects/App/Secrets.xcconfig <<'EOF'
+          // CI stub — real keys injected via repository secrets in deploy workflow
+          OPENAI_API_KEY = ci_stub_key_not_used
+          EOF
+
+      - name: Tuist install
+        run: mise exec -- tuist install
+
+      - name: Tuist generate
+        run: mise exec -- tuist generate --no-open
+
+      - name: Build for simulator
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -workspace Microcosm.xcworkspace \
+            -scheme "Microcosm" \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
+
+      - name: Select iOS Simulator runtime
+        id: sim
+        run: |
+          DEVICE_NAME=$(xcrun simctl list devices available --json \
+            | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          for runtime, devices in data['devices'].items():
+              if 'iOS' not in runtime:
+                  continue
+              for d in devices:
+                  if d.get('isAvailable') and 'iPhone' in d.get('name', ''):
+                      print(d['name'])
+                      sys.exit(0)
+          sys.exit('no iPhone simulator available')
+          ")
+          echo "device=$DEVICE_NAME" >> "$GITHUB_OUTPUT"
+          echo "Selected simulator: $DEVICE_NAME"
+
+      - name: Run tests
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -workspace Microcosm.xcworkspace \
+            -scheme "Microcosm-Workspace" \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.device }}" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            test

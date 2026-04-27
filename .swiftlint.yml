@@ -1,0 +1,44 @@
+disabled_rules:
+  - trailing_whitespace
+  - todo
+  - line_length
+  - identifier_name
+  - type_name
+  - nesting
+
+opt_in_rules:
+  - empty_count
+  - explicit_init
+  - closure_end_indentation
+  - redundant_nil_coalescing
+  - first_where
+  - last_where
+  - sorted_first_last
+  - unused_import
+
+# 점진적 강화 정책: 현 단계에서는 warning 만, S4~S6 에서 임계값 단계적 하향
+file_length:
+  warning: 500
+  ignore_comment_only_lines: true
+
+function_body_length:
+  warning: 80
+
+type_body_length:
+  warning: 400
+
+cyclomatic_complexity:
+  warning: 15
+
+large_tuple:
+  warning: 2
+  error: 100
+
+excluded:
+  - Tuist
+  - Plugins
+  - Projects/**/Derived
+  - Projects/**/Resources/**
+  - "**/Generated"
+
+reporter: "xcode"
